@@ -1,0 +1,101 @@
+import { Request, Response } from "express";
+
+import UserService from "@/app/Users/services/UserService";
+import AuthError from "@/app/Auth/exceptions/AuthError";
+
+import { PrismaClient } from '@prisma/client';
+import UserModel from "../models/UserModel";
+
+const prisma = new PrismaClient();
+
+const UsersController = () => {
+
+  async function create(req: Request, res: Response): Promise<Response> {
+    try {
+      const { user } = await UserService().SignUp(req.body);
+
+      return res.status(200).json({ user });
+
+    } catch (error) {
+      const isAuthError = error instanceof AuthError;
+
+      if (isAuthError) return res.status(401).send({ error: error.message });
+
+      return res.status(500).json({ error: 'internal server error' });
+    }
+  }
+
+  async function edit(req: Request, res: Response): Promise<Response> {
+
+    try {
+      const updatedUser = await UserModel().updateUser(req.body);
+
+      const { id } = updatedUser;
+
+      console.log(`User ${id} updated successfully`);
+
+      return res.status(200).json({
+        message: `User ${id} updated successfully`
+      });
+
+    } catch (error) {
+      return res.status(404).json({
+        message: 'Error when updating user',
+      });
+    }
+  }
+
+  async function getOne(req: Request, res: Response): Promise<Response> {
+
+    const { id } = req.params;
+
+    const userData = await prisma.users.findUnique({
+      where: {
+        id: +id
+      },
+      include: {
+        UserEmail: true,
+      },
+    });
+
+    // const haveUserResults = userData.length > 0;
+
+    if (!userData) {
+      return res.status(404).json({
+        message: 'User not found',
+      });
+    }
+
+    return res.status(200).json({
+      user: userData
+    });
+  }
+
+  async function index(req: Request, res: Response): Promise<Response> {
+    const { page = 1, numberOfItens = 10 } = req.params;
+
+    const users: any = await UserModel().getAllByPagination({
+      page,
+      numberOfItens,
+      orderBy: { 'id': 'desc' }
+    });
+
+    const haveUserResults = users.length > 0;
+
+    if (!haveUserResults) {
+      return res.status(404).json({
+        message: 'No user was founded',
+      });
+    }
+
+    return res.status(200).json({
+      users: users
+    });
+
+  }
+
+  return { create, edit, index, getOne }
+
+}
+
+export default UsersController;

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "CommonJS",
+    "outDir": "./build",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "typeRoots":["./src/@types"],
+    "types": ["node", "express"],
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"],
+      "@app/*": ["app/*"]
+    },
+    "skipLibCheck": true,
+  },
+  "include": ["src", "tsconfig.sequelize.json"]
+}
