@@ -12,8 +12,15 @@ const authOptions = {
     GoogleProvider({
       clientId: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
-    })
+    }),
   ],
+  callbacks: {
+    async signIn({ user, account }) {
+      console.log('User: ', user);
+      console.log('Account: ', account);
+      return user;
+    }
+  }
 }
 
 const handler = NextAuth(authOptions);
