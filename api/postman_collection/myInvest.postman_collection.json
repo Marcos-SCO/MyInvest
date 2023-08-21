@@ -108,7 +108,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"marcos@test.com\",\r\n    \"password\": \"password\"\r\n}",
+					"raw": "{\r\n    \"email\": \"marcos@test.com\",\r\n    \"password\": \"pass\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -201,8 +201,27 @@
 		{
 			"name": "Sign-out",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "{{baseUrl}}/auth/sign-out",
 					"host": [
@@ -247,7 +266,7 @@
 		},
 		{
 			"key": "jwt_token",
-			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImlhdCI6MTY5MTk2NTAyNiwiZXhwIjoxNjkyNTY5ODI2fQ.LM-V0fPdY1NRbgw2HTpIBe4qYq1GRn7cxf073zZHZ1k",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImlhdCI6MTY5MjU5NDcwNCwiZXhwIjoxNjkzMTk5NTA0fQ.NsT2VW5GRpsp6KZv4aagoVYQb26D6qBv-kNsWLnAvco",
 			"type": "string"
 		}
 	]
