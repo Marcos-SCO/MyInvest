@@ -26,11 +26,17 @@ const UserService = () => {
         data: {
           firstName,
           lastName,
-          password: hashedPassword,
         }
       });
 
       const lastInsertedId = newUser.id;
+
+      const userPassword = await prisma.usersPassword.create({
+        data: {
+          password: hashedPassword,
+          userId: lastInsertedId,
+        }
+      })
 
       const userEmail = await prisma.userEmails.create({
         data: {
@@ -42,7 +48,7 @@ const UserService = () => {
       console.log('User created:', newUser);
 
       return {
-        user: { newUser, userEmail },
+        user: { newUser, userPassword, userEmail },
         message: 'User created successfully!'
       }
 

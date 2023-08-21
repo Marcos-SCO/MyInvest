@@ -5,6 +5,19 @@ const prisma = new PrismaClient();
 
 const UserModel = () => {
 
+  async function getHashedPassword(userId: number) {
+    const hashedPassword = await prisma.usersPassword.findFirst({
+      where: { userId }
+    });
+
+    if (!hashedPassword) {
+      console.error(`User password credentials not founded`);
+      throw new AuthError(`User password credentials not founded`);
+    }
+
+    return hashedPassword;
+  }
+
   async function getUserByEmail(email: string) {
 
     const userEmailData = await prisma.userEmails.findFirst({
@@ -84,7 +97,7 @@ const UserModel = () => {
     return users;
   }
 
-  return { getAllByPagination, updateUser, getUserByEmail }
+  return { getAllByPagination, updateUser, getHashedPassword, getUserByEmail }
 }
 
 export default UserModel;

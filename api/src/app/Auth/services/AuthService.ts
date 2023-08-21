@@ -23,10 +23,19 @@ const AuthService = () => {
   async function signIn(email: String, password: String): Promise<{ user: object, token: string }> {
 
     const userData = await UserModel().getUserByEmail(email as string);
+
     const fullName = (userData?.firstName + ' ' + userData?.lastName);
+
     const { id } = userData;
 
-    const passwordConference = await comparePasswords(password as string, userData.password as string);
+    const userPassword =
+      await UserModel().getHashedPassword(id);
+
+    if (!userPassword) {
+      throw new AuthError(`User don't have a hashed password...`);
+    }
+
+    const passwordConference = await comparePasswords(password as string, userPassword.password as string);
 
     if (!passwordConference) {
       throw new AuthError('Invalid credentials');
