@@ -2,6 +2,8 @@ import AuthError from "@app/Auth/exceptions/AuthError";
 import Jwt from "jsonwebtoken";
 import config from "@/config";
 
+import { getValue, setValue } from "@/lib/redis";
+
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
 
@@ -9,9 +11,19 @@ import UserModel from "@/app/Users/models/UserModel";
 
 const { secret, expiresIn } = config.auth;
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 const AuthService = () => {
+
+  async function isTokenBlackListed(token: string): Promise<boolean> {
+    const blackListedToken = await getValue(`tokens:invalidated:${token}`);
+
+    return !!blackListedToken;
+  }
+
+  async function blacklistToken(token: string): Promise<void> {
+    await setValue(`tokens:invalidated:${token}`, true);
+  }
 
   async function comparePasswords(providedPassword: string, hashedPassword: string) {
     const passwordsMatch = await bcrypt.compare(providedPassword, hashedPassword);
@@ -56,18 +68,30 @@ const AuthService = () => {
 
   }
 
+  async function signOut(token: string): Promise<void> {
+    await blacklistToken(token);
+  }
+
   async function validateToken(token: string): Promise<string> {
     try {
+      const tokenIsBlackListed = await isTokenBlackListed(token);
+      // console.log('token blacklisted:', tokenIsBlackListed);
+      
+      if (tokenIsBlackListed) {
+        throw new AuthError('Invalid token - Token was blacklisted');
+      }
+      
       const decoded = Jwt.verify(token, secret as string) as { id: string };
-
+      
       return decoded.id;
 
-    } catch (error) {
-      throw new AuthError('Invalid token');
+    } catch (error: any) {
+      // 'Invalid token
+      throw new AuthError(error.message);
     }
   }
 
-  return { signIn, validateToken }
+  return { signIn, signOut, validateToken }
 }
 
 export default AuthService;

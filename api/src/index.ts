@@ -6,9 +6,6 @@ import App from './app';
 import config from './config';
 const { port } = config;
 
-// import Db from './db/connection';
-
-
 const app = App();
 app.listen(port);
 

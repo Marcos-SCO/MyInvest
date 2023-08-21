@@ -6,7 +6,7 @@ import AuthError from "@app/Auth/exceptions/AuthError";
 const AuthController = () => {
 
   const create = async (req: Request, res: Response): Promise<Response> => {
-    
+
     const { email, password } = req.body;
 
     try {
@@ -25,8 +25,15 @@ const AuthController = () => {
 
   }
 
-  const destroy = async () => {
+  const destroy = async (req: Request, res: Response): Promise<Response> => {
 
+    const requestToken = req?.user?.token;
+    console.log('request ', req.user);
+    console.log('request token: ', requestToken);
+
+    requestToken && AuthService().signOut(requestToken);
+
+    return res.status(204).send();
   }
 
   return { create, destroy }

@@ -12,6 +12,9 @@
 - bcrypt
 - @types/bcrypt
 
+- ioredis
+- @types/ioredis
+
 - cors
 - express-async-errors
 - @types/node
