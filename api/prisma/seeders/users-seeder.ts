@@ -7,13 +7,9 @@ const prisma = new PrismaClient();
 
 async function seed() {
 
-  // Generate a salt and hash the password
-  const hashedPassword = await bcrypt.hash('password', 10);
-
   const users = Array.from({ length: 10 }, () => ({
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
-    password: hashedPassword,
   }));
 
   const insertedUsers = await prisma.users.createMany({
@@ -32,10 +28,23 @@ async function seed() {
 
   const last10Users = lastInsertedUserItens.slice().reverse();
 
+  // Generate a salt and hash the password
+  const hashedPassword = await bcrypt.hash('password', 10);
+
+  const usersPasswordData = last10Users.map((user, index) => ({
+    password: hashedPassword,
+    userId: user.id
+  }));
+
   const userEmailsData = last10Users.map((user, index) => ({
     email: `${user.firstName.toLowerCase()}@${faker.internet.domainName().toLowerCase()}`,
     userId: user.id,
   }));
+
+  // Insert into related tables
+  await prisma.usersPassword.createMany({
+    data: usersPasswordData
+  })
 
   await prisma.userEmails.createMany({
     data: userEmailsData,

@@ -14,10 +14,19 @@ model Users {
   id        Int          @id @default(autoincrement())
   firstName String       @map("first_name")
   lastName  String       @map("last_name")
-  password  String       @db.VarChar(255)
   createdAt DateTime     @default(now()) @map("created_at")
   updatedAt DateTime     @updatedAt @map("updated_at")
+  UserPassword UsersPassword[]
   UserEmail UserEmails[]
+}
+
+model UsersPassword {
+  id Int @id @default(autoincrement())
+  password String @db.VarChar(255)
+  userId Int
+  users Users @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map(name: "users_password")
 }
 
 model UserEmails {

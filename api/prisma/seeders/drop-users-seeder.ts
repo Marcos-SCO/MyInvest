@@ -5,8 +5,9 @@ const prisma = new PrismaClient();
 async function resetAutoIncrementCounter() {
   try {
     await prisma.$executeRaw`ALTER TABLE users AUTO_INCREMENT = 1;`;
-    console.log('Auto-increment counter reset');
-   
+
+    await prisma.$executeRaw`ALTER TABLE users_password AUTO_INCREMENT = 1;`;
+
     await prisma.$executeRaw`ALTER TABLE user_emails AUTO_INCREMENT = 1;`;
 
     console.log('Auto-increment counter reset');
@@ -20,7 +21,8 @@ async function resetAutoIncrementCounter() {
 resetAutoIncrementCounter();
 
 async function dropSeeders() {
-  // Delete all data from the users and userEmails tables
+  // Delete all data from Users and related tables
+  await prisma.usersPassword.deleteMany();
   await prisma.userEmails.deleteMany();
   await prisma.users.deleteMany();
 
