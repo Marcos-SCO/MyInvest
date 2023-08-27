@@ -11,20 +11,33 @@ datasource db {
 }
 
 model Users {
-  id        Int          @id @default(autoincrement())
-  firstName String       @map("first_name")
-  lastName  String       @map("last_name")
-  createdAt DateTime     @default(now()) @map("created_at")
-  updatedAt DateTime     @updatedAt @map("updated_at")
+  id        Int    @id @default(autoincrement())
+  firstName String @map("first_name")
+  lastName  String @map("last_name")
+
+  accountType Int?          @default(1) @map("account_type")
+  Type        AccountTypes? @relation(fields: [accountType], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
   UserPassword UsersPassword[]
-  UserEmail UserEmails[]
+  UserEmail    UserEmails[]
+}
+
+model AccountTypes {
+  id    Int     @id @default(autoincrement())
+  type  String  @unique @default("email")
+  Users Users[]
+
+  @@map(name: "account_types")
 }
 
 model UsersPassword {
-  id Int @id @default(autoincrement())
+  id       Int    @id @default(autoincrement())
   password String @db.VarChar(255)
-  userId Int
-  users Users @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId   Int
+  users    Users  @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map(name: "users_password")
 }
