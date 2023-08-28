@@ -10,7 +10,9 @@ routes.post('/users/', UserController().create);
 
 routes.get('/users/:page(\\d+)?/:numberOfItens(\\d+)?', authMiddleware, UserController().index);
 
-routes.get('/user/:id(\\d+)', authMiddleware, UserController().getOne);
+routes.get('/user/:id(\\d+)', authMiddleware, UserController().getOneById);
+
+routes.post('/find-user/', UserController().findOneByEmail);
 
 routes.put('/user/', authMiddleware, UserController().edit);
 

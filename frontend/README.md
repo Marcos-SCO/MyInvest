@@ -8,3 +8,5 @@
 - next-auth
 
 - react-inlinesvg
+
+- axios

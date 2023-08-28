@@ -8,6 +8,7 @@ const routes = Router();
 
 // routes.post('/auth/sign-in', auth().create);
 routes.post('/auth/sign-in', AuthController().create);
+routes.post('/auth/sign-in-provider', AuthController().createProvider);
 
 routes.delete('/auth/sign-out', authMiddleware, AuthController().destroy);
 

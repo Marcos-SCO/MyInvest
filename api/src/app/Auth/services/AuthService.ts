@@ -31,6 +31,32 @@ const AuthService = () => {
     return passwordsMatch;
   }
 
+  async function signInWithProvider(email: string, accountType: Number) {
+
+    if (!accountType) {
+      throw new AuthError(`Account type was not provided...`);
+    }
+
+    const userData = await UserModel().getUserByEmail(email as string);
+
+    const fullName = (userData?.firstName + ' ' + userData?.lastName);
+
+    const { id } = userData;
+
+    const token = Jwt.sign({ id }, secret as string, {
+      expiresIn: expiresIn,
+    });
+
+    return {
+      user: {
+        id,
+        fullName,
+        email,
+        accountType,
+      },
+      token
+    }
+  }
 
   async function signIn(email: String, password: String): Promise<{ user: object, token: string }> {
 
@@ -91,7 +117,7 @@ const AuthService = () => {
     }
   }
 
-  return { signIn, signOut, validateToken }
+  return { signIn, signInWithProvider, signOut, validateToken }
 }
 
 export default AuthService;

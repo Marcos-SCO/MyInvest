@@ -45,18 +45,51 @@ const UsersController = () => {
     }
   }
 
-  async function getOne(req: Request, res: Response): Promise<Response> {
+  async function findOneByEmail(req: Request, res: Response) {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(404).json({
+        message: 'Email param was not provided',
+      });
+    }
+
+    try {
+      const userEmailData = await
+        UserModel().getEmail(email);
+
+      return res.status(200).json({
+        emailFound: true,
+        email: userEmailData
+      });
+
+    } catch (error) {
+
+      const isAuthError = error instanceof AuthError;
+
+      if (isAuthError) return res.status(404).json({
+        emailFound: false,
+        message: error.message,
+      });
+
+    }
+
+  }
+
+  async function getOneById(req: Request, res: Response): Promise<Response> {
 
     const { id } = req.params;
 
-    const userData = await prisma.users.findUnique({
+    const objData = {
       where: {
         id: +id
       },
       include: {
         UserEmail: true,
       },
-    });
+    };
+
+    const userData = await prisma.users.findUnique(objData);
 
     // const haveUserResults = userData.length > 0;
 
@@ -94,7 +127,7 @@ const UsersController = () => {
 
   }
 
-  return { create, edit, index, getOne }
+  return { create, edit, index, getOneById, findOneByEmail }
 
 }
 

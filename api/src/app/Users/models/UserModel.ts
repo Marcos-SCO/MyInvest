@@ -18,17 +18,23 @@ const UserModel = () => {
     return hashedPassword;
   }
 
-  async function getUserByEmail(email: string) {
-
+  async function getEmail(email: string) {
     const userEmailData = await prisma.userEmails.findFirst({
       where: { email },
     });
 
     if (!userEmailData) {
-      console.error(`Email not founded: ${email}`);
-      throw new AuthError(`Email not founded: ${email}`);
+      console.error(`Email: ${email} was not founded`);
+      throw new AuthError(`Email: ${email} was not founded`);
     }
 
+    return userEmailData;
+  }
+
+  async function getUserByEmail(email: string) {
+
+    const userEmailData = await getEmail(email);
+  
     const emailData = userEmailData?.email;
     const userId = userEmailData?.userId;
 
@@ -97,7 +103,7 @@ const UserModel = () => {
     return users;
   }
 
-  return { getAllByPagination, updateUser, getHashedPassword, getUserByEmail }
+  return { getAllByPagination, updateUser, getHashedPassword, getEmail, getUserByEmail }
 }
 
 export default UserModel;
