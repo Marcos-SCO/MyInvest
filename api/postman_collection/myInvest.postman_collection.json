@@ -48,6 +48,46 @@
 			"response": []
 		},
 		{
+			"name": "Users: get one by Email",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"aadmarcos@test.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/find-user/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"find-user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "User: update",
 			"protocolProfileBehavior": {
 				"disabledSystemHeaders": {}
@@ -148,7 +188,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"firstName\": \"Marcos\",\r\n    \"lastName\": \"dos Santos Carvalho\",\r\n    \"email\": \"marcos@test.com\",\r\n    \"password\": \"pass\"\r\n}",
+					"raw": "{\r\n    \"firstName\": \"Marcos\",\r\n    \"lastName\": \"dos Santos Carvalho\",\r\n    \"email\": \"aaaaamarcos@test.com\",\r\n    //\"password\": \"pass\",\r\n    \"accountType\": 2\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -193,6 +233,36 @@
 					"path": [
 						"auth",
 						"sign-in"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign-in with provider",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"marcos@test.com\",\r\n    \"accountType\": 2 // 2 = Google provider\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/auth/sign-in-provider",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth",
+						"sign-in-provider"
 					]
 				}
 			},
@@ -266,7 +336,7 @@
 		},
 		{
 			"key": "jwt_token",
-			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImlhdCI6MTY5MjU5NDcwNCwiZXhwIjoxNjkzMTk5NTA0fQ.NsT2VW5GRpsp6KZv4aagoVYQb26D6qBv-kNsWLnAvco",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImlhdCI6MTY5MzE3MDk0MCwiZXhwIjoxNjkzNzc1NzQwfQ.FyVKfunq-8PE2BuhifjhO4YQ5fz5-BgQwFQzACVQcOg",
 			"type": "string"
 		}
 	]
