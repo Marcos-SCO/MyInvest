@@ -11,4 +11,7 @@
 
 - axios
 
-Tailwind: npm i -D tailwindcss postcss autoprefixer
+## Tailwind
+installation: npm i -D tailwindcss postcss autoprefixer
+
+npx tailwindcss init -p
