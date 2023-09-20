@@ -10,3 +10,5 @@
 - react-inlinesvg
 
 - axios
+
+Tailwind: npm i -D tailwindcss postcss autoprefixer
