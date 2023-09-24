@@ -8,12 +8,15 @@ const AuthController = () => {
   const createProvider = async (req: Request, res: Response): Promise<Response> => {
     const { email, accountType } = req.body;
 
-    console.log('Account type: ', accountType)
 
     try {
       const { user, token } = await AuthService().signInWithProvider(email, accountType);
 
-      return res.status(200).json({ user, token });
+      const objData = { user, token };
+      // console.log('Account type: ', accountType)
+      console.log(objData);
+
+      return res.status(200).json(objData);
 
     } catch (error) {
       const isAuthError = error instanceof AuthError;
@@ -32,7 +35,11 @@ const AuthController = () => {
     try {
       const { user, token } = await AuthService().signIn(email, password);
 
-      return res.status(200).json({ user, token });
+      const objData = { user, token };
+      // console.log('Account type: ', accountType)
+      console.log(objData);
+
+      return res.status(200).json(objData);
 
     } catch (error) {
       const isAuthError = error instanceof AuthError;

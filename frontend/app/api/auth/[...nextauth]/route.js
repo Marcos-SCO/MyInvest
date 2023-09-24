@@ -1,3 +1,4 @@
+import { loginUser } from '@/components/user/databaseFunctions';
 import dotenv from 'dotenv';
 
 import NextAuth from "next-auth/next";
@@ -53,15 +54,24 @@ const nextAuthOptions = {
 
   callbacks: {
     async signIn({ user, account }) {
-      console.log('User: ', user);
+      // console.log('User: ', user);
       // console.log('Account: ', account);
       return user;
     },
     async jwt({ token, user }) {
-      user && (token.user = user)
+      user && (token.user = user);
+      
+      const sessionHasToken = token?.user?.token;
+      if (!user && !sessionHasToken) {
+        const userEmail = token?.email;
+        const user = await loginUser(userEmail, 2);
+
+        user && (token.user.token = user)
+      }
+
       return token;
     },
-    async session({session, token}) {
+    async session({ session, token, user }) {
       session = token.user;
       return session;
     }

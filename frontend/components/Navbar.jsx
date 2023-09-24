@@ -1,5 +1,4 @@
 import Link from "next/link";
-import LoginButton from "@/components/LoginControls";
 import LoginControls from "@/components/LoginControls";
 
 import { getServerSession } from "next-auth";

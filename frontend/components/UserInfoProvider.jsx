@@ -1,124 +1,42 @@
-'use client';
+import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
+
+import { insertUserIfNotExists, loginUser } from "./user/databaseFunctions";
+
+// import { useSession } from 'next-auth/react';
 
 import Image from "next/image";
-import { useSession } from 'next-auth/react';
 
-import axios from 'axios';
+export default async function UserInfoProvider() {
+  const session = await getServerSession(nextAuthOptions);
 
-const API_BASE_URL = process.env.API_BASE_URL;
+  if (!session) return;
 
-async function verifyIfEmailExists(userEmail) {
+  insertUserIfNotExists(session, 2);
 
-  const config = {
-    method: 'post',
-    url: `${API_BASE_URL}/find-user/`,
-    data: { email: userEmail },
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  };
+  const { image, name, email } = session;
 
-  console.log(API_BASE_URL);
+  // loginUser(email, 2);
+  // if (!session) { 
+  //   loginUser(email, 2);
+  // }
 
-  return axios(config)
-    .then(response => {
-      // console.log('Email ', response.data);
-      return true;
-    })
-    .catch(error => {
-      // console.error('Error getting email', error);
-      return false;
-    });
-}
+  console.log('my session: ', session);
 
-async function insertUserIfNotExists(user) {
-  // const userImage = session?.user?.image;
-  const { name, email } = user;
+  return (
+    <>
+      <h3 className="text-center text-xl text-green-700 mb-8">Login com Auth provider</h3>
 
-  const emailAlreadyExists = await verifyIfEmailExists(email);
+      <figure className="flex flex-col sm:flex-row max-sm:items-center mb-10 p-8 shadow-xl rounded-lg">
+        <Image className="rounded-full" src={image} width={60} height={60} loading="lazy" alt={name} />
+        <figcaption className="max-sm:pt-3 sm:pl-2 md:text-left">
+          <p>
+            <span>Nome: <b>{name}</b></span><br />
+            <span>E-mail: <b>{email}</b></span>
+          </p>
+        </figcaption>
+      </figure>
+    </>
+  );
 
-  if (emailAlreadyExists) return;
-
-  const splitName = name.split(' ');
-
-  const firstName = splitName[0];
-  const lastName = splitName.slice(1).join();
-
-  const userData = {
-    firstName: firstName,
-    lastName: lastName,
-    email,
-    accountType: 2,
-  };
-
-  axios.post(`${API_BASE_URL}/users/`, userData)
-    .then(response => {
-      console.log('User created:', response.data);
-    })
-    .catch(error => {
-      console.error('Error creating user:', error);
-    });
-
-}
-
-
-async function loginUser(email, accountType) {
-  const userData = {
-    email: email,
-    accountType: accountType,
-  };
-
-  const config = {
-    method: 'post',
-    url: `${API_BASE_URL}/auth/sign-in-provider`,
-    data: userData,
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  };
-
-  try {
-    const response = await axios(config);
-    console.log('User logged in:', response.data);
-    // Perform further actions after successful login
-  } catch (error) {
-    console.error('Error logging in user:', error);
-  }
-}
-
-
-export default function UserInfoProvider() {
-  const { status, data: session } = useSession();
-
-  // console.log('status', status);
-
-  const isUserAuthenticated = status === 'authenticated';
-
-  if (isUserAuthenticated) {
-
-    insertUserIfNotExists(session);
-
-    const userImage = session?.image;
-    const userName = session?.name;
-    const userEmail = session?.email;
-
-    loginUser(userEmail, 2);
-
-    return (
-      <section className="flex flex-col justify-center">
-        <h1 className="text-center text-xl text-green-700">Usuário logado</h1>
-
-        <figure className="flex flex-col sm:flex-row max-sm:items-center mt-10 p-8 shadow-xl rounded-lg">
-          <Image className="rounded-full" src={userImage} width={60} height={60} loading="lazy" alt={userName} />
-          <figcaption className="max-sm:pt-3 sm:pl-2 md:text-left">
-            <p>
-              <span>Nome: <b>{userName}</b></span><br />
-              <span>E-mail: <b>{userEmail}</b></span>
-            </p>
-          </figcaption>
-        </figure>
-
-      </section>
-    )
-  }
 }
