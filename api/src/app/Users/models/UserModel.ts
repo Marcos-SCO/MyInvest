@@ -31,16 +31,27 @@ const UserModel = () => {
     return userEmailData;
   }
 
+  async function getUserById(id: number) {
+    const user = await prisma.users.findUnique({
+      where: { id }
+    });
+
+    if (!user) {
+      console.error('Error retrieving user:');
+      throw new AuthError(`User with ${id} was not found`);
+    }
+
+    return user;
+  }
+
   async function getUserByEmail(email: string) {
 
     const userEmailData = await getEmail(email);
-  
+
     const emailData = userEmailData?.email;
     const userId = userEmailData?.userId;
 
-    const user = await prisma.users.findUnique({
-      where: { id: userId }
-    });
+    const user = await getUserById(userId);
 
     if (!user) {
       console.error('Error retrieving user:');
@@ -50,6 +61,33 @@ const UserModel = () => {
     const userData = { ...user, email: emailData }
 
     return userData;
+  }
+
+  async function deleteUser(args: any) {
+    const { id = false, email = false } = args;
+    let userId = id;
+
+    if (!id && email) {
+      const getUserByEmailData = await getUserByEmail(email);
+      userId = getUserByEmailData?.id;
+    }
+
+    if (id && !email || id && email) {
+      const getUserByIdData = await getUserById(userId);
+      userId = getUserByIdData?.id;
+    }
+
+    const deletedUser = await prisma.users.delete({
+      where: { id: userId },
+      include: {
+        UserEmail: true, // Include the related emails
+      },
+    });
+
+    await prisma.$disconnect();
+
+    return deletedUser;
+
   }
 
   async function updateUser(args: any) {
@@ -103,7 +141,7 @@ const UserModel = () => {
     return users;
   }
 
-  return { getAllByPagination, updateUser, getHashedPassword, getEmail, getUserByEmail }
+  return { getAllByPagination, updateUser, deleteUser, getHashedPassword, getEmail, getUserByEmail }
 }
 
 export default UserModel;

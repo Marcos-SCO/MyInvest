@@ -128,6 +128,46 @@
 			"response": []
 		},
 		{
+			"name": "User: delete",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    // \"id\": 23,\r\n    \"email\": \"AAaAVjj@test.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/user/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Users: get all",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true,
@@ -336,7 +376,7 @@
 		},
 		{
 			"key": "jwt_token",
-			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImlhdCI6MTY5MzE3MDk0MCwiZXhwIjoxNjkzNzc1NzQwfQ.FyVKfunq-8PE2BuhifjhO4YQ5fz5-BgQwFQzACVQcOg",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImlhdCI6MTY5NTU4Mzg4NiwiZXhwIjoxNjk2MTg4Njg2fQ.jXZWXxhFugABr--Kgpszp82HoE3_hNTMrYWCIkUW7h4",
 			"type": "string"
 		}
 	]

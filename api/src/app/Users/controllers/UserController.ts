@@ -45,6 +45,30 @@ const UsersController = () => {
     }
   }
 
+  async function destroy(req: Request, res: Response): Promise<Response> {
+
+    try {
+      const deletedUser = await UserModel().deleteUser(req.body);
+
+      const { id } = deletedUser;
+      
+      const userEmail =
+        deletedUser?.UserEmail?.map(({ email }) => email);
+
+      console.log(`User id: ${id} | email: ${userEmail} Was deleted successfully`);
+
+      return res.status(200).json({
+        message: `User id: ${id} | email: ${userEmail} Was deleted successfully`
+      });
+
+    } catch (error) {
+
+      return res.status(404).json({
+        message: 'Error when deleting user',
+      });
+    }
+  }
+
   async function findOneByEmail(req: Request, res: Response) {
     const { email } = req.body;
 
@@ -127,7 +151,7 @@ const UsersController = () => {
 
   }
 
-  return { create, edit, index, getOneById, findOneByEmail }
+  return { index, create, edit, destroy, getOneById, findOneByEmail }
 
 }
 
