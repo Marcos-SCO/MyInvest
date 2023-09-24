@@ -8,7 +8,7 @@ const AuthController = () => {
   const createProvider = async (req: Request, res: Response): Promise<Response> => {
     const { email, accountType } = req.body;
 
-    console.log(accountType)
+    console.log('Account type: ', accountType)
 
     try {
       const { user, token } = await AuthService().signInWithProvider(email, accountType);

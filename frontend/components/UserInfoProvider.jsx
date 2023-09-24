@@ -1,7 +1,6 @@
 'use client';
 
 import Image from "next/image";
-import SignInBtn from "./SignInBtn";
 import { useSession } from 'next-auth/react';
 
 import axios from 'axios';
@@ -34,13 +33,13 @@ async function verifyIfEmailExists(userEmail) {
 
 async function insertUserIfNotExists(user) {
   // const userImage = session?.user?.image;
-  const { name: userName, email: userEmail } = user;
+  const { name, email } = user;
 
-  const emailAlreadyExists = await verifyIfEmailExists(userEmail);
+  const emailAlreadyExists = await verifyIfEmailExists(email);
 
   if (emailAlreadyExists) return;
 
-  const splitName = userName.split(' ');
+  const splitName = name.split(' ');
 
   const firstName = splitName[0];
   const lastName = splitName.slice(1).join();
@@ -48,7 +47,7 @@ async function insertUserIfNotExists(user) {
   const userData = {
     firstName: firstName,
     lastName: lastName,
-    email: userEmail,
+    email,
     accountType: 2,
   };
 
@@ -88,19 +87,20 @@ async function loginUser(email, accountType) {
 }
 
 
-export default function UserInfo() {
+export default function UserInfoProvider() {
   const { status, data: session } = useSession();
 
+  // console.log('status', status);
 
   const isUserAuthenticated = status === 'authenticated';
 
   if (isUserAuthenticated) {
 
-    insertUserIfNotExists(session.user);
+    insertUserIfNotExists(session);
 
-    const userImage = session?.user?.image;
-    const userName = session?.user?.name;
-    const userEmail = session?.user?.email;
+    const userImage = session?.image;
+    const userName = session?.name;
+    const userEmail = session?.email;
 
     loginUser(userEmail, 2);
 
@@ -121,6 +121,4 @@ export default function UserInfo() {
       </section>
     )
   }
-
-  return <SignInBtn />;
 }

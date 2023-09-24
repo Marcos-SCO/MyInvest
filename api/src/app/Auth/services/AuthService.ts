@@ -39,7 +39,8 @@ const AuthService = () => {
 
     const userData = await UserModel().getUserByEmail(email as string);
 
-    const fullName = (userData?.firstName + ' ' + userData?.lastName);
+    const { firstName, lastName } = userData;
+    const fullName = (firstName + ' ' + lastName);
 
     const { id } = userData;
 
@@ -50,6 +51,8 @@ const AuthService = () => {
     return {
       user: {
         id,
+        firstName,
+        lastName,
         fullName,
         email,
         accountType,
@@ -62,7 +65,8 @@ const AuthService = () => {
 
     const userData = await UserModel().getUserByEmail(email as string);
 
-    const fullName = (userData?.firstName + ' ' + userData?.lastName);
+    const { firstName, lastName } = userData;
+    const fullName = (firstName + ' ' + lastName);
 
     const { id } = userData;
 
@@ -86,6 +90,8 @@ const AuthService = () => {
     return {
       user: {
         id,
+        name: firstName,
+        lastName,
         fullName,
         email,
       },
@@ -102,13 +108,13 @@ const AuthService = () => {
     try {
       const tokenIsBlackListed = await isTokenBlackListed(token);
       // console.log('token blacklisted:', tokenIsBlackListed);
-      
+
       if (tokenIsBlackListed) {
         throw new AuthError('Invalid token - Token was blacklisted');
       }
-      
+
       const decoded = Jwt.verify(token, secret as string) as { id: string };
-      
+
       return decoded.id;
 
     } catch (error: any) {
