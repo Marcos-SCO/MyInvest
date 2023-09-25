@@ -143,7 +143,7 @@ export default function SignUpForm() {
                 <input
                   id="confirmPassword"
                   name="confirmPassword"
-                  type="confirmPassword"
+                  type="password"
                   autoComplete="Senha atual"
                   // required
                   onChange={(e) => handleInput(e)}
