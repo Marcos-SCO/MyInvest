@@ -1,5 +1,3 @@
-import { updateSession } from "./updateSession";
-
 const API_BASE_URL = process.env.API_BASE_URL;
 
 async function verifyIfEmailExists(userEmail) {
@@ -26,20 +24,19 @@ async function verifyIfEmailExists(userEmail) {
   return true;
 }
 
-async function insertUserIfNotExists(user, accountType = 1) {
+async function insertUserProvider(user, accountType = 1) {
   // const userImage = session?.user?.image;
   const { name, email } = user;
 
   const emailAlreadyExists = await verifyIfEmailExists(email);
 
   // console.log('email exists', emailAlreadyExists);
-
   if (emailAlreadyExists) return;
 
   const splitName = name.split(' ');
 
-  const firstName = splitName[0];
-  const lastName = splitName.slice(1).join('');
+  firstName = splitName[0];
+  lastName = splitName.slice(1).join('');
 
   const userData = {
     firstName: firstName,
@@ -47,6 +44,54 @@ async function insertUserIfNotExists(user, accountType = 1) {
     email,
     accountType,
   };
+
+  try {
+    const res = await fetch(`${API_BASE_URL}/users/`, {
+      method: 'POST',
+      headers: { 'Content-type': 'application/json', },
+      body: JSON.stringify(userData),
+    });
+
+    console.log('User created:', res.json());
+
+  } catch (error) {
+    console.error('Error creating user:', error);
+  }
+}
+
+async function insertUserCredentials(user, accountType = 1) {
+  const { firstName, lastName, email, password, confirmPassword } = user;
+
+  const isPasswordEqual = password == confirmPassword;
+
+  if (!password || !isPasswordEqual) {
+    console.error('Password is not equal');
+    return { error: true };
+  }
+
+  if (email == '' || !email) {
+    console.error('Without email');
+    return { error: true };
+  }
+
+  const emailAlreadyExists = await verifyIfEmailExists(email);
+
+  // console.log('email exists', emailAlreadyExists);
+  if (emailAlreadyExists) {
+    console.error('Usuário já cadastrado');
+    return { alreadyUser: true };
+  };
+
+  const userData = {
+    firstName,
+    lastName,
+    email,
+    password,
+    confirmPassword,
+    // accountType,
+  };
+
+  console.log(userData)
 
   try {
     const res = await fetch(`${API_BASE_URL}/users/`, {
@@ -96,4 +141,4 @@ async function loginUser(email, accountType) {
 }
 
 
-export { verifyIfEmailExists, insertUserIfNotExists, loginUser }
+export { verifyIfEmailExists, insertUserProvider, insertUserCredentials, loginUser }
