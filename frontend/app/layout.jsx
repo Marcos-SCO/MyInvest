@@ -1,5 +1,9 @@
 import Navbar from '@/components/Navbar';
-import './globals.css';
+
+// Styles
+import './css/sass/main.scss';
+import './css/globals.css';
+
 import { Inter } from 'next/font/google';
 import { NextAuthSessionProvider } from './providers/sessionProvider';
 
