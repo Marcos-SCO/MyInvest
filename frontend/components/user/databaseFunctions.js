@@ -37,16 +37,18 @@ async function insertUserIfNotExists(user, accountType = 1) {
   if (emailAlreadyExists) return;
 
   const splitName = name.split(' ');
-
   const firstName = splitName[0];
-  const lastName = splitName.slice(1).join('');
-
+  
   const userData = {
     firstName: firstName,
-    lastName: lastName,
     email,
     accountType,
   };
+
+  if (splitName.length > 1) {
+    const lastName = splitName.slice(1).join('');
+    userData.lastName = lastName;
+  }
 
   try {
     const res = await fetch(`${API_BASE_URL}/users/`, {
@@ -55,7 +57,8 @@ async function insertUserIfNotExists(user, accountType = 1) {
       body: JSON.stringify(userData),
     });
 
-    console.log('User created:', res.json());
+    // console.log('User created:', res.json());
+    console.log('User created');
 
   } catch (error) {
     console.error('Error creating user:', error);
