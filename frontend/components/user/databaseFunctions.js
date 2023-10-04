@@ -34,64 +34,18 @@ async function insertUserProvider(user, accountType = 1) {
   if (emailAlreadyExists) return;
 
   const splitName = name.split(' ');
-
-  firstName = splitName[0];
-  lastName = splitName.slice(1).join('');
-
+  const firstName = splitName[0];
+  
   const userData = {
     firstName: firstName,
-    lastName: lastName,
     email,
     accountType,
   };
 
-  try {
-    const res = await fetch(`${API_BASE_URL}/users/`, {
-      method: 'POST',
-      headers: { 'Content-type': 'application/json', },
-      body: JSON.stringify(userData),
-    });
-
-    console.log('User created:', res.json());
-
-  } catch (error) {
-    console.error('Error creating user:', error);
+  if (splitName.length > 1) {
+    const lastName = splitName.slice(1).join('');
+    userData.lastName = lastName;
   }
-}
-
-async function insertUserCredentials(user, accountType = 1) {
-  const { firstName, lastName, email, password, confirmPassword } = user;
-
-  const isPasswordEqual = password == confirmPassword;
-
-  if (!password || !isPasswordEqual) {
-    console.error('Password is not equal');
-    return { error: true };
-  }
-
-  if (email == '' || !email) {
-    console.error('Without email');
-    return { error: true };
-  }
-
-  const emailAlreadyExists = await verifyIfEmailExists(email);
-
-  // console.log('email exists', emailAlreadyExists);
-  if (emailAlreadyExists) {
-    console.error('Usuário já cadastrado');
-    return { alreadyUser: true };
-  };
-
-  const userData = {
-    firstName,
-    lastName,
-    email,
-    password,
-    confirmPassword,
-    // accountType,
-  };
-
-  console.log(userData)
 
   try {
     const res = await fetch(`${API_BASE_URL}/users/`, {
@@ -100,7 +54,8 @@ async function insertUserCredentials(user, accountType = 1) {
       body: JSON.stringify(userData),
     });
 
-    console.log('User created:', res.json());
+    // console.log('User created:', res.json());
+    console.log('User created');
 
   } catch (error) {
     console.error('Error creating user:', error);
