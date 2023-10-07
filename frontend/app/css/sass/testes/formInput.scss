@@ -1,0 +1,33 @@
+.formInput{
+    padding-top:1rem ;
+    display: flex;
+    //left: 17rem;
+    left:2.5rem;
+    position: relative;
+
+}
+
+.testForm{
+    border: 2px solid rgba(187, 187, 187, 0);
+    border-radius: 5px;
+    position: relative;
+    left: 15rem;
+    top:10rem;
+    padding-bottom: 1.3rem;
+    background-color: #337CDB;
+
+    width: 20rem;
+}
+
+.InputForm{
+    outline: 0;
+    border: 1px solid rgba(187, 187, 187, 0.795);
+    border-radius: 5px;
+    display: flex;
+
+    padding: 8px;
+}
+
+.lblForm{
+    color: #F5FEFD;
+}

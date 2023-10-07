@@ -3,12 +3,13 @@ import Link from "next/link";
 import { nextAuthOptions } from "./api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 
-
-export default async function Home() {
+import './css/sass/main.scss'
+export default async function Home({Component, pageProps}) {
   const session = await getServerSession(nextAuthOptions);
   
   return (
     <div className='grid place-items-center h-screen -mt-24'>
+      <Component {...pageProps} />
 
       <div>
         <h1 className="text-lg">Aplicação em progresso!!!</h1>

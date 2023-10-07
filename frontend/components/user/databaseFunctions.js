@@ -96,4 +96,4 @@ async function loginUser(email, accountType) {
 }
 
 
-export { verifyIfEmailExists, insertUserProvider, insertUserCredentials, loginUser }
+//export { verifyIfEmailExists, insertUserProvider, loginUser, insertUserCredentials };
