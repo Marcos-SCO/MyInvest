@@ -1,5 +1,3 @@
-import { updateSession } from "./updateSession";
-
 const API_BASE_URL = process.env.API_BASE_URL;
 
 async function verifyIfEmailExists(userEmail) {
@@ -26,27 +24,28 @@ async function verifyIfEmailExists(userEmail) {
   return true;
 }
 
-async function insertUserIfNotExists(user, accountType = 1) {
+async function insertUserProvider(user, accountType = 1) {
   // const userImage = session?.user?.image;
   const { name, email } = user;
 
   const emailAlreadyExists = await verifyIfEmailExists(email);
 
   // console.log('email exists', emailAlreadyExists);
-
   if (emailAlreadyExists) return;
 
   const splitName = name.split(' ');
-
   const firstName = splitName[0];
-  const lastName = splitName.slice(1).join('');
-
+  
   const userData = {
     firstName: firstName,
-    lastName: lastName,
     email,
     accountType,
   };
+
+  if (splitName.length > 1) {
+    const lastName = splitName.slice(1).join('');
+    userData.lastName = lastName;
+  }
 
   try {
     const res = await fetch(`${API_BASE_URL}/users/`, {
@@ -55,7 +54,8 @@ async function insertUserIfNotExists(user, accountType = 1) {
       body: JSON.stringify(userData),
     });
 
-    console.log('User created:', res.json());
+    // console.log('User created:', res.json());
+    console.log('User created');
 
   } catch (error) {
     console.error('Error creating user:', error);
@@ -96,4 +96,4 @@ async function loginUser(email, accountType) {
 }
 
 
-export { verifyIfEmailExists, insertUserIfNotExists, loginUser }
+export { verifyIfEmailExists, insertUserProvider, insertUserCredentials, loginUser }

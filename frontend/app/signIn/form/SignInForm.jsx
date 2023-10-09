@@ -2,6 +2,9 @@
 
 import SignInGoogle from "@/components/SignInBtnGoogle";
 import { signIn } from "next-auth/react";
+
+import Link from "next/link";
+
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -111,9 +114,7 @@ export default function SignInForm() {
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Não possui uma conta?{' '}
-            <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-              Cadastre agora!
-            </a>
+            <Link href={'/signUp'} className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Cadastre agora!</Link>
           </p>
 
         </div>

@@ -7,246 +7,557 @@
 	},
 	"item": [
 		{
-			"name": "Users: get one",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true,
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
+			"name": "api_thirdparty_endpoints",
+			"item": [
+				{
+					"name": "myFinance",
+					"item": [
 						{
-							"key": "token",
-							"value": "{{jwt_token}}",
-							"type": "string"
+							"name": "fiis",
+							"item": [
+								{
+									"name": "Dividends (this endpoint returns outdate info)",
+									"request": {
+										"method": "GET",
+										"header": []
+									},
+									"response": []
+								},
+								{
+									"name": "symbols",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://mfinance.com.br/api/v1/fiis/?symbols=hctr11",
+											"protocol": "https",
+											"host": [
+												"mfinance",
+												"com",
+												"br"
+											],
+											"path": [
+												"api",
+												"v1",
+												"fiis",
+												""
+											],
+											"query": [
+												{
+													"key": "symbols",
+													"value": "hctr11"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Stocks",
+							"item": [
+								{
+									"name": "Symbols",
+									"request": {
+										"method": "GET",
+										"header": []
+									},
+									"response": []
+								},
+								{
+									"name": "Indicators",
+									"request": {
+										"method": "GET",
+										"header": []
+									},
+									"response": []
+								}
+							]
 						}
 					]
 				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"marcos@test.com\",\r\n    \"password\": \"password\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "statusInvest",
+					"item": [
+						{
+							"name": "fiis",
+							"item": [
+								{
+									"name": "dividends_same_month",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://statusinvest.com.br/fii/getearnings?Filter=hctr11&Start=2023-10-01&End=2023-10-31",
+											"protocol": "https",
+											"host": [
+												"statusinvest",
+												"com",
+												"br"
+											],
+											"path": [
+												"fii",
+												"getearnings"
+											],
+											"query": [
+												{
+													"key": "IndiceCode",
+													"value": "ifix",
+													"disabled": true
+												},
+												{
+													"key": "Filter",
+													"value": "hctr11"
+												},
+												{
+													"key": "Start",
+													"value": "2023-10-01"
+												},
+												{
+													"key": "End",
+													"value": "2023-10-31"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "historical_dividends_2_years_period",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://statusinvest.com.br/fii/getearnings?Filter=hctr11&Start=2022-01-01&End=2024-01-01",
+											"protocol": "https",
+											"host": [
+												"statusinvest",
+												"com",
+												"br"
+											],
+											"path": [
+												"fii",
+												"getearnings"
+											],
+											"query": [
+												{
+													"key": "IndiceCode",
+													"value": "ifix",
+													"disabled": true
+												},
+												{
+													"key": "Filter",
+													"value": "hctr11"
+												},
+												{
+													"key": "Start",
+													"value": "2022-01-01"
+												},
+												{
+													"key": "End",
+													"value": "2024-01-01"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Stocks",
+							"item": [
+								{
+									"name": "historical_dividends_2_years_period",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://statusinvest.com.br/acao/getearnings?IndiceCode=&Filter=sapr11&Start=2022-01-01&End=2024-01-01",
+											"protocol": "https",
+											"host": [
+												"statusinvest",
+												"com",
+												"br"
+											],
+											"path": [
+												"acao",
+												"getearnings"
+											],
+											"query": [
+												{
+													"key": "IndiceCode",
+													"value": ""
+												},
+												{
+													"key": "Filter",
+													"value": "sapr11"
+												},
+												{
+													"key": "Start",
+													"value": "2022-01-01"
+												},
+												{
+													"key": "End",
+													"value": "2024-01-01"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "dividends_same_month",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://statusinvest.com.br/acao/getearnings?IndiceCode=&Filter=sapr11&Start=2023-10&End=2023-10",
+											"protocol": "https",
+											"host": [
+												"statusinvest",
+												"com",
+												"br"
+											],
+											"path": [
+												"acao",
+												"getearnings"
+											],
+											"query": [
+												{
+													"key": "IndiceCode",
+													"value": ""
+												},
+												{
+													"key": "Filter",
+													"value": "sapr11"
+												},
+												{
+													"key": "Start",
+													"value": "2023-10"
+												},
+												{
+													"key": "End",
+													"value": "2023-10"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Search",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://statusinvest.com.br/home/mainsearchquery?q=coca",
+									"protocol": "https",
+									"host": [
+										"statusinvest",
+										"com",
+										"br"
+									],
+									"path": [
+										"home",
+										"mainsearchquery"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "coca"
+										}
+									]
+								}
+							},
+							"response": []
 						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/user/2",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"user",
-						"2"
 					]
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Users: get one by Email",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{jwt_token}}",
-							"type": "string"
+			"name": "Users",
+			"item": [
+				{
+					"name": "Users: get one",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"marcos@test.com\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"2"
+							]
 						}
-					]
+					},
+					"response": []
 				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"aadmarcos@test.com\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "Users: get one by Email",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"aadmarcos@test.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/find-user/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"find-user",
+								""
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "{{baseUrl}}/find-user/",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"find-user",
-						""
-					]
+				{
+					"name": "User: update",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"first_name\": \"Alexandre\",\r\n    \"last_name\": \"Gallaxy\",\r\n    \"email\": \"cabeca@jj.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User: delete",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"id\": 29\r\n    // \"email\": \"AAaAVjj@test.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users: get all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"marcos@test.com\",\r\n    \"password\": \"pass\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users: create",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Marcos\",\r\n    \"lastName\": \"dos Santos Carvalho\",\r\n    \"email\": \"aaaaamarcos@test.com\",\r\n    //\"password\": \"pass\",\r\n    \"accountType\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "User: update",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{jwt_token}}",
-							"type": "string"
+			"name": "Assets",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ticker\": \"SAPR11\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/assets/stocks/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"assets",
+								"stocks",
+								""
+							]
 						}
-					]
-				},
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\": 1,\r\n    \"first_name\": \"Alexandre\",\r\n    \"last_name\": \"Gallaxy\",\r\n    \"email\": \"cabeca@jj.com\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/user/",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"user",
-						""
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "User: delete",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{jwt_token}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    // \"id\": 23,\r\n    \"email\": \"AAaAVjj@test.com\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/user/",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"user",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Users: get all",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true,
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{jwt_token}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"marcos@test.com\",\r\n    \"password\": \"pass\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/users/",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"users",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Users: create",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{jwt_token}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"firstName\": \"Marcos\",\r\n    \"lastName\": \"dos Santos Carvalho\",\r\n    \"email\": \"aaaaamarcos@test.com\",\r\n    //\"password\": \"pass\",\r\n    \"accountType\": 2\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/users/",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"users",
-						""
-					]
-				}
-			},
-			"response": []
+			]
 		},
 		{
 			"name": "Sign-in",

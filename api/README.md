@@ -29,6 +29,9 @@
 - @types/cors
 - @types/express
 
+- axios
+- @types/axios
+
 # Prisma commands
 
 - npx prisma init
