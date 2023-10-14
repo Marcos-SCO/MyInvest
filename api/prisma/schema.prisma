@@ -77,7 +77,7 @@ model AssetDetailsList {
 
   symbols             String @db.Text
   currentDividend     String @db.Text
-  hisroricalDividends String @db.Text
+  historicalDividends String @db.Text
 
   assets Assets @relation(fields: [assetId], references: [id], onDelete: Cascade)
 
