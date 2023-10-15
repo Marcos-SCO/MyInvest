@@ -63,7 +63,7 @@ model AssetTypes {
 
 model Assets {
   id         Int        @id @default(autoincrement())
-  name       String
+  name       String     @unique
   type       Int
   AssetTypes AssetTypes @relation(fields: [type], references: [id])
 
@@ -73,7 +73,7 @@ model Assets {
 
 model AssetDetailsList {
   id      Int @id @default(autoincrement())
-  assetId Int
+  assetId Int @unique
 
   symbols             String @db.Text
   currentDividend     String @db.Text
