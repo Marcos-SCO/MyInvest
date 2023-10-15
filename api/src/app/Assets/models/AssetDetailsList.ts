@@ -33,12 +33,12 @@ const AssetDetailsList = () => {
   }
 
   async function updateAssetDetails(assetId: number, dataObj: any) {
-    // const { symbols, currentDividend, historicalDividends } = dataObj;
+    const { symbols, currentDividend, historicalDividends } = dataObj;
 
     try {
       const updateDetails = await prisma.assetDetailsList.update({
         where: { assetId },
-        data: { ...dataObj },
+        data: { symbols, currentDividend, historicalDividends },
       });
 
       return updateDetails;

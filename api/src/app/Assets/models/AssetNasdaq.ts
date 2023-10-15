@@ -2,60 +2,49 @@ import CommonError from "@/app/Auth/exceptions/CommonError";
 import { PrismaClient } from "@prisma/client";
 import AssetDetailsList from "./AssetDetailsList";
 import AssetsService from "../services/AssetsService";
+import AssetModel from "./AssetModel";
 
 const prisma = new PrismaClient();
 
-const AssetModel = () => {
+const AssetNasdaq = () => {
 
   async function getAssetByTickerFromDb(ticker: string) {
-    const assetInDb = await prisma.assets.findFirst({
-      where: { name: ticker }
-    });
-
-    if (!assetInDb) return false;
-
-    return assetInDb;
+    return await AssetModel().getAssetByTickerFromDb(ticker);
   }
 
   async function getDividendHistoryData(ticker: string, type: number) {
-    const date = new Date();
-    const currentYear = date.getFullYear();
-
-    const initialYear = currentYear - 5;
-    const finalYear = currentYear + 1;
-
-    return await AssetsService().getDividendHistory(ticker, `${initialYear}-01-01`, `${finalYear}-01-01`, type);
-
+    return await AssetModel().getDividendHistoryData(ticker, type)
   }
 
-  async function getAssetApiData(ticker: string, type = 1) {
-    const assetData = await AssetsService().searchSymbol(ticker, type);
+  async function getAssetApiData(ticker: string, type = 2) {
+    const searchSymbol = await AssetsService().searchSymbol(ticker, type);
+    const assetData = searchSymbol?.data;
 
-    const assetType: any = { 1: 'stocks', 3: 'fiis', }
+    const historicalDividendsSearch =
+      await getDividendHistoryData(ticker, type);
 
-    const historicalDividends = await getDividendHistoryData(ticker, type);
+    const historicalData = historicalDividendsSearch?.data;
 
-    const objResultName = assetType[type];
-    const symbolPureData = assetData?.[objResultName][0];
+    const { chart } = historicalData;
 
-    const { lastPrice } = symbolPureData;
+    const lastPrice = assetData?.primaryData?.lastSalePrice;
 
     const apiObjData = {
-      symbolData: symbolPureData,
+      symbolData: assetData,
       lastPrice,
-      historicalDividends,
+      historicalDividends: chart,
     }
 
     return apiObjData;
   }
 
   async function insertAsset(insertObj: any) {
-    const { ticker, type = 1 } = insertObj;
+    const { ticker, type = 2 } = insertObj;
 
     let assetAlreadyInDb = await getAssetByTickerFromDb(ticker);
     if (assetAlreadyInDb) throw new CommonError(`${ticker} already exists`);
 
-    const { symbolData, lastPrice, historicalDividends } = await AssetModel().getAssetApiData(ticker, type);
+    const { symbolData, lastPrice, historicalDividends } = await getAssetApiData(ticker, type);
 
     try {
 
@@ -87,7 +76,7 @@ const AssetModel = () => {
   }
 
   async function updateAsset(updateObj: any) {
-    const { ticker, type = 1 } = updateObj;
+    const { ticker, type = 2 } = updateObj;
 
     let assetAlreadyInDb = await getAssetByTickerFromDb(ticker);
 
@@ -95,8 +84,7 @@ const AssetModel = () => {
 
     const assetId = assetAlreadyInDb.id;
 
-    const { symbolData, lastPrice, historicalDividends } =
-      await getAssetApiData(ticker, type);
+    const { symbolData, lastPrice, historicalDividends } = await getAssetApiData(ticker, type);
 
     try {
       const assetDetailsObj = {
@@ -120,7 +108,7 @@ const AssetModel = () => {
 
   }
 
-  return { insertAsset, updateAsset, getAssetByTickerFromDb, getAssetApiData, getDividendHistoryData };
+  return { insertAsset, updateAsset, getAssetByTickerFromDb, getAssetApiData };
 }
 
-export default AssetModel;
+export default AssetNasdaq;

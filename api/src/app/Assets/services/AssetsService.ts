@@ -8,13 +8,24 @@ const prisma = new PrismaClient();
 
 const AssetsService = () => {
 
-  async function searchStockSymbol(ticker: String) {
+  async function searchSymbol(ticker: String, type = 1) {
+
+    const symbolEndpoint: any = {
+      1: `https://mfinance.com.br/api/v1/stocks?symbols=${ticker}`,
+      3: `https://mfinance.com.br/api/v1/fiis?symbols=${ticker}`,
+      2: `https://api.nasdaq.com/api/quote/${ticker}/info?assetclass=stocks`,
+    }
 
     if (!ticker) throw new CommonError(`No ticker was passed`);
 
-    const symbolsApiUrl = `https://mfinance.com.br/api/v1/stocks?symbols=${ticker}`;
+    const symbolsApiUrl = symbolEndpoint[type];
 
-    const axiosRequest = axios.get(symbolsApiUrl)
+    const headers = {
+      'Content-Type': 'application/json',
+      'User-Agent': 'PostmanRuntime/7.33.0'
+    };
+
+    const axiosRequest = axios.get(symbolsApiUrl, { headers })
       .then((response: any) => {
         // console.log('Response: ', response.data);
 
@@ -30,15 +41,21 @@ const AssetsService = () => {
 
   }
 
-  async function getDividendHistory(ticker: String, initialDate: string, finalDate: string) {
+  async function getDividendHistory(ticker: String, initialDate: string, finalDate: string, type = 1) {
 
     if (!ticker) throw new CommonError(`No ticker was passed`);
     if (!initialDate) throw new CommonError(`Initial date was passed`);
     if (!finalDate) throw new CommonError(`Final date was passed`);
 
-    // `https://statusinvest.com.br/acao/getearnings?IndiceCode=&Filter=${ticker}&Start=2022-01-01&End=2024-01-01`
+    const symbolEndpoint: any = {
+      1: `https://statusinvest.com.br/acao/getearnings`,
+      3: `https://statusinvest.com.br/fii/getearnings`,
+      2: `https://api.nasdaq.com/api/quote/${ticker}/chart?assetclass=stocks&fromdate=${initialDate}&todate=${finalDate}`,
+    }
 
-    const historyApiUrl = `https://statusinvest.com.br/acao/getearnings?IndiceCode=&Filter=${ticker}&Start=${initialDate}&End=${finalDate}`;
+    const brazilianEndpoints = `${symbolEndpoint[type]}?IndiceCode=&Filter=${ticker}&Start=${initialDate}&End=${finalDate}`;
+
+    const historyApiUrl = type == 2 ? symbolEndpoint[type] : brazilianEndpoints;
 
     const headers = {
       'Content-Type': 'application/json',
@@ -50,6 +67,7 @@ const AssetsService = () => {
     const axiosRequest = axios.get(historyApiUrl, { headers })
       .then((response: any) => {
         // console.log('Response: ', response.data);
+
         return response?.data;
       })
       .catch((error: any) => {
@@ -64,7 +82,7 @@ const AssetsService = () => {
 
   }
 
-  return { searchStockSymbol, getDividendHistory }
+  return { searchSymbol, getDividendHistory }
 }
 
 export default AssetsService;
