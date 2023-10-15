@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf ./build && tsc",
     "dev": "nodemon",
-    "start": "node build/index.js"
+    "start": "node build/index.js",
+    "prisma-seed": "node prisma/seeders/_executeSeeders.ts",
+    "prisma-drop-seed": "node prisma/seeders/_executeDrops.ts"
   },
   "author": "",
   "license": "ISC",
