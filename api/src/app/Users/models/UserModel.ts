@@ -38,7 +38,7 @@ const UserModel = () => {
 
     if (!user) {
       console.error('Error retrieving user:');
-      throw new AuthError(`User with ${id} was not found`);
+      throw new AuthError(`User with id: ${id} was not found`);
     }
 
     return user;
@@ -141,7 +141,7 @@ const UserModel = () => {
     return users;
   }
 
-  return { getAllByPagination, updateUser, deleteUser, getHashedPassword, getEmail, getUserByEmail }
+  return { getAllByPagination, updateUser, deleteUser, getHashedPassword, getEmail, getUserByEmail, getUserById }
 }
 
 export default UserModel;

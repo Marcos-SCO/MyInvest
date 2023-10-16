@@ -7,6 +7,16 @@ const prisma = new PrismaClient();
 
 const AssetModel = () => {
 
+  async function getAssetById(id: number) {
+    const assetInDb = await prisma.assets.findUnique({
+      where: { id }
+    });
+
+    if (!assetInDb) return false;
+
+    return assetInDb;
+  }
+
   async function getAssetByTickerFromDb(ticker: string) {
     const assetInDb = await prisma.assets.findFirst({
       where: { name: ticker }
@@ -120,7 +130,7 @@ const AssetModel = () => {
 
   }
 
-  return { insertAsset, updateAsset, getAssetByTickerFromDb, getAssetApiData, getDividendHistoryData };
+  return { insertAsset, updateAsset, getAssetByTickerFromDb, getAssetById, getAssetApiData, getDividendHistoryData };
 }
 
 export default AssetModel;
