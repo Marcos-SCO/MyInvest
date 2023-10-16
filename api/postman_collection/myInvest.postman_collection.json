@@ -61,7 +61,27 @@
 									"name": "Symbols",
 									"request": {
 										"method": "GET",
-										"header": []
+										"header": [],
+										"url": {
+											"raw": "https://mfinance.com.br/api/v1/stocks?symbols=SAPR11",
+											"protocol": "https",
+											"host": [
+												"mfinance",
+												"com",
+												"br"
+											],
+											"path": [
+												"api",
+												"v1",
+												"stocks"
+											],
+											"query": [
+												{
+													"key": "symbols",
+													"value": "SAPR11"
+												}
+											]
+										}
 									},
 									"response": []
 								},
@@ -174,7 +194,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "https://statusinvest.com.br/acao/getearnings?IndiceCode=&Filter=sapr11&Start=2022-01-01&End=2024-01-01",
+											"raw": "https://statusinvest.com.br/acao/getearnings?IndiceCode=&Filter=sapr11&Start=2020-01-01&End=2024-01-01",
 											"protocol": "https",
 											"host": [
 												"statusinvest",
@@ -196,7 +216,7 @@
 												},
 												{
 													"key": "Start",
-													"value": "2022-01-01"
+													"value": "2020-01-01"
 												},
 												{
 													"key": "End",
@@ -530,13 +550,140 @@
 			"name": "Assets",
 			"item": [
 				{
-					"name": "New Request",
+					"name": "Fiis",
+					"item": [
+						{
+							"name": "Create Asset",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"ticker\": \"HCTR11\",\r\n    \"type\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/assets/stocks/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"assets",
+										"stocks",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Asset",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"ticker\": \"HCTR11\",\r\n    \"type\": 3\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/assets/stocks/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"assets",
+										"stocks",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Stocks",
+					"item": [
+						{
+							"name": "Create Asset",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    // \"ticker\": \"SAPR11\",\r\n    //\"ticker\": \"KO\",\r\n    \"ticker\": \"MAC\",\r\n    \"type\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/assets/stocks/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"assets",
+										"stocks",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Asset",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    //\"ticker\": \"SAPR11\"\r\n    // \"ticker\": \"OIBR4\"\r\n    //\"ticker\": \"KO\",\r\n    \"ticker\": \"MAC\",\r\n    \"type\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/assets/stocks/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"assets",
+										"stocks",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User Assets",
+			"item": [
+				{
+					"name": "Create User asset",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"ticker\": \"SAPR11\"\r\n}",
+							"raw": "{\r\n    \"userId\": 1,\r\n    \"assetId\": 2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -544,14 +691,70 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/assets/stocks/",
+							"raw": "{{baseUrl}}/assets/user/",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"assets",
-								"stocks",
+								"user",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User asset",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 1,\r\n    \"assetId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/assets/user/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"assets",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User paginate assets",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 1,\r\n    \"numberOfItens\": 10,\r\n    \"page\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/assets/user/paginate",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"assets",
+								"user",
+								"paginate"
 							]
 						}
 					},
