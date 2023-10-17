@@ -1,0 +1,109 @@
+.formInput {
+    padding-top: 0rem;
+    display: flex;
+    flex-direction: column;
+    left: 0rem;
+    position: relative;
+  }
+  
+  .testForm {
+    border: 2px solid rgba(187, 187, 187, 0);
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffffa8;
+    width: 20rem;
+    padding: 1rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    // box-shadow: 5px 5px 0 0 #275fa875;
+  }
+  
+  .InputForm {
+    outline: 0;
+    border: 1px solid rgba(187, 187, 187, 0.795);
+    border-radius: 5px;
+    display: flex;
+    padding: 8px;
+    margin-bottom: 5px;
+  }
+  
+  .lblForm {
+    color: black;
+    margin-top: 10px;
+  }
+
+  .h1-cad{
+    align-items: center;
+    top: 0px;
+    display: flex;
+    position: relative;
+    color: black;
+    size: 1rem;  
+  }
+
+  h1.lblH1{
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  div.DivBtn{
+    color: rgb(255, 255, 255);
+    border: 2px solid rgba(187, 187, 187, 0);
+    border-radius: 5px;
+    background-color: #275FA8;
+    //width: 5rem;
+    position: relative;
+
+    display: flex;
+    top: 5px;
+    //width: 380px;
+    height: 3rem;
+    text-align: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .FButton{
+    position: relative;
+
+    display: flex;
+    left: 1px;
+    width: 12.5rem;
+    text-align: center;
+
+    align-self: center;
+    display: flex;
+    justify-content: center;
+
+
+  }
+  
+  h3.BtnText1{
+    //text-align: center;
+    //width: 100%;
+
+    display: flex;
+    justify-content: center;
+  }
+
+  body.form-page{
+    background-image: url("../../../../public/BackForm.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  
+  }
+  
+  .FB-Div{
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }

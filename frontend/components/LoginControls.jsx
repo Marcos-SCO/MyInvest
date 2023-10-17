@@ -17,7 +17,7 @@ export default function LoginControls({session = false}) {
         <button onClick={() => signOut()} className="bg-slate-900 text-white px-6 py-2 rounded-md">Sair</button>
       ) : (
         // <button onClick={() => signIn('google')} className="bg-slate-900 text-white px-6 py-2 rounded-md">Login</button>
-        <Link href="/signIn" className="bg-slate-900 text-white px-6 py-2 rounded-md">Login</Link>
+        <Link href="/signIn" className="bg-custom-blue text-white px-6 py-2 rounded-md">Login</Link>
       )}
     </>
   )

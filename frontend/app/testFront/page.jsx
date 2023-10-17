@@ -1,16 +1,60 @@
-import FormInput from '../../components/testComp/FormInput'
-import FormButton from '../../components/testComp/FormButton'
+'use client'
 
-const testFront = () => {
-    return(
-        <div className='testForm'>
-            <FormInput placeholder="Username"/>
-            <FormInput placeholder="E-Mail"/>
-            <FormInput placeholder="Password"/>
-            <FormInput placeholder="Repeat your Password"/>
-            <FormButton placeholder="Cadatrar"/>
-        </div>
-    )
-}
+import React, { useState } from 'react';
+import FormInput from './testComp/FormInput';
+import FormText from './testComp/FormText';
+import FormButton from './testComp/FormButton';
 
-export default testFront;
+const TestFront = () => {
+
+  const [inputState, setInputState] = useState({
+    user: '',
+    email: '',
+    password: '',
+    repeatPassword: ''
+  });
+
+  console.log(inputState);
+
+  return (
+    <>
+      <body className="form-page">
+          <div className='testForm'>
+            
+            <FormText placeholder="SignUp"/>
+              
+            <FormInput
+              placeholder="Username"
+              id="user"
+              setInputState={setInputState}
+              inputState={inputState}
+            />
+            <FormInput
+              placeholder="E-Mail"
+              id="email"
+              setInputState={setInputState}
+              inputState={inputState}
+            />
+            <FormInput
+              placeholder="Password"
+              id="password"
+              setInputState={setInputState}
+              inputState={inputState}
+            />
+            <FormInput
+              placeholder="Repeat your Password"
+              id="repeatPassword"
+              setInputState={setInputState}
+              inputState={inputState}
+            />
+            <div className='FB-Div'>
+              <FormButton/>
+            </div>
+        
+          </div>
+      </body>
+    </>
+  );
+};
+
+export default TestFront;
