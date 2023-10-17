@@ -19,10 +19,10 @@ function dropAssetNamedTypes() {
   resetAutoIncrementCounter();
 
   async function dropSeeders() {
-    // Delete all data from Users and related tables
+    // Delete all data from Asset types
     await prisma.assetTypes.deleteMany();
 
-    console.log('Account Type Seeders dropped\n\n');
+    console.log('Asset Type Seeders dropped\n\n');
 
     resetAutoIncrementCounter();
   }

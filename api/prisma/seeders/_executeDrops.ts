@@ -8,12 +8,13 @@ const dropAssetTypes = require("./drop/drop-assetTypes.ts");
 
 async function drops() {
   try {
-    await dropUsers();
-
+    
     await dropUserTypes();
-
-    await dropAssetTypes();
-
+    
+    await dropUsers();
+    
+    // await dropAssetTypes();
+    
     console.log('\n\n Drop completed successfully.');
   } catch (error) {
     console.error('\n\n\ Dropping error:', error);

@@ -52,6 +52,7 @@ CREATE TABLE `Assets` (
     `name` VARCHAR(191) NOT NULL,
     `type` INTEGER NOT NULL,
 
+    UNIQUE INDEX `Assets_name_key`(`name`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -61,8 +62,9 @@ CREATE TABLE `asset_details_list` (
     `assetId` INTEGER NOT NULL,
     `symbols` TEXT NOT NULL,
     `currentDividend` TEXT NOT NULL,
-    `hisroricalDividends` TEXT NOT NULL,
+    `historicalDividends` TEXT NOT NULL,
 
+    UNIQUE INDEX `asset_details_list_assetId_key`(`assetId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
