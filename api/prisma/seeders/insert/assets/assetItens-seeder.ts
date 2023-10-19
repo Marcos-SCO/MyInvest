@@ -5,6 +5,8 @@ const prisma = new PrismaClient();
 import AssetNasdaq from "../../../../src/app/Assets/models/AssetNasdaq";
 import AssetModel from "../../../../src/app/Assets/models/AssetModel";
 
+const insertUserAssets = require('./usersAssetItens-seeder.ts');
+
 // const AssetNasdaq =
 //   require("../../../../src/app/Assets/models/AssetNasdaq.ts");
 
@@ -57,6 +59,8 @@ async function assetSeeds() {
       await prisma.$disconnect();
 
       console.log(`\nFinish inserting assets\n`);
+
+      await insertUserAssets();
     });
 
 }
