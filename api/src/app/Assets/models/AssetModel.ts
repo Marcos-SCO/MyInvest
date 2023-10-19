@@ -130,7 +130,28 @@ const AssetModel = () => {
 
   }
 
-  return { insertAsset, updateAsset, getAssetByTickerFromDb, getAssetById, getAssetApiData, getDividendHistoryData };
+  async function deleteAsset(deleteObj: any) {
+    const { ticker } = deleteObj;
+
+    let assetAlreadyInDb = await getAssetByTickerFromDb(ticker);
+    if (!assetAlreadyInDb) throw new CommonError(`${ticker} don't exists`);
+
+    try {
+      const deletedAsset = await prisma.assets.delete({
+        where: { name: ticker }
+      });
+
+      return deletedAsset;
+    } catch (error) {
+      console.log(`Error deleting asset ${ticker} `, error);
+      throw new CommonError(`Error deleting asset ${ticker}`);
+    } finally {
+      await prisma.$disconnect();
+    }
+
+  }
+
+  return { insertAsset, updateAsset, deleteAsset, getAssetByTickerFromDb, getAssetById, getAssetApiData, getDividendHistoryData };
 }
 
 export default AssetModel;

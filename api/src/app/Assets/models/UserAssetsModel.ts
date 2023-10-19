@@ -134,7 +134,7 @@ const UserAssetsModel = () => {
 
   }
 
-  return { insertUserAsset, deleteUserAsset, getAllByPagination }
+  return { insertUserAsset, deleteUserAsset, getUserAsset, getAllByPagination }
 }
 
 export default UserAssetsModel;
