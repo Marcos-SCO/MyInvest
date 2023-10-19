@@ -1,5 +1,7 @@
 const { PrismaClient } = require('@prisma/client');
 
+const dropUserTypes = require("./drop-accountTypes.ts");
+
 const prisma = new PrismaClient();
 
 function dropUsers() {
@@ -38,6 +40,8 @@ function dropUsers() {
     })
     .finally(async () => {
       await prisma.$disconnect();
+
+      await dropUserTypes();
     });
 }
 

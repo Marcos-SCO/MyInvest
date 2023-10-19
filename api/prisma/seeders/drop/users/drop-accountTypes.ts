@@ -19,7 +19,7 @@ function dropTypes() {
   resetAutoIncrementCounter();
 
   async function dropSeeders() {
-    // Delete all data from Users and related tables
+    // Delete all data from Account types
     await prisma.accountTypes.deleteMany();
 
     console.log('Account Type Seeders dropped\n\n');

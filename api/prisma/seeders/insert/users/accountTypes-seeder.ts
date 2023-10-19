@@ -1,5 +1,7 @@
 const { PrismaClient } = require('@prisma/client');
 
+const seedUsers = require("./users-seeder.ts");
+
 const prisma = new PrismaClient();
 
 async function seedAccountTypes() {
@@ -40,6 +42,8 @@ async function seedAccountTypes() {
     })
     .finally(async () => {
       await prisma.$disconnect();
+
+      await seedUsers();
     });
 }
 

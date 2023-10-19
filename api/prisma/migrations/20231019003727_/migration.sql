@@ -50,7 +50,7 @@ CREATE TABLE `asset_types` (
 CREATE TABLE `Assets` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
-    `type` INTEGER NOT NULL,
+    `type` INTEGER NULL DEFAULT 1,
 
     UNIQUE INDEX `Assets_name_key`(`name`),
     PRIMARY KEY (`id`)
@@ -87,7 +87,7 @@ ALTER TABLE `users_password` ADD CONSTRAINT `users_password_userId_fkey` FOREIGN
 ALTER TABLE `user_emails` ADD CONSTRAINT `user_emails_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `Users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Assets` ADD CONSTRAINT `Assets_type_fkey` FOREIGN KEY (`type`) REFERENCES `asset_types`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `Assets` ADD CONSTRAINT `Assets_type_fkey` FOREIGN KEY (`type`) REFERENCES `asset_types`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `asset_details_list` ADD CONSTRAINT `asset_details_list_assetId_fkey` FOREIGN KEY (`assetId`) REFERENCES `Assets`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

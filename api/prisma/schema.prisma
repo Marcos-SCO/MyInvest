@@ -24,7 +24,7 @@ model Users {
   lastName  String @map("last_name")
 
   accountType Int?          @default(1) @map("account_type")
-  Type        AccountTypes? @relation(fields: [accountType], references: [id])
+  Type        AccountTypes? @relation(fields: [accountType], references: [id], onDelete: SetNull)
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -64,8 +64,8 @@ model AssetTypes {
 model Assets {
   id         Int        @id @default(autoincrement())
   name       String     @unique
-  type       Int
-  AssetTypes AssetTypes @relation(fields: [type], references: [id])
+  type       Int?        @default(1)
+  AssetTypes AssetTypes? @relation(fields: [type], references: [id], onDelete: SetNull)
 
   AssetDetailList AssetDetailsList[]
   UserAssets      UserAssets[]

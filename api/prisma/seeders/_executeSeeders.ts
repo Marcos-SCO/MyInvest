@@ -1,8 +1,8 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-const seedUsers = require("./insert/users-seeder.ts");
-const seedAccountTypes = require("./insert/accountTypes-seeder.ts");
+// const seedUsers = require("./insert/users/users-seeder.ts");
+const seedAccountTypes = require("./insert/users/accountTypes-seeder.ts");
 
 const seedAssetTypes = require("./insert/assetTypes-seeder.ts");
 
@@ -24,18 +24,20 @@ function sleep(ms) {
 async function seed() {
   try {
     await seedAccountTypes();
+    // await seedUsers();
 
-    const accountTypesExist = await doesTableExist('account_types');
+    /* const accountTypesExist = await doesTableExist('account_types');
+   
+    if (!accountTypesExist) {
+      console.log('\nRun the command again to insert users...\n');
+      return;
+    } */
 
     // Asset types
     await seedAssetTypes();
 
-    if (!accountTypesExist) {
-      console.log('\nRun the command again to insert users...\n');
-      return;
-    }
 
-    await seedUsers();
+
 
     console.log('\nSeeding completed successfully.\n\n');
 
