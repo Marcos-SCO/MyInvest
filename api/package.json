@@ -8,8 +8,8 @@
     "build": "rimraf ./build && tsc",
     "dev": "nodemon",
     "start": "node build/index.js",
-    "prisma-seed": "node prisma/seeders/_executeSeeders.ts",
-    "prisma-drop-seed": "node prisma/seeders/_executeDrops.ts"
+    "prisma-seed": "npx tsx prisma/seeders/_executeSeeders.ts",
+    "prisma-drop-seed": "npx tsx prisma/seeders/_executeDrops.ts"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +24,7 @@
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^3.14.0",
     "typescript": "^5.1.6"
   },
   "dependencies": {

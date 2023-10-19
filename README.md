@@ -32,10 +32,10 @@ Projeto realizado para TCC com intuito de ser realizado um WebApp com função d
 
 ### Execute seeders para teste
 - Vá até /prisma/seeders 
-  - Execute o comando: node _executeSeeder.ts
+  - Execute o comando: npm run prisma-seed
   - Isso fará com que o banco de dados seja copulado com usuários, cada vez que o comando é executado 10 itens aleatórios são inseridos;
 
-- Caso deseje limpar os registros no db, execute o arquivo: node _executeDrops.ts
+- Para limpar os registros, execute : npm run prisma-drop-seed
 
 ### Utilize o postman
 - Vá até o postman e importe o arquivo presente em: api/postman_collection
