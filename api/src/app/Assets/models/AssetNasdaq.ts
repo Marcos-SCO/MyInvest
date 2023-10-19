@@ -44,7 +44,9 @@ const AssetNasdaq = () => {
     let assetAlreadyInDb = await getAssetByTickerFromDb(ticker);
     if (assetAlreadyInDb) throw new CommonError(`${ticker} already exists`);
 
-    const { symbolData, lastPrice, historicalDividends } = await getAssetApiData(ticker, type);
+    const assetApiData = await getAssetApiData(ticker, type);
+
+    const { symbolData, lastPrice, historicalDividends } = assetApiData;
 
     try {
 

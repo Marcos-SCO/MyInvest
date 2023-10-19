@@ -4,7 +4,9 @@ const prisma = new PrismaClient();
 // const seedUsers = require("./insert/users/users-seeder.ts");
 const seedAccountTypes = require("./insert/users/accountTypes-seeder.ts");
 
-const seedAssetTypes = require("./insert/assetTypes-seeder.ts");
+const seedAssetTypes = require("./insert/assets/assetTypes-seeder.ts");
+
+const seedAssets = require("./insert/assets/assetItens-seeder.ts");
 
 
 async function doesTableExist(tableName) {
@@ -35,7 +37,7 @@ async function seed() {
 
     // Asset types
     await seedAssetTypes();
-
+    await seedAssets();
 
 
 

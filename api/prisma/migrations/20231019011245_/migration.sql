@@ -63,6 +63,8 @@ CREATE TABLE `asset_details_list` (
     `symbols` TEXT NOT NULL,
     `currentDividend` TEXT NOT NULL,
     `historicalDividends` TEXT NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL,
 
     UNIQUE INDEX `asset_details_list_assetId_key`(`assetId`),
     PRIMARY KEY (`id`)

@@ -81,6 +81,9 @@ model AssetDetailsList {
 
   assets Assets @relation(fields: [assetId], references: [id], onDelete: Cascade)
 
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
   @@map("asset_details_list")
 }
 
