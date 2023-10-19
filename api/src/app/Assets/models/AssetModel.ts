@@ -7,8 +7,6 @@ const prisma = new PrismaClient();
 
 const AssetModel = () => {
 
-
-
   async function getAssetById(id: number) {
     const assetInDb = await prisma.assets.findUnique({
       where: { id }
