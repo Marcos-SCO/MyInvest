@@ -296,6 +296,77 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "Nasdaq",
+					"item": [
+						{
+							"name": "Stocks dividends",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.nasdaq.com/api/quote/KO/chart?assetclass=stocks&fromdate=2022-01-22&todate=2023-01-22",
+									"protocol": "https",
+									"host": [
+										"api",
+										"nasdaq",
+										"com"
+									],
+									"path": [
+										"api",
+										"quote",
+										"KO",
+										"chart"
+									],
+									"query": [
+										{
+											"key": "assetclass",
+											"value": "stocks"
+										},
+										{
+											"key": "fromdate",
+											"value": "2022-01-22"
+										},
+										{
+											"key": "todate",
+											"value": "2023-01-22"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Stocks info",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.nasdaq.com/api/quote/KO/info?assetclass=stocks",
+									"protocol": "https",
+									"host": [
+										"api",
+										"nasdaq",
+										"com"
+									],
+									"path": [
+										"api",
+										"quote",
+										"KO",
+										"info"
+									],
+									"query": [
+										{
+											"key": "assetclass",
+											"value": "stocks"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		},
@@ -567,13 +638,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/assets/stocks/",
+									"raw": "{{baseUrl}}/assets/",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"assets",
-										"stocks",
 										""
 									]
 								}
@@ -595,13 +665,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/assets/stocks/",
+									"raw": "{{baseUrl}}/assets/",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"assets",
-										"stocks",
 										""
 									]
 								}
@@ -628,13 +697,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/assets/stocks/",
+									"raw": "{{baseUrl}}/assets/",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"assets",
-										"stocks",
 										""
 									]
 								}
@@ -648,7 +716,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    //\"ticker\": \"SAPR11\"\r\n    // \"ticker\": \"OIBR4\"\r\n    //\"ticker\": \"KO\",\r\n    \"ticker\": \"MAC\",\r\n    \"type\": 2\r\n}",
+									"raw": "{\r\n    //\"ticker\": \"SAPR11\"\r\n    // \"ticker\": \"OIBR4\"\r\n    \"ticker\": \"KO\",\r\n    // \"ticker\": \"MAC\",\r\n    \"type\": 2\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -656,13 +724,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{baseUrl}}/assets/stocks/",
+									"raw": "{{baseUrl}}/assets/",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"assets",
-										"stocks",
 										""
 									]
 								}
@@ -670,6 +737,33 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "Delete Asset",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"ticker\": \"SAPR11\"\r\n    // \"ticker\": \"OIBR4\"\r\n    // \"ticker\": \"MAC\"\r\n    \"ticker\": \"KO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/assets/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"assets",
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
