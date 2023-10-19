@@ -2,6 +2,8 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
+const dropUsers = require("./drop-users-seeder.ts");
+
 function dropTypes() {
 
   async function resetAutoIncrementCounter() {
@@ -19,7 +21,7 @@ function dropTypes() {
   resetAutoIncrementCounter();
 
   async function dropSeeders() {
-    // Delete all data from Users and related tables
+    // Delete all data from Account types
     await prisma.accountTypes.deleteMany();
 
     console.log('Account Type Seeders dropped\n\n');
@@ -33,6 +35,8 @@ function dropTypes() {
     })
     .finally(async () => {
       await prisma.$disconnect();
+
+      await dropUsers();
     });
 }
 

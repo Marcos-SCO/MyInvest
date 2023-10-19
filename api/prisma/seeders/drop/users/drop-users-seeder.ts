@@ -11,7 +11,7 @@ function dropUsers() {
 
       await prisma.$executeRaw`ALTER TABLE user_emails AUTO_INCREMENT = 1;`;
 
-      console.log('Auto-increment counter reset');
+      // console.log('Auto-increment counter reset');
     } catch (error) {
       console.error('Error resetting auto-increment counter:', error);
     } finally {
@@ -27,8 +27,6 @@ function dropUsers() {
     await prisma.userEmails.deleteMany();
     await prisma.users.deleteMany();
 
-    console.log('Users seeder dropped\n');
-
     resetAutoIncrementCounter();
   }
 
@@ -38,6 +36,8 @@ function dropUsers() {
     })
     .finally(async () => {
       await prisma.$disconnect();
+
+      console.log('Users seeder dropped\n');
     });
 }
 
