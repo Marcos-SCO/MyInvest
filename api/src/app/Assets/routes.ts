@@ -4,8 +4,9 @@ import UserAssetsController from "./controllers/UserAssetsController";
 
 const routes = Router();
 
-routes.post('/assets/stocks/', AssetsController().create);
-routes.put('/assets/stocks/', AssetsController().update);
+routes.post('/assets/', AssetsController().create);
+routes.put('/assets/', AssetsController().update);
+routes.delete('/assets/', AssetsController().destroy);
 
 routes.post('/assets/user/', UserAssetsController().create);
 routes.delete('/assets/user/', UserAssetsController().destroy);

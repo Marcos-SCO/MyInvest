@@ -67,7 +67,32 @@ const AssetsController = () => {
 
   }
 
-  return { create, update }
+  async function destroy(req: Request, res: Response): Promise<Response> {
+
+    try {
+      const ticker = req.body?.ticker;
+
+      const deleteObj = { ticker }
+
+      const deletedAsset = await AssetModel().deleteAsset(deleteObj);
+
+      return res.status(200).json({
+        message: `Asset ${ticker} was deleted from DB`,
+      });
+
+    } catch (error) {
+      const isCommonError = error instanceof CommonError;
+
+      if (isCommonError) return res.status(401).send({ error: error.message });
+
+      console.log(error);
+
+      return res.status(404).json({ error: 'Not found' });
+    }
+
+  }
+
+  return { create, update, destroy }
 
 }
 
