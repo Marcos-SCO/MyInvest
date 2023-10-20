@@ -17,11 +17,60 @@ async function verifyIfEmailExists(userEmail) {
 
   const emailWasFound = user?.emailFound;
 
-  // console.log('Email founded? ', emailWasFound);
+  console.log('Email founded? ', emailWasFound);
 
   if (!emailWasFound) return false;
 
   return true;
+}
+
+
+async function insertUserCredentials(user, accountType = 1) {
+  const { firstName, lastName, email, password, confirmPassword } = user;
+
+  const isPasswordEqual = password == confirmPassword;
+
+  if (!password || !isPasswordEqual) {
+    console.error('Password is not equal');
+    return { error: true };
+  }
+
+  if (email == '' || !email) {
+    console.error('Without email');
+    return { error: true };
+  }
+
+  const emailAlreadyExists = await verifyIfEmailExists(email);
+
+  // console.log('email exists', emailAlreadyExists);
+  if (emailAlreadyExists) {
+    console.error('Usuário já cadastrado');
+    return { alreadyUser: true };
+  };
+
+  const userData = {
+    firstName,
+    lastName,
+    email,
+    password,
+    confirmPassword,
+    // accountType,
+  };
+
+  console.log(userData)
+
+  try {
+    const res = await fetch(`${API_BASE_URL}/users/`, {
+      method: 'POST',
+      headers: { 'Content-type': 'application/json', },
+      body: JSON.stringify(userData),
+    });
+
+    console.log('User created:', res.json());
+
+  } catch (error) {
+    console.error('Error creating user:', error);
+  }
 }
 
 async function insertUserProvider(user, accountType = 1) {
@@ -33,9 +82,9 @@ async function insertUserProvider(user, accountType = 1) {
   // console.log('email exists', emailAlreadyExists);
   if (emailAlreadyExists) return;
 
-  const splitName = name.split(' ');
-  const firstName = splitName[0];
-  
+  const splitName = name?.split(' ');
+  const firstName = splitName ? splitName[0] : '';
+
   const userData = {
     firstName: firstName,
     email,
@@ -96,4 +145,4 @@ async function loginUser(email, accountType) {
 }
 
 
-export { verifyIfEmailExists, insertUserProvider, insertUserCredentials, loginUser }
+export { verifyIfEmailExists, insertUserCredentials, insertUserProvider, loginUser }
