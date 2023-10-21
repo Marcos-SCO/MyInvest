@@ -27,7 +27,7 @@
   
   .InputForm {
     outline: 0;
-    border: 1px solid rgba(187, 187, 187, 0.795);
+    border: 1px solid rgb(187, 187, 187, 0.795);
     border-radius: 5px;
     display: flex;
     padding: 8px;
@@ -105,5 +105,26 @@
   
   .FB-Div{
     padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding-bottom: 1.2rem;
+
+  }
+
+  .G-Btn{
+    padding-top: 5px;
+    }
+
+  .logo-g{
+    //padding-left: 7px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+
+    border-width: 5px;
+    border-color:rgb(255, 255, 255) ;
+  }
+
+  .g-h3{
+    padding-top: 3px;
+    padding-bottom: 3px;
   }
