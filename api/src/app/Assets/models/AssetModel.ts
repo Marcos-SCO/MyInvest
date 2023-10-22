@@ -27,6 +27,19 @@ const AssetModel = () => {
     return assetInDb;
   }
 
+  async function getAssetWithDetailInfo(ticker: string) {
+    const assetQuery = await prisma.assets.findFirst({
+      where: { name: ticker },
+      include: {
+        AssetDetailList: true,
+      }
+    });
+
+    if (!assetQuery) return false;
+
+    return assetQuery;
+  }
+
   async function getDividendHistoryData(ticker: string, type: number) {
     const date = new Date();
     const currentYear = date.getFullYear();
@@ -41,18 +54,15 @@ const AssetModel = () => {
   async function getAssetApiData(ticker: string, type = 1) {
     const assetData = await AssetsService().searchSymbol(ticker, type);
 
-    const assetType: any = { 1: 'stocks', 3: 'fiis', }
-
     const historicalDividends = await getDividendHistoryData(ticker, type);
 
-    const objResultName = assetType[type];
-    const symbolPureData = assetData?.[objResultName][0];
+    /* const assetType: any = { 1: 'stocks', 2: 'stocks', 3: 'fiis', } const objResultName = assetType[type]; const symbolPureData = assetData?.[objResultName][0]; */
 
-    const { lastPrice } = symbolPureData;
+    const { price = '' } = assetData?.[0];
 
     const apiObjData = {
-      symbolData: symbolPureData,
-      lastPrice,
+      symbolData: assetData,
+      lastPrice: price,
       historicalDividends,
     }
 
@@ -62,15 +72,17 @@ const AssetModel = () => {
   async function insertAsset(insertObj: any) {
     const { ticker, type = 1 } = insertObj;
 
-    let assetAlreadyInDb = await getAssetByTickerFromDb(ticker);
-    if (assetAlreadyInDb) throw new CommonError(`${ticker} already exists`);
+    const tickerCode = ticker.replace(/(^[\\/-]+)|([\\/-]+$)/g, '');
 
-    const { symbolData, lastPrice, historicalDividends } = await AssetModel().getAssetApiData(ticker, type);
+    let assetAlreadyInDb = await getAssetByTickerFromDb(tickerCode);
+    if (assetAlreadyInDb) throw new CommonError(`${tickerCode} already exists`);
+
+    const { symbolData, lastPrice, historicalDividends } = await AssetModel().getAssetApiData(tickerCode, type);
 
     try {
 
       const insertAssetItem = await prisma.assets.create({
-        data: { name: ticker, type, }
+        data: { name: tickerCode, type, }
       });
 
       const assetId = insertAssetItem.id;
@@ -85,7 +97,14 @@ const AssetModel = () => {
       const assetDetailsList = await AssetDetailsList()
         .createAssetDetails(assetDetailsObj);
 
-      return assetDetailsList;
+      // return assetDetailsList;
+
+      return {
+        id: assetId,
+        name: ticker,
+        type,
+        AssetDetailList: [assetDetailsList]
+      };
 
     } catch (error) {
       // console.log(error);
@@ -151,7 +170,7 @@ const AssetModel = () => {
 
   }
 
-  return { insertAsset, updateAsset, deleteAsset, getAssetByTickerFromDb, getAssetById, getAssetApiData, getDividendHistoryData };
+  return { insertAsset, updateAsset, deleteAsset, getAssetByTickerFromDb, getAssetWithDetailInfo, getAssetById, getAssetApiData, getDividendHistoryData };
 }
 
 export default AssetModel;

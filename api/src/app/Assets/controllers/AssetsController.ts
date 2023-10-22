@@ -7,6 +7,74 @@ import AssetNasdaq from "../models/AssetNasdaq";
 
 const AssetsController = () => {
 
+  async function insertAsset(insertObj: any) {
+    const { type } = insertObj;
+
+    const isNasdaq = type == 2;
+
+    const symbols = isNasdaq ?
+      await AssetNasdaq().insertAsset(insertObj) :
+      await AssetModel().insertAsset(insertObj);
+
+    return symbols;
+  }
+
+  async function show(req: Request, res: Response): Promise<Response> {
+    // const ticker = req.body?.ticker as string;
+    const ticker = (req.params?.ticker)
+      .replace(/(^[\\/-]+)|([\\/-]+$)/g, '') as string;
+
+    const type = AssetsService().getAssetTypeIdFromPathName(req.path);;
+    if (!type) throw new CommonError('Asset type not defined');
+
+    try {
+
+      let assetInDb: any | boolean = await AssetModel().getAssetWithDetailInfo(ticker);
+
+      if (!assetInDb) assetInDb = await insertAsset({ ticker, type });
+
+      return res.status(200).json({
+        asset: assetInDb
+      });
+
+    } catch (error) {
+      const isCommonError = error instanceof CommonError;
+
+      if (isCommonError) return res.status(401).send({ error: error.message });
+
+      console.log(error);
+
+      return res.status(404).json({ error: 'Not found' });
+    }
+  }
+
+  async function create(req: Request, res: Response): Promise<Response> {
+
+    try {
+      const ticker = req.body?.ticker;
+      const type = req.body?.type ?? 1;
+
+      const insertObj = { ticker, type };
+
+      const symbols = await insertAsset(insertObj);
+
+      return res.status(200).json({
+        ticker,
+        symbols
+      });
+
+    } catch (error) {
+      const isCommonError = error instanceof CommonError;
+
+      if (isCommonError) return res.status(401).send({ error: error.message });
+
+      console.log(error);
+
+      return res.status(404).json({ error: 'Not found' });
+    }
+
+  }
+
   async function update(req: Request, res: Response): Promise<Response> {
     try {
       const ticker = req.body?.ticker;
@@ -32,39 +100,8 @@ const AssetsController = () => {
 
       console.log(error);
 
-      return res.status(404).json({ error: 'Not founded' });
-    }
-  }
-
-  async function create(req: Request, res: Response): Promise<Response> {
-
-    try {
-      const ticker = req.body?.ticker;
-      const type = req.body?.type ?? 1;
-
-      const insertObj = { ticker, type }
-
-      const isNasdaq = type == 2;
-
-      const symbols = isNasdaq ?
-        await AssetNasdaq().insertAsset(insertObj) :
-        await AssetModel().insertAsset(insertObj);
-
-      return res.status(200).json({
-        ticker,
-        symbols
-      });
-
-    } catch (error) {
-      const isCommonError = error instanceof CommonError;
-
-      if (isCommonError) return res.status(401).send({ error: error.message });
-
-      console.log(error);
-
       return res.status(404).json({ error: 'Not found' });
     }
-
   }
 
   async function destroy(req: Request, res: Response): Promise<Response> {
@@ -92,7 +129,7 @@ const AssetsController = () => {
 
   }
 
-  return { create, update, destroy }
+  return { show, create, update, destroy }
 
 }
 

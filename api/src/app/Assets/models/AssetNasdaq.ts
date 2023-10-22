@@ -41,17 +41,19 @@ const AssetNasdaq = () => {
   async function insertAsset(insertObj: any) {
     const { ticker, type = 2 } = insertObj;
 
-    let assetAlreadyInDb = await getAssetByTickerFromDb(ticker);
-    if (assetAlreadyInDb) throw new CommonError(`${ticker} already exists`);
+    const tickerCode = ticker.replace(/(^[\\/-]+)|([\\/-]+$)/g, '');
 
-    const assetApiData = await getAssetApiData(ticker, type);
+    let assetAlreadyInDb = await getAssetByTickerFromDb(tickerCode);
+    if (assetAlreadyInDb) throw new CommonError(`${tickerCode} already exists`);
+
+    const assetApiData = await getAssetApiData(tickerCode, type);
 
     const { symbolData, lastPrice, historicalDividends } = assetApiData;
 
     try {
 
       const insertAssetItem = await prisma.assets.create({
-        data: { name: ticker, type, }
+        data: { name: tickerCode, type, }
       });
 
       const assetId = insertAssetItem.id;
@@ -66,7 +68,12 @@ const AssetNasdaq = () => {
       const assetDetailsList = await AssetDetailsList()
         .createAssetDetails(assetDetailsObj);
 
-      return assetDetailsList;
+      return {
+        id: assetId,
+        name: ticker,
+        type,
+        assetDetailsList
+      };
 
     } catch (error) {
       // console.log(error);

@@ -8,11 +8,36 @@ const prisma = new PrismaClient();
 
 const AssetsService = () => {
 
+  function getAssetTypeIdFromPathName(pathName: string) {
+    const getTypeIdByPathName: any = { 'acoes': 1, 'stocks': 2, 'fiis': 3 };
+
+    for (const key in getTypeIdByPathName) {
+      if (!pathName.includes(key)) continue;
+
+      return getTypeIdByPathName[key];
+    }
+    return null;
+  }
+
+  async function getAssetTypeIdByName(typeName: string) {
+    const getTypeIdByPathName: any = { 'acoes': 1, 'stocks': 2, 'fiis': 3 };
+
+    return getTypeIdByPathName[typeName] ?? false;
+  }
+
+  async function getAssetTypeNameById(typeId: number) {
+    const assetTypes: any = { 1: 'ações', 2: 'stocks', 3: 'fiis', };
+
+    return assetTypes[typeId] ?? false;
+  }
+
   async function searchSymbol(ticker: String, type = 1) {
 
     const symbolEndpoint: any = {
-      1: `https://mfinance.com.br/api/v1/stocks?symbols=${ticker}`,
-      3: `https://mfinance.com.br/api/v1/fiis?symbols=${ticker}`,
+      // 1: `https://mfinance.com.br/api/v1/stocks?symbols=${ticker}`,
+      // 3: `https://mfinance.com.br/api/v1/fiis?symbols=${ticker}`,
+      1: `https://statusinvest.com.br/home/mainsearchquery?q=${ticker}`,
+      3: `https://statusinvest.com.br/home/mainsearchquery?q=${ticker}`,
       2: `https://api.nasdaq.com/api/quote/${ticker}/info?assetclass=stocks`,
     }
 
@@ -82,7 +107,7 @@ const AssetsService = () => {
 
   }
 
-  return { searchSymbol, getDividendHistory }
+  return { searchSymbol, getDividendHistory, getAssetTypeIdFromPathName, getAssetTypeNameById, getAssetTypeIdByName }
 }
 
 export default AssetsService;
