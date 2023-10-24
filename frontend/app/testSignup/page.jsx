@@ -5,7 +5,9 @@ import FormInput from './testComp/FormInput';
 import FormText from './testComp/FormText';
 import FormButton from './testComp/FormButton';
 
-import SignInGoogle from "@/components/GoogleBtn";
+import SignInGoogle from "@/components/GoogleBtnRec";
+
+import LogText from "@/components/LogText"
 
 const TestFront = () => {
 
@@ -23,10 +25,10 @@ const TestFront = () => {
       <body className="form-page">
           <div className='testForm'>
             
-            <FormText placeholder="Sign Up"/>
+            <FormText placeholder="Cadastro"/>
               
             <FormInput
-              placeholder="Username"
+              placeholder="Nome de Usuário"
               id="user"
               setInputState={setInputState}
               inputState={inputState}
@@ -38,13 +40,13 @@ const TestFront = () => {
               inputState={inputState}
             />
             <FormInput
-              placeholder="Password"
+              placeholder="Senha"
               id="password"
               setInputState={setInputState}
               inputState={inputState}
             />
             <FormInput
-              placeholder="Repeat your Password"
+              placeholder="Repita sua Senha"
               id="repeatPassword"
               setInputState={setInputState}
               inputState={inputState}
@@ -53,12 +55,15 @@ const TestFront = () => {
               <FormButton/>
             </div>
 
-            <h3 className="g-h3">Fazer Cadastro com o Google:</h3>
+            <h3 className="g-h3">ou cadastre-se com:</h3>
 
             <div className="G-Btn">
               <SignInGoogle/>
             </div>
 
+            <div>
+              <LogText/>
+            </div>
         
           </div>
       </body>

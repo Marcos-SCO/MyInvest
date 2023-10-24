@@ -1,6 +1,8 @@
 'use client'
 
-import SignInGoogle from "@/components/GoogleBtn";
+import SignInGoogle from "@/components/GoogleBtnRec";
+
+import CadText from "@/components/CadText";
 
 import React, { useState } from 'react';
 import FormInput from './testComp/FormInput';
@@ -22,14 +24,8 @@ const TestFront = () => {
       <body className="form-page">
           <div className='testForm'>
             
-            <FormText placeholder="Sign In"/>
-              
-            <FormInput
-              placeholder="Username"
-              id="user"
-              setInputState={setInputState}
-              inputState={inputState}
-            />
+            <FormText placeholder="Acessar Conta"/>
+            
             <FormInput
               placeholder="E-Mail"
               id="email"
@@ -37,7 +33,7 @@ const TestFront = () => {
               inputState={inputState}
             />
             <FormInput
-              placeholder="Password"
+              placeholder="Senha"
               id="password"
               setInputState={setInputState}
               inputState={inputState}
@@ -46,10 +42,14 @@ const TestFront = () => {
               <FormButton/>
             </div>
 
-            <h3 className="g-h3">Fazer Login com o Google:</h3>
+            <h3 className="g-h3">ou faça login com:</h3>
 
             <div className="G-Btn">
               <SignInGoogle/>
+            </div>
+
+            <div>
+              <CadText/>
             </div>
         
           </div>
