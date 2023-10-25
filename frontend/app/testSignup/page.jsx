@@ -9,7 +9,7 @@ import SignInGoogle from "@/components/GoogleBtnRec";
 
 import LogText from "@/components/LogText"
 
-const TestFront = () => {
+const SignUp = () => {
 
   const [inputState, setInputState] = useState({
     user: '',
@@ -71,4 +71,4 @@ const TestFront = () => {
   )
 };
 
-export default TestFront;
+export default SignUp;

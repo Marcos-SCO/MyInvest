@@ -1,0 +1,81 @@
+.Login-Form{
+    padding-left: 10rem;
+}
+
+.Form-SignUp {
+    border: 2px solid rgba(187, 187, 187, 0);
+    border-radius: 10px;
+    position: absolute;
+    left: 25%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(248, 248, 248);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.171);
+    // background-color: #ffffffa8; (Old Version)
+    width: 20rem;
+    padding: 1rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .Form-Login {
+    border: 2px solid rgba(187, 187, 187, 0);
+    border-radius: 10px;
+    position: absolute;
+    left: 75%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(248, 248, 248);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.171);
+    // background-color: #ffffffa8; (Old Version)
+    width: 20rem;
+    padding: 1rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  // .FormPage{
+  //       //background-color: #275FA8;
+  //       //background-image: url("../../../../public/BackForm.jpg");
+  //       background: linear-gradient(rgba(39, 95, 168, 0.747), rgba(39, 95, 168, 0.747)), url("../../../../public/BackForm.jpg");
+  //       background-repeat: no-repeat;
+  //       background-size:cover;
+  //       background-position: center;
+  //       background-attachment: fixed;
+
+  //       color:white;
+
+  //       text-align: center;
+  //       width: 50%;
+  //       height: 100%;
+
+  //       font-size: 1.4rem;
+  //   }
+
+  .FormPage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(rgba(39, 95, 168, 0.747), rgba(39, 95, 168, 0.747)),
+      url("../../../../public/BackForm.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+    text-align: center;
+    font-size: 150%;
+    z-index: 1;
+  }
+
+    .PageText{
+      padding-top: 40%;
+    }

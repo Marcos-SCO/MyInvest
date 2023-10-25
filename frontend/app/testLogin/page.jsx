@@ -9,7 +9,7 @@ import FormInput from './testComp/FormInput';
 import FormText from './testComp/FormText';
 import FormButton from './testComp/FormButton';
 
-const TestFront = () => {
+const Login = () => {
 
   const [inputState, setInputState] = useState({
     user: '',
@@ -58,4 +58,4 @@ const TestFront = () => {
   )
 };
 
-export default TestFront;
+export default Login;
