@@ -4,7 +4,7 @@ const CadText = () => {
     return(
         <>
             <p className="CadText">
-                Já possuí uma conta? <Link href="/testLoginV2" className="CadLink">Acesse agora</Link>!
+                Já possuí uma conta? <Link href="/testLogin" className="CadLink">Acesse agora</Link>!
             </p>
         </>
     )

@@ -1,10 +1,12 @@
 import Link from "next/link";
+import { useState } from "react";
 
-const CadText = () => {
+const CadText = ({Cad}) => {
+
     return(
         <>
             <p className="CadText">
-                Não tem uma conta? <Link href="/testSignupV2" className="CadLink">Crie agora</Link>!
+                Não tem uma conta? <button className="CadLink">Crie agora</button>!
             </p>
         </>
     )
