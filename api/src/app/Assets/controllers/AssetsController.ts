@@ -24,7 +24,7 @@ const AssetsController = () => {
     const ticker = (req.params?.ticker)
       .replace(/(^[\\/-]+)|([\\/-]+$)/g, '') as string;
 
-    const type = AssetsService().getAssetTypeIdFromPathName(req.path);;
+    const type = AssetsService().getAssetTypeIdFromPathName(req.path);
     if (!type) throw new CommonError('Asset type not defined');
 
     try {
@@ -35,6 +35,34 @@ const AssetsController = () => {
 
       return res.status(200).json({
         asset: assetInDb
+      });
+
+    } catch (error) {
+      const isCommonError = error instanceof CommonError;
+
+      if (isCommonError) return res.status(401).send({ error: error.message });
+
+      console.log(error);
+
+      return res.status(404).json({ error: 'Not found' });
+    }
+  }
+
+  async function searchAssetsApiQuery(req: Request, res: Response): Promise<Response> {
+    // const ticker = req.body?.ticker as string;
+    const ticker = (req.params?.ticker)
+      .replace(/(^[\\/-]+)|([\\/-]+$)/g, '') as string;
+
+    try {
+
+      // let assetInDb: any | boolean = await AssetModel().getAssetWithDetailInfo(ticker);
+
+      // if (!assetInDb) assetInDb = AssetModel().getAssetApiData(ticker);
+
+      const assetQuery = await AssetsService().searchSymbol(ticker);
+
+      return res.status(200).json({
+        data: assetQuery
       });
 
     } catch (error) {
@@ -129,7 +157,7 @@ const AssetsController = () => {
 
   }
 
-  return { show, create, update, destroy }
+  return { show, create, update, destroy, searchAssetsApiQuery }
 
 }
 

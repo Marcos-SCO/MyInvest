@@ -4,6 +4,8 @@ import UserAssetsController from "./controllers/UserAssetsController";
 
 const routes = Router();
 
+routes.get('/assetsApiQuery/:ticker([\\s\\S]+)', AssetsController().searchAssetsApiQuery);
+
 routes.get('/assets/acoes/:ticker([\\s\\S]+)', AssetsController().show);
 routes.get('/assets/stocks/:ticker([\\s\\S]+)', AssetsController().show);
 routes.get('/assets/fiis/:ticker([\\s\\S]+)', AssetsController().show);

@@ -772,7 +772,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    // \"ticker\": \"visc11\"\r\n    // \"ticker\": \"MXRF11\"\r\n    \"ticker\": \"SAPR11\"\r\n    // \"ticker\": \"OIBR4\"\r\n    // \"ticker\": \"MAC\"\r\n    // \"ticker\": \"KO\"\r\n    // \"ticker\": \"IRDM11\"\r\n}",
+							"raw": "{\r\n    // \"ticker\": \"visc11\"\r\n    // \"ticker\": \"MXRF11\"\r\n    // \"ticker\": \"SAPR11\"\r\n    // \"ticker\": \"OIBR4\"\r\n    // \"ticker\": \"MAC\"\r\n    // \"ticker\": \"KO\"\r\n    // \"ticker\": \"IRDM11\"\r\n    // \"ticker\": \"amx\",\r\n    \"ticker\": \"SOJA3\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -834,7 +834,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    // \"ticker\": \"SAPR11\"\r\n    // \"ticker\": \"OIBR4\"\r\n}",
+							"raw": "{\r\n    // \"ticker\": \"SAPR11\"\r\n    // \"ticker\": \"OIBR4\"\r\n    // \"ticker\": \"KO\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

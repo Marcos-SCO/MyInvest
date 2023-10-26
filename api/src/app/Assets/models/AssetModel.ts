@@ -39,6 +39,19 @@ const AssetModel = () => {
 
     return assetQuery;
   }
+  
+  async function getManyAssetsWithDetailInfo(ticker: string) {
+    const assetQuery = await prisma.assets.findMany({
+      where: { name: ticker },
+      include: {
+        AssetDetailList: true,
+      }
+    });
+
+    if (!assetQuery) return false;
+
+    return assetQuery;
+  }
 
   async function getDividendHistoryData(ticker: string, type: number) {
     const date = new Date();
@@ -170,7 +183,7 @@ const AssetModel = () => {
 
   }
 
-  return { insertAsset, updateAsset, deleteAsset, getAssetByTickerFromDb, getAssetWithDetailInfo, getAssetById, getAssetApiData, getDividendHistoryData };
+  return { insertAsset, updateAsset, deleteAsset, getAssetByTickerFromDb, getAssetWithDetailInfo, getManyAssetsWithDetailInfo, getAssetById, getAssetApiData, getDividendHistoryData };
 }
 
 export default AssetModel;

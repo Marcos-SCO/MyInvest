@@ -31,6 +31,18 @@ async function getServerSideProps(params) {
 
 }
 
+function errorBlockMessage(errorMessage) {
+  return (
+    <div className='grid place-items-center h-screen -mt-24'>
+
+      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+        <p><strong>Message</strong>: {errorMessage}</p>
+
+      </div>
+    </div>
+  );
+}
+
 export default async function Page({ params }) {
   const { assetType, ticker } = params;
 
@@ -40,29 +52,22 @@ export default async function Page({ params }) {
   if (assetError) {
     const errorMessage = assetError?.error;
 
-    return (
-      <div className='grid place-items-center h-screen -mt-24'>
-
-        <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-          <p><strong>Message</strong>: {errorMessage}</p>
-
-        </div>
-      </div>
-    );
-
+    return errorBlockMessage(errorMessage);
   }
 
   const assetItem = assetFetch?.props?.asset;
 
+  const { id, name, type } = assetItem;
+  const assetDetailList = assetItem.AssetDetailList;
 
-  const { id, name, type, AssetDetailList } = assetItem;
+  if (!assetDetailList) return;
 
-  const { symbols, currentDividend, historicalDividends } = AssetDetailList?.[0];
+  const { symbols = '', currentDividend, historicalDividends } = assetDetailList[0];
 
   return (
     <div className='grid place-items-center h-screen -mt-24'>
 
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <p><strong>Ticker</strong>: {ticker}</p>
         <p><strong>Dividendo Atual</strong>: {currentDividend}</p>
         <br />

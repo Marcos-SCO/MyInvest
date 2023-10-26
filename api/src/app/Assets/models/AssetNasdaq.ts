@@ -72,7 +72,7 @@ const AssetNasdaq = () => {
         id: assetId,
         name: ticker,
         type,
-        assetDetailsList
+        AssetDetailList: [assetDetailsList]
       };
 
     } catch (error) {
