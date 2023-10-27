@@ -86,7 +86,7 @@ const UserAssetsController = () => {
 
     if (!haveUserResults) {
       return res.status(404).json({
-        message: 'No assets was founded',
+        message: `No assets found userid: ${userId}`,
       });
     }
 
@@ -94,7 +94,7 @@ const UserAssetsController = () => {
 
     return res.status(200).json({
       message,
-      assetList: assets
+      assetsList: assets
     });
 
   }

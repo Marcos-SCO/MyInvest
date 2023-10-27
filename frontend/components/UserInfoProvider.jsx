@@ -1,10 +1,6 @@
 import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 
-import { insertUserProvider, loginUser } from "./user/databaseFunctions";
-
-// import { useSession } from 'next-auth/react';
-
 import Image from "next/image";
 
 export default async function UserInfoProvider() {
@@ -12,16 +8,9 @@ export default async function UserInfoProvider() {
 
   if (!session) return;
 
-  insertUserProvider(session, 2);
-
   const { image, name, email } = session;
 
-  // loginUser(email, 2);
-  // if (!session) { 
-  //   loginUser(email, 2);
-  // }
-
-  console.log('my session: ', session);
+  console.log('UserInfoProvider - my session: ', session);
 
   return (
     <>

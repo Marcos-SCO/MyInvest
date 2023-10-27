@@ -67,6 +67,7 @@ const UserService = () => {
       const lastInsertedId = newUser.id;
 
       let dataOjb = {
+        userId: lastInsertedId,
         newUser
       }
 

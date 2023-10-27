@@ -17,7 +17,7 @@ async function verifyIfEmailExists(userEmail) {
 
   const emailWasFound = user?.emailFound;
 
-  console.log('Email founded? ', emailWasFound);
+  // console.log('Email founded? ', emailWasFound);
 
   if (!emailWasFound) return false;
 
@@ -25,7 +25,7 @@ async function verifyIfEmailExists(userEmail) {
 }
 
 
-async function insertUserCredentials(user, accountType = 1) {
+async function insertUserCredentials(user) {
   const { firstName, lastName, email, password, confirmPassword } = user;
 
   const isPasswordEqual = password == confirmPassword;
@@ -73,7 +73,7 @@ async function insertUserCredentials(user, accountType = 1) {
   }
 }
 
-async function insertUserProvider(user, accountType = 1) {
+async function insertUserProvider(user, accountType = 2) {
   // const userImage = session?.user?.image;
   const { name, email } = user;
 
@@ -106,6 +106,8 @@ async function insertUserProvider(user, accountType = 1) {
     // console.log('User created:', res.json());
     console.log('User created');
 
+    return res;
+
   } catch (error) {
     console.error('Error creating user:', error);
   }
@@ -132,13 +134,13 @@ async function loginUser(email, accountType) {
 
   const loggedInUser = await res.json();
 
-  const { token } = loggedInUser;
+  const { id, token } = loggedInUser;
   // console.log('token: ', token);
 
   if (!token) return null;
   // console.log('User logged-in: ', loggedInUser);
 
-  return token;
+  return { id, token };
 
   // await updateSession(token);
 

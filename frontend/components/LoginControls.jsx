@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { signIn, signOut, useSession } from "next-auth/react";
 
-export default function LoginControls({session = false}) {
+export default function LoginControls({ session = false }) {
   const { status } = useSession();
 
   const isUserAuthenticated = status === 'authenticated';
