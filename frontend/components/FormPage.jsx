@@ -1,8 +1,26 @@
+'use client';
 
+import toggleAnimation from '@/components/JS/animation.js';
+import { useEffect } from 'react';
 
 const FormPage = () => {
+
+    useEffect(() => {
+
+        const LogText = document.getElementById('LogLink');
+        const CadText = document.getElementById('CadLink');
+
+        LogText.addEventListener('click',()=>{ toggleAnimation(0)});
+        CadText.addEventListener('click', ()=>{ toggleAnimation(1)});
+
+        return()=>{
+            LogText.removeEventListener('click', ()=>{ toggleAnimation(0)});
+            CadText.removeEventListener('click', ()=>{toggleAnimation(1)});
+        }
+    }, []);
+
     return(
-        <div className="FormPage">
+        <div className="FormPage slide1" id="slide1">
             <div className="PageText">
                 <h3>Bem-Vindo(a) ao</h3>
                 <h1>MyInvest</h1>

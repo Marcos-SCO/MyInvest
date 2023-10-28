@@ -1,13 +1,18 @@
 import Link from "next/link";
+import Animation from '@/components/JS/animation.js'
 
-const CadText = () => {
+const LogText = () => {
+
+    const handleClick = () => {    
+        Animation();
+      };
     return(
         <>
             <p className="CadText">
-                Já possuí uma conta? <Link href="/testLogin" className="CadLink">Acesse agora</Link>!
+                Já possuí uma conta? <button className='CadLink' id="LogLink" onClick={handleClick}>Acesse agora</button>!
             </p>
         </>
     )
 }
 
-export default CadText;
+export default LogText;
