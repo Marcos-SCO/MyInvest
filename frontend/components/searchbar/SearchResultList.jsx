@@ -8,8 +8,11 @@ function SearchResultsList({ results }) {
 
   const router = useRouter();
 
-  function handleAssetPage(ticker, slugType) {
+  function handleAssetPage(e, ticker, slugType) {
 
+    const mouseLeftButton = e.button === 0;
+    if (!mouseLeftButton) return;
+    
     // const goToAssetPage =
     //   confirm(`Quer ir mesmo para a página do ativo ${ticker}?`);
 
@@ -18,8 +21,6 @@ function SearchResultsList({ results }) {
     const assetPageUrl = `/asset/${slugType}/${ticker}`;
 
     router.push(assetPageUrl);
-
-    // <RedirectPage redirectTo={assetPageUrl} />
 
   }
 
@@ -35,7 +36,7 @@ function SearchResultsList({ results }) {
           getBackendAssetType(resultType);
 
         return (
-          <div className="search-results" onClick={(e) => handleAssetPage(resultCode, typeSlug)} key={id}>
+          <div className="search-results" onClick={(e) => handleAssetPage(e, resultCode, typeSlug)} key={id}>
             <p>{resultName} - {resultCode}</p>
             <p>Preço: {result.price}</p>
             <p>Variação: {result.variation}</p>

@@ -32,6 +32,8 @@ const UserModel = () => {
   }
 
   async function getUserById(id: number) {
+    if (!id) throw new AuthError(`No user id was passed`);
+    
     const user = await prisma.users.findUnique({
       where: { id }
     });

@@ -24,9 +24,7 @@ async function fetchUserAssets(fetchObj) {
     const data = res;
 
     const isMissing = fetchResults.status == 404;
-    if (isMissing) {
-      throw new Error(data.message);
-    }
+    if (isMissing) throw new Error(data.message);
 
     return data;
 

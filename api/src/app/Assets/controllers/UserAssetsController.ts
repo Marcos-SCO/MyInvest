@@ -10,17 +10,20 @@ const prisma = new PrismaClient();
 
 const UserAssetsController = () => {
 
+  async function verifyUserAssetParams(res: Response, userId: any, assetId: any) {
+    if (!userId) throw new CommonError(`userId param is missing`);
+    if (!assetId) throw new CommonError(`assetId param is missing`);
+  }
+
   async function create(req: Request, res: Response): Promise<Response> {
     const userId = req.body?.userId;
     const assetId = req.body?.assetId;
-
-    if (!userId) return res.status(404).json({ message: `userId param is missing`, });
-
-    if (!assetId) return res.status(404).json({ message: `assetId param is missing`, });
-
+ 
     const insertObj = { userId, assetId };
-
+    
     try {
+      await verifyUserAssetParams(res, userId, assetId);
+
       const insertedUserAsset = await
         UserAssetsModel().insertUserAsset(insertObj);
 
@@ -32,7 +35,7 @@ const UserAssetsController = () => {
     } catch (error) {
       const isCommonError = error instanceof CommonError || error instanceof AuthError;
 
-      if (isCommonError) return res.status(401).send({ error: error.message });
+      if (isCommonError) return res.status(401).json({ error: error.message });
 
       console.log(error);
 
@@ -45,9 +48,7 @@ const UserAssetsController = () => {
     const userId = req.body?.userId;
     const assetId = req.body?.assetId;
 
-    if (!userId) return res.status(404).json({ message: `userId param is missing`, });
-
-    if (!assetId) return res.status(404).json({ message: `assetId param is missing`, });
+    await verifyUserAssetParams(res, userId, assetId);
 
     const insertObj = { userId, assetId };
 
@@ -62,7 +63,7 @@ const UserAssetsController = () => {
     } catch (error) {
       const isCommonError = error instanceof CommonError || error instanceof AuthError;
 
-      if (isCommonError) return res.status(401).send({ error: error.message });
+      if (isCommonError) return res.status(401).json({ error: error.message });
 
       console.log(error);
 
@@ -90,7 +91,7 @@ const UserAssetsController = () => {
       });
     }
 
-    const message = page > 1 ? `Page ${page} user found assets:`: 'User found assets' ;
+    const message = page > 1 ? `Page ${page} user found assets:` : 'User found assets';
 
     return res.status(200).json({
       message,

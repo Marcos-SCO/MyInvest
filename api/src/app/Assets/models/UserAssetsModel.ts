@@ -19,6 +19,7 @@ const UserAssetsModel = () => {
 
   async function userAssetsValidation(validationObj: any) {
     const { userId, assetId } = validationObj;
+    if (!userId) throw new CommonError(`No user id was passed`);
 
     const userExist = await getUserById(userId);
 
@@ -33,6 +34,8 @@ const UserAssetsModel = () => {
     });
 
     if (!userAsset) return false;
+
+    await prisma.$disconnect();
 
     return userAsset;
   }

@@ -1,3 +1,9 @@
+import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
+import Link from "next/link";
+
+import AssetFavButton from "@/components/AssetButtons/layout";
+
 const API_BASE_URL = process.env.API_BASE_URL;
 
 async function getServerSideProps(params) {
@@ -46,6 +52,15 @@ function errorBlockMessage(errorMessage) {
 export default async function Page({ params }) {
   const { assetType, ticker } = params;
 
+  const session = await getServerSession(nextAuthOptions);
+  console.log(session);
+
+  const credentialSession = session?.user;
+
+  const { id: userSessionId } = credentialSession ? credentialSession : session;
+
+  const userId = session?.userId ?? userSessionId;
+
   const assetFetch = await getServerSideProps(params);
   const assetError = assetFetch?.errorData;
 
@@ -57,7 +72,7 @@ export default async function Page({ params }) {
 
   const assetItem = assetFetch?.props?.asset;
 
-  const { id, name, type } = assetItem;
+  const { id: assetId, name, type } = assetItem;
   const assetDetailList = assetItem.AssetDetailList;
 
   if (!assetDetailList) return;
@@ -65,9 +80,14 @@ export default async function Page({ params }) {
   const { symbols = '', currentDividend, historicalDividends } = assetDetailList[0];
 
   return (
-    <div className='grid place-items-center h-screen -mt-24'>
+    <div className='grid place-items-center'>
 
       <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+
+        <AssetFavButton assetId={assetId} userId={userId} />
+
+        <Link href="/userAssets" className="my-3">Acessar meus ativos</Link>
+
         <p><strong>Ticker</strong>: {ticker}</p>
         <p><strong>Dividendo Atual</strong>: {currentDividend}</p>
         <br />
