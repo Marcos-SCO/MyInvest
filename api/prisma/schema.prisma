@@ -32,6 +32,7 @@ model Users {
   UserPassword UsersPassword[]
   UserEmail    UserEmails[]
   UserAssets   UserAssets[]
+  AssetEmailsWatch   AssetEmailsWatch[]
 }
 
 model UsersPassword {
@@ -62,8 +63,8 @@ model AssetTypes {
 }
 
 model Assets {
-  id         Int        @id @default(autoincrement())
-  name       String     @unique
+  id         Int         @id @default(autoincrement())
+  name       String      @unique
   type       Int?        @default(1)
   AssetTypes AssetTypes? @relation(fields: [type], references: [id], onDelete: SetNull)
 
@@ -76,13 +77,15 @@ model AssetDetailsList {
   assetId Int @unique
 
   symbols             String @db.Text
-  currentDividend     String @db.Text
+  currentPrice     String @db.Text
   historicalDividends String @db.Text
 
   assets Assets @relation(fields: [assetId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+
+  AssetEmailsWatch AssetEmailsWatch[]
 
   @@map("asset_details_list")
 }
@@ -97,4 +100,20 @@ model UserAssets {
   assets Assets @relation(fields: [assetId], references: [id], onDelete: Cascade)
 
   @@map(name: "user_assets")
+}
+
+model AssetEmailsWatch {
+  id            Int      @id @default(autoincrement())
+  userId        Int
+  assetId       Int
+  expectedPrice Decimal
+  emailSent     Boolean  @default(false)
+
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  users  Users            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  assets AssetDetailsList @relation(fields: [assetId], references: [assetId], onDelete: Cascade)
+
+  @@map(name: "asset_emails_watch")
 }

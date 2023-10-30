@@ -61,7 +61,7 @@ CREATE TABLE `asset_details_list` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `assetId` INTEGER NOT NULL,
     `symbols` TEXT NOT NULL,
-    `currentDividend` TEXT NOT NULL,
+    `currentPrice` TEXT NOT NULL,
     `historicalDividends` TEXT NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL,
@@ -75,6 +75,19 @@ CREATE TABLE `user_assets` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `userId` INTEGER NOT NULL,
     `assetId` INTEGER NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `asset_emails_watch` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `userId` INTEGER NOT NULL,
+    `assetId` INTEGER NOT NULL,
+    `expectedPrice` DECIMAL(65, 30) NOT NULL,
+    `emailSent` BOOLEAN NOT NULL DEFAULT false,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -99,3 +112,9 @@ ALTER TABLE `user_assets` ADD CONSTRAINT `user_assets_userId_fkey` FOREIGN KEY (
 
 -- AddForeignKey
 ALTER TABLE `user_assets` ADD CONSTRAINT `user_assets_assetId_fkey` FOREIGN KEY (`assetId`) REFERENCES `Assets`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `asset_emails_watch` ADD CONSTRAINT `asset_emails_watch_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `Users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `asset_emails_watch` ADD CONSTRAINT `asset_emails_watch_assetId_fkey` FOREIGN KEY (`assetId`) REFERENCES `asset_details_list`(`assetId`) ON DELETE CASCADE ON UPDATE CASCADE;

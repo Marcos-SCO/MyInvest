@@ -102,7 +102,7 @@ const AssetModel = () => {
 
       const assetDetailsObj = {
         assetId,
-        currentDividend: JSON.stringify(lastPrice),
+        currentPrice: JSON.stringify(lastPrice),
         symbols: JSON.stringify(symbolData),
         historicalDividends: JSON.stringify(historicalDividends),
       }
@@ -143,7 +143,7 @@ const AssetModel = () => {
     try {
       const assetDetailsObj = {
         assetId,
-        currentDividend: JSON.stringify(lastPrice),
+        currentPrice: JSON.stringify(lastPrice),
         symbols: JSON.stringify(symbolData),
         historicalDividends: JSON.stringify(historicalDividends),
       }
