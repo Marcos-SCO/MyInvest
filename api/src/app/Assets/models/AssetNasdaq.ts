@@ -85,9 +85,10 @@ const AssetNasdaq = () => {
   }
 
   async function updateAsset(updateObj: any) {
-    const { ticker, type = 2 } = updateObj;
+    const { ticker, type = 2, passedAssetFromDb = false } = updateObj;
 
-    let assetAlreadyInDb = await getAssetByTickerFromDb(ticker);
+    let assetAlreadyInDb = !passedAssetFromDb
+      ? await getAssetByTickerFromDb(ticker) : passedAssetFromDb;
 
     if (!assetAlreadyInDb) throw new CommonError(`${ticker} don't exists in details list`);
 

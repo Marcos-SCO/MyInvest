@@ -106,11 +106,21 @@ const AssetsController = () => {
   async function update(req: Request, res: Response): Promise<Response> {
     try {
       const ticker = req.body?.ticker;
-      const type = req.body?.type ?? 1;
 
-      const updateObj = { ticker, type }
+      let typeValue = req.body?.type;
 
-      const isNasdaq = type == 2;
+      let assetFromDb: any;
+
+      if (!typeValue) {
+        assetFromDb = await AssetModel()
+          .getAssetByTickerFromDb(ticker);
+
+        typeValue = assetFromDb ? assetFromDb.type : 1;
+      }
+
+      const updateObj = { ticker, typeValue, passedAssetFromDb: assetFromDb }
+
+      const isNasdaq = typeValue == 2;
 
       const assetDetails = isNasdaq ?
         await AssetNasdaq().updateAsset(updateObj) :

@@ -39,7 +39,7 @@ const AssetModel = () => {
 
     return assetQuery;
   }
-  
+
   async function getManyAssetsWithDetailInfo(ticker: string) {
     const assetQuery = await prisma.assets.findMany({
       where: { name: ticker },
@@ -129,9 +129,10 @@ const AssetModel = () => {
   }
 
   async function updateAsset(updateObj: any) {
-    const { ticker, type = 1 } = updateObj;
+    const { ticker, type = 1, passedAssetFromDb = false } = updateObj;
 
-    let assetAlreadyInDb = await getAssetByTickerFromDb(ticker);
+    let assetAlreadyInDb = !passedAssetFromDb
+      ? await getAssetByTickerFromDb(ticker) : passedAssetFromDb;
 
     if (!assetAlreadyInDb) throw new CommonError(`${ticker} don't exists in details list`);
 
