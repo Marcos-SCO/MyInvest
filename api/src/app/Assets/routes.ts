@@ -11,6 +11,7 @@ routes.get('/assets/acoes/:ticker([\\s\\S]+)', AssetsController().show);
 routes.get('/assets/stocks/:ticker([\\s\\S]+)', AssetsController().show);
 routes.get('/assets/fiis/:ticker([\\s\\S]+)', AssetsController().show);
 
+routes.post('/assets/paginate/', AssetsController().index);
 routes.post('/assets/', AssetsController().create);
 routes.put('/assets/', AssetsController().update);
 routes.delete('/assets/', AssetsController().destroy);

@@ -40,9 +40,8 @@ const AssetModel = () => {
     return assetQuery;
   }
 
-  async function getManyAssetsWithDetailInfo(ticker: string) {
+  async function getAllAssetsWithDetailInfo() {
     const assetQuery = await prisma.assets.findMany({
-      where: { name: ticker },
       include: {
         AssetDetailList: true,
       }
@@ -51,6 +50,38 @@ const AssetModel = () => {
     if (!assetQuery) return false;
 
     return assetQuery;
+  }
+
+  async function getAllAssetsByPagination(args: any) {
+
+    const { page = 1, numberOfItens = 10, orderBy = false } = args;
+
+    const totalAssetCount = await prisma.assets.count();
+
+    const totalPages = Math.ceil(totalAssetCount / numberOfItens);
+
+    // Calculate the number of records to skip
+    const skip = (page - 1) * numberOfItens;
+
+    const queryObj: any = {
+      skip,
+      take: +numberOfItens,
+      include: {
+        AssetDetailList: true,
+      },
+    }
+
+    if (orderBy) queryObj['orderBy'] = orderBy;
+
+    const assetResults =
+      await prisma.assets.findMany(queryObj);
+
+    await prisma.$disconnect();
+
+    return {
+      totalPages,
+      assetResults
+    }
   }
 
   async function getDividendHistoryData(ticker: string, type: number) {
@@ -68,8 +99,6 @@ const AssetModel = () => {
     const assetData = await AssetsService().searchSymbol(ticker, type);
 
     const historicalDividends = await getDividendHistoryData(ticker, type);
-
-    /* const assetType: any = { 1: 'stocks', 2: 'stocks', 3: 'fiis', } const objResultName = assetType[type]; const symbolPureData = assetData?.[objResultName][0]; */
 
     const { price = '' } = assetData?.[0];
 
@@ -184,7 +213,7 @@ const AssetModel = () => {
 
   }
 
-  return { insertAsset, updateAsset, deleteAsset, getAssetByTickerFromDb, getAssetWithDetailInfo, getManyAssetsWithDetailInfo, getAssetById, getAssetApiData, getDividendHistoryData };
+  return { insertAsset, updateAsset, deleteAsset, getAssetByTickerFromDb, getAssetWithDetailInfo, getAllAssetsWithDetailInfo, getAllAssetsByPagination, getAssetById, getAssetApiData, getDividendHistoryData };
 }
 
 export default AssetModel;

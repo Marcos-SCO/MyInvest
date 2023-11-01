@@ -19,6 +19,35 @@ const AssetsController = () => {
     return symbols;
   }
 
+  async function index(req: Request, res: Response): Promise<Response> {
+    const { page = 1, numberOfItens = 10 } = req.body;
+
+    const assetsQuery: any = await AssetModel().getAllAssetsByPagination({
+      page,
+      numberOfItens,
+      orderBy: { 'id': 'desc' }
+    });
+
+    const { totalPages, assetResults } = assetsQuery;
+
+    const queryResults = assetResults.length > 0;
+
+    if (!queryResults) {
+      return res.status(404).json({
+        message: `No assets found, total number of pages is ${totalPages}`,
+      });
+    }
+
+    const message = page > 1 ? `Assets found page ${page}` : `Found Assets`;
+
+    return res.status(200).json({
+      message,
+      totalPages,
+      assetsList: assetResults
+    });
+
+  }
+
   async function show(req: Request, res: Response): Promise<Response> {
     // const ticker = req.body?.ticker as string;
     const ticker = (req.params?.ticker)
@@ -167,7 +196,7 @@ const AssetsController = () => {
 
   }
 
-  return { show, create, update, destroy, searchAssetsApiQuery }
+  return { index, show, create, update, destroy, searchAssetsApiQuery }
 
 }
 
