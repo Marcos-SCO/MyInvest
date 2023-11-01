@@ -1,5 +1,6 @@
-import { insertUserProvider, loginUser } from '@/components/user/databaseFunctions';
 import dotenv from 'dotenv';
+
+import { insertUserProvider, loginUser } from 'components/user/databaseFunctions';
 
 import NextAuth from "next-auth/next";
 import Credentials from "next-auth/providers/credentials";
@@ -57,16 +58,27 @@ const nextAuthOptions = {
       const { name, email } = user;
 
       if (account.provider === "google") {
-        // console.log('google account');
-        const userProvider =
+        let userIdValue;
+
+        const emailInProvider =
           await insertUserProvider({ name, email }, 2);
 
-        const userInsertResult = await userProvider.json();
+        const emailAlreadyExists = emailInProvider?.emailExists;
 
-        const userId = userInsertResult?.user?.userId;
+        if (emailAlreadyExists) {
+          userIdValue = emailInProvider?.user.email?.userId;
+          if (userIdValue) user.userId = userIdValue;
 
-        if (userId) user.userId = userId;
+          return user;
+        }
+
+        const userInsertResult = emailInProvider;
+
+        userIdValue = userInsertResult?.user?.userId;
+
+        if (userIdValue) user.userId = userIdValue;
       }
+
 
       return user;
     },

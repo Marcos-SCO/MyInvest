@@ -21,7 +21,7 @@ async function verifyIfEmailExists(userEmail) {
 
   if (!emailWasFound) return false;
 
-  return true;
+  return user;
 }
 
 
@@ -79,8 +79,13 @@ async function insertUserProvider(user, accountType = 2) {
 
   const emailAlreadyExists = await verifyIfEmailExists(email);
 
-  // console.log('email exists', emailAlreadyExists);
-  if (emailAlreadyExists) return;
+  console.log('email exists', emailAlreadyExists);
+  if (emailAlreadyExists) {
+    return {
+      emailExists: true,
+      user: emailAlreadyExists
+    }
+  };
 
   const splitName = name?.split(' ');
   const firstName = splitName ? splitName[0] : '';
@@ -103,10 +108,11 @@ async function insertUserProvider(user, accountType = 2) {
       body: JSON.stringify(userData),
     });
 
-    // console.log('User created:', res.json());
-    console.log('User created');
+    const responseJson = await res.json(); 
 
-    return res;
+    console.log('User created:', responseJson);
+
+    return await responseJson;
 
   } catch (error) {
     console.error('Error creating user:', error);
