@@ -54,7 +54,7 @@ const AssetModel = () => {
 
   async function getAllAssetsByPagination(args: any) {
 
-    const { page = 1, numberOfItens = 10, orderBy = false } = args;
+    const { page = 1, numberOfItens = 10, getDetailedList = false, orderBy = false } = args;
 
     const totalAssetCount = await prisma.assets.count();
 
@@ -67,7 +67,7 @@ const AssetModel = () => {
       skip,
       take: +numberOfItens,
       include: {
-        AssetDetailList: true,
+        AssetDetailList: getDetailedList,
       },
     }
 

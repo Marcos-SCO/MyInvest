@@ -20,12 +20,13 @@ const AssetsController = () => {
   }
 
   async function index(req: Request, res: Response): Promise<Response> {
-    const { page = 1, numberOfItens = 10 } = req.body;
+    const { page = 1, numberOfItens = 10, getDetailedList = false, orderBy = 'asc' } = req.body;
 
     const assetsQuery: any = await AssetModel().getAllAssetsByPagination({
       page,
       numberOfItens,
-      orderBy: { 'id': 'desc' }
+      getDetailedList,
+      orderBy: { 'id': orderBy }
     });
 
     const { totalPages, assetResults } = assetsQuery;
@@ -43,7 +44,7 @@ const AssetsController = () => {
     return res.status(200).json({
       message,
       totalPages,
-      assetsList: assetResults
+      assetResults
     });
 
   }
