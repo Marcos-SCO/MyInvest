@@ -1,6 +1,6 @@
 'use client';
 
-import { insertUserCredentials } from "@/components/user/databaseFunctions";
+import { insertUserCredentials } from "components/user/databaseFunctions";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

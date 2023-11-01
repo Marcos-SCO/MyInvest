@@ -1,8 +1,8 @@
 import Link from "next/link";
-import LoginControls from "@/components/LoginControls";
+import LoginControls from "components/LoginControls";
 
 import { getServerSession } from "next-auth";
-import { nextAuthOptions } from '@/app/api/auth/[...nextauth]/route';
+import { nextAuthOptions } from 'app/api/auth/[...nextauth]/route';
 
 export default async function Navbar() {
 

@@ -1,9 +1,9 @@
-import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/route";
+import { nextAuthOptions } from "app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 
-import { fetchUserAssets } from "@/app/api/assets/userAssets/fetchUserAssets";
+import { fetchUserAssets } from "app/api/assets/userAssets/fetchUserAssets";
 
-import AssetFavButton from "@/components/AssetButtons/layout";
+import AssetFavButton from "components/AssetButtons/layout";
 
 export default async function UserAssets() {
   const session = await getServerSession(nextAuthOptions);

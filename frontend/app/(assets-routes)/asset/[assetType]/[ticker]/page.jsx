@@ -1,8 +1,8 @@
-import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/route";
+import { nextAuthOptions } from "app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 
-import AssetFavButton from "@/components/AssetButtons/layout";
+import AssetFavButton from "components/AssetButtons/layout";
 
 const API_BASE_URL = process.env.API_BASE_URL;
 

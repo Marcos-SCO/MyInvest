@@ -1,6 +1,6 @@
-import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/route";
-import ButtonLogout from "@/components/ButtonLogout";
-import UserInfoProvider from "@/components/UserInfoProvider";
+import { nextAuthOptions } from "app/api/auth/[...nextauth]/route";
+import ButtonLogout from "components/ButtonLogout";
+import UserInfoProvider from "components/UserInfoProvider";
 
 import { getServerSession } from "next-auth";
 

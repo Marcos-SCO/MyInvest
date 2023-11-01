@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { userHasAsset } from '@/app/api/assets/userAssets/userHasAsset';
+import { userHasAsset } from 'app/api/assets/userAssets/userHasAsset';
 
 import ItemButton from './ItemButton';
 

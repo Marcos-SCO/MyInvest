@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { signIn } from "next-auth/react";
-import DisplaySvg from "@/app/helpers/DisplaySvg";
+import DisplaySvg from "app/helpers/DisplaySvg";
 
 export default function SignInBtnGoogle() {
   return (

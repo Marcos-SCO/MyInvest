@@ -1,6 +1,6 @@
 // 'use client';
 
-import { getBackendAssetType } from '@/app/api/assets/helpers/assetHelpers';
+import { getBackendAssetType } from 'app/api/assets/helpers/assetHelpers';
 
 import { useRouter } from "next/navigation";
 

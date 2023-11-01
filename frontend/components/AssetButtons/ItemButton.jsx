@@ -1,8 +1,8 @@
 'use client';
 
-import { userCreateAsset } from '@/app/api/assets/userAssets/userAddAsset';
-import { userHasAsset } from '@/app/api/assets/userAssets/userHasAsset'
-import { userRemoveAsset } from '@/app/api/assets/userAssets/userRemoveAsset';
+import { userCreateAsset } from 'app/api/assets/userAssets/userAddAsset';
+import { userHasAsset } from 'app/api/assets/userAssets/userHasAsset'
+import { userRemoveAsset } from 'app/api/assets/userAssets/userRemoveAsset';
 import React, { useEffect, useState } from 'react';
 
 export default function ItemButton({ isUserAsset, fetchObj }) {
