@@ -56,9 +56,9 @@ const AssetModel = () => {
 
     const { page = 1, numberOfItens = 10, getDetailedList = false, orderBy = false } = args;
 
-    const totalAssetCount = await prisma.assets.count();
+    const totalAssetsCount = await prisma.assets.count();
 
-    const totalPages = Math.ceil(totalAssetCount / numberOfItens);
+    const totalPages = Math.ceil(totalAssetsCount / numberOfItens);
 
     // Calculate the number of records to skip
     const skip = (page - 1) * numberOfItens;
@@ -80,6 +80,7 @@ const AssetModel = () => {
 
     return {
       totalPages,
+      totalAssetsCount,
       assetResults
     }
   }

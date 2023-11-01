@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rimraf ./build && tsc",
     "dev": "nodemon",
-    "start": "node build/index.js",
+    "build": "rimraf ./build && tsc && tsc-alias",
+    "start": "nodemon ./build/index.js",
     "prisma-seed": "npx tsx prisma/seeders/_executeSeeders.ts",
     "prisma-drop-seed": "npx tsx prisma/seeders/_executeDrops.ts"
   },
@@ -23,6 +23,7 @@
     "faker": "^5.5.3",
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.1",
+    "tsc-alias": "^1.8.8",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^3.14.0",
     "typescript": "^5.1.6"

@@ -61,8 +61,15 @@ const UserAssetsModel = () => {
 
   async function getAllByPagination(userId: number, args: any) {
     const userExist = await getUserById(userId);
+    if (!userExist) return;
 
-    const { page = 1, numberOfItens = 10, orderBy = false } = args;
+    const { page = 1, numberOfItens = 10, getDetailedList = true, orderBy = false } = args;
+
+    const totalAssetsCount = await prisma.userAssets.count({
+      where: { userId }
+    });
+
+    const totalPages = Math.ceil(totalAssetsCount / numberOfItens);
 
     const skip = (page - 1) * numberOfItens;
     // Calculate the number of records to skip
@@ -81,12 +88,17 @@ const UserAssetsModel = () => {
     const userAssetsResults =
       await prisma.userAssets.findMany(queryObj);
 
-    const assetsWithDetails =
-      await getPaginatedAssetWithDetails(userAssetsResults);
+    const assetsQueryResults = getDetailedList
+      ? await getPaginatedAssetWithDetails(userAssetsResults)
+      : userAssetsResults;
 
     await prisma.$disconnect();
 
-    return assetsWithDetails;
+    return {
+      totalPages,
+      totalAssetsCount,
+      assetsQueryResults
+    };
   }
 
 

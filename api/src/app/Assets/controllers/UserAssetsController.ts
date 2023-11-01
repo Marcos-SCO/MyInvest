@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
 
 import { PrismaClient } from '@prisma/client';
-import UserModel from "../../Users/models/UserModel";
 import CommonError from "@/app/Auth/exceptions/CommonError";
 import UserAssetsModel from "../models/UserAssetsModel";
 import AuthError from "@/app/Auth/exceptions/AuthError";
+
+import errorMessageHelper from '@app/helpers/ErrorHelper';
 
 const prisma = new PrismaClient();
 
@@ -18,9 +19,9 @@ const UserAssetsController = () => {
   async function create(req: Request, res: Response): Promise<Response> {
     const userId = req.body?.userId;
     const assetId = req.body?.assetId;
- 
+
     const insertObj = { userId, assetId };
-    
+
     try {
       await verifyUserAssetParams(res, userId, assetId);
 
@@ -33,13 +34,7 @@ const UserAssetsController = () => {
       });
 
     } catch (error) {
-      const isCommonError = error instanceof CommonError || error instanceof AuthError;
-
-      if (isCommonError) return res.status(401).json({ error: error.message });
-
-      console.log(error);
-
-      return res.status(404).json({ error: 'Not found' });
+      return errorMessageHelper(res, error);
     }
 
   }
@@ -61,42 +56,46 @@ const UserAssetsController = () => {
       });
 
     } catch (error) {
-      const isCommonError = error instanceof CommonError || error instanceof AuthError;
-
-      if (isCommonError) return res.status(401).json({ error: error.message });
-
-      console.log(error);
-
-      return res.status(404).json({ error: 'Not found' });
+      return errorMessageHelper(res, error);
     }
 
   }
 
   async function index(req: Request, res: Response): Promise<Response> {
-    const { userId, page = 1, numberOfItens = 10 } = req.body;
+    const { userId, page = 1, numberOfItens = 10, getDetailedList = true, orderBy = 'desc' } = req.body;
 
     if (!userId) return res.status(404).json({ message: `userId param is missing`, });
 
-    const assets: any = await UserAssetsModel().getAllByPagination(userId, {
-      page,
-      numberOfItens,
-      orderBy: { 'id': 'desc' }
-    });
-
-    const haveUserResults = assets.length > 0;
-
-    if (!haveUserResults) {
-      return res.status(404).json({
-        message: `No assets found userid: ${userId}`,
+    try {
+      const assetsQuery: any = await UserAssetsModel().getAllByPagination(userId, {
+        page,
+        numberOfItens,
+        getDetailedList,
+        orderBy: { 'id': orderBy }
       });
+
+      const { totalPages, totalAssetsCount, assetsQueryResults } = assetsQuery;
+
+      const haveUserResults = assetsQueryResults?.length > 0;
+
+      if (!haveUserResults) {
+        return res.status(404).json({
+          message: totalPages > 0 ? `No assets found, total number of pages is ${totalPages}` : `No assets found for userId: ${userId}`,
+        });
+      }
+
+      const message = page > 1 ? `Page ${page} user found assets:` : 'User found assets';
+
+      return res.status(200).json({
+        message,
+        totalPages,
+        totalAssetsCount,
+        assetsList: assetsQueryResults
+      });
+
+    } catch (error) {
+      return errorMessageHelper(res, error);
     }
-
-    const message = page > 1 ? `Page ${page} user found assets:` : 'User found assets';
-
-    return res.status(200).json({
-      message,
-      assetsList: assets
-    });
 
   }
 

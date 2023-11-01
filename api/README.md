@@ -9,6 +9,8 @@
 - prisma
 - @types/prisma
 
+- tsc-alias
+
 - bcrypt
 - @types/bcrypt
 
@@ -19,6 +21,8 @@
 - express-async-errors
 - @types/node
 - nodemon
+- pm2
+
 - ts-node
 - tsconfig-paths
 - typescript
@@ -30,7 +34,7 @@
 - @types/express
 
 - axios
-- @types/axios
+- @types/axios 
 
 # Prisma commands
 

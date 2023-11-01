@@ -4,6 +4,7 @@ import CommonError from "@/app/Auth/exceptions/CommonError";
 
 import AssetModel from "../models/AssetModel";
 import AssetNasdaq from "../models/AssetNasdaq";
+import errorMessageHelper from "@/app/helpers/ErrorHelper";
 
 const AssetsController = () => {
 
@@ -22,30 +23,36 @@ const AssetsController = () => {
   async function index(req: Request, res: Response): Promise<Response> {
     const { page = 1, numberOfItens = 10, getDetailedList = false, orderBy = 'asc' } = req.body;
 
-    const assetsQuery: any = await AssetModel().getAllAssetsByPagination({
-      page,
-      numberOfItens,
-      getDetailedList,
-      orderBy: { 'id': orderBy }
-    });
+    try {
 
-    const { totalPages, assetResults } = assetsQuery;
-
-    const queryResults = assetResults.length > 0;
-
-    if (!queryResults) {
-      return res.status(404).json({
-        message: `No assets found, total number of pages is ${totalPages}`,
+      const assetsQuery: any = await AssetModel().getAllAssetsByPagination({
+        page,
+        numberOfItens,
+        getDetailedList,
+        orderBy: { 'id': orderBy }
       });
+
+      const { totalPages, assetResults } = assetsQuery;
+
+      const queryResults = assetResults?.length > 0;
+
+      if (!queryResults) {
+        return res.status(404).json({
+          message: totalPages > 0 ? `No assets found, total number of pages is ${totalPages}` : `No assets found`,
+        });
+      }
+
+      const message = page > 1 ? `Assets found page ${page}` : `Found Assets`;
+
+      return res.status(200).json({
+        message,
+        totalPages,
+        assetResults
+      });
+
+    } catch (error) {
+      return errorMessageHelper(res, error);
     }
-
-    const message = page > 1 ? `Assets found page ${page}` : `Found Assets`;
-
-    return res.status(200).json({
-      message,
-      totalPages,
-      assetResults
-    });
 
   }
 
@@ -68,13 +75,7 @@ const AssetsController = () => {
       });
 
     } catch (error) {
-      const isCommonError = error instanceof CommonError;
-
-      if (isCommonError) return res.status(401).send({ error: error.message });
-
-      console.log(error);
-
-      return res.status(404).json({ error: 'Not found' });
+      return errorMessageHelper(res, error, { customMessage: `Asset ${ticker} was not found` });
     }
   }
 
@@ -96,13 +97,7 @@ const AssetsController = () => {
       });
 
     } catch (error) {
-      const isCommonError = error instanceof CommonError;
-
-      if (isCommonError) return res.status(401).send({ error: error.message });
-
-      console.log(error);
-
-      return res.status(404).json({ error: 'Not found' });
+      return errorMessageHelper(res, error);
     }
   }
 
@@ -122,13 +117,7 @@ const AssetsController = () => {
       });
 
     } catch (error) {
-      const isCommonError = error instanceof CommonError;
-
-      if (isCommonError) return res.status(401).send({ error: error.message });
-
-      console.log(error);
-
-      return res.status(404).json({ error: 'Not found' });
+      return errorMessageHelper(res, error);
     }
 
   }
@@ -162,13 +151,7 @@ const AssetsController = () => {
       });
 
     } catch (error) {
-      const isCommonError = error instanceof CommonError;
-
-      if (isCommonError) return res.status(401).send({ error: error.message });
-
-      console.log(error);
-
-      return res.status(404).json({ error: 'Not found' });
+      return errorMessageHelper(res, error);
     }
   }
 
@@ -186,13 +169,7 @@ const AssetsController = () => {
       });
 
     } catch (error) {
-      const isCommonError = error instanceof CommonError;
-
-      if (isCommonError) return res.status(401).send({ error: error.message });
-
-      console.log(error);
-
-      return res.status(404).json({ error: 'Not found' });
+      return errorMessageHelper(res, error);
     }
 
   }
