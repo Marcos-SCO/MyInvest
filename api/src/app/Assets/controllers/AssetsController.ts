@@ -22,7 +22,13 @@ const AssetsController = () => {
 
   async function index(req: Request, res: Response): Promise<Response> {
     const { page = 1, numberOfItens = 10, getDetailedList = false, orderBy = 'asc' } = req.body;
-
+    
+    if (numberOfItens < 1) {
+      return res.status(404).json({
+        message: 'You can\'t search for 0 itens',
+      });
+    }
+    
     try {
 
       const assetsQuery: any = await AssetModel().getAllAssetsByPagination({
@@ -32,7 +38,7 @@ const AssetsController = () => {
         orderBy: { 'id': orderBy }
       });
 
-      const { totalPages, assetResults } = assetsQuery;
+      const { totalPages, totalAssetsCount, assetResults } = assetsQuery;
 
       const queryResults = assetResults?.length > 0;
 
@@ -47,6 +53,7 @@ const AssetsController = () => {
       return res.status(200).json({
         message,
         totalPages,
+        totalAssetsCount,
         assetResults
       });
 
