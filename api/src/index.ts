@@ -1,12 +1,19 @@
 // To ignore a types lib you can use: @ts-ignore
 
-import express from 'express';
 import App from './app';
 
 import config from './config';
+
 const { port } = config;
 
 const app = App();
 app.listen(port);
 
-// const db = Db();
+
+import { assetUpdatesCron } from './app/Queues/executeCrons';
+
+// Define your cron job for 12 PM (noon)
+assetUpdatesCron('0 12 * * *');
+
+// Define your cron job for 12 AM (midnight)
+assetUpdatesCron('0 0 * * *');

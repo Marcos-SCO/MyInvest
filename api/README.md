@@ -11,6 +11,8 @@
 
 - tsc-alias
 
+- node-cron
+
 - bcrypt
 - @types/bcrypt
 
