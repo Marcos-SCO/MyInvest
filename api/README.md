@@ -38,6 +38,8 @@
 - axios
 - @types/axios 
 
+- nodemailer: npm i nodemailer @types/nodemailer
+
 # Prisma commands
 
 - npx prisma init
