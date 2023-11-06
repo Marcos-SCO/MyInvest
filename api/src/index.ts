@@ -19,11 +19,13 @@ assetUpdatesCron('0 12 * * *');
 // Define your cron job for 12 AM (midnight)
 assetUpdatesCron('0 0 * * *');
 
+// assetUpdatesCron();
+
 const assetsEmail = AssetsEmail.AssetsEmail()
 
 const emailOptionsObj = {
   emailTo: 'malvitima0@gmail.com',
-  subject: 'Hello warudo!!!'
+  subject: 'Hello warudo!!! Assunto pendente'
 };
 
 const emailTemplateVariables = {
@@ -34,4 +36,4 @@ const emailTemplateVariables = {
   lastClosedPrice: '95.00',
 }
 
-assetsEmail.send(emailOptionsObj, emailTemplateVariables);
+// assetsEmail.send(emailOptionsObj, emailTemplateVariables);

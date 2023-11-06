@@ -32,7 +32,7 @@ model Users {
   UserPassword UsersPassword[]
   UserEmail    UserEmails[]
   UserAssets   UserAssets[]
-  AssetEmailsWatch   AssetEmailsWatch[]
+  PriceAssetsWatch   PriceAssetsWatch[]
 }
 
 model UsersPassword {
@@ -85,7 +85,7 @@ model AssetDetailsList {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  AssetEmailsWatch AssetEmailsWatch[]
+  PriceAssetsWatch PriceAssetsWatch[]
 
   @@map("asset_details_list")
 }
@@ -102,12 +102,12 @@ model UserAssets {
   @@map(name: "user_assets")
 }
 
-model AssetEmailsWatch {
+model PriceAssetsWatch {
   id            Int      @id @default(autoincrement())
   userId        Int
   assetId       Int
-  expectedPrice Decimal
-  emailSent     Boolean  @default(false)
+  expectedPrice String @db.Text
+  active     Boolean  @default(true)
 
   createdAt     DateTime @default(now()) @map("created_at")
   updatedAt     DateTime @updatedAt @map("updated_at")

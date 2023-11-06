@@ -42,12 +42,13 @@ const UserAssetsController = () => {
   async function destroy(req: Request, res: Response): Promise<Response> {
     const userId = req.body?.userId;
     const assetId = req.body?.assetId;
-
-    await verifyUserAssetParams(res, userId, assetId);
-
+    
     const insertObj = { userId, assetId };
-
+    
     try {
+
+      await verifyUserAssetParams(res, userId, assetId);
+      
       const deleteUserAsset = await
         UserAssetsModel().deleteUserAsset(insertObj);
 

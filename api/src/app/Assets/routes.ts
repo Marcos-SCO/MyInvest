@@ -3,6 +3,8 @@ import AssetsController from "./controllers/AssetsController";
 import UserAssetsController from "./controllers/UserAssetsController";
 import UserAssetsService from "./services/UserAssetService";
 
+import PriceAssetsWatchController from './controllers/PriceAssetsWatchController';
+
 const routes = Router();
 
 routes.get('/assetsApiQuery/:ticker([\\s\\S]+)', AssetsController().searchAssetsApiQuery);
@@ -19,6 +21,10 @@ routes.delete('/assets/', AssetsController().destroy);
 routes.post('/verify/user/asset/', UserAssetsService().verifyIfUserHasAsset);
 routes.post('/assets/user/', UserAssetsController().create);
 routes.delete('/assets/user/', UserAssetsController().destroy);
+
+routes.post('/assets/price/watch/', PriceAssetsWatchController().create);
+routes.delete('/assets/price/watch/', PriceAssetsWatchController().destroy);
+routes.post('/assets/price/watch/paginate/', PriceAssetsWatchController().index);
 
 routes.post('/assets/user/paginate/', UserAssetsController().index);
 

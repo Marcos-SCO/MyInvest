@@ -84,8 +84,8 @@ CREATE TABLE `asset_emails_watch` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `userId` INTEGER NOT NULL,
     `assetId` INTEGER NOT NULL,
-    `expectedPrice` DECIMAL(65, 30) NOT NULL,
-    `emailSent` BOOLEAN NOT NULL DEFAULT false,
+    `expectedPrice` TEXT NOT NULL,
+    `active` BOOLEAN NOT NULL DEFAULT true,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL,
 

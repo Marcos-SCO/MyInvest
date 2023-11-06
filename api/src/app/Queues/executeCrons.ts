@@ -24,8 +24,8 @@ export async function assetUpdatesCron(scheduleTime = '*/10 * * * * *') {
 
     isAssetUpdateCronRunning = true;
 
-    await someAsyncOperation();
-    // await executeQueueAssetUpdates();
+    // await someAsyncOperation();
+    await executeQueueAssetUpdates();
 
     // This function will run every minute
     console.log('\nCron job executed at:', new Date().toLocaleString());

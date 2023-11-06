@@ -4,24 +4,11 @@ import { AssetEmailTemplate } from './templates/AssetEmailTemplate';
 import config from "@/config";
 
 import emailTransporter from './conig/EmailTransporter';
+import EmailOptions from './conig/EmailOptions';
 
 const { EMAIL_SMTP, EMAIL_PORT, EMAIL_SECURITY, EMAIL_USER, EMAIL_PASSWORD } = config.smtp;
 
 function AssetsEmail() {
-
-  function emailOptions(optionsObj: any) {
-    const { emailFrom, emailTo, emailHtml, subject } = optionsObj;
-
-    return {
-      // from: 'you@example.com',
-      // from: EMAIL_USER,
-      // to: 'malvitima@hotmail.com',
-      from: emailFrom,
-      to: emailTo,
-      subject: subject,
-      html: emailHtml,
-    };
-  }
 
   async function send(emailObjectOptions: any, emailTemplateVariables: any) {
 
@@ -38,12 +25,12 @@ function AssetsEmail() {
       subject
     };
 
-    const emailSendOptions: any = emailOptions(emailOptionsObj);
+    const emailSendOptions: any = EmailOptions(emailOptionsObj);
 
     try {
-      // console.log(emailhtml: ,emailHtml);
+      // console.log('emailhtml: ', emailHtml);
 
-      // const emailSend = await transporter.sendMail(emailSendOptions);
+      const emailSend = await transporter.sendMail(emailSendOptions);
 
       // console.log('Email send: ', emailSend);
 
