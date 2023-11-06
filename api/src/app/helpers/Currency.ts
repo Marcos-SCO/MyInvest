@@ -5,7 +5,7 @@ function cleanCurrency(input: any) {
   const isInputString = typeof input === 'string';
 
   const inputValue =
-    isInputString ? input : input?.toFixed(2);
+    isInputString ? input.replace(',', '.') : input?.toFixed(2);
 
   // Use the regular expression to find the numeric part in the input
   const match = inputValue.match(regex);

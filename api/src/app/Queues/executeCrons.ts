@@ -1,5 +1,6 @@
 import cron from 'node-cron';
-import { executeQueueAssetUpdates } from './queueExecutables';
+import { AssetUpdatesExecuteQueue } from './AssetUpdatesExecuteQueue';
+import { PriceAlertEmailsExecuteQueue } from './PriceAlertEmailsExecuteQueue';
 
 // Simulate an async operation
 async function someAsyncOperation() {
@@ -25,7 +26,9 @@ export async function assetUpdatesCron(scheduleTime = '*/10 * * * * *') {
     isAssetUpdateCronRunning = true;
 
     // await someAsyncOperation();
-    await executeQueueAssetUpdates();
+    // await AssetUpdatesExecuteQueue();
+
+    // await PriceAlertEmailsExecuteQueue();
 
     // This function will run every minute
     console.log('\nCron job executed at:', new Date().toLocaleString());

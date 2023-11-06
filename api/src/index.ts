@@ -19,6 +19,8 @@ assetUpdatesCron('0 12 * * *');
 // Define your cron job for 12 AM (midnight)
 assetUpdatesCron('0 0 * * *');
 
+// assetUpdatesCron('*/2 * * * * *');
+
 // assetUpdatesCron();
 
 const assetsEmail = AssetsEmail.AssetsEmail()

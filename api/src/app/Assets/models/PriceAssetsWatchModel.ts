@@ -19,6 +19,51 @@ const PriceAssetsWatchModel = () => {
     return await AssetModel().getAssetById(id);
   }
 
+  async function assetReachedExpectedPrice(dataObj: any) {
+
+    const { priceAlertId, assetId, userId, expectedPrice } = dataObj;
+
+    const assetDetailsQuery = await prisma.assetDetailsList.findUnique({
+      where: { assetId },
+      select: {
+        currentPrice: true,
+      }
+    });
+
+    if (!assetDetailsQuery) return false;
+    
+    const assetCurrentPrice = assetDetailsQuery?.currentPrice;
+
+    const numCurrentPrice = +assetCurrentPrice;
+    const numExpectedPrice = +expectedPrice;
+
+    const currentPriceReached =
+      numCurrentPrice == numExpectedPrice
+      || numCurrentPrice <= numExpectedPrice;
+
+    if (!currentPriceReached) {
+      console.log('Current price reached: ', currentPriceReached)
+      return false;
+    }
+
+    const userEmailQuery = await prisma.userEmails.findFirst({
+      where: { userId },
+      select: {
+        email: true,
+      }
+    });
+
+    if (!userEmailQuery) return false;
+    const userEmail = userEmailQuery?.email;
+
+    return {
+      currentPriceReached: currentPriceReached,
+      userEmail,
+      currentPrice: assetCurrentPrice
+    };
+
+  }
+
   async function getPriceAlertById(id: number) {
     const priceAlert = await prisma.priceAssetsWatch.findUnique({
       where: { id }
@@ -166,7 +211,7 @@ const PriceAssetsWatchModel = () => {
 
   }
 
-  return { insertPriceAlert, deletePriceAlert, getAllByPagination }
+  return { insertPriceAlert, deletePriceAlert, getAllByPagination, assetReachedExpectedPrice }
 }
 
 export default PriceAssetsWatchModel;

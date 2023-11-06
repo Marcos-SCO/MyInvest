@@ -2,6 +2,7 @@ import CommonError from "@/app/Auth/exceptions/CommonError";
 import { PrismaClient } from "@prisma/client";
 import AssetDetailsList from "./AssetDetailsList";
 import AssetsService from "../services/AssetsService";
+import { cleanCurrency } from "@/app/helpers/Currency";
 
 const prisma = new PrismaClient();
 
@@ -130,9 +131,11 @@ const AssetModel = () => {
 
       const assetId = insertAssetItem.id;
 
+      const cleanCurrentPrice = cleanCurrency(lastPrice);
+
       const assetDetailsObj = {
         assetId,
-        currentPrice: JSON.stringify(lastPrice),
+        currentPrice: cleanCurrentPrice,
         symbols: JSON.stringify(symbolData),
         historicalDividends: JSON.stringify(historicalDividends),
       }
@@ -171,10 +174,12 @@ const AssetModel = () => {
     const { symbolData, lastPrice, historicalDividends } =
       await getAssetApiData(ticker, type);
 
+    const cleanCurrentPrice = cleanCurrency(lastPrice);
+
     try {
       const assetDetailsObj = {
         assetId,
-        currentPrice: JSON.stringify(lastPrice),
+        currentPrice: cleanCurrentPrice,
         symbols: JSON.stringify(symbolData),
         historicalDividends: JSON.stringify(historicalDividends),
       }

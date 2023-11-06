@@ -26,6 +26,8 @@ routes.post('/assets/price/watch/', PriceAssetsWatchController().create);
 routes.delete('/assets/price/watch/', PriceAssetsWatchController().destroy);
 routes.post('/assets/price/watch/paginate/', PriceAssetsWatchController().index);
 
+routes.post('/assets/user/view/', PriceAssetsWatchController().show);
+
 routes.post('/assets/user/paginate/', UserAssetsController().index);
 
 export default routes;

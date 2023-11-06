@@ -6,7 +6,7 @@ function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function executeQueueAssetUpdates(page = 1, processedCount = 0) {
+async function AssetUpdatesExecuteQueue(page = 1, processedCount = 0) {
   const assetQueuesPageResults =
     await AssetUpdatesQueue().getAssetIds(page);
 
@@ -56,8 +56,8 @@ async function executeQueueAssetUpdates(page = 1, processedCount = 0) {
 
   sleep(3000);
 
-  await executeQueueAssetUpdates(nextPage, currentProcessedCount);
+  await AssetUpdatesExecuteQueue(nextPage, currentProcessedCount);
 
 }
 
-export { executeQueueAssetUpdates, sleep };
+export { AssetUpdatesExecuteQueue, sleep };

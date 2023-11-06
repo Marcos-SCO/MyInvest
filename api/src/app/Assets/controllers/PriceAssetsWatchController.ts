@@ -18,6 +18,31 @@ const PriceAssetsWatchController = () => {
     if (!expectedPrice) throw new CommonError(`expectedPrice param is missing`);
   }
 
+  async function show(req: Request, res: Response): Promise<Response> {
+
+    const { priceAlertId, assetId, userId, expectedPrice } = req.body;
+
+    const dataObj = {
+      assetId,
+      userId,
+      expectedPrice,
+      priceAlertId,
+    }
+
+    try {
+
+      let assetReachExpectedPrice = await PriceAssetsWatchModel().assetReachedExpectedPrice(dataObj);
+
+      return res.status(200).json({
+        assetReachExpectedPrice
+      });
+
+    } catch (error) {
+
+      return errorMessageHelper(res, error, { customMessage: `Asset alert was not found` });
+    }
+  }
+
   async function create(req: Request, res: Response): Promise<Response> {
 
     const userId = req.body?.userId;
@@ -75,7 +100,7 @@ const PriceAssetsWatchController = () => {
     const { page = 1, numberOfItens = 10, orderBy = 'desc' } = req.body;
 
     const userId = req.body?.userId;
-    
+
     const searchByStatus = req.body?.searchByStatus;
     const active = req.body?.active ?? true;
 
@@ -117,7 +142,7 @@ const PriceAssetsWatchController = () => {
 
   }
 
-  return { index, create, destroy }
+  return { index, create, destroy, show }
 
 }
 

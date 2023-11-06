@@ -501,7 +501,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"first_name\": \"Alexandre\",\r\n    \"last_name\": \"Gallaxy\",\r\n    \"email\": \"cabeca@jj.com\"\r\n}",
+							"raw": "{\r\n    \"id\": 10000,\r\n    \"first_name\": \"Alexandre\",\r\n    \"last_name\": \"Gallaxy\",\r\n    \"email\": \"cabeca@jj.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -622,7 +622,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Marcos\",\r\n    \"lastName\": \"dos Santos Carvalho\",\r\n    \"email\": \"aaaaamarcos@test.com\",\r\n    //\"password\": \"pass\",\r\n    \"accountType\": 2\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Marcos\",\r\n    \"lastName\": \"dos Santos Carvalho\",\r\n    \"email\": \"aaaaaaaaamarcos@test.com\",\r\n    \"password\": \"pass\",\r\n    \"accountType\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -684,7 +684,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"ticker\": \"SNCI11\",\r\n    \"type\": 3\r\n}",
+									"raw": "{\r\n    // \"type\": 3,\r\n    \"ticker\": \"HCTR11\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -716,7 +716,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"ticker\": \"SAPR11\",\r\n    //\"ticker\": \"KO\",\r\n    // \"ticker\": \"MAC\",\r\n    // \"type\": 2\r\n    \"type\": 1\r\n}",
+									"raw": "{\r\n    //\"ticker\": \"SAPR11\",\r\n    // \"type\": 1\r\n    //\"ticker\": \"KO\",\r\n    \"ticker\": \"MAC\",\r\n    \"type\": 2\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -743,7 +743,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"ticker\": \"SAPR11\",\r\n    // \"ticker\": \"OIBR4\"\r\n    //\"ticker\": \"KO\",\r\n    // \"ticker\": \"MAC\",\r\n    //\"type\": 1\r\n    \"type\": 1\r\n}",
+									"raw": "{\r\n    // \"type\": 1\r\n    // \"ticker\": \"SAPR11\"\r\n    // \"ticker\": \"OIBR4\"\r\n    //\"ticker\": \"KO\",\r\n    \"ticker\": \"MAC\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -802,7 +802,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    // \"ticker\": \"MAC\"\r\n    // \"ticker\": \"KO\"\r\n    \r\n}",
+							"raw": "{\r\n    \"ticker\": \"MAC\"\r\n    // \"ticker\": \"KO\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -810,15 +810,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/assets/stocks/ko/",
+							"raw": "{{baseUrl}}/assets/stocks/ko",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"assets",
 								"stocks",
-								"ko",
-								""
+								"ko"
 							]
 						}
 					},
@@ -947,6 +946,33 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Paginate Assets",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 1,\r\n    \"numberOfItens\": 5,\r\n    // \"getDetailedList\": true,\r\n    \"orderBy\": \"asc\" // \"orderBy\": \"desc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/assets/paginate",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"assets",
+								"paginate"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -960,7 +986,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": 1,\r\n    \"assetId\": 2\r\n}",
+							"raw": "{\r\n    \"userId\": 19\r\n    \"assetId\": 3\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -982,13 +1008,41 @@
 					"response": []
 				},
 				{
+					"name": "Create User asset Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 40,\r\n    \"assetId\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/assets/user/verify",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"assets",
+								"user",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Delete User asset",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": 1,\r\n    \"assetId\": 2\r\n}",
+							"raw": "{\r\n    \"userId\": 1,\r\n    \"assetId\": 200\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1016,7 +1070,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": 1,\r\n    \"numberOfItens\": 10,\r\n    \"page\": 1\r\n}",
+							"raw": "{\r\n    \"userId\": 100,\r\n    \"numberOfItens\": 10,\r\n    \"page\": 1,\r\n    \"getDetailedList\": true // \"getDetailedList\": false\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1032,6 +1086,128 @@
 								"assets",
 								"user",
 								"paginate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Price alerts",
+			"item": [
+				{
+					"name": "Create price alert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 1,\r\n    \"assetId\": 3,\r\n    \"expectedPrice\": \"10.00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/assets/price/watch/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"assets",
+								"price",
+								"watch",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete price alert",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"softDelete\": true,\r\n    // \"alertId\": 6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/assets/price/watch/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"assets",
+								"price",
+								"watch",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Price alert paginate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 1000,\r\n    // \"page\": 1,\r\n    \"orderBy\": \"asc\",\r\n    \"numberOfItens\": 10,\r\n    \"searchByStatus\": true,\r\n    \"active\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/assets/price/watch/paginate/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"assets",
+								"price",
+								"watch",
+								"paginate",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Price alert paginate Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"userId\": 2,\r\n    \"priceAlertId\": 1,\r\n    \"assetId\": 1,\r\n    \"expectedPrice\": 10.10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/assets/user/view/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"assets",
+								"user",
+								"view",
+								""
 							]
 						}
 					},
@@ -1167,7 +1343,7 @@
 		},
 		{
 			"key": "jwt_token",
-			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImlhdCI6MTY5NTU4Mzg4NiwiZXhwIjoxNjk2MTg4Njg2fQ.jXZWXxhFugABr--Kgpszp82HoE3_hNTMrYWCIkUW7h4",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsImlhdCI6MTY5ODgxMjQxNCwiZXhwIjoxNjk5NDE3MjE0fQ.oe0C8X9AuD5epQ8IJjvg4vyXQgUgqrX4ZjCJTPxMDSU",
 			"type": "string"
 		}
 	]
