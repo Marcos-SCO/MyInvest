@@ -1,5 +1,6 @@
 import AssetModel from "../Assets/models/AssetModel";
 import AssetNasdaq from "../Assets/models/AssetNasdaq";
+import PriceAssetsWatchModel from "../Assets/models/PriceAssetsWatchModel";
 import AssetUpdatesQueue from "./AssetUpdatesQueue";
 import PriceAlertEmailsQueue from "./PriceAlertEmailsQueue";
 
@@ -8,7 +9,7 @@ function sleep(ms: number) {
 }
 
 async function PriceAlertEmailsExecuteQueue(page = 1, processedCount = 0) {
-  
+
   const priceAlertQueuesPageResults =
     await PriceAlertEmailsQueue().getPriceAlertAssets(page);
 
@@ -26,15 +27,28 @@ async function PriceAlertEmailsExecuteQueue(page = 1, processedCount = 0) {
 
   for (let i = 0; i < resultsLength; i++) {
     let priceAlertId = priceAlertResults[i]?.id;
-    let assetId = priceAlertResults[i]?.id;
-    let userId = priceAlertResults[i]?.type;
-    let expectedPrice = priceAlertResults[i]?.expectedPrice;
 
-    const updateObj = { priceAlertId, assetId, userId, expectedPrice };
+    let assetId = priceAlertResults[i]?.assetId;
+    let userId = priceAlertResults[i]?.userId;
+
+    let expectedPrice = priceAlertResults[i]?.expectedPrice;
+    let priceAlertTypeId = priceAlertResults[i]?.priceAlertTypeId;
+
+    const reachedPriceObj = { priceAlertId, assetId, userId, expectedPrice, priceAlertTypeId };
+
+    const assetReachedExpectedPrice = await PriceAssetsWatchModel().assetReachedExpectedPrice(reachedPriceObj);
+
+    if (!assetReachedExpectedPrice) {
+      console.log(`Alert ${priceAlertId} didn't reach expected price \n`);
+      sleep(1000);
+      continue;
+    }
 
     currentProcessedCount++;
 
-    // console.log(`${i + 1}: ${currentProcessedCount} - ${assetTicker} | Updated at ${updatedAt}\n`);
+    console.log(`Alert ${priceAlertId} reach expected price \n`, assetReachedExpectedPrice);
+    sleep(1000);
+
     console.log(`${i + 1}: ${currentProcessedCount}\n`);
   }
 

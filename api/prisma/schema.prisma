@@ -115,7 +115,7 @@ model PriceAssetsWatch {
   id               Int     @id @default(autoincrement())
   userId           Int
   assetId          Int
-  priceAlertTypeId Int
+  priceAlertTypeId Int @default(1)
   expectedPrice    String  @db.Text
   active           Boolean @default(true)
 

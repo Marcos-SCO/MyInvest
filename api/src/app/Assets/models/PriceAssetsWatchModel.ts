@@ -21,7 +21,7 @@ const PriceAssetsWatchModel = () => {
 
   async function assetReachedExpectedPrice(dataObj: any) {
 
-    const { priceAlertId, assetId, userId, expectedPrice } = dataObj;
+    const { priceAlertId, assetId, userId, expectedPrice, priceAlertTypeId } = dataObj;
 
     const assetDetailsQuery = await prisma.assetDetailsList.findUnique({
       where: { assetId },
@@ -31,15 +31,27 @@ const PriceAssetsWatchModel = () => {
     });
 
     if (!assetDetailsQuery) return false;
-    
+
     const assetCurrentPrice = assetDetailsQuery?.currentPrice;
 
     const numCurrentPrice = +assetCurrentPrice;
     const numExpectedPrice = +expectedPrice;
 
-    const currentPriceReached =
-      numCurrentPrice == numExpectedPrice
-      || numCurrentPrice <= numExpectedPrice;
+    let currentPriceReached;
+
+    const isLessThanType = priceAlertTypeId == 1;
+    const isGreaterThanType = priceAlertTypeId == 2;
+
+    const priceTypeMessage =
+      isLessThanType ? 'Menor ou igual' : 'Maior ou igual';
+
+    if (isLessThanType) {
+      currentPriceReached = numCurrentPrice <= numExpectedPrice;
+    }
+
+    if (isGreaterThanType) {
+      currentPriceReached = numCurrentPrice >= numExpectedPrice;
+    }
 
     if (!currentPriceReached) {
       console.log('Current price reached: ', currentPriceReached)
@@ -59,7 +71,9 @@ const PriceAssetsWatchModel = () => {
     return {
       currentPriceReached: currentPriceReached,
       userEmail,
-      currentPrice: assetCurrentPrice
+      expectedPrice,
+      priceTypeMessage,
+      currentPrice: +assetCurrentPrice
     };
 
   }
@@ -77,11 +91,11 @@ const PriceAssetsWatchModel = () => {
     return priceAlert;
   }
 
-  async function userScheduleSamePriceAlert(userId: number, assetId: number, expectedPrice: any) {
+  async function userScheduleSamePriceAlert(userId: number, assetId: number, expectedPrice: any, priceAlertTypeId = 1) {
 
     const userAlreadyScheduleAlert =
       await prisma.priceAssetsWatch.findFirst({
-        where: { userId, assetId, expectedPrice }
+        where: { userId, assetId, expectedPrice, priceAlertTypeId }
       });
 
     if (!userAlreadyScheduleAlert) return false;
@@ -139,7 +153,7 @@ const PriceAssetsWatchModel = () => {
   }
 
   async function insertPriceAlert(insertOjb: any) {
-    let { userId, assetId, expectedPrice } = insertOjb;
+    let { userId, assetId, expectedPrice, priceAlertTypeId = 1 } = insertOjb;
 
     await getUserById(userId);
     await getAssetById(assetId);
@@ -147,7 +161,7 @@ const PriceAssetsWatchModel = () => {
     const cleanExpectedPrice = cleanCurrency(expectedPrice);
 
     const alreadyScheduleSamePrice =
-      await userScheduleSamePriceAlert(userId, assetId, cleanExpectedPrice);
+      await userScheduleSamePriceAlert(userId, assetId, cleanExpectedPrice, priceAlertTypeId);
 
     if (alreadyScheduleSamePrice) {
       throw new CommonError(`User: ${userId} already has a schedule with same price of ${cleanExpectedPrice} for Asset: ${assetId}`);

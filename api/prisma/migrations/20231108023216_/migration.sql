@@ -93,7 +93,7 @@ CREATE TABLE `price_assets_watch` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `userId` INTEGER NOT NULL,
     `assetId` INTEGER NOT NULL,
-    `priceAlertTypeId` INTEGER NOT NULL,
+    `priceAlertTypeId` INTEGER NOT NULL DEFAULT 1,
     `expectedPrice` TEXT NOT NULL,
     `active` BOOLEAN NOT NULL DEFAULT true,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),

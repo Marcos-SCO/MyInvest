@@ -1103,7 +1103,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": 1,\r\n    \"assetId\": 3,\r\n    \"expectedPrice\": \"10.00\"\r\n}",
+							"raw": "{\r\n    \"userId\": 1,\r\n    \"assetId\": 10,\r\n    \"expectedPrice\": \"10.270\",\r\n    \"priceAlertTypeId\": 2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1185,13 +1185,13 @@
 					"response": []
 				},
 				{
-					"name": "Price alert paginate Copy",
+					"name": "Verify if price alert was reach",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    // \"userId\": 2,\r\n    \"priceAlertId\": 1,\r\n    \"assetId\": 1,\r\n    \"expectedPrice\": 10.10\r\n}",
+							"raw": "{\r\n    \"userId\": 5,\r\n    \"assetId\": 2,\r\n    \"priceAlertId\": 1,\r\n    \"priceAlertTypeId\": 1, // Menor ou igual - //\"priceAlertTypeId\": 2, // Maior ou igual\r\n    \"expectedPrice\": 13.60\r\n    \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

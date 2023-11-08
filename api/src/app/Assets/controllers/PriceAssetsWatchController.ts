@@ -20,13 +20,14 @@ const PriceAssetsWatchController = () => {
 
   async function show(req: Request, res: Response): Promise<Response> {
 
-    const { priceAlertId, assetId, userId, expectedPrice } = req.body;
+    const { priceAlertId, assetId, userId, expectedPrice, priceAlertTypeId = 1 } = req.body;
 
     const dataObj = {
       assetId,
       userId,
       expectedPrice,
       priceAlertId,
+      priceAlertTypeId
     }
 
     try {
@@ -47,9 +48,11 @@ const PriceAssetsWatchController = () => {
 
     const userId = req.body?.userId;
     const assetId = req.body?.assetId;
+
+    const priceAlertTypeId = req.body?.priceAlertTypeId ?? 1;
     const expectedPrice = req.body?.expectedPrice;
 
-    const insertObj = { userId, assetId, expectedPrice };
+    const insertObj = { userId, assetId, expectedPrice, priceAlertTypeId };
 
     try {
       await verifyParamsPriceAssets(res, userId, assetId, expectedPrice);
