@@ -211,7 +211,7 @@ const PriceAssetsWatchModel = () => {
 
   }
 
-  return { insertPriceAlert, deletePriceAlert, getAllByPagination, assetReachedExpectedPrice }
+  return { insertPriceAlert, userScheduleSamePriceAlert, deletePriceAlert, getAllByPagination, assetReachedExpectedPrice }
 }
 
 export default PriceAssetsWatchModel;

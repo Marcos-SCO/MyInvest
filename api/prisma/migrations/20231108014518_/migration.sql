@@ -80,10 +80,20 @@ CREATE TABLE `user_assets` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `asset_emails_watch` (
+CREATE TABLE `price_alert_types` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(191) NOT NULL DEFAULT 'Menor ou igual',
+
+    UNIQUE INDEX `price_alert_types_name_key`(`name`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `price_assets_watch` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `userId` INTEGER NOT NULL,
     `assetId` INTEGER NOT NULL,
+    `priceAlertTypeId` INTEGER NOT NULL,
     `expectedPrice` TEXT NOT NULL,
     `active` BOOLEAN NOT NULL DEFAULT true,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
@@ -114,7 +124,10 @@ ALTER TABLE `user_assets` ADD CONSTRAINT `user_assets_userId_fkey` FOREIGN KEY (
 ALTER TABLE `user_assets` ADD CONSTRAINT `user_assets_assetId_fkey` FOREIGN KEY (`assetId`) REFERENCES `Assets`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `asset_emails_watch` ADD CONSTRAINT `asset_emails_watch_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `Users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `price_assets_watch` ADD CONSTRAINT `price_assets_watch_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `Users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `asset_emails_watch` ADD CONSTRAINT `asset_emails_watch_assetId_fkey` FOREIGN KEY (`assetId`) REFERENCES `asset_details_list`(`assetId`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `price_assets_watch` ADD CONSTRAINT `price_assets_watch_assetId_fkey` FOREIGN KEY (`assetId`) REFERENCES `asset_details_list`(`assetId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `price_assets_watch` ADD CONSTRAINT `price_assets_watch_priceAlertTypeId_fkey` FOREIGN KEY (`priceAlertTypeId`) REFERENCES `price_alert_types`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

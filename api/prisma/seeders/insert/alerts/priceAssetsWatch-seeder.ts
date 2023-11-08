@@ -1,16 +1,13 @@
 const { PrismaClient } = require('@prisma/client');
 
-import userAssetModel from "../../../../src/app/Assets/models/UserAssetsModel";
-
-const insertPriceAssetsWatch = require("../alerts/priceAssetsWatch-seeder");
+import PriceAssetsWatchModel from "../../../../src/app/Assets/models/PriceAssetsWatchModel";
 
 const prisma = new PrismaClient();
 
-async function insertUserAssets() {
+async function insertPriceAssetsWatch() {
 
   async function seed() {
     try {
-      // Retrieve a list of users and assets (you should have your own data or use Prisma queries to fetch them).
       const users = await prisma.users.findMany();
       const assets = await prisma.assets.findMany();
 
@@ -23,38 +20,46 @@ async function insertUserAssets() {
       // Define the number of assets to insert for each user.
       const assetsPerUser = 6;
 
-      // Loop through users and assets to create user-assets relationships.
+      const expectedPricesArray = ["55", "120", "10", "30.50", "11.50", "120.20"];
+      const alertTypesArray = [1, 2];
+
       for (const user of users) {
 
         for (let i = 0; i < assetsPerUser; i++) {
           // Randomly select an asset for the user.
           const randomAsset = assets[Math.floor(Math.random() * assets.length)];
 
+          const expectedPrice =
+            expectedPricesArray[Math.floor(Math.random() * expectedPricesArray.length)];
+
+          const priceAlertTypeId = alertTypesArray[Math.floor(Math.random() * alertTypesArray.length)];
+
           const userId = user?.id;
           const assetId = randomAsset?.id;
 
-          const userAlreadyHaveAsset =
-            await userAssetModel().getUserAsset(userId, assetId);
+          const userScheduleSamePriceForAsset =
+            await PriceAssetsWatchModel().userScheduleSamePriceAlert(userId, assetId, expectedPrice);
 
-          if (userAlreadyHaveAsset) { continue; }
+          if (userScheduleSamePriceForAsset) { continue; }
 
           // Insert the user-asset relationship.
-          await prisma.userAssets.create({
+          await prisma.priceAssetsWatch.create({
             data: {
               userId,
-              assetId
+              assetId,
+              priceAlertTypeId,
+              expectedPrice,
             },
           });
+
         }
       }
 
-      console.log('User assets inserted successfully.');
+      console.log('PriceAssetsWatch inserted successfully.');
     } catch (error) {
-      console.error('Error inserting user assets:', error);
+      console.error('Error inserting PriceAssetsWatch itens: ', error);
     } finally {
       await prisma.$disconnect();
-
-      await insertPriceAssetsWatch();
     }
   }
 
@@ -68,4 +73,4 @@ async function insertUserAssets() {
     });
 }
 
-module.exports = insertUserAssets;
+module.exports = insertPriceAssetsWatch;

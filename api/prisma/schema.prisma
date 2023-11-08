@@ -102,18 +102,29 @@ model UserAssets {
   @@map(name: "user_assets")
 }
 
-model PriceAssetsWatch {
-  id            Int      @id @default(autoincrement())
-  userId        Int
-  assetId       Int
-  expectedPrice String @db.Text
-  active     Boolean  @default(true)
+model PriceAlertTypes {
+  id   Int    @id @default(autoincrement())
+  name String @unique @default("Menor ou igual")
 
-  createdAt     DateTime @default(now()) @map("created_at")
-  updatedAt     DateTime @updatedAt @map("updated_at")
+  PriceAssetsWatch PriceAssetsWatch[]
+
+  @@map(name: "price_alert_types")
+}
+
+model PriceAssetsWatch {
+  id               Int     @id @default(autoincrement())
+  userId           Int
+  assetId          Int
+  priceAlertTypeId Int
+  expectedPrice    String  @db.Text
+  active           Boolean @default(true)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   users  Users            @relation(fields: [userId], references: [id], onDelete: Cascade)
   assets AssetDetailsList @relation(fields: [assetId], references: [assetId], onDelete: Cascade)
+  priceAlertTypes PriceAlertTypes @relation(fields: [priceAlertTypeId], references: [id], onDelete: Cascade)
 
-  @@map(name: "asset_emails_watch")
+  @@map(name: "price_assets_watch")
 }
