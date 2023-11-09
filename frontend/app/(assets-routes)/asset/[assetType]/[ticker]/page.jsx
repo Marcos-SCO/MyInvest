@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import Link from "next/link";
 
 import AssetFavButton from "components/AssetButtons/layout";
+import { formatCurrency } from "../../../../helpers/assets";
 
 const API_BASE_URL = process.env.API_BASE_URL;
 
@@ -53,11 +54,13 @@ export default async function Page({ params }) {
   const { assetType, ticker } = params;
 
   const session = await getServerSession(nextAuthOptions);
-  console.log(session);
+  // console.log(session);
 
   const credentialSession = session?.user;
 
-  const { id: userSessionId } = credentialSession ? credentialSession : session;
+  // const { id: userSessionId } = ;
+  const userSessionId =
+    credentialSession ? credentialSession?.id : session?.id;
 
   const userId = session?.userId ?? userSessionId;
 
@@ -77,23 +80,32 @@ export default async function Page({ params }) {
 
   if (!assetDetailList) return;
 
-  const { symbols = '', currentDividend, historicalDividends } = assetDetailList[0];
+  const assetDetail = assetDetailList[0];
+  const symbols = assetDetail?.symbols;
+  const currentPrice = formatCurrency(assetDetail?.currentPrice);
+  const currentDividend = assetDetail?.currentDividend;
+  const historicalData = assetDetail?.historicalData;
+
+  console.log(JSON.parse(historicalData));
 
   return (
     <div className='grid place-items-center'>
 
       <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-8">
 
-        <AssetFavButton assetId={assetId} userId={userId} />
+        {userId && <>
+          <AssetFavButton assetId={assetId} userId={userId} />
 
-        <Link href="/userAssets" className="my-3">Acessar meus ativos</Link>
+          <a href="/user/assets" className="my-3">Acessar meus ativos</a>
+        </>}
 
         <p><strong>Ticker</strong>: {ticker}</p>
+        <p><strong>Preço Atual</strong>: {currentPrice}</p>
         <p><strong>Dividendo Atual</strong>: {currentDividend}</p>
         <br />
         <p style={{ width: "100%", maxHeight: "200px", overflowY: "hidden" }}><strong>Symbols</strong> : {symbols}</p>
         <br />
-        <p style={{ width: "100%", maxHeight: "200px", overflowY: "hidden" }}><strong>Histórico de dividendos</strong> : {historicalDividends}</p>
+        <p style={{ width: "100%", maxHeight: "200px", overflowY: "hidden" }}><strong>Histórico de dividendos</strong> : {historicalData}</p>
 
       </div>
     </div >

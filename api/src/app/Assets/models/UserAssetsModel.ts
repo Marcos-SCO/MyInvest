@@ -51,7 +51,7 @@ const UserAssetsModel = () => {
         .getAssetDetailsFromDb(paginatedAssetItem.assetId);
 
       // Exclude itens and return rest
-      const { id, assetId, historicalDividends, ...restAssetDetails } = assetDetails;
+      const { id, assetId, historicalData, ...restAssetDetails } = assetDetails;
 
       assetsWithDetails.push({ ...paginatedAssetItem.assets, assetDetails: restAssetDetails });
     }

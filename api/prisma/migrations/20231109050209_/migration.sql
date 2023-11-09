@@ -60,9 +60,9 @@ CREATE TABLE `Assets` (
 CREATE TABLE `asset_details_list` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `assetId` INTEGER NOT NULL,
-    `symbols` TEXT NOT NULL,
+    `symbols` LONGTEXT NOT NULL,
     `currentPrice` TEXT NOT NULL,
-    `historicalDividends` TEXT NOT NULL,
+    `historicalData` LONGTEXT NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL,
 

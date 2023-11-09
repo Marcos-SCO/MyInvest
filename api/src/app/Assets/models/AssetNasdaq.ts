@@ -20,10 +20,10 @@ const AssetNasdaq = () => {
     const searchSymbol = await AssetsService().searchSymbol(ticker, type);
     const assetData = searchSymbol?.data;
 
-    const historicalDividendsSearch =
+    const historicalDataSearch =
       await getDividendHistoryData(ticker, type);
 
-    const historicalData = historicalDividendsSearch?.data;
+    const historicalData = historicalDataSearch?.data;
 
     const { chart } = historicalData;
 
@@ -32,7 +32,7 @@ const AssetNasdaq = () => {
     const apiObjData = {
       symbolData: assetData,
       lastPrice,
-      historicalDividends: chart,
+      historicalData: chart,
     }
 
     return apiObjData;
@@ -48,7 +48,7 @@ const AssetNasdaq = () => {
 
     const assetApiData = await getAssetApiData(tickerCode, type);
 
-    const { symbolData, lastPrice, historicalDividends } = assetApiData;
+    const { symbolData, lastPrice, historicalData } = assetApiData;
 
     try {
 
@@ -62,7 +62,7 @@ const AssetNasdaq = () => {
         assetId,
         currentPrice: JSON.stringify(lastPrice),
         symbols: JSON.stringify(symbolData),
-        historicalDividends: JSON.stringify(historicalDividends),
+        historicalData: JSON.stringify(historicalData),
       }
 
       const assetDetailsList = await AssetDetailsList()
@@ -94,14 +94,14 @@ const AssetNasdaq = () => {
 
     const assetId = assetAlreadyInDb.id;
 
-    const { symbolData, lastPrice, historicalDividends } = await getAssetApiData(ticker, type);
+    const { symbolData, lastPrice, historicalData } = await getAssetApiData(ticker, type);
 
     try {
       const assetDetailsObj = {
         assetId,
         currentPrice: JSON.stringify(lastPrice),
         symbols: JSON.stringify(symbolData),
-        historicalDividends: JSON.stringify(historicalDividends),
+        historicalData: JSON.stringify(historicalData),
       }
 
       const assetDetailsList = await AssetDetailsList()

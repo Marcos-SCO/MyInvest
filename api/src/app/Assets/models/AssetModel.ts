@@ -100,14 +100,16 @@ const AssetModel = () => {
   async function getAssetApiData(ticker: string, type = 1) {
     const assetData = await AssetsService().searchSymbol(ticker, type);
 
-    const historicalDividends = await getDividendHistoryData(ticker, type);
+    const historicalData = await getDividendHistoryData(ticker, type);
 
-    const { price = '' } = assetData?.[0];
+    const assetDataObj = assetData?.[0];
+
+    const { price = '' } = assetDataObj;
 
     const apiObjData = {
-      symbolData: assetData,
+      symbolData: assetDataObj,
       lastPrice: price,
-      historicalDividends,
+      historicalData,
     }
 
     return apiObjData;
@@ -121,7 +123,7 @@ const AssetModel = () => {
     let assetAlreadyInDb = await getAssetByTickerFromDb(tickerCode);
     if (assetAlreadyInDb) throw new CommonError(`${tickerCode} already exists`);
 
-    const { symbolData, lastPrice, historicalDividends } = await AssetModel().getAssetApiData(tickerCode, type);
+    const { symbolData, lastPrice, historicalData } = await AssetModel().getAssetApiData(tickerCode, type);
 
     try {
 
@@ -137,7 +139,8 @@ const AssetModel = () => {
         assetId,
         currentPrice: cleanCurrentPrice,
         symbols: JSON.stringify(symbolData),
-        historicalDividends: JSON.stringify(historicalDividends),
+        // historicalData: JSON.stringify(historicalData),
+        historicalData: JSON.stringify(historicalData),
       }
 
       const assetDetailsList = await AssetDetailsList()
@@ -171,7 +174,7 @@ const AssetModel = () => {
 
     const assetId = assetAlreadyInDb.id;
 
-    const { symbolData, lastPrice, historicalDividends } =
+    const { symbolData, lastPrice, historicalData } =
       await getAssetApiData(ticker, type);
 
     const cleanCurrentPrice = cleanCurrency(lastPrice);
@@ -181,7 +184,7 @@ const AssetModel = () => {
         assetId,
         currentPrice: cleanCurrentPrice,
         symbols: JSON.stringify(symbolData),
-        historicalDividends: JSON.stringify(historicalDividends),
+        historicalData: historicalData,
       }
 
       const assetDetailsList = await AssetDetailsList()

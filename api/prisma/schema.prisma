@@ -76,9 +76,9 @@ model AssetDetailsList {
   id      Int @id @default(autoincrement())
   assetId Int @unique
 
-  symbols             String @db.Text
+  symbols             String @db.LongText
   currentPrice     String @db.Text
-  historicalDividends String @db.Text
+  historicalData String @db.LongText
 
   assets Assets @relation(fields: [assetId], references: [id], onDelete: Cascade)
 

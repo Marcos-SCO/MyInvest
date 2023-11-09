@@ -16,7 +16,7 @@ const AssetDetailsList = () => {
   }
 
   async function createAssetDetails(dataObj: any) {
-    // const { assetId, symbols, currentPrice, historicalDividends } = dataObj;
+    // const { assetId, symbols, currentPrice, historicalData } = dataObj;
 
     try {
       const assetDetailsList = await prisma.assetDetailsList.create({
@@ -33,12 +33,12 @@ const AssetDetailsList = () => {
   }
 
   async function updateAssetDetails(assetId: number, dataObj: any) {
-    const { symbols, currentPrice, historicalDividends } = dataObj;
+    const { symbols, currentPrice, historicalData } = dataObj;
 
     try {
       const updateDetails = await prisma.assetDetailsList.update({
         where: { assetId },
-        data: { symbols, currentPrice, historicalDividends },
+        data: { symbols, currentPrice, historicalData },
       });
 
       return updateDetails;

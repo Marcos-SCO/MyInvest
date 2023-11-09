@@ -1,4 +1,3 @@
-
 function getBackendAssetType(type) {
   const types = {
     1: {
