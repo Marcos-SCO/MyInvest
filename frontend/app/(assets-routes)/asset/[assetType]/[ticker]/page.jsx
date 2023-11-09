@@ -86,7 +86,7 @@ export default async function Page({ params }) {
   const currentDividend = assetDetail?.currentDividend;
   const historicalData = assetDetail?.historicalData;
 
-  console.log(JSON.parse(historicalData));
+  // console.log(JSON.parse(historicalData));
 
   return (
     <div className='grid place-items-center'>
@@ -101,11 +101,10 @@ export default async function Page({ params }) {
 
         <p><strong>Ticker</strong>: {ticker}</p>
         <p><strong>Preço Atual</strong>: {currentPrice}</p>
-        <p><strong>Dividendo Atual</strong>: {currentDividend}</p>
         <br />
         <p style={{ width: "100%", maxHeight: "200px", overflowY: "hidden" }}><strong>Symbols</strong> : {symbols}</p>
         <br />
-        <p style={{ width: "100%", maxHeight: "200px", overflowY: "hidden" }}><strong>Histórico de dividendos</strong> : {historicalData}</p>
+        <p style={{ width: "100%", maxHeight: "200px", overflowY: "hidden" }}><strong>Históricos</strong> : {historicalData}</p>
 
       </div>
     </div >
