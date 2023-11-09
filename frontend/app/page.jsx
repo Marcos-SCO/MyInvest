@@ -1,5 +1,3 @@
-
-
 import Link from "next/link";
 
 import { nextAuthOptions } from "./api/auth/[...nextauth]/route";

@@ -1,94 +1,142 @@
 .Login-Form{
-    padding-left: 10rem;
+  padding-left: 10rem;
 }
 
 .Form-SignUp {
-    border: 2px solid rgba(187, 187, 187, 0);
-    border-radius: 10px;
-    position: absolute;
-    left: 25%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgb(248, 248, 248);
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.171);
-    // background-color: #ffffffa8; (Old Version)
-    width: 20rem;
-    padding: 1rem;
+  border: 2px solid rgba(187, 187, 187, 0);
+  border-radius: 10px;
+  position: absolute;
+  left: 25%;
+  top: 60%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(248, 248, 248);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.171);
+  // background-color: #ffffffa8; (Old Version)
+  width: 20rem;
+  padding: 1rem;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
-  .Form-Login {
-    border: 2px solid rgba(187, 187, 187, 0);
-    border-radius: 10px;
-    position: absolute;
-    left: 75%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgb(248, 248, 248);
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.171);
-    // background-color: #ffffffa8; (Old Version)
-    width: 20rem;
-    padding: 1rem;
+.Form-Login {
+  border: 2px solid rgba(187, 187, 187, 0);
+  border-radius: 10px;
+  position: absolute;
+  left: 75%;
+  top: 58%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(248, 248, 248);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.171);
+  // background-color: #ffffffa8; (Old Version)
+  width: 20rem;
+  padding: 1rem;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
-  // .FormPage{
-  //       //background-color: #275FA8;
-  //       //background-image: url("../../../../public/BackForm.jpg");
-  //       background: linear-gradient(rgba(39, 95, 168, 0.747), rgba(39, 95, 168, 0.747)), url("../../../../public/BackForm.jpg");
-  //       background-repeat: no-repeat;
-  //       background-size:cover;
-  //       background-position: center;
-  //       background-attachment: fixed;
+// .FormPage{
+//       //background-color: #275FA8;
+//       //background-image: url("../../../../public/BackForm.jpg");
+//       background: linear-gradient(rgba(39, 95, 168, 0.747), rgba(39, 95, 168, 0.747)), url("../../../../public/BackForm.jpg");
+//       background-repeat: no-repeat;
+//       background-size:cover;
+//       background-position: center;
+//       background-attachment: fixed;
 
-  //       color:white;
+//       color:white;
 
-  //       text-align: center;
-  //       width: 50%;
-  //       height: 100%;
+//       text-align: center;
+//       width: 50%;
+//       height: 100%;
 
-  //       font-size: 1.4rem;
-  //   }
+//       font-size: 1.4rem;
+//   }
 
-  .FormPage {
+.FormPage {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(rgba(39, 95, 168, 0.747), rgba(39, 95, 168, 0.747)),
+    url("../../../../public/BackForm.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: white;
+  text-align: center;
+  font-size: 150%;
+  z-index: 1;
+  transition: transform 1s;
+  //transform: translateX(100%);
+}
+
+.PageText{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+  .FormPage.slide2{
     position: absolute;
     top: 0;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(rgba(39, 95, 168, 0.747), rgba(39, 95, 168, 0.747)),
-      url("../../../../public/BackForm.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    color: white;
-    text-align: center;
-    font-size: 150%;
-    z-index: 1;
-    transition: transform 1s;
-    //transform: translateX(100%);
+    transform: translateX(0%);
   }
 
-    .PageText{
-      padding-top: 40%;
-    }
+  .FormPage.slide1{
+    position: absolute;
+    top: 0;
+    transform: translateX(100%);
+  }
 
-    .FormPage.slide2{
-      position: absolute;
-      top: 0;
-      transform: translateX(0%);
-    }
-  
-    .FormPage.slide1{
-      position: absolute;
-      top: 0;
-      transform: translateX(100%);
-    }
+  .Login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 6rem;
+  }
+
+  .Logo-Div{
+    //margin-top: 12rem;
+    left: 75%;
+    top:17.6%;
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    transform: translate(-50%, -50%);
+  }
+
+  .Logo-Div1{
+    //margin-top: 12rem;
+    left: 25%;
+    top:14%;
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    transform: translate(-50%, -50%);
+  }
+
+  .Search{
+    border-radius: 25px;
+    height: 30px;
+    padding-left: 5px;
+    border-width: 2px;
+    border-color:rgba(0, 0, 0, 0.151) ;
+  }
