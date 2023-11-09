@@ -12,12 +12,14 @@ export default async function Navbar() {
   const session = await getServerSession(nextAuthOptions);
 
   return (
-    <div className="p-4 flex justify-between item-center">
+    <div className="pt-3 px-40 flex justify-between item-center">
       <div>
         <Link className="Logo-Link" href={'/'}>
           <Image src="/logo.jpeg" height={50} width={50} alt="Logo" className="Logo-Img"/>
         </Link>
       </div>
+
+      <input type="text" placeholder="Search.." className="Search"></input>
 
       <div className="Login-Btn">
         <LoginControls session={session} />

@@ -23,7 +23,7 @@ const FormPage = () => {
         <div className="FormPage slide1" id="slide1">
             <div className="PageText">
                 <h3>Bem-Vindo(a) ao</h3>
-                <h1>MyInvest</h1>
+                <h1 className='font-bold'>MyInvest</h1>
                     <br/>
                 <h4>
                     <p>

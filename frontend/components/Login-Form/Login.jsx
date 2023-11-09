@@ -8,6 +8,8 @@ import React, { useState } from 'react';
 import FormInput from './testComp/FormInput';
 import FormText from './testComp/FormText';
 import FormButton from './testComp/FormButton';
+import Image from "next/image";
+import Logo from '@/components/Logo'
 
 const Login = () => {
 
@@ -20,7 +22,12 @@ const Login = () => {
   console.log(inputState);
 
   return (
-    <>
+    <div className="Login">
+
+        <div className="Logo-Div">
+          <Image src="/logo.jpeg" height={125} width={125} alt="Logo" className="Logo-Img1"/>
+        </div>
+          
           <div className='Form-Login'>
             
             <FormText placeholder="Acessar Conta"/>
@@ -52,7 +59,7 @@ const Login = () => {
             </div>
         
           </div>
-    </>
+    </div>
   )
 };
 

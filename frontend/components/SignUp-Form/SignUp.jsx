@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import FormInput from './testComp/FormInput';
 import FormText from './testComp/FormText';
 import FormButton from './testComp/FormButton';
+import Image from 'next/image';
 
 import SignInGoogle from "@/components/GoogleBtnRec";
 
@@ -22,6 +23,10 @@ const SignUp = () => {
 
   return (
     <>
+        <div className="Logo-Div1">
+          <Image src="/logo.jpeg" height={125} width={125} alt="Logo" className="Logo-Img1"/>
+        </div>
+
           <div className='Form-SignUp'>
             
             <FormText placeholder="Cadastro"/>
