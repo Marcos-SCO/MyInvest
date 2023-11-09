@@ -301,7 +301,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://statusinvest.com.br/home/mainsearchquery?q=coca",
+									"raw": "https://statusinvest.com.br/acao/getearnings?IndiceCode=&Filter=sapr11&Start=2023-10&End=2023-10",
 									"protocol": "https",
 									"host": [
 										"statusinvest",
@@ -309,13 +309,25 @@
 										"br"
 									],
 									"path": [
-										"home",
-										"mainsearchquery"
+										"acao",
+										"getearnings"
 									],
 									"query": [
 										{
-											"key": "q",
-											"value": "coca"
+											"key": "IndiceCode",
+											"value": ""
+										},
+										{
+											"key": "Filter",
+											"value": "sapr11"
+										},
+										{
+											"key": "Start",
+											"value": "2023-10"
+										},
+										{
+											"key": "End",
+											"value": "2023-10"
 										}
 									]
 								}
@@ -390,6 +402,22 @@
 										}
 									]
 								}
+							},
+							"response": []
+						},
+						{
+							"name": "tranding symbols",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "GET",
+								"header": []
 							},
 							"response": []
 						}
@@ -743,7 +771,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    // \"type\": 1\r\n    // \"ticker\": \"SAPR11\"\r\n    // \"ticker\": \"OIBR4\"\r\n    //\"ticker\": \"KO\",\r\n    \"ticker\": \"MAC\"\r\n}",
+									"raw": "{\r\n    // \"type\": 1\r\n    // \"ticker\": \"SAPR11\"\r\n    // \"ticker\": \"OIBR4\"\r\n    // \"ticker\": \"MAC\"\r\n    \"ticker\": \"KO\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
