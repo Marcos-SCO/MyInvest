@@ -12,7 +12,7 @@ export default async function Navbar() {
   const session = await getServerSession(nextAuthOptions);
 
   return (
-    <div className="pt-3 px-40 flex justify-between item-center">
+    <div className="pt-3 px-80 flex justify-between item-center z-5 bg-white">
       <div>
         <Link className="Logo-Link" href={'/'}>
           <Image src="/logo.jpeg" height={50} width={50} alt="Logo" className="Logo-Img"/>
