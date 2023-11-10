@@ -1,0 +1,33 @@
+.AdTest{
+    position:fixed;
+    top: 0;
+    width: 100%;
+    height: 30%;
+    background: linear-gradient(rgba(39, 95, 168, 0.747), rgba(39, 95, 168, 0.747)),
+      url("../../../../public/BackForm.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: cover;
+    // background-attachment: fixed;
+    color: white;
+    text-align: center;
+    font-size: 150%;
+    z-index: -1;
+
+
+}
+
+.AdTexts{
+    padding-top: 10rem;
+}
+
+.AdH1{
+    font-weight: bold;
+    font-size: 200%;
+}
+
+.AdGBtn{
+    position: absolute;
+    top: 76%;
+    left: 20%;
+}

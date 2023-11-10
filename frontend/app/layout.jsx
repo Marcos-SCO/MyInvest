@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
         <body>
           <NextAuthSessionProvider>
             <div>
-              <Navbar />
+              {/* <Navbar /> */}
               {children}
             </div>
           </NextAuthSessionProvider>
