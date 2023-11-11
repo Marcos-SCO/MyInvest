@@ -2,6 +2,8 @@ import AuthError from "@/app/Auth/exceptions/AuthError";
 import CommonError from "@/app/Auth/exceptions/CommonError";
 import { PrismaClient } from "@prisma/client";
 
+import config from "@/config";
+
 const axios = require('axios');
 
 const prisma = new PrismaClient();
@@ -66,7 +68,7 @@ const AssetsService = () => {
 
   }
 
-  async function getDividendHistory(ticker: String, initialDate: string, finalDate: string, type = 1) {
+  async function getHistory(ticker: String, initialDate: string, finalDate: string, type = 1) {
 
     if (!ticker) throw new CommonError(`No ticker was passed`);
     if (!initialDate) throw new CommonError(`Initial date was passed`);
@@ -98,7 +100,7 @@ const AssetsService = () => {
       .catch((error: any) => {
         console.log(error);
 
-        console.error(`Error in getDividendHistory : ${error?.message}`);
+        console.error(`Error in getHistory : ${error?.message}`);
 
         throw new CommonError(error);
       })
@@ -107,7 +109,43 @@ const AssetsService = () => {
 
   }
 
-  return { searchSymbol, getDividendHistory, getAssetTypeIdFromPathName, getAssetTypeNameById, getAssetTypeIdByName }
+  async function getHistoryFromBrapi(ticker: String) {
+
+    if (!ticker) throw new CommonError(`No ticker was passed`);
+
+    const apiKey = config?.BRAPI_API_KEY;
+    if (!apiKey) throw new CommonError('No Brapi key');
+
+    const symbolEndpoint = `https://brapi.dev/api/quote/${ticker}?range=3mo&interval=1d&token=${apiKey}`;
+
+    const historyApiUrl = symbolEndpoint;
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'User-Agent': 'PostmanRuntime/7.33.0'
+    };
+
+    // Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36
+
+    const axiosRequest = axios.get(historyApiUrl, { headers })
+      .then((response: any) => {
+        // console.log('Response: ', response.data);
+
+        return response?.data;
+      })
+      .catch((error: any) => {
+        console.log(error);
+
+        console.error(`Error in getHistory : ${error?.message}`);
+
+        throw new CommonError(error);
+      })
+
+    return axiosRequest;
+
+  }
+
+  return { searchSymbol, getHistory, getHistoryFromBrapi, getAssetTypeIdFromPathName, getAssetTypeNameById, getAssetTypeIdByName }
 }
 
 export default AssetsService;

@@ -86,21 +86,22 @@ const AssetModel = () => {
     }
   }
 
-  async function getDividendHistoryData(ticker: string, type: number) {
-    const date = new Date();
-    const currentYear = date.getFullYear();
+  async function getHistoryData(ticker: string, type: number) {
+    // const date = new Date();
+    // const currentYear = date.getFullYear();
 
-    const initialYear = currentYear - 5;
-    const finalYear = currentYear + 1;
+    // const initialYear = currentYear - 5;
+    // const finalYear = currentYear + 1;
 
-    return await AssetsService().getDividendHistory(ticker, `${initialYear}-01-01`, `${finalYear}-01-01`, type);
+    // return await AssetsService().getHistory(ticker, `${initialYear}-01-01`, `${finalYear}-01-01`, type);
 
+    return await AssetsService().getHistoryFromBrapi(ticker);
   }
 
   async function getAssetApiData(ticker: string, type = 1) {
     const assetData = await AssetsService().searchSymbol(ticker, type);
 
-    const historicalData = await getDividendHistoryData(ticker, type);
+    const historicalData = await getHistoryData(ticker, type);
 
     const assetDataObj = assetData?.[0];
 
@@ -171,11 +172,14 @@ const AssetModel = () => {
       ? await getAssetByTickerFromDb(ticker) : passedAssetFromDb;
 
     if (!assetAlreadyInDb) throw new CommonError(`${ticker} don't exists in details list`);
-
+    
     const assetId = assetAlreadyInDb.id;
-
+    
     const { symbolData, lastPrice, historicalData } =
-      await getAssetApiData(ticker, type);
+    await getAssetApiData(ticker, type);
+    
+    const isHistoryDataError = historicalData?.error;
+    if (isHistoryDataError) throw new CommonError(`Brapi error: ${historicalData?.message}`);
 
     const cleanCurrentPrice = cleanCurrency(lastPrice);
 
@@ -184,7 +188,7 @@ const AssetModel = () => {
         assetId,
         currentPrice: cleanCurrentPrice,
         symbols: JSON.stringify(symbolData),
-        historicalData: historicalData,
+        historicalData: JSON.stringify(historicalData),
       }
 
       const assetDetailsList = await AssetDetailsList()
@@ -222,7 +226,7 @@ const AssetModel = () => {
 
   }
 
-  return { insertAsset, updateAsset, deleteAsset, getAssetByTickerFromDb, getAssetWithDetailInfo, getAllAssetsWithDetailInfo, getAllAssetsByPagination, getAssetById, getAssetApiData, getDividendHistoryData };
+  return { insertAsset, updateAsset, deleteAsset, getAssetByTickerFromDb, getAssetWithDetailInfo, getAllAssetsWithDetailInfo, getAllAssetsByPagination, getAssetById, getAssetApiData, getHistoryData };
 }
 
 export default AssetModel;

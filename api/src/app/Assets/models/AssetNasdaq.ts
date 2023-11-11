@@ -12,8 +12,8 @@ const AssetNasdaq = () => {
     return await AssetModel().getAssetByTickerFromDb(ticker);
   }
 
-  async function getDividendHistoryData(ticker: string, type: number) {
-    return await AssetModel().getDividendHistoryData(ticker, type)
+  async function getHistoryData(ticker: string, type: number) {
+    return await AssetModel().getHistoryData(ticker, type)
   }
 
   async function getAssetApiData(ticker: string, type = 2) {
@@ -21,18 +21,19 @@ const AssetNasdaq = () => {
     const assetData = searchSymbol?.data;
 
     const historicalDataSearch =
-      await getDividendHistoryData(ticker, type);
+      await getHistoryData(ticker, type);
 
-    const historicalData = historicalDataSearch?.data;
+    // const historicalData = historicalDataSearch?.data;
+    // const { chart } = historicalData;
 
-    const { chart } = historicalData;
+    const historicalData = historicalDataSearch;
 
     const lastPrice = assetData?.primaryData?.lastSalePrice;
 
     const apiObjData = {
       symbolData: assetData,
       lastPrice,
-      historicalData: chart,
+      historicalData,
     }
 
     return apiObjData;
@@ -95,6 +96,9 @@ const AssetNasdaq = () => {
     const assetId = assetAlreadyInDb.id;
 
     const { symbolData, lastPrice, historicalData } = await getAssetApiData(ticker, type);
+
+    const isHistoryDataError = historicalData?.error;
+    if (isHistoryDataError) throw new CommonError(`Brapi error: ${historicalData?.message}`);
 
     try {
       const assetDetailsObj = {
