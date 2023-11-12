@@ -1,0 +1,93 @@
+.form-container {
+  width: 100%;
+
+  .sendButton {
+    position: relative;
+    z-index: 999;
+  }
+
+  .google-button-container {
+    width: 100%;
+    button {
+      margin: auto;
+      width: 100%;
+      
+      max-width: 290px;
+    }
+
+    .span-text {
+      width: 100%;
+    }
+  }
+}
+
+form {
+  width: 100%;
+}
+
+.formInput {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  // max-width: 280px;
+
+  label {
+    cursor: pointer;
+    font-size: .95rem;
+    color: gray;
+    position: relative;
+    z-index: 99;
+
+    &[focused="true"] {
+      color: #f00;
+    }
+  }
+
+  span {
+    position: absolute;
+    opacity: 0;
+    margin-top: .5rem;
+    padding: 1rem 0;
+    color: #f00;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+  }
+
+  input {
+    width: 100%;
+    padding: .6rem;
+    // margin: 10px 0px;
+    border-radius: .2rem;
+    border: 1px solid #ccc;
+
+    transition: .3s ease-in-out;
+
+    &:invalid[focused="true"] {
+      border: 1px solid #f00;
+    }
+
+    &:invalid[focused="true"]~span {
+      opacity: 1;
+      height: auto;
+      position: relative;
+      top: .5rem;
+      // display: block;
+    }
+
+    &:focus {
+      box-shadow: none;
+      outline: none;
+
+      &:invalid {
+        outline: 1px solid #f00;
+        outline: none;
+      }
+    }
+  }
+
+}
