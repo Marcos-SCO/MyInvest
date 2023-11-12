@@ -20,18 +20,26 @@ const AssetNasdaq = () => {
     const searchSymbol = await AssetsService().searchSymbol(ticker, type);
     const assetData = searchSymbol?.data;
 
-    const historicalDataSearch =
-      await getHistoryData(ticker, type);
 
     // const historicalData = historicalDataSearch?.data;
     // const { chart } = historicalData;
 
+    const historicalDataSearch =
+      await getHistoryData(ticker, type);
+
     const historicalData = historicalDataSearch;
+
+    const historicalDataResults =
+      (historicalData)?.results[0];
+
+    const assetIcon =
+      historicalDataResults?.logourl ?? 'https://brapi.dev/favicon.svg';
 
     const lastPrice = assetData?.primaryData?.lastSalePrice;
 
     const apiObjData = {
       symbolData: assetData,
+      assetIcon,
       lastPrice,
       historicalData,
     }
@@ -49,7 +57,7 @@ const AssetNasdaq = () => {
 
     const assetApiData = await getAssetApiData(tickerCode, type);
 
-    const { symbolData, lastPrice, historicalData } = assetApiData;
+    const { symbolData, assetIcon, lastPrice, historicalData } = assetApiData;
 
     try {
 
@@ -61,6 +69,7 @@ const AssetNasdaq = () => {
 
       const assetDetailsObj = {
         assetId,
+        assetIcon,
         currentPrice: JSON.stringify(lastPrice),
         symbols: JSON.stringify(symbolData),
         historicalData: JSON.stringify(historicalData),
@@ -95,7 +104,7 @@ const AssetNasdaq = () => {
 
     const assetId = assetAlreadyInDb.id;
 
-    const { symbolData, lastPrice, historicalData } = await getAssetApiData(ticker, type);
+    const { symbolData, assetIcon, lastPrice, historicalData } = await getAssetApiData(ticker, type);
 
     const isHistoryDataError = historicalData?.error;
     if (isHistoryDataError) throw new CommonError(`Brapi error: ${historicalData?.message}`);
@@ -103,6 +112,7 @@ const AssetNasdaq = () => {
     try {
       const assetDetailsObj = {
         assetId,
+        assetIcon,
         currentPrice: JSON.stringify(lastPrice),
         symbols: JSON.stringify(symbolData),
         historicalData: JSON.stringify(historicalData),
@@ -114,7 +124,7 @@ const AssetNasdaq = () => {
       return assetDetailsList;
 
     } catch (error) {
-      // console.log(error);
+      console.log('AssetNasdaq: ', error);
       throw new CommonError(`Error updating Asset Item`);
     } finally {
       await prisma.$disconnect();

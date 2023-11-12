@@ -29,10 +29,10 @@ model Users {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  UserPassword UsersPassword[]
-  UserEmail    UserEmails[]
-  UserAssets   UserAssets[]
-  PriceAssetsWatch   PriceAssetsWatch[]
+  UserPassword     UsersPassword[]
+  UserEmail        UserEmails[]
+  UserAssets       UserAssets[]
+  PriceAssetsWatch PriceAssetsWatch[]
 }
 
 model UsersPassword {
@@ -76,8 +76,9 @@ model AssetDetailsList {
   id      Int @id @default(autoincrement())
   assetId Int @unique
 
-  symbols             String @db.LongText
-  currentPrice     String @db.Text
+  symbols        String @db.LongText
+  assetIcon      String @default("https://brapi.dev/favicon.svg") @db.Text
+  currentPrice   String @db.Text
   historicalData String @db.LongText
 
   assets Assets @relation(fields: [assetId], references: [id], onDelete: Cascade)
@@ -115,16 +116,16 @@ model PriceAssetsWatch {
   id               Int     @id @default(autoincrement())
   userId           Int
   assetId          Int
-  priceAlertTypeId Int @default(1)
+  priceAlertTypeId Int     @default(1)
   expectedPrice    String  @db.Text
   active           Boolean @default(true)
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  users  Users            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  assets AssetDetailsList @relation(fields: [assetId], references: [assetId], onDelete: Cascade)
-  priceAlertTypes PriceAlertTypes @relation(fields: [priceAlertTypeId], references: [id], onDelete: Cascade)
+  users           Users            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  assets          AssetDetailsList @relation(fields: [assetId], references: [assetId], onDelete: Cascade)
+  priceAlertTypes PriceAlertTypes  @relation(fields: [priceAlertTypeId], references: [id], onDelete: Cascade)
 
   @@map(name: "price_assets_watch")
 }

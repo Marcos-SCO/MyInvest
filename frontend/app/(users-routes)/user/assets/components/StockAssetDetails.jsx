@@ -11,7 +11,6 @@ export default function StockAssetDetails({ symbolProps }) {
   return (
     <div>
       <p>{nameDescription}</p>
-      <p>ID: {id}</p>
       <p>Nome: {name}</p>
       <p>Preço atual: {currentPrice}</p>
       <p>Variação percentual: {percentageChange}</p>

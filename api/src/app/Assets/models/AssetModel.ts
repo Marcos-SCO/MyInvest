@@ -107,8 +107,15 @@ const AssetModel = () => {
 
     const { price = '' } = assetDataObj;
 
+    const historicalDataResults =
+      (historicalData)?.results[0];
+
+    const assetIcon =
+      historicalDataResults?.logourl ?? 'https://brapi.dev/favicon.svg';
+
     const apiObjData = {
       symbolData: assetDataObj,
+      assetIcon,
       lastPrice: price,
       historicalData,
     }
@@ -124,7 +131,7 @@ const AssetModel = () => {
     let assetAlreadyInDb = await getAssetByTickerFromDb(tickerCode);
     if (assetAlreadyInDb) throw new CommonError(`${tickerCode} already exists`);
 
-    const { symbolData, lastPrice, historicalData } = await AssetModel().getAssetApiData(tickerCode, type);
+    const { symbolData, assetIcon, lastPrice, historicalData } = await AssetModel().getAssetApiData(tickerCode, type);
 
     try {
 
@@ -136,18 +143,16 @@ const AssetModel = () => {
 
       const cleanCurrentPrice = cleanCurrency(lastPrice);
 
-      const assetDetailsObj = {
+      const assetDetailsObj: any = {
         assetId,
+        assetIcon,
         currentPrice: cleanCurrentPrice,
         symbols: JSON.stringify(symbolData),
-        // historicalData: JSON.stringify(historicalData),
         historicalData: JSON.stringify(historicalData),
       }
 
       const assetDetailsList = await AssetDetailsList()
         .createAssetDetails(assetDetailsObj);
-
-      // return assetDetailsList;
 
       return {
         id: assetId,
@@ -157,7 +162,7 @@ const AssetModel = () => {
       };
 
     } catch (error) {
-      // console.log(error);
+      console.log('AssetModel: ', error);
       throw new CommonError(`Error creating Asset Item`);
     } finally {
       await prisma.$disconnect();
@@ -172,24 +177,25 @@ const AssetModel = () => {
       ? await getAssetByTickerFromDb(ticker) : passedAssetFromDb;
 
     if (!assetAlreadyInDb) throw new CommonError(`${ticker} don't exists in details list`);
-    
+
     const assetId = assetAlreadyInDb.id;
-    
-    const { symbolData, lastPrice, historicalData } =
-    await getAssetApiData(ticker, type);
-    
+
+    const { symbolData, assetIcon, lastPrice, historicalData } = await getAssetApiData(ticker, type);
+
     const isHistoryDataError = historicalData?.error;
     if (isHistoryDataError) throw new CommonError(`Brapi error: ${historicalData?.message}`);
 
     const cleanCurrentPrice = cleanCurrency(lastPrice);
 
+    const assetDetailsObj: any = {
+      assetId,
+      assetIcon,
+      currentPrice: cleanCurrentPrice,
+      symbols: JSON.stringify(symbolData),
+      historicalData: JSON.stringify(historicalData),
+    }
+
     try {
-      const assetDetailsObj = {
-        assetId,
-        currentPrice: cleanCurrentPrice,
-        symbols: JSON.stringify(symbolData),
-        historicalData: JSON.stringify(historicalData),
-      }
 
       const assetDetailsList = await AssetDetailsList()
         .updateAssetDetails(assetId, assetDetailsObj);

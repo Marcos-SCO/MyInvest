@@ -64,7 +64,6 @@ export default async function Page({ params }) {
 
   const credentialSession = session?.user;
 
-  // const { id: userSessionId } = ;
   const userSessionId =
     credentialSession ? credentialSession?.id : session?.id;
 
@@ -95,8 +94,8 @@ export default async function Page({ params }) {
   const parsedHistoricalData =
     (JSON.parse(historicalData))?.results[0];
 
-  const assetLogoUrl =
-    parsedHistoricalData?.logourl ?? 'https://brapi.dev/favicon.svg';
+  const assetLogoUrl = parsedHistoricalData?.logourl
+    ?? 'https://brapi.dev/favicon.svg';
 
   const assetLongName =
     parsedHistoricalData?.longName;

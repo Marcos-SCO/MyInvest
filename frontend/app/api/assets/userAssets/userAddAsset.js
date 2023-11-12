@@ -31,7 +31,7 @@ async function userCreateAsset(fetchObj) {
     };
 
   } catch (error) {
-    console.log('Message: ', error.message);
+    console.error('UserAddAsset: ', error.message);
     return {
       assetCreated: false,
       message: error.message,
