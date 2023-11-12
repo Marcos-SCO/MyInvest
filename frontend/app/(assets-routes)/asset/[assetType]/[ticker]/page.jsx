@@ -107,7 +107,11 @@ export default async function Page({ params }) {
   const historicalDataPrice =
     parsedHistoricalData?.historicalDataPrice;
 
-  // console.log(historicalDataPrice);
+  const fiftyTwoWeekLow =
+    parsedHistoricalData?.fiftyTwoWeekLow;
+
+  const fiftyTwoWeekHigh =
+    parsedHistoricalData?.fiftyTwoWeekHigh;
 
   return (
     <div className=''>
@@ -121,8 +125,7 @@ export default async function Page({ params }) {
         <p>{assetLongName}</p>
         <p><strong>Ticker</strong>: {ticker}</p>
         <p><strong>Preço Atual</strong>: {currentPrice}</p>
-        <br />
-        <p style={{ width: "100%", maxWidth: "800px", maxHeight: "400px", overflowY: "hidden", paddingY: "1rem" }}><strong>Symbols</strong> : {symbols}</p>
+
 
         <br />
 
