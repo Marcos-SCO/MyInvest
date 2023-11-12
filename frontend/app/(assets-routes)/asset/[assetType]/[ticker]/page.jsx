@@ -1,24 +1,26 @@
 import { nextAuthOptions } from "app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 
-import Link from "next/link";
 import Image from "next/image";
-
 import { formatCurrency } from "../../../../helpers/assets";
 
 import { ZoomableTimeSeriesChart } from '../../charts/ZoomableTimeSeriesChart';
 
 import UserAssetButtons from './UserAssetButtons';
+import { notFound } from "next/navigation";
 
 const API_BASE_URL = process.env.API_BASE_URL;
 
-async function getServerSideProps(params) {
+async function getAssetData(params) {
   const { assetType, ticker } = params;
 
   const backendUrl = `${API_BASE_URL}/assets/${assetType}/${ticker}/`;
   const config = {
     method: 'GET',
-    Headers: { 'Content-type': 'application/json' }
+    Headers: { 'Content-type': 'application/json' },
+    next: {
+      revalidate: 60
+    }
   }
 
   try {
@@ -27,11 +29,8 @@ async function getServerSideProps(params) {
     const isErrorRequest = !res.ok || res.status == 404;
 
     if (isErrorRequest) {
-      console.log(backendUrl);
+      // console.log(backendUrl);
       const errorData = await res.json();
-
-      // const errorMessage = JSON.stringify(errorData);
-      const errorMessage = errorData;
 
       return {
         errorData: {
@@ -57,18 +56,6 @@ async function getServerSideProps(params) {
 
 }
 
-function errorBlockMessage(errorMessage) {
-  return (
-    <div className='grid place-items-center h-screen -mt-24'>
-
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <p><strong>Message</strong>: {errorMessage}</p>
-
-      </div>
-    </div>
-  );
-}
-
 export default async function Page({ params }) {
   const { assetType, ticker } = params;
 
@@ -83,13 +70,13 @@ export default async function Page({ params }) {
 
   const userId = session?.userId ?? userSessionId;
 
-  const assetFetch = await getServerSideProps(params);
+  const assetFetch = await getAssetData(params);
   const assetError = assetFetch?.errorData;
 
   if (assetError) {
     const errorMessage = assetError?.error;
 
-    return errorBlockMessage(errorMessage);
+    notFound();
   }
 
   const assetItem = assetFetch?.props?.asset;
@@ -121,10 +108,6 @@ export default async function Page({ params }) {
     parsedHistoricalData?.historicalDataPrice;
 
   // console.log(historicalDataPrice);
-
-  function setClick() {
-    return console.log('olaaaa');
-  }
 
   return (
     <div className=''>

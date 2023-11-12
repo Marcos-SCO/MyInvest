@@ -3,9 +3,11 @@
 import { userCreateAsset } from 'app/api/assets/userAssets/userAddAsset';
 import { userRemoveAsset } from 'app/api/assets/userAssets/userRemoveAsset';
 import React, { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
+
+import { useRouter } from "next/navigation";
 
 export default function ItemButton({ isUserAsset, fetchObj }) {
+  const router = useRouter();
 
   const userAssetInitialValue = isUserAsset;
   const [userAsset, setUserAsset] = useState(userAssetInitialValue);
@@ -15,11 +17,14 @@ export default function ItemButton({ isUserAsset, fetchObj }) {
       await userCreateAsset(fetchObj);
       setUserAsset(true);
 
+      router.refresh(); 
+      // Use refresh to request the data from the backend without cashing
+
       return;
     }
 
     const removeUserAsset = await userRemoveAsset(fetchObj);
-    console.log(removeUserAsset);
+    // console.log(removeUserAsset);
 
     setUserAsset(false);
 
@@ -29,6 +34,8 @@ export default function ItemButton({ isUserAsset, fetchObj }) {
     if (closestAssetContainer) {
       closestAssetContainer.style = 'display:none';
     }
+
+    router.refresh();
   }
 
   return (
