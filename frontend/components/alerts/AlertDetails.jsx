@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function AlertDetails({ alertProps }) {
-  const { id, priceAlertTypeId, expectedPrice, name, nameDescription, assetSlug, currentPriceValue } = alertProps;
+  const { id, priceAlertTypeId, expectedPriceValue, name, nameDescription, assetSlug, currentPriceValue } = alertProps;
 
   // const dividendYield = symbolsData?.dividendYield;
 
@@ -17,7 +17,7 @@ export default function AlertDetails({ alertProps }) {
       <p>{nameDescription}</p>
       <p>Nome: {name}</p>
       <p>Tipo de alerta: {priceAlertTypeId}</p>
-      <p>Preço programado: {expectedPrice}</p>
+      <p>Preço programado: {expectedPriceValue}</p>
       <p>Preço atual: {currentPriceValue}</p>
     </div>
   )

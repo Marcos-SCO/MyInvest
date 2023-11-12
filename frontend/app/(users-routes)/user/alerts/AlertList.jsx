@@ -37,9 +37,15 @@ export default async function AlertList({ ...props }) {
 
         const assetLogoUrl = assetIcon;
 
+        const expectedPriceForCurrentFormat =
+          isStockAsset ? `$${expectedPrice}` : expectedPrice;
+
+        const expectedPriceValue =
+          formatCurrency(expectedPriceForCurrentFormat);
+
         const currentPriceValue = formatCurrency(currentPrice);
 
-        const alertProps = { id, priceAlertTypeId, expectedPrice, name, nameDescription, assetSlug, currentPriceValue };
+        const alertProps = { id, priceAlertTypeId, expectedPriceValue, name, nameDescription, assetSlug, currentPriceValue };
 
         countItens += 1;
         const applyLazyOrEager = countItens <= 2
