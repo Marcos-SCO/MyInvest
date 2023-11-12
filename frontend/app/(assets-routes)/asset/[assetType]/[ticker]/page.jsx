@@ -1,9 +1,14 @@
 import { nextAuthOptions } from "app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
-import Link from "next/link";
 
-import AssetFavButton from "components/AssetButtons/layout";
+import Link from "next/link";
+import Image from "next/image";
+
 import { formatCurrency } from "../../../../helpers/assets";
+
+import { ZoomableTimeSeriesChart } from '../../charts/ZoomableTimeSeriesChart';
+
+import UserAssetButtons from './UserAssetButtons';
 
 const API_BASE_URL = process.env.API_BASE_URL;
 
@@ -16,25 +21,39 @@ async function getServerSideProps(params) {
     Headers: { 'Content-type': 'application/json' }
   }
 
-  const res = await fetch(backendUrl, config);
+  try {
+    const res = await fetch(backendUrl, config);
 
-  const isErrorRequest = !res.ok || res.status == 404;
+    const isErrorRequest = !res.ok || res.status == 404;
 
-  if (isErrorRequest) {
-    console.log(backendUrl);
-    const errorData = await res.json();
+    if (isErrorRequest) {
+      console.log(backendUrl);
+      const errorData = await res.json();
 
-    // const errorMessage = JSON.stringify(errorData);
-    const errorMessage = errorData;
+      // const errorMessage = JSON.stringify(errorData);
+      const errorMessage = errorData;
 
-    return { errorData: errorMessage };
+      return {
+        errorData: {
+          error: `${ticker.toUpperCase()} não foi encontrado`
+        }
+      };
+    }
+
+    const data = await res.json();
+
+    return {
+      props: data,
+    };
+
+  } catch (error) {
+
+    return {
+      errorData: {
+        error: 'Item não foi encontrado',
+      }
+    };
   }
-
-  const data = await res.json();
-
-  return {
-    props: data,
-  };
 
 }
 
@@ -86,25 +105,45 @@ export default async function Page({ params }) {
   const currentDividend = assetDetail?.currentDividend;
   const historicalData = assetDetail?.historicalData;
 
-  // console.log(JSON.parse(historicalData));
+  const parsedHistoricalData =
+    (JSON.parse(historicalData))?.results[0];
+
+  const assetLogoUrl =
+    parsedHistoricalData?.logourl ?? 'https://brapi.dev/favicon.svg';
+
+  const assetLongName =
+    parsedHistoricalData?.longName;
+
+  const assetShortName =
+    parsedHistoricalData?.shortName;
+
+  const historicalDataPrice =
+    parsedHistoricalData?.historicalDataPrice;
+
+  // console.log(historicalDataPrice);
+
+  function setClick() {
+    return console.log('olaaaa');
+  }
 
   return (
-    <div className='grid place-items-center'>
+    <div className=''>
 
       <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-8">
 
-        {userId && <>
-          <AssetFavButton assetId={assetId} userId={userId} />
+        {userId && <UserAssetButtons assetId={assetId} userId={userId} />}
 
-          <a href="/user/assets" className="my-3">Acessar meus ativos</a>
-        </>}
+        <Image src={assetLogoUrl} width={50} height={50} alt={assetLongName} title={assetLongName} loading="eager" />
 
+        <p>{assetLongName}</p>
         <p><strong>Ticker</strong>: {ticker}</p>
         <p><strong>Preço Atual</strong>: {currentPrice}</p>
         <br />
-        <p style={{ width: "100%", maxHeight: "200px", overflowY: "hidden" }}><strong>Symbols</strong> : {symbols}</p>
+        <p style={{ width: "100%", maxWidth: "800px", maxHeight: "400px", overflowY: "hidden", paddingY: "1rem" }}><strong>Symbols</strong> : {symbols}</p>
+
         <br />
-        <p style={{ width: "100%", maxHeight: "200px", overflowY: "hidden" }}><strong>Históricos</strong> : {historicalData}</p>
+
+        {historicalDataPrice && <ZoomableTimeSeriesChart objData={historicalDataPrice} assetType={type} />}
 
       </div>
     </div >

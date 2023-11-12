@@ -11,6 +11,8 @@
 
 - axios
 
+- apexcharts: npm install --save react-apexcharts apexcharts
+
 ## Tailwind
 installation: npm i -D tailwindcss postcss autoprefixer
 

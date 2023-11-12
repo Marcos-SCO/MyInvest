@@ -19,7 +19,7 @@ const UserAssetsService = () => {
       if (!userAssetQuery) {
         return res.status(404).json({
           userHasAsset: false,
-          message: `User don't have assets`,
+          message: `User don't have asset ${assetId}`,
         });
       }
 

@@ -110,6 +110,7 @@ const AssetsService = () => {
   }
 
   async function getHistoryFromBrapi(ticker: String) {
+    // https://brapi.dev/docs/acoes
 
     if (!ticker) throw new CommonError(`No ticker was passed`);
 

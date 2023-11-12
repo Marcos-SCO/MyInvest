@@ -31,7 +31,8 @@ async function userHasAsset(fetchObj) {
     };
 
   } catch (error) {
-    console.log('Message:', error.message);
+    // console.log('Message:', error.message);
+
     return {
       haveAsset: false,
       message: error.message,

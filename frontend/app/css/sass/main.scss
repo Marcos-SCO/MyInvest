@@ -1,4 +1,9 @@
 @import './components/index.scss';
 
 body {
+  min-height: 1000px;
+}
+
+html, body {
+  overflow-x: hidden;
 }

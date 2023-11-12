@@ -43,7 +43,7 @@ export default async function UserAssets() {
         const assetSlug = typeObj?.typeSlug;
 
         const symbolsData = JSON.parse(assetDetails?.symbols);
-        
+
         if (isStockAsset) {
           console.log(symbolsData);
         }
@@ -57,10 +57,10 @@ export default async function UserAssets() {
 
             <AssetFavButton assetId={id} userId={userId} />
 
-            <Link href={`/asset/${assetSlug}/${name}`} className="block p-2 w-40 border border-gray-300 rounded-md mb-2">Ir até a página do ativo</Link>
+            <Link rel="prefetch" href={`/asset/${assetSlug}/${name}`} className="block p-2 w-40 border border-gray-300 rounded-md mb-2">Ir até a página do ativo</Link>
 
             {!isStockAsset && <AssetDetails symbolProps={symbolProps} />}
-            
+
             {isStockAsset && <StockAssetDetails symbolProps={symbolProps} />}
 
           </div>
