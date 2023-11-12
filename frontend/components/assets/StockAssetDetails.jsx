@@ -1,9 +1,10 @@
 import React from 'react';
 
 export default function StockAssetDetails({ symbolProps }) {
-  const { id, name, nameDescription, currentPrice, symbolsData } = symbolProps;
+  const { id, name, nameDescription, currentPrice } = symbolProps;
 
-  const { primaryData } = symbolsData;
+  const symbolData = symbolProps?.symbolsData;
+  const primaryData = symbolData?.primaryData;
 
   const percentageChange = primaryData?.percentageChange ?? "N/A";
   const detailIndicator = primaryData?.deltaIndicator ?? "N/A";

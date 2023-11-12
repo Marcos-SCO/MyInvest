@@ -28,6 +28,7 @@ function SearchResultsList({ results }) {
     <div className="results-list">
 
       {results.map((result, id) => {
+
         const resultType = result.type;
         const resultName = result.name;
         const resultCode = result.code;

@@ -100,7 +100,7 @@ const PriceAssetsWatchController = () => {
   }
 
   async function index(req: Request, res: Response): Promise<Response> {
-    const { page = 1, numberOfItens = 10, orderBy = 'desc' } = req.body;
+    const { page = 1, numberOfItens = 10, orderBy = 'desc', getDetailedList = false } = req.body;
 
     const userId = req.body?.userId;
 
@@ -110,6 +110,7 @@ const PriceAssetsWatchController = () => {
     let paginationObj: any = {
       page,
       numberOfItens,
+      getDetailedList,
       orderBy: { 'updatedAt': orderBy }
     }
 

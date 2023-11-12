@@ -105,8 +105,43 @@ const PriceAssetsWatchModel = () => {
     return userAlreadyScheduleAlert;
   }
 
+  async function getPaginatedAlertsWithDetails(alertPaginatedResults: any) {
+    const assetsWithDetails = [];
+
+    let paginatedAssetItem: any = {};
+
+    for (paginatedAssetItem of alertPaginatedResults) {
+
+      const assetId = paginatedAssetItem?.assetId;
+
+      const assetDetailsResults: any = await prisma.assets.findUnique({
+        where: { id: assetId },
+        include: {
+          AssetDetailList: {
+            select: {
+              currentPrice: true,
+              assetIcon: true,
+            }
+          },
+        },
+      });
+
+      const { id, name, type, AssetDetailList } = assetDetailsResults;
+      
+      const detailsList = { id, name, type };
+
+      const assetDetailList = AssetDetailList?.[0];
+
+      const assetDetails: any = { ...detailsList, ...assetDetailList };
+
+      assetsWithDetails.push({ ...paginatedAssetItem, ...paginatedAssetItem.assets, assetDetails });
+    }
+
+    return assetsWithDetails;
+  }
+
   async function getAllByPagination(args: any) {
-    const { page = 1, numberOfItens = 10, getDetailedList = true, orderBy = false } = args;
+    const { page = 1, numberOfItens = 10, getDetailedList = false, orderBy = false } = args;
 
     const userId = args?.userId;
     const searchByStatus = args?.searchByStatus ?? false;
@@ -128,6 +163,10 @@ const PriceAssetsWatchModel = () => {
     const queryObj: any = {
       skip,
       take: +numberOfItens,
+      include: {
+        // assets: true,
+        priceAlertTypes: true,
+      }
     }
 
     if (userId) {
@@ -143,12 +182,16 @@ const PriceAssetsWatchModel = () => {
     const priceAlertResults =
       await prisma.priceAssetsWatch.findMany(queryObj);
 
+    const priceAlertResultsData = getDetailedList
+      ? await getPaginatedAlertsWithDetails(priceAlertResults)
+      : priceAlertResults;
+
     await prisma.$disconnect();
 
     return {
       totalPages,
       totalAlertsCount,
-      priceAlertResults,
+      priceAlertResults: priceAlertResultsData,
     };
   }
 

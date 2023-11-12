@@ -7,8 +7,9 @@ import { fetchUserAssets } from "app/api/assets/userAssets/fetchUserAssets";
 import AssetFavButton from "components/AssetButtons/layout";
 import { getAssetTypeDescription, formatCurrency } from "../../../helpers/assets";
 
-import AssetDetails from "./components/AssetDetails";
-import StockAssetDetails from "./components/StockAssetDetails";
+import AssetDetails from "components/assets/AssetDetails";
+import StockAssetDetails from "components/assets/StockAssetDetails";
+
 import Image from 'next/image';
 
 export default async function UserAssetsList({ ...props }) {
