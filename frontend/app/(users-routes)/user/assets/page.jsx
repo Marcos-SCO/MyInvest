@@ -5,24 +5,18 @@ import { Suspense } from "react";
 import Loading from "app/loading";
 
 import UserAssetsList from './UserAssetsList';
+import { getUserSessionData } from "app/helpers/session/getUserSessionData";
 
 export default async function UserAssets() {
   const session = await getServerSession(nextAuthOptions);
 
-  // const { token } = session;
-  const credentialSession = session?.user;
-
-  const { id, name } =
-    credentialSession ? credentialSession : session;
-
-  const firstNAme = name.split(' ')?.[0];
-
-  const userId = session?.userId ?? id;
+  const { id, userId, name, firstName, token } =
+    await getUserSessionData(session);
 
   return (
     <div className="w-full flex flex-col items-center justify-center p-10">
 
-      <h3 className="mb-5">{firstNAme} - Lista de ativos</h3>
+      <h3 className="mb-5">{firstName} - Lista de ativos</h3>
 
       <>
         <Suspense fallback={<Loading />}>

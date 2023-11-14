@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 
-import { insertUserProvider, loginUser } from 'components/user/databaseFunctions';
+import { insertUserProvider, loginUser } from 'app/helpers/user/databaseFunctions';
 
 import NextAuth from "next-auth/next";
 import Credentials from "next-auth/providers/credentials";

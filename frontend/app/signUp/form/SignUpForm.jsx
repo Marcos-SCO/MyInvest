@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { insertUserCredentials } from "components/user/databaseFunctions";
+import { insertUserCredentials } from "app/helpers/user/databaseFunctions";
 
 import { FormInput } from "components/Form/FormInput";
 

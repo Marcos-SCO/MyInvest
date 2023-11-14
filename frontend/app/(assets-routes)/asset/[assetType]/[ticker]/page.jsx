@@ -91,8 +91,10 @@ export default async function Page({ params }) {
   const currentDividend = assetDetail?.currentDividend;
   const historicalData = assetDetail?.historicalData;
 
+  const parsedData = JSON.parse(historicalData);
+
   const parsedHistoricalData =
-    (JSON.parse(historicalData))?.results[0];
+    parsedData?.results[0];
 
   const assetLogoUrl = parsedHistoricalData?.logourl
     ?? 'https://brapi.dev/favicon.svg';
