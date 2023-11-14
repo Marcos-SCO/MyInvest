@@ -41,7 +41,7 @@ export default async function UserAssetsList({ ...props }) {
           ?? 'https://brapi.dev/favicon.svg';
 
         if (isStockAsset) {
-          console.log(symbolsData);
+          // console.log(symbolsData);
         }
 
         const currentPrice = formatCurrency(assetDetails?.currentPrice);

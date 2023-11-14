@@ -21,7 +21,7 @@ const PriceAssetsWatchModel = () => {
 
   async function assetReachedExpectedPrice(dataObj: any) {
 
-    const { priceAlertId, assetId, userId, expectedPrice, priceAlertTypeId } = dataObj;
+    const { priceAlertId, assetId, userId, expectedPrice, priceAlertTypeId, ative = true } = dataObj;
 
     const assetDetailsQuery = await prisma.assetDetailsList.findUnique({
       where: { assetId },
@@ -91,11 +91,11 @@ const PriceAssetsWatchModel = () => {
     return priceAlert;
   }
 
-  async function userScheduleSamePriceAlert(userId: number, assetId: number, expectedPrice: any, priceAlertTypeId = 1) {
+  async function userScheduleSamePriceAlert(userId: number, assetId: number, expectedPrice: any, priceAlertTypeId = 1, active = true) {
 
     const userAlreadyScheduleAlert =
       await prisma.priceAssetsWatch.findFirst({
-        where: { userId, assetId, expectedPrice, priceAlertTypeId }
+        where: { userId, assetId, expectedPrice, priceAlertTypeId, active }
       });
 
     if (!userAlreadyScheduleAlert) return false;
@@ -127,7 +127,7 @@ const PriceAssetsWatchModel = () => {
       });
 
       const { id, name, type, AssetDetailList } = assetDetailsResults;
-      
+
       const detailsList = { id, name, type };
 
       const assetDetailList = AssetDetailList?.[0];

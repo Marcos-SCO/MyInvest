@@ -22,7 +22,7 @@ const ZoomableTimeSeriesChart = (props) => {
   const [chartData, setChartData] = useState(null);
 
   useEffect(() => {
-    console.log("objData in useEffect:", objData);
+    // console.log("objData in useEffect:", objData);
 
     const objHasData = objData && objData.length > 0;
     if (!objHasData) return;

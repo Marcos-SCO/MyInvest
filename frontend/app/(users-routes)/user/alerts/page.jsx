@@ -13,16 +13,6 @@ export default async function UserAssets() {
 
   const { id, name, userId, firstName } = await getUserSessionData(session);
 
-  // const { token } = session;
-  // const credentialSession = session?.user;
-
-  // const { id, name } =
-  //   credentialSession ? credentialSession : session;
-
-  // const firstName = name.split(' ')?.[0];
-
-  // const userId = session?.userId ?? id;
-
   return (
     <div className="w-full flex flex-col items-center justify-center p-10">
 
