@@ -11,9 +11,9 @@ import AlertDetails from "components/alerts/AlertDetails";
 import Image from 'next/image';
 
 export default async function AlertList({ ...props }) {
-  const { userId } = props;
+  const { userId, page = 1 } = props;
 
-  const fetchResults = await fetchUserAlerts({ id: userId });
+  const fetchResults = await fetchUserAlerts({ id: userId, page });
   const fetchResultsData = fetchResults?.priceAlertsList;
 
   let countItens = 0;

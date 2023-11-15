@@ -13,9 +13,9 @@ import StockAssetDetails from "components/assets/StockAssetDetails";
 import Image from 'next/image';
 
 export default async function UserAssetsList({ ...props }) {
-  const { userId } = props;
+  const { userId, page = 1 } = props;
 
-  const fetchResults = await fetchUserAssets({ id: userId });
+  const fetchResults = await fetchUserAssets({ id: userId, page });
   const fetchResultsData = fetchResults.assetsList;
 
   let countItens = 0;
