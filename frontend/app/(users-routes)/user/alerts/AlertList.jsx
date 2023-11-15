@@ -9,12 +9,28 @@ import { getAssetTypeDescription, formatCurrency } from "../../../helpers/assets
 import AlertDetails from "components/alerts/AlertDetails";
 
 import Image from 'next/image';
+import { Pagination } from '../../../../components/page/Pagination';
+
+const baseUrl = process.env.NEXT_PUBLIC_FRONT_END_URL;
 
 export default async function AlertList({ ...props }) {
   const { userId, page = 1 } = props;
 
-  const fetchResults = await fetchUserAlerts({ id: userId, page });
+  const numberOfItens = 10;
+
+  const fetchResults = await fetchUserAlerts({ id: userId, page, numberOfItens });
   const fetchResultsData = fetchResults?.priceAlertsList;
+
+  const basePaginationUrl = baseUrl + '/user/alerts/page/';
+  const totalPages = fetchResults?.totalPages;
+
+  const paginationParams = {
+    basePaginationUrl,
+    page,
+    itensPerPage: numberOfItens,
+    totalPages,
+    totalItensCount: fetchResults?.totalItensCount
+  }
 
   let countItens = 0;
 
@@ -64,6 +80,9 @@ export default async function AlertList({ ...props }) {
         );
 
       })}
+
+      {<Pagination props={paginationParams} />}
+
     </>
   )
 }

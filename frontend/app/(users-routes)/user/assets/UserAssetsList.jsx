@@ -1,6 +1,6 @@
 import React from 'react';
-
 import Link from "next/link";
+import Image from 'next/image';
 
 import { fetchUserAssets } from "app/api/assets/userAssets/fetchUserAssets";
 
@@ -10,13 +10,29 @@ import { getAssetTypeDescription, formatCurrency } from "../../../helpers/assets
 import AssetDetails from "components/assets/AssetDetails";
 import StockAssetDetails from "components/assets/StockAssetDetails";
 
-import Image from 'next/image';
+import { Pagination } from '../../../../components/page/Pagination';
+
+const baseUrl = process.env.NEXT_PUBLIC_FRONT_END_URL;
 
 export default async function UserAssetsList({ ...props }) {
   const { userId, page = 1 } = props;
 
-  const fetchResults = await fetchUserAssets({ id: userId, page });
+  const numberOfItens = 10;
+
+  const fetchResults = await fetchUserAssets({ id: userId, page, numberOfItens });
+
   const fetchResultsData = fetchResults.assetsList;
+
+  const basePaginationUrl = baseUrl + '/user/assets/page/';
+  const totalPages = fetchResults?.totalPages;
+
+  const paginationParams = {
+    basePaginationUrl,
+    page,
+    itensPerPage: numberOfItens,
+    totalPages,
+    totalItensCount: fetchResults?.totalItensCount
+  }
 
   let countItens = 0;
 
@@ -69,6 +85,9 @@ export default async function UserAssetsList({ ...props }) {
         );
 
       })}
+
+      {<Pagination props={paginationParams} />}
+
     </>
   )
 }
