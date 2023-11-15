@@ -1,6 +1,6 @@
 import React from 'react';
-
 import Link from "next/link";
+import Image from 'next/image';
 
 import { fetchUserAlerts } from "app/api/assets/userAlerts/fetchUserAlerts";
 
@@ -8,7 +8,6 @@ import { getAssetTypeDescription, formatCurrency } from "../../../helpers/assets
 
 import AlertDetails from "components/alerts/AlertDetails";
 
-import Image from 'next/image';
 import { Pagination } from '../../../../components/page/Pagination';
 
 const baseUrl = process.env.NEXT_PUBLIC_FRONT_END_URL;
@@ -19,6 +18,7 @@ export default async function AlertList({ ...props }) {
   const numberOfItens = 10;
 
   const fetchResults = await fetchUserAlerts({ id: userId, page, numberOfItens });
+
   const fetchResultsData = fetchResults?.priceAlertsList;
 
   const basePaginationUrl = baseUrl + '/user/alerts/page/';
