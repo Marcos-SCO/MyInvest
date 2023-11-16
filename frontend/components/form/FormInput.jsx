@@ -34,7 +34,7 @@ function FormInput(props) {
           title={errorMessage}
           className="input-item"
         />
-        <span>{errorMessage}</span>
+        <span data-js={`${name}-error-container`}>{errorMessage}</span>
       </div>
     </div>
   );

@@ -36,8 +36,8 @@ export default function RootLayout({ children }) {
   const childrenSegment = children?.props.childProp?.segment;
 
   return (
-    <html lang="en">
-      <body className={`${inter.className} sm:overflow-x-hidden`}>
+    <html lang="pt-br">
+      <body className={`${inter.className}`}>
         <NextAuthSessionProvider>
           {
             dontShowNavNavBarIn(childrenSegment)

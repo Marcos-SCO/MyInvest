@@ -1,9 +1,48 @@
+// Mixins
+@import './mixins/index.scss';
+
+// colors
+@import './colors';
+
+// Animations
+@import './animations/animations.scss';
+
+// Components
 @import './components/index.scss';
+// Pages
+@import './pages/index.scss';
+
+// Fonts
+@import './fonts/';
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 
 body {
-  min-height: 1000px;
+  min-height: 500px;
 }
 
 html, body {
   overflow-x: hidden;
+  width: 100%;
+}
+
+a, button {
+  transition: opacity .5s ease-in-out;
+  
+  &:hover {
+    opacity: .9;
+  }
+}
+
+img {
+  max-width: 100%;
+}
+
+.myInvestLogo {
+  // margin: auto;
 }

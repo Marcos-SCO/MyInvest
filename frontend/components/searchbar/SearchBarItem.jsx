@@ -1,7 +1,7 @@
 'use client';
 
 import fetchAssets from 'app/api/assets/fetchAssets';
-import DisplaySvg from 'app/helpers/DisplaySvg';
+import DisplaySvg from 'app/helpers/svg/DisplaySvg';
 import useDebounce from 'app/hooks/useDebounce';
 
 import React, { useEffect, useState } from 'react';

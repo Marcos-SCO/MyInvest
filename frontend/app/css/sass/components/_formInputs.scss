@@ -2,21 +2,42 @@
   width: 100%;
 
   .sendButton {
+    margin-top: .5rem;
     position: relative;
     z-index: 999;
   }
 
   .google-button-container {
     width: 100%;
+    margin-top: 1.8rem;
+
+    p {
+      font-family: 'Inter', sans-serif;
+      text-align: center;
+      font-weight: 500;
+      line-height: 24.2px;
+      font-size: 1.1rem;
+
+      margin-top: .8rem;
+      margin-bottom: .8rem;
+
+      @include wide {
+        line-height: 30.2px;
+        // font-size: 1.25rem;
+        font-size: 1.15rem;
+      }
+    }
+
     button {
       margin: auto;
       width: 100%;
-      
-      max-width: 290px;
+
+      // max-width: 290px;
+      max-width: 345px;
     }
 
     .span-text {
-      width: 100%;
+      // width: 100%;
     }
   }
 }
@@ -45,8 +66,11 @@ form {
 
   span {
     position: absolute;
+    left: -100%;
+    z-index: -1;
     opacity: 0;
-    margin-top: .5rem;
+    // margin-top: .5rem;
+    margin-top: 1%;
     padding: 1rem 0;
     color: #f00;
   }
@@ -75,8 +99,9 @@ form {
       opacity: 1;
       height: auto;
       position: relative;
+      left: 0;
       top: .5rem;
-      // display: block;
+      z-index: 1;
     }
 
     &:focus {
@@ -90,4 +115,31 @@ form {
     }
   }
 
+}
+
+.google-button {
+
+  padding: .45rem;
+  font-weight: 500;
+  font-family: 'inter',
+    sans-serif;
+  // line-height: 20.2px;
+
+  font-size: 1rem;
+  border: 1px solid #cccccc69;
+
+  span {
+    padding: 0 .5rem;
+  }
+
+  @include desktop {
+    font-size: 1.15rem;
+  }
+
+  @include wide {
+    padding: .75rem;
+    line-height: 24.2px;
+    font-size: 1.25rem;
+    min-height: 24px;
+  }
 }

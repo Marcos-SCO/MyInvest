@@ -4,19 +4,26 @@ import SignInGoogle from "components/SignInBtnGoogle";
 import { signIn } from "next-auth/react";
 
 import Link from "next/link";
+import Image from "next/image";
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { FormInput } from "components/Form/FormInput";
 
+import DisplaySvg from 'app/helpers/svg/DisplaySvg';
+
+const baseUrl = process.env.FRONT_END_BASE_URL;
 
 export default function SignInForm() {
 
   const [inputState, setInputState] = useState({
     email: '',
-    password: ''
+    password: '',
+    formFeedBackError: false,
   });
+
+  const formFeedBackError = inputState?.formFeedBackError;
 
   const inputs = [
     {
@@ -24,7 +31,7 @@ export default function SignInForm() {
       type: "email",
       placeholder: "E-mail",
       errorMessage: "Precisa ser um e-mail válido!",
-      label: "Email",
+      label: "E-mail",
       required: true,
     },
     {
@@ -32,9 +39,8 @@ export default function SignInForm() {
       type: "password",
       placeholder: "Senha",
       errorMessage:
-        "Mínimo de 4 caracteres é necessário",
-      label: "Password",
-      pattern: `^.{4,}$`,
+        "Preencha este campo",
+      label: "Senha",
       required: true,
     },
   ];
@@ -50,6 +56,8 @@ export default function SignInForm() {
 
     const { email, password } = inputState;
 
+    setInputState({ ...inputState, formFeedBackError: false })
+
     const result = await signIn('credentials', {
       email,
       password,
@@ -58,7 +66,10 @@ export default function SignInForm() {
 
     if (result?.error) {
       console.error(result);
-      window.alert('Credenciais inválidas');
+      // window.alert('Credenciais inválidas');
+
+      setInputState({ ...inputState, formFeedBackError: 'E-mail ou senha inválidos!' });
+
       return;
     }
 
@@ -67,51 +78,76 @@ export default function SignInForm() {
 
   return (
     <>
-      <div className="form-container flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          {/* <img
-            className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Your Company"
-          /> */}
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Acesse sua conta
-          </h2>
+      <section className="form-section-container flex flex-wrap md:flex-no-wrap">
+
+        <div className="form-message-container">
+          <div className="form-message-inner">
+            <h1 className="form-title moveFromBottom">Bem-Vindo(a) ao <br /> <span className="font-bold">MyInvest</span></h1>
+
+            <div className="text-inner moveFromBottom">
+              <p className="mb-5">Uma plataforma dedicada em facilitar sua vida!</p>
+              <p>Monitore o preço de seus investimentos de forma simples e eficaz, receba notificações para se manter atualizado de seus ganhos e perdas!</p>
+            </div>
+
+          </div>
         </div>
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
+        <div className="form-container flex flex-1 flex-col justify-center py-12">
 
-            {inputs.map((input, key) => (
-              <FormInput
-                key={key}
-                {...input}
-                value={inputState[input.name]}
-                handleInput={handleInput}
-              />
-            ))}
+          <div className="form-container-header sm:mx-auto sm:w-full sm:max-w-sm moveFromLeft-mobile">
 
-            <div>
-              <button
-                type="submit"
-                className="sendButton flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                fazer Login
-              </button>
-            </div>
-          </form>
+            <a href={`${baseUrl}`} title="MyInvest">
+              <DisplaySvg name="myInvestLogo" class="myInvestLogo m-auto" width="120" height="120" />
+            </a>
 
-          <div className="google-button-container mt-10 text-center text-sm text-gray-500">
-            <SignInGoogle />
           </div>
 
-          <p className="mt-10 text-center text-sm text-gray-500">
-            Não possui uma conta?{' '}
-            <Link href={'/signUp'} className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Cadastre agora!</Link>
-          </p>
+          <div className="form-container-inner">
+
+            <h2 className="form-header-title text-center">
+              Acesse sua conta
+            </h2>
+
+            <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+              <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
+
+                {inputs.map((input, key) => (
+                  <FormInput
+                    key={key}
+                    {...input}
+                    value={inputState[input.name]}
+                    handleInput={handleInput}
+                  />
+                ))}
+
+                <div>
+                  <button
+                    type="submit"
+                    className="form-button sendButton"
+                  >Fazer Login</button>
+                </div>
+
+                {formFeedBackError && <div className="form-feed-back" data-js="form-feed-back">
+                  <p>{formFeedBackError}</p>
+                </div>}
+
+              </form>
+
+              <div className="google-button-container text-center">
+                <p>Ou utilize o Google para login:</p>
+                <SignInGoogle />
+              </div>
+
+              <p className="not-account">
+                Não possui uma conta?{' '}
+                <Link href={'/signUp'} className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Cadastre agora!</Link>
+              </p>
+
+            </div>
+          </div>
 
         </div>
-      </div>
+      </section>
     </>
   )
 }

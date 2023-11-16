@@ -1,0 +1,32 @@
+/* Mobile Size */
+@mixin max-mobile {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+/* Tablet Size */
+@mixin tablet {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin max-tablet {
+  @media (max-width: 1024px) {
+    @content;
+  }
+}
+
+/* Desktop Size */
+@mixin desktop {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin wide {
+  @media (min-width: 1440px) {
+    @content;
+  }
+}

@@ -7,6 +7,7 @@ const nextConfig = {
   },
   env: {
     API_BASE_URL: process.env.API_BASE_URL,
+    FRONT_END_BASE_URL: process.env.FRONT_END_BASE_URL,
   },
 }
 

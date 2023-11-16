@@ -2,13 +2,13 @@
 
 import Image from "next/image";
 import { signIn } from "next-auth/react";
-import DisplaySvg from "app/helpers/DisplaySvg";
+import DisplaySvg from "app/helpers/svg/DisplaySvg";
 
 export default function SignInBtnGoogle() {
   return (
-    <button onClick={() => signIn('google')} className="flex items-center gap-4 shadow-xl rounded-lg pl-3 w100">
+    <button onClick={() => signIn('google')} className="google-button flex justify-center items-center shadow-xl rounded-lg w100">
       <DisplaySvg name="googleIcon"/>
-      <span className="span-text bg-blue-500 text-white px-4 py-3">Login com Google</span>
+      <span className="span-text">Login com Google</span>
     </button>
   );
 }
