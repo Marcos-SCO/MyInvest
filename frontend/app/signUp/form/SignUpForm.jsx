@@ -8,6 +8,9 @@ import { insertUserCredentials } from "app/helpers/user/databaseFunctions";
 
 import { FormInput } from "components/Form/FormInput";
 
+import DisplaySvg from 'app/helpers/svg/DisplaySvg';
+
+const baseUrl = process.env.FRONT_END_BASE_URL;
 
 export default function SignUpForm() {
 
@@ -17,7 +20,10 @@ export default function SignUpForm() {
     email: '',
     password: '',
     confirmPassword: '',
+    formFeedBackError: false,
   });
+
+  const formFeedBackError = inputState?.formFeedBackError;
 
   const inputs = [
     {
@@ -54,7 +60,7 @@ export default function SignUpForm() {
       placeholder: "Senha",
       errorMessage:
         "Mínimo de 4 caracteres é necessário",
-      label: "Password",
+      label: "Senha",
       pattern: `^.{4,}$`,
       required: true,
     },
@@ -87,10 +93,15 @@ export default function SignUpForm() {
     const userError = userInsert?.error;
     const alreadyUser = userInsert?.alreadyUser;
 
-    if (userError) return;
+    setInputState({ ...inputState, formFeedBackError: false });
+
+    // if (userError) return;
 
     if (alreadyUser) {
-      const answer = window.confirm('Usuário já está cadastrado');
+      // const answer = window.alert('Usuário já está cadastrado');
+
+      setInputState({ ...inputState, formFeedBackError: 'Usuário já está cadastrado' });
+
       return;
     }
 
@@ -100,45 +111,59 @@ export default function SignUpForm() {
 
   return (
     <>
-      <div className="form-container mt-10 flex min-h-100 flex-1 flex-col justify-center px-6">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          {/* <img
-            className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Your Company"
-          /> */}
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Criei sua conta
-          </h2>
-        </div>
+      <section className="form-section-container flex">
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
+        <div className="form-container flex flex-1 flex-col justify-center py-12">
 
-            {inputs.map((input, key) => (
-              <FormInput
-                key={key}
-                {...input}
-                value={inputState[input.name]}
-                handleInput={handleInput}
-              />
-            ))}
+          <div className="form-container-header sm:mx-auto sm:w-full sm:max-w-sm">
 
-            <div>
-              <button
-                type="submit"
-                className="sendButton flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >Enviar</button>
+            <a href={`${baseUrl}`} title="MyInvest">
+              <DisplaySvg name="myInvestLogo" class="myInvestLogo m-auto" width="120" height="120" />
+            </a>
+
+          </div>
+
+
+          <div className="form-container-inner moveFromBottom">
+            <h2 className="form-header-title text-center">
+              Criei sua conta
+            </h2>
+
+            <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+              <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
+
+                {inputs.map((input, key) => (
+                  <FormInput
+                    key={key}
+                    {...input}
+                    value={inputState[input.name]}
+                    handleInput={handleInput}
+                  />
+                ))}
+
+                <div>
+                  <button
+                    type="submit"
+                    className="form-button sendButton"
+                  >Enviar</button>
+                </div>
+
+                {formFeedBackError && <div className="form-feed-back" data-js="form-feed-back">
+                  <p>{formFeedBackError}</p>
+                </div>}
+
+              </form>
+
+              <p className="account-question">
+                Já possui uma conta?{' '}
+                <Link href={'/signIn'} className="font-semibold leading-6">Faça login agora!</Link>
+              </p>
+
             </div>
-          </form>
-
-          <p className="mt-10 text-center text-sm text-gray-500">
-            Já possui uma conta?{' '}
-            <Link href={'/signIn'} className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Faça login agora!</Link>
-          </p>
+          </div>
 
         </div>
-      </div>
+      </section>
     </>
   )
 }

@@ -1,0 +1,31 @@
+.signUp {
+  /* Hide the scrollbar */
+  overflow-y: hidden;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    /* Adjust the width as needed */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    /* Make the thumb transparent */
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+    /* Make the track transparent */
+  }
+
+  /* For Firefox */
+  & {
+    scrollbar-width: thin;
+    /* Adjust the width as needed */
+    scrollbar-color: transparent transparent;
+    /* Make the thumb and track transparent */
+  }
+
+  .form-container {
+    max-width: 800px;
+  }
+}

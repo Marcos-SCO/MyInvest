@@ -56,7 +56,7 @@ export default function SignInForm() {
 
     const { email, password } = inputState;
 
-    setInputState({ ...inputState, formFeedBackError: false })
+    setInputState({ ...inputState, formFeedBackError: false });
 
     const result = await signIn('credentials', {
       email,
@@ -138,9 +138,9 @@ export default function SignInForm() {
                 <SignInGoogle />
               </div>
 
-              <p className="not-account">
+              <p className="account-question">
                 Não possui uma conta?{' '}
-                <Link href={'/signUp'} className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Cadastre agora!</Link>
+                <Link href={'/signUp'} className="font-semibold leading-6">Cadastre agora!</Link>
               </p>
 
             </div>

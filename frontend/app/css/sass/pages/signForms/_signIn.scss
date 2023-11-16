@@ -1,9 +1,9 @@
-.signIn {
+.signUp, .signIn {
   height: 100%;
   width: 100%;
   overflow-x: hidden;
 
-  background: linear-gradient($primary, $primary), url("../../../../public/img/backtext.jpg");
+  background: linear-gradient($primary, $primary), url("../../../../../public/img/backtext.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: cover;
@@ -46,7 +46,7 @@
     max-width: 550px;
   }
 
-  .not-account {
+  .account-question {
     font-family: 'Inter', sans-serif;
     text-align: center;
     font-weight: 500;
@@ -59,6 +59,10 @@
       line-height: 30.2px;
       // font-size: 1.25rem;
       font-size: 1.15rem;
+    }
+
+    a {
+      color: $primary;
     }
   }
 }
