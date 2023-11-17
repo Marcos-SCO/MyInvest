@@ -9,7 +9,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { FormInput } from "components/Form/FormInput";
+import { FormInput } from "components/form/FormInput";
+import { MessageContainer } from "./MessageContainer";
 
 import DisplaySvg from 'app/helpers/svg/DisplaySvg';
 
@@ -80,17 +81,7 @@ export default function SignInForm() {
     <>
       <section className="form-section-container flex flex-wrap md:flex-no-wrap">
 
-        <div className="form-message-container">
-          <div className="form-message-inner">
-            <h1 className="form-title moveFromBottom">Bem-Vindo(a) ao <br /> <span className="font-bold">MyInvest</span></h1>
-
-            <div className="text-inner moveFromBottom">
-              <p className="mb-5">Uma plataforma dedicada em facilitar sua vida!</p>
-              <p>Monitore o preço de seus investimentos de forma simples e eficaz, receba notificações para se manter atualizado de seus ganhos e perdas!</p>
-            </div>
-
-          </div>
-        </div>
+        <MessageContainer />
 
         <div className="form-container flex flex-1 flex-col justify-center py-12">
 

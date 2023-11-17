@@ -6,7 +6,9 @@ import { useState } from "react";
 
 import { insertUserCredentials } from "app/helpers/user/databaseFunctions";
 
-import { FormInput } from "components/Form/FormInput";
+import { FormInput } from "components/form/FormInput";
+
+import { MessageContainer } from "./MessageContainer";
 
 import DisplaySvg from 'app/helpers/svg/DisplaySvg';
 
@@ -111,7 +113,9 @@ export default function SignUpForm() {
 
   return (
     <>
-      <section className="form-section-container flex">
+      <section className="form-section-container flex flex-wrap md:flex-no-wrap">
+
+        <MessageContainer />
 
         <div className="form-container flex flex-1 flex-col justify-center py-12">
 

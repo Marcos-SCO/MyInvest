@@ -1,3 +1,15 @@
 @import './form';
 @import './signIn';
 @import './signUp';
+
+.page-signIn,
+.page-signUp {
+
+  @media ((min-height: 1045px)) {
+    background-color: #0d458e;
+  }
+
+  @media (min-width: 2500px) and (min-height: 1545px) {
+    height: 100%;
+  }
+}

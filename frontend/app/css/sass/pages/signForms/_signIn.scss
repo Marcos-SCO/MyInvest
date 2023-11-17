@@ -1,5 +1,4 @@
 .signUp, .signIn {
-  height: 100%;
   width: 100%;
   overflow-x: hidden;
 
@@ -7,12 +6,11 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: cover;
-
-  overflow: hidden;
 }
 
 .form-section-container {
   height: 100%;
+  // overflow-y: auto;
 
   @include max-mobile {
     flex-direction: column-reverse;

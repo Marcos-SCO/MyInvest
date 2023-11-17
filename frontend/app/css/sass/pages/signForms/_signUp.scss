@@ -1,6 +1,14 @@
 .signUp {
+
+  background: linear-gradient($primary, $primary), url("../../../../../public/img/economical-research.jpg");
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top right;
+
   /* Hide the scrollbar */
-  overflow-y: hidden;
+  overflow-x: hidden;
+  // overflow-y: hidden;
 
   &::-webkit-scrollbar {
     width: 0;
@@ -26,6 +34,6 @@
   }
 
   .form-container {
-    max-width: 800px;
+    // max-width: 850px;
   }
 }
