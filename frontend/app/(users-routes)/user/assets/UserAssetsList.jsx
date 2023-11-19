@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import { fetchUserAssets } from "app/api/assets/userAssets/fetchUserAssets";
 
-import AssetFavButton from "components/AssetButtons/layout";
+import AssetFavButton from "components/assetButtons/layout";
 import { getAssetTypeDescription, formatCurrency } from "../../../helpers/assets";
 
 import AssetDetails from "components/assets/AssetDetails";

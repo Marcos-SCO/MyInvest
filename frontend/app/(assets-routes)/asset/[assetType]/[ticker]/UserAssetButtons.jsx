@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AssetFavButton from "components/AssetButtons/layout";
+import AssetFavButton from "components/assetButtons/layout";
 
 import Link from "next/link";
 
