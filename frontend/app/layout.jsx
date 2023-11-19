@@ -1,4 +1,4 @@
-import Navbar from 'components/Navbar';
+import Header from 'components/base/Header';
 
 // Styles
 import './css/sass/main.scss';
@@ -14,16 +14,22 @@ export const metadata = {
   description: 'Plataforma para monitoramento de oscilações em renda variável',
 }
 
-function renderChildrenWithNavBar(children, containerClasses = 'max-w-6xl mx-auto') {
-  return (<div className={containerClasses}>
-    <Navbar />
-    {children}
-  </div>
+function renderChildrenWithHeader(children) {
+  const childrenSegment = children?.props.childProp?.segment;
+
+  return (
+    <>
+      <Header childrenSegment={childrenSegment} />
+
+      <main className={`max-w-6xl mx-auto`}>
+        {children}
+      </main>
+    </>
   )
 }
 
 function renderChildren(children) {
-  return (<>{children}</>)
+  return (<main>{children}</main>)
 }
 
 function dontShowNavNavBarIn(page) {
@@ -42,7 +48,7 @@ export default function RootLayout({ children }) {
           {
             dontShowNavNavBarIn(childrenSegment)
               ? renderChildren(children)
-              : renderChildrenWithNavBar(children)
+              : renderChildrenWithHeader(children)
           }
         </NextAuthSessionProvider>
       </body>

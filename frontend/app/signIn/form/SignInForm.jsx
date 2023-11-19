@@ -1,6 +1,6 @@
 'use client';
 
-import SignInGoogle from "components/SignInBtnGoogle";
+import SignInGoogle from "components/auth/SignInBtnGoogle";
 import { signIn } from "next-auth/react";
 
 import Link from "next/link";
