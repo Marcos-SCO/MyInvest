@@ -13,6 +13,8 @@
 
 - apexcharts: npm install --save react-apexcharts apexcharts
 
+- micromodal: npm install micromodal --save
+
 ## Tailwind
 installation: npm i -D tailwindcss postcss autoprefixer
 

@@ -7,7 +7,11 @@ import './css/globals.css';
 import { Inter } from 'next/font/google';
 import { NextAuthSessionProvider } from './providers/sessionProvider';
 
-const inter = Inter({ subsets: ['latin'] })
+import SearchBar from "components/searchBar/layout";
+
+import Modal from "components/modal/Modal";
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'MyInvest',
@@ -20,6 +24,14 @@ function renderChildrenWithHeader(children) {
   return (
     <>
       <Header childrenSegment={childrenSegment} />
+
+      {/* <button data-micromodal-trigger="modal-1">Open Modal</button> */}
+
+      {/* <Modal searchBar={SearchBar} /> */}
+
+      <Modal>
+        <SearchBar />
+      </Modal>
 
       <main className={`max-w-6xl mx-auto`}>
         {children}

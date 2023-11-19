@@ -1,3 +1,6 @@
+// Libs
+@import './libs/index.scss';
+
 // Mixins
 @import './mixins/index.scss';
 
@@ -6,6 +9,9 @@
 
 // Animations
 @import './animations/animations.scss';
+
+// Base
+@import './base/';
 
 // Components
 @import './components/index.scss';

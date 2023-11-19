@@ -131,7 +131,7 @@ export default function SignInForm() {
 
               <p className="account-question">
                 Não possui uma conta?{' '}
-                <Link href={'/signUp'} className="font-semibold leading-6">Cadastre agora!</Link>
+                <Link rel="prefetch" href={'/signUp'} className="font-semibold leading-6">Cadastre agora!</Link>
               </p>
 
             </div>

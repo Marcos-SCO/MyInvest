@@ -160,7 +160,7 @@ export default function SignUpForm() {
 
               <p className="account-question">
                 Já possui uma conta?{' '}
-                <Link href={'/signIn'} className="font-semibold leading-6">Faça login agora!</Link>
+                <Link rel="prefetch" href={'/signIn'} className="font-semibold leading-6">Faça login agora!</Link>
               </p>
 
             </div>

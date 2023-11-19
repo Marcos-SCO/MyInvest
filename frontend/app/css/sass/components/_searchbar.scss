@@ -23,3 +23,16 @@
     overflow-y: auto;
   }
 }
+
+.search-bar-header-container {
+  // position: relative;
+
+  .search-bar-container {
+    position: initial;
+
+    .results-list {
+      max-width: 300px;
+    }
+
+  }
+}
