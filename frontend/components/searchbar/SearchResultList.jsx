@@ -60,6 +60,11 @@ function SearchResultsList({ results }) {
           )
         })}
       </div>}
+
+      {!feedBackMessage && !isThereSearchResults && <div className={`results-list display-results`}>
+        <p className='p-5'>Pesquise por tickers ou nome de ativos</p>
+      </div>}
+
     </>
   );
 };
