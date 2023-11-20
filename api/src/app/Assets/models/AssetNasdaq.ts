@@ -20,7 +20,6 @@ const AssetNasdaq = () => {
     const searchSymbol = await AssetsService().searchSymbol(ticker, type);
     const assetData = searchSymbol?.data;
 
-
     // const historicalData = historicalDataSearch?.data;
     // const { chart } = historicalData;
 
@@ -62,6 +61,10 @@ const AssetNasdaq = () => {
 
     try {
 
+      if (!symbolData) {
+        throw new CommonError('Symbol not exists');
+      }
+
       const insertAssetItem = await prisma.assets.create({
         data: { name: tickerCode, type, }
       });
@@ -88,7 +91,7 @@ const AssetNasdaq = () => {
 
     } catch (error) {
       // console.log(error);
-      throw new CommonError(`Error creating Asset Item`);
+      throw new CommonError(`Error creating Asset Item: ${error}`);
     } finally {
       await prisma.$disconnect();
     }

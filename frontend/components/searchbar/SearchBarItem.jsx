@@ -36,7 +36,7 @@ export default function SearchBarItem({ setResults }) {
       <label htmlFor="searchInput" className='cursor-pointer'>
         <DisplaySvg name="magnifyingGlass" />
       </label>
-      <input className='p-1' id="searchInput" autocomplete="off" value={input} onChange={(e) => setInput(e.target.value)} placeholder='Procure ativos...' />
+      <input className='p-1' id="searchInput" autoComplete="off" value={input} onChange={(e) => setInput(e.target.value)} placeholder='Procure ativos...' />
     </div>
   )
 }

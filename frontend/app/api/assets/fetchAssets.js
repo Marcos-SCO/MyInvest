@@ -32,8 +32,6 @@ async function fetchAssets(value) {
       const includeBackendSupportedTypes = asset.type
         && [1, 12, 2].includes(asset.type);
 
-      console.log('inc', searchedValue);
-
       return (includeAssetValue && includeBackendSupportedTypes);
     });
 
@@ -41,7 +39,7 @@ async function fetchAssets(value) {
     return filteredResults;
 
   } catch (error) {
-    console.log('Fetch error: ', error.message);
+    console.error('Fetch assets error: ', error.message);
   }
 
 }

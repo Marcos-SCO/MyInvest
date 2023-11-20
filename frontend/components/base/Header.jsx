@@ -1,18 +1,18 @@
 import React from 'react';
 
+import { usePathname } from "next/navigation";
+
 import Navbar from 'components/base/Navbar';
 
 export default function Header({ ...props }) {
   const { childrenSegment = '' } = props;
 
-  const segmentName = childrenSegment?.toLowerCase();
-  const dontApplyShadowIn = ['__page__'];
+  // const pathname = usePathname();
 
-  const headerShadow =
-    dontApplyShadowIn.includes(segmentName) ? '' : 'shadow-md';
+  // console.log(pathname);
 
   return (
-    <header className={`p-4 ${headerShadow}`}>
+    <header className={`main-header p-4`} data-js="main-header">
       <Navbar />
     </header>
   )

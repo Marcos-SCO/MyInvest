@@ -13,21 +13,18 @@ function SearchResultsList({ results }) {
   const router = useRouter();
 
   function handleAssetPage(e, ticker, slugType) {
-
     const mouseLeftButton = e.button === 0;
     if (!mouseLeftButton) return;
 
     const assetPageUrl = `/asset/${slugType}/${ticker}`;
 
     router.push(assetPageUrl);
-
   }
 
   return (
     <div className="results-list">
 
       {results.map((result, id) => {
-
         const resultType = result.type;
         const resultName = result.name;
         const resultCode = result.code;
@@ -39,18 +36,16 @@ function SearchResultsList({ results }) {
           `${baseUrl}/asset/${typeSlug}/${resultCode}`;
 
         return (
-          <>
-            <Link href={assetPageUrl}>
-              <div className="search-results" key={id}>
-                <p>{resultName} - {resultCode}</p>
-                <p>Preço: {result.price}</p>
-                <p>Variação: {result.variation}</p>
-                <p>TYPE vindo da api: {resultType}</p>
-                <p>Tipo para cadastro no backend: {backendCode}</p>
-                <p>Descrição do tipo: {nameDescription}</p>
-              </div>
-            </Link>
-          </>
+          <Link href={assetPageUrl} key={id}>
+            <div className="search-results">
+              <p>{resultName} - {resultCode}</p>
+              <p>Preço: {result.price}</p>
+              <p>Variação: {result.variation}</p>
+              <p>TYPE vindo da api: {resultType}</p>
+              <p>Tipo para cadastro no backend: {backendCode}</p>
+              <p>Descrição do tipo: {nameDescription}</p>
+            </div>
+          </Link>
         )
       })}
 

@@ -12,10 +12,16 @@ import { getUserSessionData } from "../../../../helpers/session/getUserSessionDa
 import AddPriceAlert from "../../../../../components/alerts/AddPriceAlert";
 import { getAssetData } from "../../../../api/assets/getAssetData";
 
+import ChangePageAttributes from "app/hooks/ChangePageAttributes";
+
 const API_BASE_URL = process.env.API_BASE_URL;
+
+export const metadata = {}
 
 export default async function Page({ params }) {
   const { assetType, ticker } = params;
+
+  metadata.title = `MyInvest - ${ticker}`;
 
   const session = await getServerSession(nextAuthOptions);
 
@@ -55,7 +61,7 @@ export default async function Page({ params }) {
     ?? 'https://brapi.dev/favicon.svg';
 
   const assetLongName =
-    parsedHistoricalData?.longName;
+    parsedHistoricalData?.longName ?? ticker;
 
   const assetShortName =
     parsedHistoricalData?.shortName;
@@ -70,26 +76,30 @@ export default async function Page({ params }) {
     parsedHistoricalData?.fiftyTwoWeekHigh;
 
   return (
-    <div className=''>
+    <>
+      <ChangePageAttributes pageName="asset" />
 
-      <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div className=''>
 
-        <AddPriceAlert sessionProp={session} assetId={assetId} assetTicker={ticker} assetCurrentPrice={currentPrice} />
+        <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-8">
 
-        {userId && <UserAssetButtons assetId={assetId} userId={userId} />}
+          <AddPriceAlert sessionProp={session} assetId={assetId} assetTicker={ticker} assetCurrentPrice={currentPrice} />
 
-        <Image src={assetLogoUrl} width={50} height={50} alt={assetLongName} title={assetLongName} loading="eager" />
+          {userId && <UserAssetButtons assetId={assetId} userId={userId} />}
 
-        <p>{assetLongName}</p>
-        <p><strong>Ticker</strong>: {ticker}</p>
-        <p><strong>Preço Atual</strong>: {currentPrice}</p>
+          <Image src={assetLogoUrl} width={50} height={50} alt={assetLongName} title={assetLongName} loading="eager" />
+
+          <p>{assetLongName}</p>
+          <p><strong>Ticker</strong>: {ticker}</p>
+          <p><strong>Preço Atual</strong>: {currentPrice}</p>
 
 
-        <br />
+          <br />
 
-        {historicalDataPrice && <ZoomableTimeSeriesChart objData={historicalDataPrice} assetType={type} />}
+          {historicalDataPrice && <ZoomableTimeSeriesChart objData={historicalDataPrice} assetType={type} />}
 
-      </div>
-    </div >
+        </div>
+      </div >
+    </>
   )
 }

@@ -13,3 +13,7 @@ body {
   height: 100%;
   overflow-x: hidden;
 }
+
+body:not(.page-home) .main-header {
+  @apply shadow-md
+}

@@ -6,7 +6,6 @@ import { nextAuthOptions } from 'app/api/auth/[...nextauth]/route';
 import LoginControls from "components/auth/LoginControls";
 import DisplaySvg from 'app/helpers/svg/DisplaySvg';
 import SearchModalButton from "../modal/SearchModalButton";
-import AModal from "../modal/AModal";
 
 export default async function Navbar() {
 
@@ -23,10 +22,6 @@ export default async function Navbar() {
 
           <SearchModalButton />
 
-        </div>
-
-        <div className="search-bar-header-container">
-          <AModal />
         </div>
 
         <LoginControls session={session} />

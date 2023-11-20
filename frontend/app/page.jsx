@@ -3,11 +3,16 @@ import Link from "next/link";
 import { nextAuthOptions } from "./api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 
+import ChangePageAttributes from "app/hooks/ChangePageAttributes";
+
+export const metadata = {}
+
 export default async function Home() {
   const session = await getServerSession(nextAuthOptions);
 
   return (
     <>
+      <ChangePageAttributes pageName="home"/>
       <div className='grid place-items-center h-screen -mt-24'>
 
         <div>
