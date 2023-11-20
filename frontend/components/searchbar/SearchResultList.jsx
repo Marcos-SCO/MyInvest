@@ -21,38 +21,46 @@ function SearchResultsList({ results }) {
     router.push(assetPageUrl);
   }
 
+  const isThereSearchResults = results?.length;
+
   const isDisplayingResults =
-    results?.length ? ' display-results' : '';
+    isThereSearchResults ? ' display-results' : '';
+
+  const feedBackMessage = results?.[0]?.feedback;
 
   return (
-    <div className={`results-list${isDisplayingResults}`}>
+    <>
+      {feedBackMessage && <div className={`results-list display-results`}>
+        <p className='p-5'>{feedBackMessage}</p>
+      </div>}
 
-      {results.map((result, id) => {
-        const resultType = result.type;
-        const resultName = result.name;
-        const resultCode = result.code;
+      {!feedBackMessage && <div className={`results-list${isDisplayingResults}`}>
+        {results.map((result, id) => {
+          const resultType = result.type;
+          const resultName = result.name;
+          const resultCode = result.code;
 
-        const { backendCode, typeSlug, nameDescription } =
-          getBackendAssetType(resultType);
+          const { backendCode, typeSlug, nameDescription } =
+            getBackendAssetType(resultType);
 
-        const assetPageUrl =
-          `${baseUrl}/asset/${typeSlug}/${resultCode}`;
+          const assetPageUrl =
+            `${baseUrl}/asset/${typeSlug}/${resultCode}`;
 
-        return (
-          <Link href={assetPageUrl} key={id}>
-            <div className="search-results">
-              <p>{resultName} - {resultCode}</p>
-              <p>Preço: {result.price}</p>
-              <p>Variação: {result.variation}</p>
-              <p>TYPE vindo da api: {resultType}</p>
-              <p>Tipo para cadastro no backend: {backendCode}</p>
-              <p>Descrição do tipo: {nameDescription}</p>
-            </div>
-          </Link>
-        )
-      })}
-
-    </div>
+          return (
+            <Link href={assetPageUrl} key={id}>
+              <div className="search-results">
+                <p>{resultName} - {resultCode}</p>
+                <p>Preço: {result.price}</p>
+                <p>Variação: {result.variation}</p>
+                <p>TYPE vindo da api: {resultType}</p>
+                <p>Tipo para cadastro no backend: {backendCode}</p>
+                <p>Descrição do tipo: {nameDescription}</p>
+              </div>
+            </Link>
+          )
+        })}
+      </div>}
+    </>
   );
 };
 

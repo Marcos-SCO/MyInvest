@@ -12,11 +12,14 @@ export default function SearchBarItem({ setResults }) {
   const debounceValue = useDebounce(input, 500);
 
   async function fetchData(value) {
- 
+    setResults([{ feedback: `Carregando...` }]);
+
     const filteredResults = await fetchAssets(value);
 
-    if (!filteredResults) {
-      // setResults(['Nenhum resultado...']);
+    const haveFilteredResults = filteredResults?.length;
+
+    if (!haveFilteredResults) {
+      setResults([{ feedback: `Nenhum resultado para : ${value}` }]);
       return;
     }
 
@@ -27,10 +30,10 @@ export default function SearchBarItem({ setResults }) {
     if (!input) return setResults([]);
 
     fetchData(debounceValue);
-    
+
   }, [debounceValue]);
 
-  
+
   return (
     <div className='search-inputs-container input-wrapper flex justify-center'>
       <label htmlFor="searchInput" className='cursor-pointer'>

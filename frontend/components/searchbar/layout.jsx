@@ -14,7 +14,8 @@ function SearchBar() {
       <div className="search-bar-container">
         <SearchBarItem setResults={setResults} />
 
-        {results && results.length > 0 && <SearchResultsList results={results} />}
+        {/* {results && results.length > 0 && <SearchResultsList results={results} />} */}
+        {<SearchResultsList results={results} />}
       </div>
     </>
   );
