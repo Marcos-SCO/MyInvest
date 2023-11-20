@@ -15,6 +15,8 @@
 
 - flowbite: npm i flowbite-react
 
+- nextjs-toploader: npm install nextjs-toploader
+
 ## Tailwind
 installation: npm i -D tailwindcss postcss autoprefixer
 

@@ -9,6 +9,8 @@ import { NextAuthSessionProvider } from './providers/sessionProvider';
 
 import { UrlChangeListener } from './hooks/UrlChangeListener';
 
+import ProgressBar from 'components/page/ProgressBar';
+
 import SearchBar from "components/searchBar/layout";
 
 import { ModalProvider } from 'app/providers/modalProviders';
@@ -29,13 +31,14 @@ function renderChildrenWithHeader(children) {
 
   return (
     <>
+      <ProgressBar />
       <Header childrenSegment={childrenSegment} />
 
       <SearchModalContainer modalId="search-bar">
         <SearchBar />
       </SearchModalContainer>
 
-      <main className={`max-w-6xl mx-auto`}>
+      <main className={`max-w-6xl mx-auto px-5`}>
         {children}
       </main>
     </>
@@ -57,8 +60,6 @@ export default function RootLayout({ children }) {
 
   const pageProps =
     children.props?.__NEXT_DATA__?.props?.pageProps;
-
-  console.log(pageProps);
 
   return (
     <html lang="pt-br">
