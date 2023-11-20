@@ -32,11 +32,11 @@ export default function SearchBarItem({ setResults }) {
 
   
   return (
-    <div className='input-wrapper py-5 flex justify-center'>
+    <div className='search-inputs-container input-wrapper flex justify-center'>
       <label htmlFor="searchInput" className='cursor-pointer'>
         <DisplaySvg name="magnifyingGlass" />
       </label>
-      <input className='p-1' id="searchInput" value={input} onChange={(e) => setInput(e.target.value)} placeholder='Procure ativos...' />
+      <input className='p-1' id="searchInput" autocomplete="off" value={input} onChange={(e) => setInput(e.target.value)} placeholder='Procure ativos...' />
     </div>
   )
 }

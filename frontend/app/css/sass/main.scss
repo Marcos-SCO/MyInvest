@@ -1,6 +1,3 @@
-// Libs
-@import './libs/index.scss';
-
 // Mixins
 @import './mixins/index.scss';
 
@@ -36,6 +33,14 @@ html, body {
   overflow-x: hidden;
   width: 100%;
   height: 100%;
+}
+
+body.modal-open {
+  @include tablet {
+    // overflow-y: visible!important;
+    overflow: visible!important;
+    padding-right: initial!important;
+  }
 }
 
 a, button {

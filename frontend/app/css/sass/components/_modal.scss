@@ -1,0 +1,26 @@
+.modal-container {
+  &.bg-gray-900 {
+    background-color: #000;
+    background-color: rgba(0, 0, 0, .4);
+  }
+
+  &>div {
+    position: absolute;
+    top: 15%;
+    width: 70%;
+    max-width: 1200px;
+    padding: 0;
+
+    @include max-mobile {
+      width: 90%;
+    }
+
+  }
+}
+
+.search-modal-container {
+
+  .input-wrapper {
+    padding: 0;
+  }
+}

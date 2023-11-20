@@ -13,7 +13,7 @@
 
 - apexcharts: npm install --save react-apexcharts apexcharts
 
-- micromodal: npm install micromodal --save
+- flowbite: npm i flowbite-react
 
 ## Tailwind
 installation: npm i -D tailwindcss postcss autoprefixer

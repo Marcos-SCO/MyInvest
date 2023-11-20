@@ -4,6 +4,10 @@ import { getBackendAssetType } from 'app/api/assets/helpers/assetHelpers';
 
 import { useRouter } from "next/navigation";
 
+import Link from "next/link";
+
+const baseUrl = process.env.FRONT_END_BASE_URL;
+
 function SearchResultsList({ results }) {
 
   const router = useRouter();
@@ -12,11 +16,6 @@ function SearchResultsList({ results }) {
 
     const mouseLeftButton = e.button === 0;
     if (!mouseLeftButton) return;
-    
-    // const goToAssetPage =
-    //   confirm(`Quer ir mesmo para a página do ativo ${ticker}?`);
-
-    // if (!goToAssetPage) return;
 
     const assetPageUrl = `/asset/${slugType}/${ticker}`;
 
@@ -36,15 +35,22 @@ function SearchResultsList({ results }) {
         const { backendCode, typeSlug, nameDescription } =
           getBackendAssetType(resultType);
 
+        const assetPageUrl =
+          `${baseUrl}/asset/${typeSlug}/${resultCode}`;
+
         return (
-          <div className="search-results" onClick={(e) => handleAssetPage(e, resultCode, typeSlug)} key={id}>
-            <p>{resultName} - {resultCode}</p>
-            <p>Preço: {result.price}</p>
-            <p>Variação: {result.variation}</p>
-            <p>TYPE vindo da api: {resultType}</p>
-            <p>Tipo para cadastro no backend: {backendCode}</p>
-            <p>Descrição do tipo: {nameDescription}</p>
-          </div>
+          <>
+            <Link href={assetPageUrl}>
+              <div className="search-results" key={id}>
+                <p>{resultName} - {resultCode}</p>
+                <p>Preço: {result.price}</p>
+                <p>Variação: {result.variation}</p>
+                <p>TYPE vindo da api: {resultType}</p>
+                <p>Tipo para cadastro no backend: {backendCode}</p>
+                <p>Descrição do tipo: {nameDescription}</p>
+              </div>
+            </Link>
+          </>
         )
       })}
 

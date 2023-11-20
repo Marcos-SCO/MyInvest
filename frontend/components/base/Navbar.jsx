@@ -5,6 +5,8 @@ import { nextAuthOptions } from 'app/api/auth/[...nextauth]/route';
 
 import LoginControls from "components/auth/LoginControls";
 import DisplaySvg from 'app/helpers/svg/DisplaySvg';
+import SearchModalButton from "../modal/SearchModalButton";
+import AModal from "../modal/AModal";
 
 export default async function Navbar() {
 
@@ -19,16 +21,12 @@ export default async function Navbar() {
 
         <div className="search-bar-header-container">
 
-          <button class="search-button" data-micromodal-trigger="modal-1">
+          <SearchModalButton />
 
-            <div className="button-inner-label">
-              <DisplaySvg name="magnifyingGlass" width="23" height="23" />
-              <label>Procurar ativos...</label>
-            </div>
+        </div>
 
-            <kbd>/</kbd>
-          </button>
-
+        <div className="search-bar-header-container">
+          <AModal />
         </div>
 
         <LoginControls session={session} />

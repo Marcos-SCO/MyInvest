@@ -9,7 +9,9 @@ import { NextAuthSessionProvider } from './providers/sessionProvider';
 
 import SearchBar from "components/searchBar/layout";
 
-import Modal from "components/modal/Modal";
+import { ModalProvider } from 'app/providers/modalProviders';
+
+import SearchModalContainer from "components/modal/SearchModalContainer";
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -29,9 +31,9 @@ function renderChildrenWithHeader(children) {
 
       {/* <Modal searchBar={SearchBar} /> */}
 
-      <Modal>
+      <SearchModalContainer modalId="search-bar">
         <SearchBar />
-      </Modal>
+      </SearchModalContainer>
 
       <main className={`max-w-6xl mx-auto`}>
         {children}
@@ -57,11 +59,13 @@ export default function RootLayout({ children }) {
     <html lang="pt-br">
       <body className={`${inter.className} page-${childrenSegment}`} data-page={childrenSegment}>
         <NextAuthSessionProvider>
-          {
-            dontShowNavNavBarIn(childrenSegment)
-              ? renderChildren(children)
-              : renderChildrenWithHeader(children)
-          }
+          <ModalProvider>
+            {
+              dontShowNavNavBarIn(childrenSegment)
+                ? renderChildren(children)
+                : renderChildrenWithHeader(children)
+            }
+          </ModalProvider>
         </NextAuthSessionProvider>
       </body>
     </html>
