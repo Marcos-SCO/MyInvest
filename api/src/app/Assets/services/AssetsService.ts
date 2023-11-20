@@ -135,12 +135,11 @@ const AssetsService = () => {
         return response?.data;
       })
       .catch((error: any) => {
-        console.log(error);
 
-        console.error(`Error in getHistory : ${error?.message}`);
+        console.error(`Error in getHistoryFromBrapi : ${error?.message}`);
 
         throw new CommonError(error);
-      })
+      });
 
     return axiosRequest;
 

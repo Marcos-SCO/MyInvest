@@ -24,13 +24,12 @@ const AssetNasdaq = () => {
     // const historicalData = historicalDataSearch?.data;
     // const { chart } = historicalData;
 
-    const historicalDataSearch =
-      await getHistoryData(ticker, type);
+    const historicalDataSearch = await getHistoryData(ticker, type);
 
     const historicalData = historicalDataSearch;
 
     const historicalDataResults =
-      (historicalData)?.results[0];
+      historicalData ? (historicalData)?.results[0] : [];
 
     const assetIcon =
       historicalDataResults?.logourl ?? 'https://brapi.dev/favicon.svg';
@@ -41,7 +40,7 @@ const AssetNasdaq = () => {
       symbolData: assetData,
       assetIcon,
       lastPrice,
-      historicalData,
+      historicalData: historicalData,
     }
 
     return apiObjData;
@@ -59,6 +58,8 @@ const AssetNasdaq = () => {
 
     const { symbolData, assetIcon, lastPrice, historicalData } = assetApiData;
 
+    const historicalDataValue = historicalData ? historicalData : [];
+
     try {
 
       const insertAssetItem = await prisma.assets.create({
@@ -72,7 +73,7 @@ const AssetNasdaq = () => {
         assetIcon,
         currentPrice: JSON.stringify(lastPrice),
         symbols: JSON.stringify(symbolData),
-        historicalData: JSON.stringify(historicalData),
+        historicalData: JSON.stringify(historicalDataValue),
       }
 
       const assetDetailsList = await AssetDetailsList()
@@ -106,8 +107,10 @@ const AssetNasdaq = () => {
 
     const { symbolData, assetIcon, lastPrice, historicalData } = await getAssetApiData(ticker, type);
 
-    const isHistoryDataError = historicalData?.error;
-    if (isHistoryDataError) throw new CommonError(`Brapi error: ${historicalData?.message}`);
+    const historicalDataValue = historicalData ? historicalData : [];
+
+    // const isHistoryDataError = historicalData?.error;
+    // if (isHistoryDataError) throw new CommonError(`Brapi error: ${historicalData?.message}`);
 
     try {
       const assetDetailsObj = {
@@ -115,7 +118,7 @@ const AssetNasdaq = () => {
         assetIcon,
         currentPrice: JSON.stringify(lastPrice),
         symbols: JSON.stringify(symbolData),
-        historicalData: JSON.stringify(historicalData),
+        historicalData: JSON.stringify(historicalDataValue),
       }
 
       const assetDetailsList = await AssetDetailsList()

@@ -86,29 +86,37 @@ const AssetModel = () => {
     }
   }
 
-  async function getHistoryData(ticker: string, type: number) {
-    // const date = new Date();
-    // const currentYear = date.getFullYear();
-
-    // const initialYear = currentYear - 5;
-    // const finalYear = currentYear + 1;
+  async function getHistoryByDate(ticker: string, type: number) {
+    const date = new Date();
+    const currentYear = date.getFullYear();
+    const initialYear = currentYear - 5;
+    const finalYear = currentYear + 1;
 
     // return await AssetsService().getHistory(ticker, `${initialYear}-01-01`, `${finalYear}-01-01`, type);
+  }
 
-    return await AssetsService().getHistoryFromBrapi(ticker);
+  async function getHistoryData(ticker: string, type: number) {
+
+    try {
+      const historyData = await AssetsService().getHistoryFromBrapi(ticker);
+      return historyData;
+
+    } catch {
+      return false;
+    }
   }
 
   async function getAssetApiData(ticker: string, type = 1) {
     const assetData = await AssetsService().searchSymbol(ticker, type);
 
-    const historicalData = await getHistoryData(ticker, type);
+    const historicalData: any = await getHistoryData(ticker, type);
 
     const assetDataObj = assetData?.[0];
 
     const { price = '' } = assetDataObj;
 
     const historicalDataResults =
-      (historicalData)?.results[0];
+      historicalData ? (historicalData)?.results[0] : [];
 
     const assetIcon =
       historicalDataResults?.logourl ?? 'https://brapi.dev/favicon.svg';
@@ -117,7 +125,7 @@ const AssetModel = () => {
       symbolData: assetDataObj,
       assetIcon,
       lastPrice: price,
-      historicalData,
+      historicalData: historicalData ?? [],
     }
 
     return apiObjData;
@@ -131,7 +139,10 @@ const AssetModel = () => {
     let assetAlreadyInDb = await getAssetByTickerFromDb(tickerCode);
     if (assetAlreadyInDb) throw new CommonError(`${tickerCode} already exists`);
 
-    const { symbolData, assetIcon, lastPrice, historicalData } = await AssetModel().getAssetApiData(tickerCode, type);
+    const { symbolData, assetIcon, lastPrice, historicalData }
+      = await AssetModel().getAssetApiData(tickerCode, type);
+
+    const historicalDataValue = historicalData ? historicalData : [];
 
     try {
 
@@ -148,7 +159,7 @@ const AssetModel = () => {
         assetIcon,
         currentPrice: cleanCurrentPrice,
         symbols: JSON.stringify(symbolData),
-        historicalData: JSON.stringify(historicalData),
+        historicalData: JSON.stringify(historicalDataValue),
       }
 
       const assetDetailsList = await AssetDetailsList()
@@ -182,8 +193,10 @@ const AssetModel = () => {
 
     const { symbolData, assetIcon, lastPrice, historicalData } = await getAssetApiData(ticker, type);
 
-    const isHistoryDataError = historicalData?.error;
-    if (isHistoryDataError) throw new CommonError(`Brapi error: ${historicalData?.message}`);
+    const historicalDataValue = historicalData ? historicalData : [];
+
+    // const isHistoryDataError = historicalData ? historicalData?.error : false;
+    // if (isHistoryDataError) throw new CommonError(`Brapi error: ${historicalData?.message}`);
 
     const cleanCurrentPrice = cleanCurrency(lastPrice);
 
@@ -192,7 +205,7 @@ const AssetModel = () => {
       assetIcon,
       currentPrice: cleanCurrentPrice,
       symbols: JSON.stringify(symbolData),
-      historicalData: JSON.stringify(historicalData),
+      historicalData: JSON.stringify(historicalDataValue),
     }
 
     try {

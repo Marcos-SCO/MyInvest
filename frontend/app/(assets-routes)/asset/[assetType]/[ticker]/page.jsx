@@ -26,8 +26,8 @@ export default async function Page({ params }) {
 
   if (assetError) {
     const errorMessage = assetError?.error;
-
-    notFound();
+    console.error('message to display:', errorMessage)
+    return notFound();
   }
 
   const assetItem = assetFetch?.props?.asset;
@@ -35,18 +35,21 @@ export default async function Page({ params }) {
   const { id: assetId, name, type } = assetItem;
   const assetDetailList = assetItem.AssetDetailList;
 
-  if (!assetDetailList) return;
+  if (!assetDetailList) notFound();
 
   const assetDetail = assetDetailList[0];
   const symbols = assetDetail?.symbols;
+
   const currentPrice = formatCurrency(assetDetail?.currentPrice);
+
   const currentDividend = assetDetail?.currentDividend;
   const historicalData = assetDetail?.historicalData;
 
-  const parsedData = JSON.parse(historicalData);
+  const parsedData = historicalData
+    ? JSON.parse(historicalData) : undefined;
 
   const parsedHistoricalData =
-    parsedData?.results[0];
+    parsedData?.results?.[0];
 
   const assetLogoUrl = parsedHistoricalData?.logourl
     ?? 'https://brapi.dev/favicon.svg';

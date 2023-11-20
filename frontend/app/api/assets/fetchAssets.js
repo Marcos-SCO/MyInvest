@@ -10,7 +10,10 @@ async function fetchAssets(value) {
   const backendUrl = `${API_BASE_URL}/assetsApiQuery/${tickerValue}/`;
   const config = {
     method: 'GET',
-    Headers: { 'Content-type': 'application/json' }
+    Headers: { 'Content-type': 'application/json' },
+    next: {
+      revalidate: 60
+    }
   }
 
   try {
