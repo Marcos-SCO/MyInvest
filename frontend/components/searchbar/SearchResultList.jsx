@@ -21,8 +21,11 @@ function SearchResultsList({ results }) {
     router.push(assetPageUrl);
   }
 
+  const isDisplayingResults =
+    results?.length ? ' display-results' : '';
+
   return (
-    <div className="results-list">
+    <div className={`results-list${isDisplayingResults}`}>
 
       {results.map((result, id) => {
         const resultType = result.type;

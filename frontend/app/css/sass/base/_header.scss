@@ -1,20 +1,33 @@
+.page-home, .page-__PAGE__ {
+  .main-header {
+    box-shadow: none;
+  }
+}
+
 .search-button {
+  cursor: pointer;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   position: relative;
-  min-width: 360px;
+
+  width: auto;
+  width: 100%;
+  max-width: 300px;
+  
   font-weight: 400;
+
   background: #f3f5f9;
   border: 1px solid #e5e8ed;
   border-radius: 4px;
-  font-size: 14px;
+  
+  font-size: .875rem;
   line-height: 21px;
   overflow-x: hidden;
-  padding: 6px 12px;
+  padding: .6rem .7rem;
   white-space: nowrap;
-  width: auto;
 
   .button-inner-label {
     label {
@@ -24,15 +37,26 @@
 
   svg {
     display: inline-block;
+    fill: #656565;
   }
 
   kbd {
-    font-size: 14px;
+    font-size: .875rem;
     font-family: consolas, menlo, monospace !important;
     white-space: nowrap;
-    padding: 0 2px;
+    padding: 0 .125rem;
     border: 1px solid #f1f1f1;
-    border-radius: 3px;
+    border-radius: .188rem;
     background: #fafafa;
+  }
+
+  @include max-mobile {
+    .button-inner-label label, kbd {
+      display: none;
+    }
+  }
+
+  @include tablet {
+    min-width: 300px;
   }
 }

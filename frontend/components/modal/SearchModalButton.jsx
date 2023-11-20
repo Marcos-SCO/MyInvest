@@ -13,7 +13,7 @@ export default function SearchModalButton() {
     <button className="search-button" onClick={() => openModalHandler('search-bar')}>
 
       <div className="button-inner-label">
-        <DisplaySvg name="magnifyingGlass" width="23" height="23" />
+        <DisplaySvg name="magnifyingGlass" width="24" height="24" />
         <label>Procurar ativos...</label>
       </div>
 
