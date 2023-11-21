@@ -12,7 +12,7 @@
     max-width: 1200px;
     padding: 0;
 
-    @include max-mobile {
+    @include max-desktop {
       width: 90%;
     }
 

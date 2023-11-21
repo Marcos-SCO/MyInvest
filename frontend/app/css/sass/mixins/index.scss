@@ -1,6 +1,13 @@
 /* Mobile Size */
+
 @mixin max-mobile {
-  @media (max-width: 767px) {
+  @media (max-width: 640px) {
+    @content;
+  }
+}
+
+@mixin max-tablet {
+  @media (max-width: 767.9px) {
     @content;
   }
 }
@@ -12,8 +19,8 @@
   }
 }
 
-@mixin max-tablet {
-  @media (max-width: 1024px) {
+@mixin max-desktop {
+  @media (max-width: 1023.9px) {
     @content;
   }
 }

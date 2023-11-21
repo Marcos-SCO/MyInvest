@@ -28,7 +28,7 @@
 body {
   min-height: 500px;
 
-  @include max-mobile {
+  @include max-tablet {
     &::-webkit-scrollbar {
       display: none;
 

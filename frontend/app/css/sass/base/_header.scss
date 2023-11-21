@@ -58,7 +58,7 @@
     background: #fafafa;
   }
 
-  @include max-mobile {
+  @include max-tablet {
 
     .button-inner-label label,
     kbd {

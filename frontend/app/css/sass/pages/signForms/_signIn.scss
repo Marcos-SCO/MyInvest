@@ -67,10 +67,10 @@
 
 .form-message-container,
 .form-container {
-  width: 100%;
-
-  @include tablet {
-    width: 50%;
+  width: 50%;
+  
+  @include max-mobile {
+    width: 100%;
   }
 }
 
@@ -119,7 +119,7 @@
     line-height: 30.26px;
   }
 
-  @include max-tablet {
+  @include max-desktop {
 
     .form-title {
       font-size: 1.575rem;

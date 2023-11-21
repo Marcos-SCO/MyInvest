@@ -1,14 +1,15 @@
-.content-header {
-  // @include desktop {
-  //   display: flex!important;
-  // }
-}
-
 .my-account-button-container {
   cursor: pointer;
 
+  .button-text {
+    font-size: 1.1rem;
+    line-height: initial;
+  }
+
   @include desktop {
     margin-left: 1rem;
+
+    line-height: 24px;
   }
 }
 
@@ -42,7 +43,7 @@
 
 
 .navLinksContent {
-  @include max-tablet {
+  @include max-desktop {
     display: flex;
     flex-direction: column !important;
     align-items: initial !important;
@@ -105,6 +106,10 @@
 }
 
 .header-profile-actions {
+  a {
+    width: 100%;
+  }
+
   .profile-login {
     display: flex;
     flex-direction: column;
@@ -128,9 +133,9 @@
 }
 
 .user-header-container {
-  @include max-tablet {
+  @include max-desktop {
     align-items: baseline !important;
-    position: absolute;
+    // position: absolute;
     top: 2rem;
     right: 1.5rem;
   }
@@ -143,8 +148,16 @@
   // background-color: #f3f5f9 !important;
   background-color: #dfe3ec !important;
 
+  &>div {
+    flex-grow: initial !important;
+  }
+
   .text-primary {
     color: initial !important;
+  }
+
+  a {
+    width: 100%;
   }
 
   a,
