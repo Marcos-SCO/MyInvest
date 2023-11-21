@@ -12,15 +12,13 @@ export default async function Home() {
 
   return (
     <>
-      <ChangePageAttributes pageName="home"/>
-      <div className='grid place-items-center h-screen -mt-24'>
+      <ChangePageAttributes pageName="home" />
 
-        <div>
-          <h1 className="text-lg">Aplicação em progresso!!!</h1>
-          {session && <Link className="font-bold text-lg text-green-700 text-center" href={'/admin'}>Ir para o Admin</Link>}
-        </div>
-
+      <div>
+        <h1 className="text-lg">Aplicação em progresso!!!</h1>
+        {session && <Link className="font-bold text-lg text-green-700 text-center" href={'/admin'}>Ir para o Admin</Link>}
       </div>
+
     </>
   );
 }

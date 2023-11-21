@@ -8,7 +8,6 @@ export default function Header({ ...props }) {
   const { childrenSegment = '' } = props;
 
   // const pathname = usePathname();
-
   // console.log(pathname);
 
   return (

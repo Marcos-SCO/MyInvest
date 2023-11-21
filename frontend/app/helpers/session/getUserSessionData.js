@@ -6,7 +6,12 @@ export async function getUserSessionData(session) {
     credentialSession ? credentialSession : session;
 
   const id = sessionData?.id;
-  const name = sessionData?.name;
+
+  const name = credentialSession
+    ? credentialSession?.fullName
+    : sessionData?.name;
+
+  const email = sessionData?.email ?? false;
 
   const firstName = name?.split(' ')?.[0];
 
@@ -14,11 +19,15 @@ export async function getUserSessionData(session) {
 
   const token = session?.token ?? false;
 
+  const image = sessionData?.image ?? false;
+
   return {
     id,
     userId,
+    email,
     name,
     firstName,
+    image,
     token
   }
 }

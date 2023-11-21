@@ -74,7 +74,11 @@ export default function SignInForm() {
       return;
     }
 
-    router.replace('/admin');
+    // router.replace('/admin');
+    // shallow perform a full reload
+    // router.push('/admin', undefined, { shallow: false });
+
+    window.location.href = "/admin";
   }
 
   return (

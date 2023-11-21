@@ -15,6 +15,8 @@
 
 - flowbite: npm i flowbite-react
 
+- nextUI: npm i @nextui-org/react framer-motion
+
 - nextjs-toploader: npm install nextjs-toploader
 
 ## Tailwind

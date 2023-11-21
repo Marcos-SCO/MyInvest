@@ -27,6 +27,14 @@
 
 body {
   min-height: 500px;
+
+  @include max-mobile {
+    &::-webkit-scrollbar {
+      display: none;
+
+      scrollbar-width: none;
+    }
+  }
 }
 
 html, body {
@@ -61,4 +69,10 @@ img {
 
 .myInvestLogo {
   // margin: auto;
+
+  transition: transform .1s ease-in-out;
+
+  &:focus, &:hover {
+    transform:  translateY(-0.09rem);
+  }
 }

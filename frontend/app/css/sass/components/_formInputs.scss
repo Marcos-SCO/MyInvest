@@ -40,6 +40,15 @@
       // width: 100%;
     }
   }
+
+  button {
+    transition: transform .1s ease-in-out;
+
+    &:focus,
+    &:hover {
+      transform:  translateY(-0.09rem);
+    }
+  }
 }
 
 form {
@@ -118,7 +127,6 @@ form {
 }
 
 .google-button {
-
   padding: .45rem;
   font-weight: 500;
   font-family: 'inter',

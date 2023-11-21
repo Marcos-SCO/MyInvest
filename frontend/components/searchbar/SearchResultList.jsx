@@ -31,7 +31,7 @@ function SearchResultsList({ results }) {
   return (
     <>
       {feedBackMessage && <div className={`results-list display-results`}>
-        <p className='p-5'>{feedBackMessage}</p>
+        <p>{feedBackMessage}</p>
       </div>}
 
       {!feedBackMessage && <div className={`results-list${isDisplayingResults}`}>
@@ -62,7 +62,7 @@ function SearchResultsList({ results }) {
       </div>}
 
       {!feedBackMessage && !isThereSearchResults && <div className={`results-list display-results`}>
-        <p className='p-5'>Pesquise por tickers ou nome de ativos</p>
+        <p>Pesquise por tickers ou nome de ativos</p>
       </div>}
 
     </>

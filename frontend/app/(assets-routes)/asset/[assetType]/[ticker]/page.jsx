@@ -79,9 +79,9 @@ export default async function Page({ params }) {
     <>
       <ChangePageAttributes pageName="asset" />
 
-      <div className=''>
+      <div className='asset-page-container'>
 
-        <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="flex flex-1 flex-col justify-center py-12">
 
           <AddPriceAlert sessionProp={session} assetId={assetId} assetTicker={ticker} assetCurrentPrice={currentPrice} />
 

@@ -1,0 +1,160 @@
+.content-header {
+  // @include desktop {
+  //   display: flex!important;
+  // }
+}
+
+.my-account-button-container {
+  cursor: pointer;
+
+  @include desktop {
+    margin-left: 1rem;
+  }
+}
+
+.credential-button {
+  margin-left: 1rem !important;
+
+  background-color: $primary !important;
+  outline: $primary !important;
+
+  min-height: 42px;
+  min-width: 42px;
+
+  &.no-shadow {
+    box-shadow: none !important;
+  }
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  svg {
+    padding: .2rem;
+
+    path {
+      stroke: #fff;
+    }
+  }
+}
+
+
+.navLinksContent {
+  @include max-tablet {
+    display: flex;
+    flex-direction: column !important;
+    align-items: initial !important;
+    justify-content: flex-start;
+    flex-grow: 0 !important;
+  }
+}
+
+.main-nav-inner-container {
+  background: none !important;
+  border: none;
+
+  border: none;
+  height: initial !important;
+
+  --navbar-height: initial !important;
+
+  max-height: inherit !important;
+
+  margin-left: 1rem;
+
+  .text-primary {
+    color: initial !important;
+  }
+
+  .hamburger-menu {
+    transition: transform .1s ease-in-out;
+
+    padding: 1.265rem 1.5rem;
+    background: #f3f5f9;
+    border: 1px solid #e5e8ed;
+    border-radius: 4px;
+
+    outline: none;
+  }
+
+  @include desktop {
+    margin-left: 2rem;
+
+    .hamburger-menu {
+
+      &:focus,
+      &:hover {
+        transform: translateY(-0.09rem);
+      }
+    }
+  }
+
+  header,
+  .header {
+    padding: 0;
+    border: none;
+  }
+
+  a,
+  li {
+    outline: none;
+  }
+
+}
+
+.header-profile-actions {
+  .profile-login {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .text-primary {
+    color: initial !important;
+  }
+}
+
+.main-nav-content,
+.nav-mobile-container {
+
+  a,
+  button,
+  li {
+    font-size: 1.1rem;
+    outline: none;
+  }
+}
+
+.user-header-container {
+  @include max-tablet {
+    align-items: baseline !important;
+    position: absolute;
+    top: 2rem;
+    right: 1.5rem;
+  }
+}
+
+.nav-mobile-container {
+  padding-top: 1.5rem !important;
+
+  margin-top: 3rem;
+  // background-color: #f3f5f9 !important;
+  background-color: #dfe3ec !important;
+
+  .text-primary {
+    color: initial !important;
+  }
+
+  a,
+  li {
+    font-size: 1.1rem;
+    margin: .5rem 0;
+    outline: none;
+  }
+
+  .avatar-button {
+    margin-right: .5rem;
+  }
+}

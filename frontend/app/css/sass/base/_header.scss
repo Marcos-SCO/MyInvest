@@ -1,4 +1,5 @@
-.page-home, .page-__PAGE__ {
+.page-home,
+.page-__PAGE__ {
   .main-header {
     box-shadow: none;
   }
@@ -6,6 +7,12 @@
 
 .search-button {
   cursor: pointer;
+
+  transition: transform .1s ease-in-out;
+
+  &:focus, &:hover {
+    transform:  translateY(-0.09rem);
+  }
 
   display: flex;
   justify-content: space-between;
@@ -16,13 +23,13 @@
   width: auto;
   width: 100%;
   max-width: 300px;
-  
+
   font-weight: 400;
 
   background: #f3f5f9;
   border: 1px solid #e5e8ed;
   border-radius: 4px;
-  
+
   font-size: .875rem;
   line-height: 21px;
   overflow-x: hidden;
@@ -31,6 +38,7 @@
 
   .button-inner-label {
     label {
+      cursor: pointer;
       margin-left: .5rem;
     }
   }
@@ -51,7 +59,9 @@
   }
 
   @include max-mobile {
-    .button-inner-label label, kbd {
+
+    .button-inner-label label,
+    kbd {
       display: none;
     }
   }

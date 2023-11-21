@@ -64,6 +64,9 @@
 
 .search-bar-header-container {
   // position: relative;
+  display: flex;
+  align-items: center;
+
   cursor: pointer;
 
   .search-bar-container {

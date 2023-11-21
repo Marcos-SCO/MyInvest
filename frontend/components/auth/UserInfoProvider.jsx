@@ -10,7 +10,7 @@ export default async function UserInfoProvider() {
 
   const { image, name, email } = session;
 
-  console.log('UserInfoProvider - my session: ', session);
+  // console.log('UserInfoProvider - my session: ', session);
 
   return (
     <>

@@ -14,7 +14,7 @@ export default async function Admin() {
     credentialSession ? credentialSession : session;
 
   return (
-    <div className="w-full h-screen flex flex-col items-center justify-center p-10">
+    <div className="w-full flex flex-col items-center justify-center p-10">
 
       {!image && <div>
         <h1 className="text-2xl mb-8">Olá, {name}. Bem vindo(a)!</h1>

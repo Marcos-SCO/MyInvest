@@ -76,6 +76,6 @@ export default function RootLayout({ children }) {
           </ModalProvider>
         </NextAuthSessionProvider>
       </body>
-    </html>
+    </html >
   )
 }
