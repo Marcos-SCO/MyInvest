@@ -7,8 +7,8 @@ import { getUserSessionData } from "../../app/helpers/session/getUserSessionData
 import LoginControls from "components/auth/LoginControls";
 import DisplaySvg from 'app/helpers/svg/DisplaySvg';
 import SearchModalButton from "../modal/SearchModalButton";
-import UserDropDown from "components/base/UserDropDown";
 
+import MenuDrop from "components/base/MenuDrop";
 
 export default async function Navbar() {
 
@@ -29,7 +29,7 @@ export default async function Navbar() {
             <SearchModalButton />
           </div>
 
-          <UserDropDown userSessionData={userSessionData} />
+          <MenuDrop userSessionData={userSessionData} />
 
           {/* <LoginControls session={session} /> */}
         </div>

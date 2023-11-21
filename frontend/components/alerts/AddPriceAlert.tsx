@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { addPriceAlert } from 'app/api/assets/userAlerts/addPriceAlert';
+import { addPriceAlert } from '../../app/api/assets/userAlerts/addPriceAlert';
 import { getServerSession } from 'next-auth';
-import { nextAuthOptions } from 'app/api/auth/[...nextauth]/route';
+import { nextAuthOptions } from '../../app/api/auth/[...nextauth]/route';
 import { getUserSessionData } from '../../app/helpers/session/getUserSessionData';
 
 import AlertPriceForm from './form/AlertPriceForm';

@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 // import Link from 'next/link';
 
 import { signIn, signOut, useSession } from "next-auth/react";
@@ -13,16 +13,42 @@ import DisplaySvg from '../../app/helpers/svg/DisplaySvg';
 
 const baseUrl = process.env.FRONT_END_BASE_URL;
 
-export default function UserDropDown({ ...props }) {
+export default function MenuDrop({ ...props }) {
   const { userSessionData } = props;
 
   const { name, email, firstName, userId, image = false } = userSessionData;
 
   const sessionHasToken = userSessionData?.token;
 
-  // const dimensions = useWindowDimensions();
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const closeMenuOnOutsideClick = (event) => {
+      const currentReference = dropdownRef.current;
+
+      const isUserClickInMenu =
+        currentReference && !currentReference.contains(event.target);
+
+      if (!isUserClickInMenu) return;
+
+      setIsMenuOpen(false);
+    };
+
+    const handleDocumentClick = (event) => {
+      closeMenuOnOutsideClick(event);
+    };
+
+    // Attach the event listener when the component mounts
+    document.addEventListener('click', handleDocumentClick);
+
+    // Detach the event listener when the component unmounts
+    return () => {
+      document.removeEventListener('click', handleDocumentClick);
+    };
+  }, []);
 
   function navBarContent() {
     return (
@@ -64,20 +90,20 @@ export default function UserDropDown({ ...props }) {
           </NavbarContent>
         </NavbarContent>
 
-        <NavbarContent as="div" className="user-header-container items-center" justify="end">
+        <NavbarContent as="div" className="user-header-container items-center" justify="start">
 
           {(sessionHasToken) &&
-            <Dropdown placement="bottom-end">
+            <Dropdown placement="bottom-start">
 
               <DropdownTrigger>
-                <div className='my-account-button-container flex items-center'>
-                  <span className=''>Minha conta</span>
+                <li className='my-account-button-container flex items-center'>
+                  <span className='button-text'>Minha conta</span>
                   {image
-                    ? (<Avatar isBordered as="button" className="no-shadow transition-transform credential-button" color="secondary" name={name} size="sm" src={image} />)
-                    : (<button className="no-shadow credential-button flex relative justify-center items-center box-border overflow-hidden align-middle outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 w-8 h-8 text-tiny bg-secondary text-secondary-foreground rounded-full ring-2 ring-offset-2 ring-offset-background dark:ring-offset-background-dark ring-secondary z-10 aria-expanded:scale-[0.97] aria-expanded:opacity-70 subpixel-antialiased transition-transform">
+                    ? <Avatar isBordered as="button" className="no-shadow transition-transform credential-button" color="secondary" name={name} size="sm" src={image} />
+                    : <button className="no-shadow credential-button flex relative justify-center items-center box-border overflow-hidden align-middle outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 w-8 h-8 text-tiny bg-secondary text-secondary-foreground rounded-full ring-2 ring-offset-2 ring-offset-background dark:ring-offset-background-dark ring-secondary z-10 aria-expanded:scale-[0.97] aria-expanded:opacity-70 subpixel-antialiased transition-transform">
                       <DisplaySvg name="userAvatar" width="32" height="32" />
-                    </button>)}
-                </div>
+                    </button>}
+                </li>
               </DropdownTrigger>
 
               <DropdownMenu aria-label="Profile Actions" variant="flat" className="header-profile-actions">
@@ -116,6 +142,7 @@ export default function UserDropDown({ ...props }) {
         isBlurred={false}
         onMenuOpenChange={setIsMenuOpen}
         as="div"
+        ref={dropdownRef}
       >
         <NavbarContent as="div" className="nav-bar-content lg:hidden" justify="start">
           <NavbarMenuToggle className="hamburger-menu" aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
@@ -130,36 +157,6 @@ export default function UserDropDown({ ...props }) {
         </NavbarMenu>
 
       </Navbar>
-
-      {/* <Navbar fluid rounded>
-        <Navbar.Toggle />
-        <Navbar.Collapse>
-          <Navbar.Link href="#">
-            Home
-          </Navbar.Link>
-
-          <Navbar.Link href="#">Services</Navbar.Link>
-          <Navbar.Link href="#">Pricing</Navbar.Link>
-          <Navbar.Link href="#">Contact</Navbar.Link>
-
-          {(!sessionHasToken) &&
-            <div className="flex md:order-2">
-              <Button>Get started</Button>
-            </div>}
-
-          {(sessionHasToken) &&
-            <Dropdown label={userAvatar} data-user-id={userId} inline>
-              <Dropdown.Item>
-                <Link href={`${baseUrl}/admin`}>
-                  {name}
-                </Link>
-              </Dropdown.Item>
-              <Dropdown.Item>{email}</Dropdown.Item>
-              <Dropdown.Item onClick={() => signOut()}>Sair</Dropdown.Item>
-            </Dropdown>}
-
-        </Navbar.Collapse>
-      </Navbar> */}
     </>
   )
 }
