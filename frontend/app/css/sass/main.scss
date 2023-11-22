@@ -37,7 +37,8 @@ body {
   }
 }
 
-html, body {
+html,
+body {
   overflow-x: hidden;
   width: 100%;
   height: 100%;
@@ -46,22 +47,26 @@ html, body {
 body.modal-open {
   @include tablet {
     // overflow-y: visible!important;
-    overflow: visible!important;
-    padding-right: initial!important;
+    overflow: visible !important;
+    padding-right: initial !important;
   }
 }
 
-a, button {
+a,
+button,
+.myButton {
   transition: transform .1s ease-in-out;
 
-  &:focus, &:hover {
-    transform:  translateY(-0.09rem);
+  &:focus,
+  &:hover {
+    transform: translateY(-0.09rem);
   }
 }
 
-a, button {
+a,
+button {
   transition: opacity .5s ease-in-out;
-  
+
   &:hover {
     opacity: .9;
   }
@@ -77,4 +82,51 @@ img {
 
 .myInvestLogo {
   // margin: auto;
+}
+
+.myButton {
+  cursor: pointer;
+  padding: 0.7rem 0.75rem;
+  color: #fff;
+  background-color: $primary;
+  border-radius: 6px;
+  outline: none;
+
+  transition: all .2s ease-in-out;
+
+  text-align: center;
+
+  span {
+    width: 100%;
+  }
+
+  &:hover {
+    background-color: rgb(14 70 144);
+  }
+
+  &.transparent {
+    color: initial;
+    background-color: initial;
+
+    &:hover {
+      background-color: rgb(227, 232, 244);
+    }
+  }
+
+  display: flex;
+  align-items: center;
+
+  font-size: 1rem;
+
+  @include desktop {
+    font-size: 1.15rem;
+  }
+
+  @include wide {
+    padding: .75rem;
+    line-height: 24.2px;
+    font-size: 1.25rem;
+    min-height: 24px;
+  }
+
 }

@@ -17,3 +17,7 @@ body {
 .main-header {
   @apply shadow-md
 }
+
+.main-container {
+  @apply max-w-6xl mx-auto px-5;
+}
