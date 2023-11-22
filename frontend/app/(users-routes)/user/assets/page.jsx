@@ -3,7 +3,9 @@ import UserAssets from './UserAssets';
 export default async function Index() {
   return (
     <>
-      <UserAssets />
+      <main className='main-container'>
+        <UserAssets />
+      </main>
     </>
   )
 }

@@ -3,8 +3,8 @@ import Header from 'components/base/Header';
 // Styles
 import './css/sass/main.scss';
 import './css/globals.css';
-
 import { Inter } from 'next/font/google';
+
 import { NextAuthSessionProvider } from './providers/sessionProvider';
 
 import { UrlChangeListener } from './hooks/UrlChangeListener';
@@ -33,14 +33,11 @@ function renderChildrenWithHeader(children) {
     <>
       <ProgressBar />
       <Header childrenSegment={childrenSegment} />
-
       <SearchModalContainer modalId="search-bar">
         <SearchBar />
       </SearchModalContainer>
 
-      <main className={`max-w-6xl mx-auto px-5`}>
-        {children}
-      </main>
+      {children}
     </>
   )
 }

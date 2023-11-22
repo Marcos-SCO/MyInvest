@@ -77,29 +77,31 @@ export default async function Page({ params }) {
 
   return (
     <>
-      <ChangePageAttributes pageName="asset" />
+      <main className='main-container'>
+        <ChangePageAttributes pageName="asset" />
 
-      <div className='asset-page-container'>
+        <div className='asset-page-container'>
 
-        <div className="flex flex-1 flex-col justify-center py-12">
+          <div className="flex flex-1 flex-col justify-center py-12">
 
-          <AddPriceAlert sessionProp={session} assetId={assetId} assetTicker={ticker} assetCurrentPrice={currentPrice} />
+            <AddPriceAlert sessionProp={session} assetId={assetId} assetTicker={ticker} assetCurrentPrice={currentPrice} />
 
-          {userId && <UserAssetButtons assetId={assetId} userId={userId} />}
+            {userId && <UserAssetButtons assetId={assetId} userId={userId} />}
 
-          <Image src={assetLogoUrl} width={50} height={50} alt={assetLongName} title={assetLongName} loading="eager" />
+            <Image src={assetLogoUrl} width={50} height={50} alt={assetLongName} title={assetLongName} loading="eager" />
 
-          <p>{assetLongName}</p>
-          <p><strong>Ticker</strong>: {ticker}</p>
-          <p><strong>Preço Atual</strong>: {currentPrice}</p>
+            <p>{assetLongName}</p>
+            <p><strong>Ticker</strong>: {ticker}</p>
+            <p><strong>Preço Atual</strong>: {currentPrice}</p>
 
 
-          <br />
+            <br />
 
-          {historicalDataPrice && <ZoomableTimeSeriesChart objData={historicalDataPrice} assetType={type} />}
+            {historicalDataPrice && <ZoomableTimeSeriesChart objData={historicalDataPrice} assetType={type} />}
 
-        </div>
-      </div >
+          </div>
+        </div >
+      </main>
     </>
   )
 }

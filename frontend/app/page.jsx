@@ -5,6 +5,11 @@ import { getServerSession } from "next-auth";
 
 import ChangePageAttributes from "app/hooks/ChangePageAttributes";
 
+import SearchModalButton from "../components/modal/SearchModalButton";
+import SearchBar from "../components/searchBar/layout";
+
+import MainHero from '../components/sections/MainHero';
+
 export const metadata = {}
 
 export default async function Home() {
@@ -12,13 +17,10 @@ export default async function Home() {
 
   return (
     <>
-      <ChangePageAttributes pageName="home" />
-
       <div>
-        <h1 className="text-lg">Aplicação em progresso!!!</h1>
-        {session && <Link className="font-bold text-lg text-green-700 text-center" href={'/admin'}>Ir para o Admin</Link>}
+        <ChangePageAttributes pageName="home" />
+        <MainHero />
       </div>
-
     </>
   );
 }

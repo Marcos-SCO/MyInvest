@@ -6,7 +6,9 @@ export default async function Page(context) {
 
   return (
     <>
-      <UserAssets page={pageNumber} />
+      <main className='main-container'>
+        <UserAssets page={pageNumber} />
+      </main>
     </>
   )
 }
