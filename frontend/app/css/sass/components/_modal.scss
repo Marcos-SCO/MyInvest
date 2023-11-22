@@ -8,11 +8,11 @@
     height: auto;
     position: absolute;
     top: 15%;
-    width: 70%;
-    max-width: 1200px;
+    width: 60%;
+    max-width: 980px;
     padding: 0;
 
-    @include max-desktop {
+    @include max-tablet {
       width: 90%;
     }
 

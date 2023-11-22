@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-// import Link from 'next/link';
 
 import { signIn, signOut, useSession } from "next-auth/react";
 
@@ -73,26 +72,28 @@ export default function MenuDrop({ ...props }) {
 
             {(!sessionHasToken) && (
               <>
-                <NavbarItem>
-                  <Link href={`${baseUrl}/signIn`}>
-                    Login
-                  </Link>
-                </NavbarItem>
+                <NavbarContent className='flex lg:ml-2 header-buttons-container'>
+                  <NavbarItem className='li-button'>
+                    <Link href={`${baseUrl}/signIn`} className='menu-button transparent'>
+                      Login
+                    </Link>
+                  </NavbarItem>
 
-                <NavbarItem>
-                  <Link href={`${baseUrl}/signUp`} className="bg-slate-900 text-white p-3 rounded-md">
-                    Criar conta
-                  </Link>
-                </NavbarItem>
+                  <NavbarItem className='li-button'>
+                    <Link href={`${baseUrl}/signUp`} className="menu-button">
+                      Criar conta
+                    </Link>
+                  </NavbarItem>
+                </NavbarContent>
               </>
             )}
 
           </NavbarContent>
         </NavbarContent>
 
-        <NavbarContent as="div" className="user-header-container items-center" justify="start">
+        {(sessionHasToken) &&
+          <NavbarContent as="div" className="user-header-container items-center" justify="start">
 
-          {(sessionHasToken) &&
             <Dropdown placement="bottom-start">
 
               <DropdownTrigger>
@@ -127,9 +128,9 @@ export default function MenuDrop({ ...props }) {
                 </DropdownItem>
 
               </DropdownMenu>
-            </Dropdown>}
+            </Dropdown>
 
-        </NavbarContent>
+          </NavbarContent>}
 
       </>)
   }

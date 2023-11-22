@@ -1,3 +1,57 @@
+.nav-bar-container {
+  .menuDrop-container {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.nav-bar-container,
+.nav-mobile-container {
+  .menu-button {
+    padding: 0.7rem 0.75rem;
+    color: #fff;
+    background-color: $primary;
+    border-radius: 6px;
+    outline: none;
+
+    transition: all .2s ease-in-out;
+
+    &:hover {
+      background-color: rgb(14 70 144);
+    }
+
+    &.transparent {
+      color: initial;
+      background-color: initial;
+
+      &:hover {
+        background-color: rgb(227, 232, 244);
+      }
+    }
+  }
+
+  @include max-desktop {
+    .header-buttons-container {
+      flex-direction: column;
+
+      .li-button {
+        align-self: flex-start;
+      }
+
+      .menu-button {
+        margin: auto;
+        width: 100%;
+        // min-width: 116px;
+
+        &.transparent {
+          background-color: #fff;
+        }
+      }
+    }
+  }
+
+}
+
 .my-account-button-container {
   cursor: pointer;
 
@@ -10,6 +64,8 @@
     margin-left: 1rem;
 
     line-height: 24px;
+
+    margin-top: .15rem;
   }
 }
 
@@ -65,8 +121,8 @@
 
   margin-left: 1rem;
 
-  .text-primary {
-    color: initial !important;
+  a {
+    color: #000;
   }
 
   .hamburger-menu {
@@ -76,6 +132,9 @@
     background: #f3f5f9;
     border: 1px solid #e5e8ed;
     border-radius: 4px;
+
+    min-height: 48px;
+    min-width: 48px;
 
     outline: none;
   }
@@ -145,18 +204,16 @@
   padding-top: 1.5rem !important;
 
   margin-top: 3rem;
-  // background-color: #f3f5f9 !important;
-  background-color: #dfe3ec !important;
+  background-color: #f3f5f9 !important;
+  // background-color: #dfe3ec !important;
 
   &>div {
     flex-grow: initial !important;
   }
 
-  .text-primary {
-    color: initial !important;
-  }
 
   a {
+    color: #000;
     width: 100%;
   }
 

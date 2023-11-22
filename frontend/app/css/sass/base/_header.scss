@@ -8,12 +8,6 @@
 .search-button {
   cursor: pointer;
 
-  transition: transform .1s ease-in-out;
-
-  &:focus, &:hover {
-    transform:  translateY(-0.09rem);
-  }
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -33,7 +27,7 @@
   font-size: .875rem;
   line-height: 21px;
   overflow-x: hidden;
-  padding: .6rem .7rem;
+  padding: .7rem .7rem;
   white-space: nowrap;
 
   .button-inner-label {

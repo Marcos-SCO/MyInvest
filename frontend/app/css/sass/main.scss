@@ -52,6 +52,14 @@ body.modal-open {
 }
 
 a, button {
+  transition: transform .1s ease-in-out;
+
+  &:focus, &:hover {
+    transform:  translateY(-0.09rem);
+  }
+}
+
+a, button {
   transition: opacity .5s ease-in-out;
   
   &:hover {
@@ -69,10 +77,4 @@ img {
 
 .myInvestLogo {
   // margin: auto;
-
-  transition: transform .1s ease-in-out;
-
-  &:focus, &:hover {
-    transform:  translateY(-0.09rem);
-  }
 }
