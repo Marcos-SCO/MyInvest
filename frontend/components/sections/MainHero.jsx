@@ -5,6 +5,8 @@ import Link from 'next/link';
 
 const baseUrl = process.env.FRONT_END_BASE_URL;
 
+import DisplaySvg from '../../app/helpers/svg/DisplaySvg';
+
 export default function MainHero({ ...props }) {
 
   const { id, name, userId, firstName, token } = props?.userSession;
@@ -36,13 +38,13 @@ export default function MainHero({ ...props }) {
                 <span>Cadastre-se com seu e-mail</span>
               </a>
             </div>}
-            
+
             {userId && <div className='button-container user-logged'>
               <a href={`${baseUrl}/user/assets`} className="myButton">
-                <span>Acesse seus favoritos</span>
+                <span><DisplaySvg name='checkCircle' width="28" height="28" /> Acesse seus favoritos</span>
               </a>
               <a href={`${baseUrl}/user/alerts`} className="myButton">
-                <span>Veja seus alertas</span>
+                <span><DisplaySvg name='bell' width="28" height="28" /> Veja seus alertas</span>
               </a>
             </div>}
 
