@@ -80,16 +80,15 @@ export default async function UserAssetsList({ ...props }) {
 
             <AssetFavButton assetId={id} userId={userId} />
 
-            <a className="priceAlertModalButton myButton white" href={`${baseUrl}/asset/${assetSlug}/${name}/#price-modal`} >
+            {/* <a className="priceAlertModalButton myButton white" href={`${baseUrl}/asset/${assetSlug}/${name}/#price-modal`} >
               Definir Alerta de preço
-            </a>
+            </a> */}
 
             <button rel="prefetch" data-href={`${baseUrl}/asset/${assetSlug}/${name}`} className="block p-2 w-40 border border-gray-300 rounded-md mb-2" onClick={(e) => {
-              // window.location.href = `${ baseUrl }/asset/${assetSlug}/${name}`;
+              window.location.href = `${baseUrl}/asset/${assetSlug}/${name}/` + '#price-modal';
+            }}>Definir Alerta de preço</button>
 
-              window.history.pushState({}, '', `${ baseUrl }/asset/${assetSlug}/${name}` + '#price-modal');
-
-            }}>Ir até a página do ativo</button>
+            <Link rel="prefetch" href={`${baseUrl}/asset/${assetSlug}/${name}`} className="block p-2 w-40 border border-gray-300 rounded-md mb-2">Ir até a página do ativo</Link>
 
             <Image src={assetLogoUrl} width={50} height={50} alt={name} title={name} loading={applyLazyOrEager} />
 
