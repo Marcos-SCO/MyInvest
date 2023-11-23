@@ -9,8 +9,8 @@ import { fetchUserAssets } from "app/api/assets/userAssets/fetchUserAssets";
 import AssetFavButton from "components/assetButtons/layout";
 import { getAssetTypeDescription, formatCurrency } from "../../../helpers/assets";
 
-import AssetDetails from "components/assets/AssetDetails";
-import StockAssetDetails from "components/assets/StockAssetDetails";
+import SymbolsBr from "../../../../components/assets/SymbolsBr";
+import SymbolsUs from "../../../../components/assets/SymbolsUs";
 
 import OpenModalContainer from '../../../../components/modal/OpenModalHandler';
 
@@ -63,13 +63,7 @@ export default async function UserAssetsList({ ...props }) {
         const assetLogoUrl = assetDetails?.assetIcon
           ?? 'https://brapi.dev/favicon.svg';
 
-        if (isStockAsset) {
-          // console.log(symbolsData);
-        }
-
         const currentPrice = formatCurrency(assetDetails?.currentPrice);
-
-        const symbolProps = { id, name, symbolsData, nameDescription, assetSlug, currentPrice };
 
         countItens += 1;
         const applyLazyOrEager = countItens <= 2
@@ -92,9 +86,11 @@ export default async function UserAssetsList({ ...props }) {
 
             <Image src={assetLogoUrl} width={50} height={50} alt={name} title={name} loading={applyLazyOrEager} />
 
-            {!isStockAsset && <AssetDetails symbolProps={symbolProps} />}
+            {!isStockAsset && <SymbolsBr symbols={symbolsData} />}
 
-            {isStockAsset && <StockAssetDetails symbolProps={symbolProps} />}
+            {isStockAsset && <SymbolsUs symbols={symbolsData} />}
+
+            <p>Preço atual: {currentPrice}</p>
 
           </div>
         );
