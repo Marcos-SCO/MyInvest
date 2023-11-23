@@ -83,7 +83,9 @@ const ZoomableTimeSeriesChart = (props) => {
               const closePrice = dataItem.close;
 
               const toFixedValue = closePrice.toFixed(2);
-              const priceValue = assetType == 1 ? `R$ ${toFixedValue}` : `$${toFixedValue}`;
+              const isBrazilianAsset = assetType == 1 || assetType == 3;
+
+              const priceValue = isBrazilianAsset ? `R$ ${toFixedValue}` : `$${toFixedValue}`;
 
               // You can add additional labels here
               return `${priceValue}`;

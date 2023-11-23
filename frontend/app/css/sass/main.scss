@@ -112,6 +112,26 @@ img {
       background-color: rgb(227, 232, 244);
     }
   }
+  
+  &.white {
+    color: initial;
+    background-color: #fff;
+    
+    &:hover {
+      background-color: #f2f2f2;
+    }
+    border: 1px solid #ccc;
+  }
+  
+  &.silver {
+    color: initial;
+    background-color: #f2f2f2;
+  
+    &:hover {
+      background-color: #f1f1f1;
+    }
+    
+  }
 
   display: flex;
   align-items: center;

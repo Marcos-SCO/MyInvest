@@ -40,7 +40,7 @@ export default function ItemButton({ isUserAsset, fetchObj }) {
 
   return (
     <button onClick={handleAsset} className="p-2 w-40 border border-gray-300 rounded-md mb-2">
-      {!userAsset ? 'Favoritar' : 'Remover dos favoritos'}
+      {!userAsset ? 'Seguir' : 'Deixar de seguir'}
     </button>
   );
 }

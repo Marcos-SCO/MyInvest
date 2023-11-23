@@ -1,0 +1,43 @@
+.authButtons-modal.modal-container {
+  &>div {
+    max-width: 580px;
+    width: 100%;
+    margin: auto;
+  }
+}
+
+.authButtons-modal {
+
+  .modal-body {
+    padding: 0;
+    padding: 1rem 1.5rem;
+  }
+
+  .tittle-container {
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.28rem;
+    max-width: 340px;
+    margin: 0 auto 1rem;
+  }
+
+  .button-container {
+
+    button,
+    a {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+
+      @include desktop {
+        font-size: 1rem !important;
+      }
+
+      @include max-mobile {
+        margin-bottom: 1rem;
+        width: 100%;
+      }
+
+    }
+  }
+
+}

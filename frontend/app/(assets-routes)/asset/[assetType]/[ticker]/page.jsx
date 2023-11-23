@@ -1,24 +1,35 @@
 import { nextAuthOptions } from "app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
+import dynamic from 'next/dynamic';
 
 import Image from "next/image";
-import { formatCurrency } from "../../../../helpers/assets";
+import { notFound } from "next/navigation";
+import { getUserSessionData } from "../../../../helpers/session/getUserSessionData";
 
+import { formatCurrency } from "../../../../helpers/assets";
 import { ZoomableTimeSeriesChart } from '../../charts/ZoomableTimeSeriesChart';
 
 import UserAssetButtons from './UserAssetButtons';
-import { notFound } from "next/navigation";
-import { getUserSessionData } from "../../../../helpers/session/getUserSessionData";
+
 import AddPriceAlert from "../../../../../components/alerts/AddPriceAlert";
+
 import { getAssetData } from "../../../../api/assets/getAssetData";
 
 import ChangePageAttributes from "app/hooks/ChangePageAttributes";
+
+import OpenModalContainer from '../../../../../components/modal/OpenModalHandler';
+
+import ModalContainer from '../../../../../components/modal/ModalContainer';
+
+import AuthButtonsTemplate from '../../../../../components/page/AuthButtonsTemplate';
+
+import AssetFavButton from "../../../../../components/assetButtons/layout";
 
 const API_BASE_URL = process.env.API_BASE_URL;
 
 export const metadata = {}
 
-export default async function Page({ params }) {
+export default async function Page({ params, onLoad }) {
   const { assetType, ticker } = params;
 
   metadata.title = `MyInvest - ${ticker}`;
@@ -75,6 +86,9 @@ export default async function Page({ params }) {
   const fiftyTwoWeekHigh =
     parsedHistoricalData?.fiftyTwoWeekHigh;
 
+  const HashClickAfterLoading =
+    dynamic(() => import('./HashClickAfterLoading'), { ssr: false });
+
   return (
     <>
       <main className='main-container'>
@@ -84,7 +98,25 @@ export default async function Page({ params }) {
 
           <div className="flex flex-1 flex-col justify-center py-12">
 
-            <AddPriceAlert sessionProp={session} assetId={assetId} assetTicker={ticker} assetCurrentPrice={currentPrice} />
+            {!userId && <ModalContainer modalId={'authContainer'} modalTitle="Faça login ou crie uma conta" className="authButtons-modal">
+              <AuthButtonsTemplate templateTitle="É necessário ter uma conta para acessar a funcionalidade" />
+            </ModalContainer>}
+
+            {userId && <ModalContainer modalId={'priceAlert'} modalTitle="Alerta de ativos">
+              <AddPriceAlert sessionProp={session} assetId={assetId} assetTicker={ticker} assetCurrentPrice={currentPrice} />
+            </ModalContainer>}
+
+            <OpenModalContainer className="priceAlertModalButton myButton white" modalId={userId ? `priceAlert` : 'authContainer'}>
+              Definir Alerta de preço
+            </OpenModalContainer>
+
+            {!userId && (
+              <OpenModalContainer modalId={`authContainer`} className={'followAssetButton myButton white'}>
+                Seguir ativo
+              </OpenModalContainer>
+            )}
+
+            {userId && <AssetFavButton assetId={assetId} userId={userId} />}
 
             {userId && <UserAssetButtons assetId={assetId} userId={userId} />}
 
@@ -98,6 +130,8 @@ export default async function Page({ params }) {
             <br />
 
             {historicalDataPrice && <ZoomableTimeSeriesChart objData={historicalDataPrice} assetType={type} />}
+
+            {<HashClickAfterLoading />}
 
           </div>
         </div >

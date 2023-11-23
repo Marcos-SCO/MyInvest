@@ -1,0 +1,115 @@
+.priceAlert-container.modal-container {
+  &>div {
+    max-width: 580px;
+    width: 100%;
+    margin: auto;
+  }
+}
+
+.alert-price-container {
+
+  .header-price-alert {
+    .myButton {
+      font-size: 1rem;
+    }
+
+    .info {
+      .ticker {
+        font-size: 2rem;
+        text-transform: uppercase;
+      }
+
+      .currentValue {
+        font-weight: 500;
+        font-size: 1.2rem;
+        span {
+          font-size: 1.5rem;
+          font-weight: 400;
+        }
+      }
+
+    }
+
+    @include max-mobile {
+      .link-container {
+        margin: 1.5rem 0 0!important;
+      }
+    }
+
+  }
+
+  .alert-container {
+
+    .form-main-content {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .input-container {
+      width: 100%;
+      max-width: 230px;
+
+      label {
+        margin-bottom: 1rem;
+      }
+
+      &.invalid {
+        color: #f00;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 0.6rem;
+        border-radius: 0.2rem;
+        border: 1px solid #ccc;
+        transition: 0.3s ease-in-out;
+
+        box-shadow: none;
+        outline: none;
+
+        &:focus {
+          border-color: $primary;
+        }
+        
+        &[focused=true] {
+          border-color: $primary;
+        }
+
+        &.invalid[focused=true] {
+          color: #f00;
+          border: 1px solid #f00;
+        }
+      }
+
+    }
+
+    .form-feed-back {}
+
+    .myButton-container {
+      .myButton {
+        background-color: $primary;
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+      }
+    }
+
+    @include max-mobile {
+      .form-main-content {
+        flex-direction: column;
+      }
+
+      .input-container {
+        max-width: 100%;
+
+        margin-bottom: 1rem;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+  }
+}

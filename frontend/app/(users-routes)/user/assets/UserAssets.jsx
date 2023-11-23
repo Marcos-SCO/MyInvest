@@ -12,8 +12,9 @@ export default async function UserAssets({ page }) {
 
   const session = await getServerSession(nextAuthOptions);
 
-  const { id, userId, name, firstName, token } =
-    await getUserSessionData(session);
+  const sessionData = await getUserSessionData(session);
+
+  const { id, userId, name, firstName, token } = sessionData;
 
   return (
     <div className="w-full flex flex-col items-center justify-center p-10">
@@ -22,7 +23,7 @@ export default async function UserAssets({ page }) {
 
       <>
         <Suspense fallback={<Loading />}>
-          <UserAssetsList userId={userId} page={page} />
+          <UserAssetsList userId={userId} page={page} session={sessionData} />
         </Suspense>
       </>
 

@@ -1,7 +1,7 @@
 const API_BASE_URL = process.env.API_BASE_URL;
 
 async function addPriceAlert(fetchObj) {
-  const { userId, assetId, expectedPrice, priceAlertType } = fetchObj;
+  const { userId, assetId, expectedPrice, priceAlertTypeId } = fetchObj;
 
   const backendUrl = `${API_BASE_URL}/assets/price/watch/`;
 
@@ -9,7 +9,7 @@ async function addPriceAlert(fetchObj) {
     userId,
     assetId,
     expectedPrice,
-    priceAlertType
+    priceAlertTypeId
   };
 
   const config = {

@@ -58,7 +58,8 @@
 
         .google-button,
         .myButton {
-          // max-height: 46px;
+          padding: .7rem .9rem;
+          min-height: 54px;
         }
 
         .google-button {
@@ -72,6 +73,29 @@
           background-color: #f3f5f9;
           color: #000;
 
+          span {
+            width: initial;
+          }
+
+          .svg-container {
+            margin-right: .3rem;
+
+            svg {
+              stroke: #005480;
+
+              & path {
+
+                stroke: #005480;
+              }
+            }
+          }
+
+          &>span {
+            width: 100%;
+            display: flex;
+            align-items: center;
+          }
+
 
           &:last-child {
             margin-left: 1rem;
@@ -83,7 +107,7 @@
 
         &.user-logged {
           .myButton {
-            min-width: 220px;
+            min-width: 225px;
           }
         }
       }
@@ -118,9 +142,9 @@
 
       .myButton,
       .google-button {
-        padding: .5rem;
-        font-size: 1.25rem;
-        line-height:inherit;
+        // padding: .5rem;
+        font-size: 1.2rem;
+        line-height: inherit;
         min-height: inherit;
       }
     }

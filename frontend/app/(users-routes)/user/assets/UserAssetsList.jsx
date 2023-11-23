@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Link from "next/link";
 import Image from 'next/image';
 
@@ -10,11 +12,16 @@ import { getAssetTypeDescription, formatCurrency } from "../../../helpers/assets
 import AssetDetails from "components/assets/AssetDetails";
 import StockAssetDetails from "components/assets/StockAssetDetails";
 
+import OpenModalContainer from '../../../../components/modal/OpenModalHandler';
+
 import { Pagination } from '../../../../components/page/Pagination';
 
 const baseUrl = process.env.NEXT_PUBLIC_FRONT_END_URL;
 
 export default async function UserAssetsList({ ...props }) {
+
+  const session = props?.session;
+
   const { userId, page = 1 } = props;
 
   const numberOfItens = 10;
@@ -73,7 +80,16 @@ export default async function UserAssetsList({ ...props }) {
 
             <AssetFavButton assetId={id} userId={userId} />
 
-            <Link rel="prefetch" href={`/asset/${assetSlug}/${name}`} className="block p-2 w-40 border border-gray-300 rounded-md mb-2">Ir até a página do ativo</Link>
+            <a className="priceAlertModalButton myButton white" href={`${baseUrl}/asset/${assetSlug}/${name}/#price-modal`} >
+              Definir Alerta de preço
+            </a>
+
+            <button rel="prefetch" data-href={`${baseUrl}/asset/${assetSlug}/${name}`} className="block p-2 w-40 border border-gray-300 rounded-md mb-2" onClick={(e) => {
+              // window.location.href = `${ baseUrl }/asset/${assetSlug}/${name}`;
+
+              window.history.pushState({}, '', `${ baseUrl }/asset/${assetSlug}/${name}` + '#price-modal');
+
+            }}>Ir até a página do ativo</button>
 
             <Image src={assetLogoUrl} width={50} height={50} alt={name} title={name} loading={applyLazyOrEager} />
 
@@ -88,6 +104,6 @@ export default async function UserAssetsList({ ...props }) {
 
       {<Pagination props={paginationParams} />}
 
-    </>
+    </ >
   )
 }

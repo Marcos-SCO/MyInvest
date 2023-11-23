@@ -1,0 +1,19 @@
+.priceAlertModalButton {
+  font-size: 1rem;
+  width: 100%;
+  max-width: 200px;
+
+  @include desktop {
+    font-size: 1rem!important;
+  }
+}
+
+.followAssetButton {
+  font-size: 1rem;
+  width: 100%;
+  max-width: 200px;
+
+  @include desktop {
+    font-size: 1rem!important;
+  }
+}

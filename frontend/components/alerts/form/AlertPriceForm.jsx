@@ -15,13 +15,27 @@ export default function AlertPriceForm(props) {
   const currentPrice =
     getFormatToInsertPrice(assetCurrentPrice);
 
-  const priceTypeDescription = { 1: 'Menor ou igual', 2: 'Maior ou igual', }
+  const priceTypeDescription =
+    { 1: 'Menor ou igual', 2: 'Maior ou igual', }
+
+  const [focused, setFocused] = useState({
+    focus: false,
+    invalid: false,
+  });
+
+  const handleFocus = (bool) => {
+    setFocused({
+      focus: bool,
+      invalid: bool,
+    });
+  }
 
   const [inputState, setInputState] = useState({
-    // expectedPrice: "15,350.30",
     expectedPrice: currentPrice,
     type: 1,
   });
+
+  const formFeedBackError = inputState?.formFeedBackError;
 
   // 1 - Menor ou igual | 2 - Maior ou igual
   const minValue = inputState.type == 1
@@ -34,6 +48,8 @@ export default function AlertPriceForm(props) {
 
     const { expectedPrice, type } = inputState;
 
+    setInputState({ ...inputState, formFeedBackError: false });
+
     const expectedPriceValue =
       getFormatToInsertPrice(expectedPrice);
 
@@ -45,14 +61,24 @@ export default function AlertPriceForm(props) {
       const lessThanZeroMessage =
         `Selecione um valor maior que zero!`;
 
-      window.alert(lessThanZeroMessage);
+      console.log(lessThanZeroMessage);
+
+      setInputState({ ...inputState, formFeedBackError: lessThanZeroMessage });
+
+      handleFocus(true);
+
       return;
     }
 
     if (isExpectedPriceEqualToCurrentPrice) {
       const samePriceMessage = `Selecione um valor diferente do preço atual de ${currentPrice}`;
 
-      window.alert(samePriceMessage);
+      console.log(samePriceMessage);
+
+      setInputState({ ...inputState, formFeedBackError: samePriceMessage });
+
+      handleFocus(true);
+
       return;
     }
 
@@ -64,7 +90,7 @@ export default function AlertPriceForm(props) {
       token,
       userId,
       assetId,
-      type,
+      priceAlertTypeId: type,
       expectedPrice,
     }
 
@@ -85,60 +111,67 @@ export default function AlertPriceForm(props) {
     if (userAlreadyHasSchedule) {
       const alertNotCreatedMessage = userAlreadyHasSchedule;
 
-      const alreadyCreatedMessage = `Alerta ${typeDescription} ${expectedPrice} já havia sido criado para ${assetTicker}`;
+      const alreadyCreatedMessage = `Você já possui um alerta <br/> "${typeDescription}" ${expectedPrice} para ${assetTicker}`;
 
-      window.alert(alreadyCreatedMessage);
+      console.log(alreadyCreatedMessage);
+
+      setInputState({ ...inputState, formFeedBackError: alreadyCreatedMessage });
+
+      handleFocus(true);
     }
 
     console.log(insertedAlert);
-
-    // const answer = window.confirm('Usuário já está cadastrado');
 
     return;
   }
 
   return (
-    <div className="my-10 p-6 bg-white rounded-xl shadow-md flex items-center space-x-4">
+    <div className="alert-container my-5 md:p-6 bg-white rounded-xl shadow-md flex items-center space-x-4">
       <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
 
-        <Link rel="prefetch" href={`${baseUrl}/user/alerts`}>Ir até Meus alertas</Link>
+        <div className='form-main-content'>
+          <div className='input-container flex flex-col'>
+            <label htmlFor="type">Tipo de alerta: </label>
+            <select
+              id="type"
+              name="type"
+              value={inputState.type}
+              onChange={handleInput}
+            >
+              <option value="" disabled>Tipo de alerta</option>
+              <option value="1">Menor ou igual</option>
+              <option value="2">Maior ou igual</option>
+            </select>
+          </div>
 
-        <p className='shadow-md'>Valor atual do ativo: {currentPrice}</p>
-
-        <div className='shadow-md'>
-          <label htmlFor="type">Tipo de alerta: </label>
-          <select
-            id="type"
-            name="type"
-            value={inputState.type}
-            onChange={handleInput}
-          >
-            <option value="" disabled>Selecione o tipo</option>
-            <option value="1">Menor ou igual</option>
-            <option value="2">Maior ou igual</option>
-          </select>
+          <div className={`input-container flex flex-col${focused.invalid ? ' invalid' : ''}`}>
+            <label htmlFor="expectedPrice">Valor:</label>
+            <input
+              type="number"
+              id="expectedPrice"
+              name="expectedPrice"
+              value={+inputState?.expectedPrice}
+              onChange={handleInput}
+              min={minValue}
+              step="0.01"
+              onClick={() => handleFocus(false)}
+              onBlur={() => handleFocus(false)}
+              focused={focused.focus.toString()}
+              className={focused.invalid ? 'invalid' : ''}
+            />
+          </div>
         </div>
 
-        <div className='shadow-md'>
-          <label htmlFor="expectedPrice">Enter a Number:</label>
-          <input
-            type="number"
-            id="expectedPrice"
-            name="expectedPrice"
-            value={inputState?.expectedPrice}
-            onChange={handleInput}
-            min={minValue}
-            step="0.01"
-          />
-          <p>Valor selecionado: {inputState?.expectedPrice}</p>
+        <div className='myButton-container'>
+          <button type="submit" className="myButton">
+            Enviar
+          </button>
         </div>
 
-        <div>
-          <button
-            type="submit"
-            className="sendButton flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >Enviar</button>
-        </div>
+        {formFeedBackError && <div className="form-feed-back" data-js="form-feed-back">
+          <p dangerouslySetInnerHTML={{ __html: formFeedBackError }} />
+        </div>}
+
       </form>
 
 

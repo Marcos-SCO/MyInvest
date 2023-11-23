@@ -49,7 +49,9 @@ const PriceAssetsWatchController = () => {
     const userId = req.body?.userId;
     const assetId = req.body?.assetId;
 
-    const priceAlertTypeId = req.body?.priceAlertTypeId ?? 1;
+    const priceAlertTypeId =
+      +(req.body?.priceAlertTypeId ?? 1);
+      
     const expectedPrice = req.body?.expectedPrice;
 
     const insertObj = { userId, assetId, expectedPrice, priceAlertTypeId };
