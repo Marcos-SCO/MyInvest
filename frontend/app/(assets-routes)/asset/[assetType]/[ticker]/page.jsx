@@ -1,6 +1,7 @@
+import dynamic from 'next/dynamic';
+
 import { nextAuthOptions } from "app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
-import dynamic from 'next/dynamic';
 
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -24,6 +25,9 @@ import ModalContainer from '../../../../../components/modal/ModalContainer';
 import AuthButtonsTemplate from '../../../../../components/page/AuthButtonsTemplate';
 
 import AssetFavButton from "../../../../../components/assetButtons/layout";
+
+import SymbolsBr from '../../../../../components/assets/SymbolsBr';
+import SymbolsUs from '../../../../../components/assets/SymbolsUs';
 
 const API_BASE_URL = process.env.API_BASE_URL;
 
@@ -55,7 +59,7 @@ export default async function Page({ params, onLoad }) {
   if (!assetDetailList) notFound();
 
   const assetDetail = assetDetailList[0];
-  const symbols = assetDetail?.symbols;
+  const symbols = assetDetail ? JSON.parse(assetDetail?.symbols) : undefined;
 
   const currentPrice = formatCurrency(assetDetail?.currentPrice);
 
@@ -85,6 +89,9 @@ export default async function Page({ params, onLoad }) {
 
   const fiftyTwoWeekHigh =
     parsedHistoricalData?.fiftyTwoWeekHigh;
+
+  const previousClose =
+    parsedHistoricalData?.regularMarketPreviousClose;
 
   const HashClickAfterLoading =
     dynamic(() => import('./HashClickAfterLoading'), { ssr: false });
@@ -126,6 +133,8 @@ export default async function Page({ params, onLoad }) {
             <p><strong>Ticker</strong>: {ticker}</p>
             <p><strong>Preço Atual</strong>: {currentPrice}</p>
 
+            {symbols && type && type != 2 && <SymbolsBr symbols={symbols} />}
+            {symbols && type && type == 2 && <SymbolsUs symbols={symbols} />}
 
             <br />
 
