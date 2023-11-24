@@ -68,9 +68,7 @@ button,
 
   &:focus,
   &:hover {
-    position: relative;
-    // transform: translateY(-0.09rem);
-    top: -0.05rem;
+    transform: translateY(-0.09rem);
   }
 }
 

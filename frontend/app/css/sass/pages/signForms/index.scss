@@ -16,4 +16,11 @@
   .main-header {
     display: none;
   }
+
+  a {
+    position: relative;
+    &:hover {
+      top: -0.09rem;
+    }
+  }
 }
