@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
 
 import Navbar from 'components/base/Navbar';
 
 export default function Header({ ...props }) {
-  const { childrenSegment = '' } = props;
+  // const { childrenSegment = '' } = props;
 
   // const pathname = usePathname();
   // console.log(pathname);

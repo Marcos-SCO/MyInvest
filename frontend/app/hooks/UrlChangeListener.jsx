@@ -11,7 +11,6 @@ export function UrlChangeListener() {
 
   const { modalStates, closeModalHandler } = useModal();
 
-  
   useEffect(() => {
 
     if (modalStates) {

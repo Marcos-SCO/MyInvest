@@ -63,7 +63,7 @@
   animation: moveTop .75s ease-out forwards;
 }
 
-@include max-tablet {
+@include max-mobile {
   .moveFromLeft-mobile {
     animation: moveLeft .75s ease-out forwards;
   }

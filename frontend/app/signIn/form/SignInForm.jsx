@@ -48,7 +48,7 @@ export default function SignInForm() {
 
   const handleInput = (e) => setInputState({ ...inputState, [e.target.name]: e.target.value });
 
-  const router = useRouter();
+  // const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();

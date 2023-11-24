@@ -17,7 +17,7 @@ export default async function Navbar() {
   return (
     <nav className="nav-bar-container">
       <div className="flex justify-between item-center max-w-6xl mx-auto">
-        <Link rel="prefetch" className="" href={'/'}>
+        <Link rel="prefetch" href={'/'} title="MyInvest">
           <DisplaySvg name="myInvestLogo" class="myInvestLogo m-auto" width="80" height="80" />
         </Link>
 

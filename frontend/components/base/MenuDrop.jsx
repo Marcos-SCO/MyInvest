@@ -3,10 +3,9 @@
 import React, { useEffect, useRef } from 'react';
 
 import { signIn, signOut, useSession } from "next-auth/react";
+// import { useRouter } from "next/navigation";
 
 import { Navbar, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, NavbarBrand, NavbarContent, NavbarItem, Link, Input, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar, Button } from "@nextui-org/react";
-
-import useWindowDimensions from 'app/hooks/UseWindowDimensions';
 
 import DisplaySvg from '../../app/helpers/svg/DisplaySvg';
 
@@ -19,6 +18,13 @@ export default function MenuDrop({ ...props }) {
 
   const sessionHasToken = userSessionData?.token;
 
+  async function logout() {
+    await signOut({
+      redirect: false
+    })
+
+    window.location.href = baseUrl;
+  }
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
@@ -124,7 +130,7 @@ export default function MenuDrop({ ...props }) {
                 </DropdownItem>
 
                 <DropdownItem key="logout">
-                  <Link className="danger" color="danger" onClick={() => signOut()}>Sair</Link>
+                  <Link className="danger" color="danger" onClick={logout}>Sair</Link>
                 </DropdownItem>
 
               </DropdownMenu>

@@ -46,7 +46,7 @@ function renderChildren(children) {
   return (<main>{children}</main>)
 }
 
-function dontShowNavNavBarIn(page) {
+function dontShowNavbarIn(page) {
   const exceptions = ['signIn', 'signUp'];
   return exceptions.includes(page);
 }
@@ -66,9 +66,9 @@ export default function RootLayout({ children }) {
           <ModalProvider>
             <UrlChangeListener />
             {
-              dontShowNavNavBarIn(childrenSegment)
-                ? renderChildren(children)
-                : renderChildrenWithHeader(children)
+              !dontShowNavbarIn(childrenSegment)
+                ? renderChildrenWithHeader(children)
+                : renderChildren(children)
             }
           </ModalProvider>
         </NextAuthSessionProvider>

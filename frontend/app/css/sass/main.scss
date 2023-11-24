@@ -53,22 +53,24 @@ body.modal-open {
 }
 
 a,
+button {
+  transition: opacity .5s ease-in-out;
+
+  &:hover {
+    opacity: .9;
+  }
+}
+
+a,
 button,
 .myButton {
   transition: transform .1s ease-in-out;
 
   &:focus,
   &:hover {
-    transform: translateY(-0.09rem);
-  }
-}
-
-a,
-button {
-  transition: opacity .5s ease-in-out;
-
-  &:hover {
-    opacity: .9;
+    position: relative;
+    // transform: translateY(-0.09rem);
+    top: -0.05rem;
   }
 }
 

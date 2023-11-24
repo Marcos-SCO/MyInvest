@@ -4,7 +4,7 @@ import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 export default function ButtonLogout() {
-  const router = useRouter()
+  const router = useRouter();
 
   async function logout() {
     await signOut({
