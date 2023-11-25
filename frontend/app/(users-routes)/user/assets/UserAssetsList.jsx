@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 import { fetchUserAssets } from "app/api/assets/userAssets/fetchUserAssets";
 
-import AssetFavButton from "components/assetButtons/layout";
+import AssetFavButton from "components/assets/assetButtons/assetFavButton/layout";
 import { getAssetTypeDescription, formatCurrency } from "../../../helpers/assets";
 
 import SymbolsBr from "../../../../components/assets/SymbolsBr";
@@ -15,6 +15,7 @@ import SymbolsUs from "../../../../components/assets/SymbolsUs";
 import OpenModalContainer from '../../../../components/modal/OpenModalHandler';
 
 import { Pagination } from '../../../../components/page/Pagination';
+import DisplaySvg from '../../../helpers/svg/DisplaySvg';
 
 const baseUrl = process.env.NEXT_PUBLIC_FRONT_END_URL;
 
@@ -74,15 +75,13 @@ export default async function UserAssetsList({ ...props }) {
 
             <AssetFavButton assetId={id} userId={userId} />
 
-            {/* <a className="priceAlertModalButton myButton white" href={`${baseUrl}/asset/${assetSlug}/${name}/#price-modal`} >
-              Definir Alerta de preço
-            </a> */}
-
-            <button rel="prefetch" data-href={`${baseUrl}/asset/${assetSlug}/${name}`} className="block p-2 w-40 border border-gray-300 rounded-md mb-2" onClick={(e) => {
+            <button rel="prefetch" data-href={`${baseUrl}/asset/${assetSlug}/${name}`} className="priceAlertModalButton myButtonSvg" onClick={(e) => {
               window.location.href = `${baseUrl}/asset/${assetSlug}/${name}/` + '#price-modal';
-            }}>Definir Alerta de preço</button>
+            }}>
+              <DisplaySvg name={'bell'} width="18" height="18" /> Definir Alerta de preço
+            </button>
 
-            <Link rel="prefetch" href={`${baseUrl}/asset/${assetSlug}/${name}`} className="block p-2 w-40 border border-gray-300 rounded-md mb-2">Ir até a página do ativo</Link>
+            <Link rel="prefetch" href={`${baseUrl}/asset/${assetSlug}/${name}`} className="activePageButton myButtonSvg">Ir até a página do ativo</Link>
 
             <Image src={assetLogoUrl} width={50} height={50} alt={name} title={name} loading={applyLazyOrEager} />
 

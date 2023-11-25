@@ -112,25 +112,26 @@ img {
       background-color: rgb(227, 232, 244);
     }
   }
-  
+
   &.white {
     color: initial;
     background-color: #fff;
-    
+
     &:hover {
       background-color: #f2f2f2;
     }
+
     border: 1px solid #ccc;
   }
-  
+
   &.silver {
     color: initial;
     background-color: #f2f2f2;
-  
+
     &:hover {
       background-color: #f1f1f1;
     }
-    
+
   }
 
   display: flex;
@@ -147,6 +148,40 @@ img {
     line-height: 24.2px;
     font-size: 1.25rem;
     min-height: 24px;
+  }
+
+}
+
+.myButton.myAlerts {
+  span {
+    width: auto;
+    svg {
+      margin-right: .25rem;
+    }
+  }
+}
+
+.myButtonSvg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+
+  text-align: center;
+
+  color: #4d5156;
+
+  padding: 1rem;
+
+  svg {
+    margin-right: .25rem;
+  }
+
+  @include max-mobile {
+    width: 100%;
   }
 
 }

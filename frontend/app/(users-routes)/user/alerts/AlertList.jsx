@@ -70,7 +70,7 @@ export default async function AlertList({ ...props }) {
         return (
           <div key={key} className="mb-3 w-100 min-w-[300px] border-t-4" data-js="asset-container">
 
-            <Link rel="prefetch" href={`/asset/${assetSlug}/${name}`} className="block p-2 w-40 border border-gray-300 rounded-md mb-2">Ir até a página do ativo</Link>
+            <Link rel="prefetch" href={`/asset/${assetSlug}/${name}`} className="activePageButton myButtonSvg">Ir até a página do ativo</Link>
 
             <Image src={assetLogoUrl} width={50} height={50} alt={name} title={name} loading={applyLazyOrEager} />
 

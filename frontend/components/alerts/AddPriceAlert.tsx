@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { addPriceAlert } from '../../app/api/assets/userAlerts/addPriceAlert';
 import { getServerSession } from 'next-auth';
 import { nextAuthOptions } from '../../app/api/auth/[...nextauth]/route';
 import { getUserSessionData } from '../../app/helpers/session/getUserSessionData';
@@ -8,11 +7,13 @@ import { getUserSessionData } from '../../app/helpers/session/getUserSessionData
 import AlertPriceForm from './form/AlertPriceForm';
 import Link from 'next/link';
 
+import DisplaySvg from '../../app/helpers/svg/DisplaySvg';
+
 const baseUrl = process.env.NEXT_PUBLIC_FRONT_END_URL;
 
 export default async function AddPriceAlert(props) {
 
-  const { sessionProp = false, assetId, assetTicker, assetCurrentPrice = 0 } = props;
+  const { sessionProp = false, assetId, assetTicker, assetCurrentPrice = 0, assetType = false } = props;
 
   const session = !sessionProp ?
     await getServerSession(nextAuthOptions) : sessionProp;
@@ -28,6 +29,7 @@ export default async function AddPriceAlert(props) {
     assetId,
     assetTicker,
     assetCurrentPrice,
+    assetType,
   }
 
   return (
@@ -41,7 +43,9 @@ export default async function AddPriceAlert(props) {
                 <p className='currentValue'>Valor atual : <span>{assetCurrentPrice}</span></p>
               </div>
               <div className='link-container'>
-                <Link rel="prefetch" href={`${baseUrl}/user/alerts`} className='myButton silver'>Meus alertas</Link>
+                <Link rel="prefetch" href={`${baseUrl}/user/alerts`} className='myButton myAlerts silver'>
+                  <DisplaySvg name={'bell'} width="18" height="18" /> Meus alertas
+                </Link>
               </div>
             </div>
 

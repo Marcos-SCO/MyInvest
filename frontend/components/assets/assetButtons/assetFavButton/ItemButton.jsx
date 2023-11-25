@@ -5,7 +5,7 @@ import { userRemoveAsset } from 'app/api/assets/userAssets/userRemoveAsset';
 import React, { useEffect, useState } from 'react';
 
 import { useRouter } from "next/navigation";
-import DisplaySvg from '../../app/helpers/svg/DisplaySvg';
+import DisplaySvg from '../../../../app/helpers/svg/DisplaySvg';
 
 export default function ItemButton({ isUserAsset, fetchObj }) {
   const router = useRouter();

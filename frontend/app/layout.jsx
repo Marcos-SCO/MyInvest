@@ -8,16 +8,20 @@ import { Inter } from 'next/font/google';
 import { NextAuthSessionProvider } from './providers/sessionProvider';
 
 import { UrlChangeListener } from './hooks/UrlChangeListener';
-
+import ChangePageAttributes from "app/hooks/ChangePageAttributes";
 import ProgressBar from 'components/page/ProgressBar';
 
 import SearchBar from "components/searchBar/layout";
 
+import { nextAuthOptions } from './api/auth/[...nextauth]/route';
+import { getServerSession } from 'next-auth';
+import { getUserSessionData } from './helpers/session/getUserSessionData';
+
 import { ModalProvider } from 'app/providers/modalProviders';
-
 import SearchModalContainer from "components/modal/SearchModalContainer";
+import ModalContainer from '../components/modal/ModalContainer';
 
-import ChangePageAttributes from "app/hooks/ChangePageAttributes";
+import AuthButtonsTemplate from '../components/page/AuthButtonsTemplate';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -51,7 +55,18 @@ function dontShowNavbarIn(page) {
   return exceptions.includes(page);
 }
 
-export default function RootLayout({ children }) {
+function activateContainerModals(userId) {
+  return <>
+    {!userId && <ModalContainer modalId={'authContainer'} modalTitle="Faça login ou crie uma conta" className="authButtons-modal">
+      <AuthButtonsTemplate templateTitle="É necessário ter uma conta para acessar a funcionalidade" />
+    </ModalContainer>}
+  </>
+}
+
+export default async function RootLayout({ children }) {
+
+  const session = await getServerSession(nextAuthOptions);
+  const { userId } = await getUserSessionData(session);
 
   const childrenSegment = children?.props.childProp?.segment;
 
@@ -65,6 +80,7 @@ export default function RootLayout({ children }) {
           <ChangePageAttributes pageName={childrenSegment} />
           <ModalProvider>
             <UrlChangeListener />
+            {activateContainerModals(userId)}
             {
               !dontShowNavbarIn(childrenSegment)
                 ? renderChildrenWithHeader(children)

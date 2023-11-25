@@ -1,11 +1,18 @@
-.priceAlertModalButton {
-  font-size: 1rem;
-  width: 100%;
+.myAssetsButton {
   max-width: 200px;
+}
 
-  @include desktop {
-    font-size: 1rem !important;
+.activePageButton {
+  max-width: 250px;
+}
+
+.priceAlertModalButton {
+  svg {
+    path {
+      stroke: $primary;
+    }
   }
+
 }
 
 .followAssetButton {

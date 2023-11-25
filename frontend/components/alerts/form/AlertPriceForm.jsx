@@ -5,12 +5,13 @@ import { addPriceAlert } from '../../../app/api/assets/userAlerts/addPriceAlert'
 import { getFormatToInsertPrice } from '../../../app/helpers/assets';
 import Link from 'next/link';
 
+import { formatCurrency } from '../../../app/helpers/assets';
 
 export default function AlertPriceForm(props) {
 
   const baseUrl = process.env.NEXT_PUBLIC_FRONT_END_URL;
 
-  const { userId, assetId, assetTicker, assetCurrentPrice, token } = props?.insertAlertObj;
+  const { userId, assetId, assetTicker, assetCurrentPrice, token, assetType = 1 } = props?.insertAlertObj;
 
   const currentPrice =
     getFormatToInsertPrice(assetCurrentPrice);
@@ -37,9 +38,16 @@ export default function AlertPriceForm(props) {
 
   const formFeedBackError = inputState?.formFeedBackError;
 
+  const replaceNumberCommas = assetType == 2
+    ? currentPrice.replace(',', '.')
+    : currentPrice;
+
   // 1 - Menor ou igual | 2 - Maior ou igual
   const minValue = inputState.type == 1
-    ? 0 : +parseFloat(currentPrice.replace(',', '.'));
+    ? 0
+    : +parseFloat(replaceNumberCommas);
+
+  const currencyValue = +assetType == 2 ? 'usd' : 'brl';
 
   const handleInput = (e) => setInputState({ ...inputState, [e.target.name]: e.target.value });
 
@@ -52,6 +60,9 @@ export default function AlertPriceForm(props) {
 
     const expectedPriceValue =
       getFormatToInsertPrice(expectedPrice);
+
+    const expectedPriceTextDisplay =
+      formatCurrency(`${expectedPrice}`, currencyValue);
 
     const isExpectedPriceEqualToCurrentPrice =
       expectedPriceValue == +currentPrice;
@@ -71,7 +82,7 @@ export default function AlertPriceForm(props) {
     }
 
     if (isExpectedPriceEqualToCurrentPrice) {
-      const samePriceMessage = `Selecione um valor diferente do preço atual de ${currentPrice}`;
+      const samePriceMessage = `Selecione um valor diferente do preço atual de ${expectedPriceTextDisplay}`;
 
       console.log(samePriceMessage);
 
@@ -103,7 +114,7 @@ export default function AlertPriceForm(props) {
       priceTypeDescription[type] + ' a' ?? '';
 
     if (!userAlreadyHasSchedule) {
-      const alertCreatedMessage = `Alerta para o ativo ${assetTicker} foi criado no preço ${typeDescription} ${expectedPrice}`;
+      const alertCreatedMessage = `Alerta para o ativo ${assetTicker} foi criado no preço ${typeDescription} ${expectedPriceTextDisplay}`;
 
       window.alert(alertCreatedMessage);
     }
@@ -111,7 +122,7 @@ export default function AlertPriceForm(props) {
     if (userAlreadyHasSchedule) {
       const alertNotCreatedMessage = userAlreadyHasSchedule;
 
-      const alreadyCreatedMessage = `Você já possui um alerta <br/> "${typeDescription}" ${expectedPrice} para ${assetTicker}`;
+      const alreadyCreatedMessage = `Você já possui um alerta <br/> "${typeDescription}" ${expectedPriceTextDisplay} para ${assetTicker}`;
 
       console.log(alreadyCreatedMessage);
 

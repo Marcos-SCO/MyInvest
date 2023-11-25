@@ -7,29 +7,28 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getUserSessionData } from "../../../../helpers/session/getUserSessionData";
 
+import { getAssetData } from "../../../../api/assets/getAssetData";
+
 import { formatCurrency } from "../../../../helpers/assets";
 import { ZoomableTimeSeriesChart } from '../../charts/ZoomableTimeSeriesChart';
 
-import UserAssetButtons from './UserAssetButtons';
-
 import AddPriceAlert from "../../../../../components/alerts/AddPriceAlert";
 
-import { getAssetData } from "../../../../api/assets/getAssetData";
+import AssetFavButton from "../../../../../components/assets/assetButtons/assetFavButton/layout";
 
 import ChangePageAttributes from "app/hooks/ChangePageAttributes";
 
-import OpenModalContainer from '../../../../../components/modal/OpenModalHandler';
-
 import ModalContainer from '../../../../../components/modal/ModalContainer';
 
-import AuthButtonsTemplate from '../../../../../components/page/AuthButtonsTemplate';
+import OpenPriceAlertModal from '../../../../../components/assets/assetButtons/assetPriceAlert/OpenPriceAlertModal';
+import OpenModalContainer from '../../../../../components/modal/OpenModalHandler';
 
-import AssetFavButton from "../../../../../components/assetButtons/layout";
+import UserAssetsButton from '../../../../../components/assets/assetButtons/UserAssetsButton';
 
 import SymbolsBr from '../../../../../components/assets/SymbolsBr';
 import SymbolsUs from '../../../../../components/assets/SymbolsUs';
 
-const API_BASE_URL = process.env.API_BASE_URL;
+import DisplaySvg from '../../../../helpers/svg/DisplaySvg';
 
 export const metadata = {}
 
@@ -99,6 +98,11 @@ export default async function Page({ params, onLoad }) {
   return (
     <>
       <ChangePageAttributes pageName="asset" />
+
+      {userId && <ModalContainer modalId={'priceAlert'} modalTitle="Alerta de ativos">
+        <AddPriceAlert sessionProp={session} assetId={assetId} assetTicker={ticker} assetCurrentPrice={currentPrice} assetType={type} />
+      </ModalContainer>}
+
       <main className='main-container'>
 
         <div className='asset-page-container'>
@@ -107,29 +111,13 @@ export default async function Page({ params, onLoad }) {
 
             <h1 className='asset-title'>{ticker}</h1>
 
-            {!userId && <ModalContainer modalId={'authContainer'} modalTitle="Faça login ou crie uma conta" className="authButtons-modal">
-              <AuthButtonsTemplate templateTitle="É necessário ter uma conta para acessar a funcionalidade" />
-            </ModalContainer>}
-
-            {userId && <ModalContainer modalId={'priceAlert'} modalTitle="Alerta de ativos">
-              <AddPriceAlert sessionProp={session} assetId={assetId} assetTicker={ticker} assetCurrentPrice={currentPrice} />
-            </ModalContainer>}
-
             <div className='side-buttons'>
-              {userId && <UserAssetButtons assetId={assetId} userId={userId} />}
+              <UserAssetsButton userId={userId} />
 
-              <OpenModalContainer className="priceAlertModalButton myButton white" modalId={userId ? `priceAlert` : 'authContainer'}>
-                Definir Alerta de preço
-              </OpenModalContainer>
+              <OpenPriceAlertModal userId={userId} />
             </div>
 
-            {!userId && (
-              <OpenModalContainer modalId={`authContainer`} className={'followAssetButton myButton white'}>
-                Seguir
-              </OpenModalContainer>
-            )}
-
-            {userId && <AssetFavButton assetId={assetId} userId={userId} />}
+            {<AssetFavButton assetId={assetId} userId={userId} />}
 
             <figure>
               <Image src={assetLogoUrl} width={50} height={50} alt={assetLongName} title={assetLongName} loading="eager" />

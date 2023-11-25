@@ -1,4 +1,4 @@
-function formatCurrency(input) {
+function formatCurrency(input, currencyDefinition = false) {
   // Remove any non-digit characters from the input
   if (!input) return;
 
@@ -6,12 +6,15 @@ function formatCurrency(input) {
 
   const isUsd = input.indexOf('$') !== -1;
 
-  if (isUsd) {
+  const isUsCurrency = currencyDefinition == 'usd';
+  const isBrCurrency = currencyDefinition == 'brl';
+
+  if (isUsd || isUsCurrency) {
     // Format as USD
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(number);
   }
 
-  if (!isUsd) {
+  if (!isUsd || isBrCurrency) {
     // Format as BRL (Brazilian Real)
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(number);
   }
