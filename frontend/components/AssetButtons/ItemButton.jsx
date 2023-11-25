@@ -5,6 +5,7 @@ import { userRemoveAsset } from 'app/api/assets/userAssets/userRemoveAsset';
 import React, { useEffect, useState } from 'react';
 
 import { useRouter } from "next/navigation";
+import DisplaySvg from '../../app/helpers/svg/DisplaySvg';
 
 export default function ItemButton({ isUserAsset, fetchObj }) {
   const router = useRouter();
@@ -17,8 +18,8 @@ export default function ItemButton({ isUserAsset, fetchObj }) {
       await userCreateAsset(fetchObj);
       setUserAsset(true);
 
-      router.refresh(); 
       // Use refresh to request the data from the backend without cashing
+      router.refresh();
 
       return;
     }
@@ -38,9 +39,14 @@ export default function ItemButton({ isUserAsset, fetchObj }) {
     router.refresh();
   }
 
+  const folowStatus = !userAsset ? 'Seguir' : 'Seguindo';
+  const svgName = !userAsset ? 'plusSign' : 'check';
+
+  const followClass = !userAsset ? 'blue' : 'white';
+
   return (
-    <button onClick={handleAsset} className="p-2 w-40 border border-gray-300 rounded-md mb-2">
-      {!userAsset ? 'Seguir' : 'Deixar de seguir'}
+    <button onClick={handleAsset} className={`followAssetButton ${followClass}`}>
+      <DisplaySvg name={svgName} width="18" height="18" /> {folowStatus}
     </button>
   );
 }

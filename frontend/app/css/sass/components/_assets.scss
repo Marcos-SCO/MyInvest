@@ -4,16 +4,51 @@
   max-width: 200px;
 
   @include desktop {
-    font-size: 1rem!important;
+    font-size: 1rem !important;
   }
 }
 
 .followAssetButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
   font-size: 1rem;
   width: 100%;
-  max-width: 200px;
+  max-width: 120px;
+
+  border: 1px solid;
+  border-color: #d2e3fc;
+  color: #4d5156;
+
+  padding: .25rem .6875rem .25rem .4375rem;
+
+  font-size: 12px;
+  border-radius: 14px;
+
+  .svg-container {
+    margin-right: .4rem;
+
+    svg {
+      path {
+        stroke: $primary;
+      }
+    }
+  }
+
+  &.blue {
+    background-color: $primary;
+
+    &,
+    svg path {
+      stroke: #fff;
+      color: #fff;
+    }
+  }
 
   @include desktop {
-    font-size: 1rem!important;
+    font-size: 1rem !important;
   }
 }

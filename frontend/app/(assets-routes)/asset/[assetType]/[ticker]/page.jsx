@@ -98,12 +98,14 @@ export default async function Page({ params, onLoad }) {
 
   return (
     <>
+      <ChangePageAttributes pageName="asset" />
       <main className='main-container'>
-        <ChangePageAttributes pageName="asset" />
 
         <div className='asset-page-container'>
 
           <div className="flex flex-1 flex-col justify-center py-12">
+
+            <h1 className='asset-title'>{ticker}</h1>
 
             {!userId && <ModalContainer modalId={'authContainer'} modalTitle="Faça login ou crie uma conta" className="authButtons-modal">
               <AuthButtonsTemplate templateTitle="É necessário ter uma conta para acessar a funcionalidade" />
@@ -113,30 +115,36 @@ export default async function Page({ params, onLoad }) {
               <AddPriceAlert sessionProp={session} assetId={assetId} assetTicker={ticker} assetCurrentPrice={currentPrice} />
             </ModalContainer>}
 
-            <OpenModalContainer className="priceAlertModalButton myButton white" modalId={userId ? `priceAlert` : 'authContainer'}>
-              Definir Alerta de preço
-            </OpenModalContainer>
+            <div className='side-buttons'>
+              {userId && <UserAssetButtons assetId={assetId} userId={userId} />}
+
+              <OpenModalContainer className="priceAlertModalButton myButton white" modalId={userId ? `priceAlert` : 'authContainer'}>
+                Definir Alerta de preço
+              </OpenModalContainer>
+            </div>
 
             {!userId && (
               <OpenModalContainer modalId={`authContainer`} className={'followAssetButton myButton white'}>
-                Seguir ativo
+                Seguir
               </OpenModalContainer>
             )}
 
             {userId && <AssetFavButton assetId={assetId} userId={userId} />}
 
-            {userId && <UserAssetButtons assetId={assetId} userId={userId} />}
+            <figure>
+              <Image src={assetLogoUrl} width={50} height={50} alt={assetLongName} title={assetLongName} loading="eager" />
 
-            <Image src={assetLogoUrl} width={50} height={50} alt={assetLongName} title={assetLongName} loading="eager" />
-
-            <p>{assetLongName}</p>
-            <p><strong>Ticker</strong>: {ticker}</p>
-            <p><strong>Preço Atual</strong>: {currentPrice}</p>
+              <figcaption>
+                <p>{assetLongName}</p>
+                <p><strong>Ticker</strong>: {ticker}</p>
+                <p><strong>Preço Atual</strong>: {currentPrice}</p>
+              </figcaption>
+            </figure>
 
             {symbols && type && type != 2 && <SymbolsBr symbols={symbols} />}
+
             {symbols && type && type == 2 && <SymbolsUs symbols={symbols} />}
 
-            <br />
 
             {historicalDataPrice && <ZoomableTimeSeriesChart objData={historicalDataPrice} assetType={type} />}
 

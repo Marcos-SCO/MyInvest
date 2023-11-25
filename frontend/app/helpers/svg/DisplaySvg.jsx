@@ -11,6 +11,8 @@ const svgArray = {
 
   userAvatar: (props) => `<svg ${props} width="28px" height="28px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
 
+  plusSign: (props) => `<svg ${props} width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 12H18M12 6V18" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+
   bell: (props) => `<svg ${props} width="32" height="32" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m9.002 17h-3.3956c-1.2584 0-1.8876 0-2.02-0.0977-0.14873-0.1098-0.18507-0.1746-0.20118-0.3587-0.01433-0.1639 0.37131-0.795 1.1426-2.057 0.79635-1.3031 1.4726-3.2004 1.4726-5.8866 0-1.4852 0.63214-2.9096 1.7574-3.9598 1.1252-1.0502 2.6513-1.6402 4.2426-1.6402s3.1174 0.59 4.2426 1.6402c1.1253 1.0502 1.7574 2.4746 1.7574 3.9598 0 2.6862 0.6762 4.5835 1.4726 5.8866 0.7712 1.262 1.1569 1.8931 1.1426 2.057-0.0161 0.1841-0.0525 0.2489-0.2012 0.3587-0.1324 0.0977-0.7616 0.0977-2.02 0.0977h-3.394m-5.9984 0-0.00164 1c0 1.6569 1.3432 3 3 3 1.6569 0 3-1.3431 3-3v-1m-5.9984 0h5.9984" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>`,
 
   check: (props) => `<svg ${props} width="32" height="32" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 12.6111L8.92308 17.5L20 6.5" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>`,
