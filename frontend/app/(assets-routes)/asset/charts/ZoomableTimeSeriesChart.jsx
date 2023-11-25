@@ -6,7 +6,9 @@ import dynamic from "next/dynamic";
 const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const ZoomableTimeSeriesChart = (props) => {
-  const { objData, assetType = 1 } = props;
+  const { objData, assetType = 1, assetTicker = false } = props;
+  const tickerString =
+    assetTicker ? assetTicker + ' - ' : '';
   /* {
     date: 1699621200,
     open: 10.81,
@@ -74,14 +76,13 @@ const ZoomableTimeSeriesChart = (props) => {
           x: {
             formatter: function (val) {
               const date = new Date(val).toLocaleDateString('pt-BR');
-              return `Data: ${date}`;
+              return `${tickerString}Data: ${date}`;
             }
           },
           y: {
             formatter: function (val, { series, seriesIndex, dataPointIndex, w }) {
               const dataItem = objData[dataPointIndex];
               const closePrice = dataItem.close;
-
               const toFixedValue = closePrice.toFixed(2);
               const isBrazilianAsset = assetType == 1 || assetType == 3;
 
@@ -93,7 +94,7 @@ const ZoomableTimeSeriesChart = (props) => {
           },
 
           style: {
-            fontSize: '1.1rem', // Adjust the font size as needed
+            fontSize: '1.12rem', // Adjust the font size as needed
           },
 
         },

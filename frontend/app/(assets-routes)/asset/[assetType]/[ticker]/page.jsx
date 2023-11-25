@@ -134,7 +134,7 @@ export default async function Page({ params, onLoad }) {
             {symbols && type && type == 2 && <SymbolsUs symbols={symbols} />}
 
 
-            {historicalDataPrice && <ZoomableTimeSeriesChart objData={historicalDataPrice} assetType={type} />}
+            {historicalDataPrice && <ZoomableTimeSeriesChart objData={historicalDataPrice} assetType={type} assetTicker={ticker} />}
 
             {<HashClickAfterLoading />}
 
