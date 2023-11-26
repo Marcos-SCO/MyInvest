@@ -36,7 +36,7 @@ export default function UserAssetCard({ props }) {
             <Image src={assetLogoUrl} width={50} height={50} alt={assetLongName} title={assetLongName} loading={applyLazyOrEager} />
             <figcaption>
               <p className="asset-title">{ticker}</p>
-              <small>{limitString(assetLongName, 50)}</small>
+              <small className='assetLongName'>{limitString(assetLongName, 50)}</small>
             </figcaption>
           </figure>
         </Link>

@@ -17,6 +17,7 @@
         position: absolute;
         top: 1rem;
         right: 1rem;
+        z-index: 9;
       }
     }
   }
@@ -24,6 +25,12 @@
   .asset-title {
     font-size: 1.75rem;
     font-weight: 600;
+  }
+
+  .assetLongName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 20px;
   }
 
   .asset-info-details {
@@ -105,6 +112,7 @@
 
     .followAssetButton {
       margin-top: .5rem;
+      z-index: 9;
     }
 
     .description-header {

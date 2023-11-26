@@ -4,8 +4,6 @@
   flex-wrap: wrap;
   justify-content: space-between;
 
-  .asset-card-item {}
-
   @media (max-width:768px) {
     .asset-card-item {
       max-width: 100%;
@@ -30,10 +28,12 @@
   }
 
   @include desktop {
+
     .asset-card-item {
       width: 32%;
       max-width: 390px;
     }
+
   }
 
 }
