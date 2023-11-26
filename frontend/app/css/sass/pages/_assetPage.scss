@@ -30,7 +30,7 @@
 
         &:last-child {
           margin-left: 0;
-          margin-bottom: 1rem;
+          // margin-bottom: 1rem;
         }
 
       }
@@ -39,9 +39,11 @@
 
   @include tablet {
     .side-buttons {
-      position: relative;
-      top: -3rem;
-      right: 0;
+      a, button {
+        position: relative;
+        top: -3rem;
+        right: 0;
+      }
 
     }
   }

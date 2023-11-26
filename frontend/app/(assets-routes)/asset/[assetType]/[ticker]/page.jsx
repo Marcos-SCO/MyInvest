@@ -159,9 +159,18 @@ export default async function Page({ params, onLoad }) {
 
           </div>
 
+          {historicalDataPrice && 
+          <div className='historical-graph-container'>
+            <ZoomableTimeSeriesChart objData={historicalDataPrice} assetType={type} assetTicker={ticker} />
+          </div>
+          }
 
-
-          {historicalDataPrice && <ZoomableTimeSeriesChart objData={historicalDataPrice} assetType={type} assetTicker={ticker} />}
+          {!historicalDataPrice &&
+            <div className='historical-graph-container no-data-graph'>
+              <span className='not-found-text'>Não foi encontrado registros históricos para esse ativo :(</span>
+              <ZoomableTimeSeriesChart objData={[{ date: 0, open: 0, high: 0, low: 0, close: 0, volume: 0, adjustedClose: 0 }]} assetType={type} assetTicker={ticker} />
+            </div>
+          }
 
           {<HashClickAfterLoading />}
 
