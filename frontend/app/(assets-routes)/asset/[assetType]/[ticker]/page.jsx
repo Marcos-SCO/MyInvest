@@ -4,12 +4,14 @@ import { nextAuthOptions } from "app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 
 import Image from "next/image";
+import Link from 'next/link';
+
 import { notFound } from "next/navigation";
 import { getUserSessionData } from "../../../../helpers/session/getUserSessionData";
 
 import { getAssetData } from "../../../../api/assets/getAssetData";
 
-import { formatCurrency } from "../../../../helpers/assets";
+import { formatCurrency, getAssetTypeDescription } from "../../../../helpers/assets";
 import { ZoomableTimeSeriesChart } from '../../charts/ZoomableTimeSeriesChart';
 
 import AddPriceAlert from "../../../../../components/alerts/AddPriceAlert";
@@ -18,6 +20,8 @@ import AssetFavButton from "../../../../../components/assets/assetButtons/assetF
 
 import ChangePageAttributes from "app/hooks/ChangePageAttributes";
 
+import DisplaySvg from '../../../../helpers/svg/DisplaySvg';
+
 import ModalContainer from '../../../../../components/modal/ModalContainer';
 
 import OpenPriceAlertModal from '../../../../../components/assets/assetButtons/assetPriceAlert/OpenPriceAlertModal';
@@ -25,10 +29,7 @@ import OpenModalContainer from '../../../../../components/modal/OpenModalHandler
 
 import UserAssetsButton from '../../../../../components/assets/assetButtons/UserAssetsButton';
 
-import SymbolsBr from '../../../../../components/assets/SymbolsBr';
-import SymbolsUs from '../../../../../components/assets/SymbolsUs';
-
-import DisplaySvg from '../../../../helpers/svg/DisplaySvg';
+import PercentageVariation from '../../../../../components/assets/symbols/PercentageVariation';
 
 export const metadata = {}
 
@@ -38,7 +39,6 @@ export default async function Page({ params, onLoad }) {
   metadata.title = `MyInvest - ${ticker}`;
 
   const session = await getServerSession(nextAuthOptions);
-
   const { userId } = await getUserSessionData(session);
 
   const assetFetch = await getAssetData(params);
@@ -60,13 +60,19 @@ export default async function Page({ params, onLoad }) {
   const assetDetail = assetDetailList[0];
   const symbols = assetDetail ? JSON.parse(assetDetail?.symbols) : undefined;
 
+  const assetTypeDescription = getAssetTypeDescription(type);
+  const currencyName = assetTypeDescription?.currencyName;
+
   const currentPrice = formatCurrency(assetDetail?.currentPrice);
 
-  const currentDividend = assetDetail?.currentDividend;
   const historicalData = assetDetail?.historicalData;
 
   const parsedData = historicalData
     ? JSON.parse(historicalData) : undefined;
+
+  const requestedAt = parsedData?.requestedAt;
+  const requestAtDate = requestedAt ?
+    new Date(requestedAt).toLocaleDateString('pt-BR') : false;
 
   const parsedHistoricalData =
     parsedData?.results?.[0];
@@ -77,11 +83,11 @@ export default async function Page({ params, onLoad }) {
   const assetLongName =
     parsedHistoricalData?.longName ?? ticker;
 
-  const assetShortName =
-    parsedHistoricalData?.shortName;
-
   const historicalDataPrice =
     parsedHistoricalData?.historicalDataPrice;
+
+  const assetShortName =
+    parsedHistoricalData?.shortName;
 
   const fiftyTwoWeekLow =
     parsedHistoricalData?.fiftyTwoWeekLow;
@@ -105,41 +111,62 @@ export default async function Page({ params, onLoad }) {
 
       <main className='main-container'>
 
-        <div className='asset-page-container'>
+        <div className='asset-page-container py-12'>
 
-          <div className="flex flex-1 flex-col justify-center py-12">
+          <div className='asset-page-header'>
 
-            <h1 className='asset-title'>{ticker}</h1>
+            <div className='asset-header'>
+              <div className='caption-title'>
+                <div>
+                  <h1 className='asset-title'>{assetLongName} ({ticker})</h1>
+                  <small>Apresentação de valores diários em Moeda - {currencyName}</small>
+                </div>
+                {<AssetFavButton assetId={assetId} userId={userId} />}
+              </div>
 
-            <div className='side-buttons'>
-              <UserAssetsButton userId={userId} />
+              <div className='asset-info-details'>
+                <figure>
+                  <Image src={assetLogoUrl} width={50} height={50} alt={assetLongName} title={assetLongName} loading="eager" />
+                  <figcaption>
+                    <p>{ticker}</p>
+                    <small>{assetLongName}</small>
+                  </figcaption>
+                </figure>
 
-              <OpenPriceAlertModal userId={userId} />
+                <div className='price-description'>
+                  <div className='description-header'>
+                    <Link href="#historical-price-data">
+                      <p className='current-price'>{currentPrice}</p>
+                    </Link>
+                    <Link href="#historical-price-data">
+                      {<PercentageVariation symbols={symbols} />}
+                    </Link>
+                  </div>
+                  {requestedAt &&
+                    <small>
+                      {<p>Atualizado em {requestAtDate}</p>}
+                    </small>}
+                </div>
+
+              </div>
+
             </div>
 
-            {<AssetFavButton assetId={assetId} userId={userId} />}
-
-            <figure>
-              <Image src={assetLogoUrl} width={50} height={50} alt={assetLongName} title={assetLongName} loading="eager" />
-
-              <figcaption>
-                <p>{assetLongName}</p>
-                <p><strong>Ticker</strong>: {ticker}</p>
-                <p><strong>Preço Atual</strong>: {currentPrice}</p>
-              </figcaption>
-            </figure>
-
-            {symbols && type && type != 2 && <SymbolsBr symbols={symbols} />}
-
-            {symbols && type && type == 2 && <SymbolsUs symbols={symbols} />}
-
-
-            {historicalDataPrice && <ZoomableTimeSeriesChart objData={historicalDataPrice} assetType={type} assetTicker={ticker} />}
-
-            {<HashClickAfterLoading />}
+            <div className='side-buttons'>
+              <OpenPriceAlertModal userId={userId} />
+              <UserAssetsButton userId={userId} />
+            </div>
 
           </div>
-        </div >
+
+
+
+          {historicalDataPrice && <ZoomableTimeSeriesChart objData={historicalDataPrice} assetType={type} assetTicker={ticker} />}
+
+          {<HashClickAfterLoading />}
+
+
+        </div>
       </main>
     </>
   )

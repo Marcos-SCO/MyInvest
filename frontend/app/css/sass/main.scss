@@ -63,7 +63,8 @@ button {
 
 a,
 button,
-.myButton {
+.myButton,
+.followAssetButton {
   transition: transform .1s ease-in-out;
 
   &:focus,

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { variationRemoveSpecialChars } from '../../app/helpers/assets';
+import { variationRemoveSpecialChars } from '../../../app/helpers/assets';
 
 export default function SymbolsUs({ symbols }) {
   const { symbol, companyName, } = symbols;

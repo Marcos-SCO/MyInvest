@@ -1,0 +1,49 @@
+.asset-page-header {
+  // display: flex;
+
+  position: relative;
+
+  .side-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    // margin-top: 1rem;
+
+    a:last-child,
+    button:last-child {
+      margin-left: 1rem;
+    }
+
+  }
+
+  @include max-mobile {
+    .side-buttons {
+
+      a,
+      button {
+        width: 100%;
+        max-width: 100%;
+
+        margin-top: 1rem;
+
+        &:last-child {
+          margin-left: 0;
+          margin-bottom: 1rem;
+        }
+
+      }
+    }
+  }
+
+  @include tablet {
+    .side-buttons {
+      position: relative;
+      top: -3rem;
+      right: 0;
+
+    }
+  }
+
+}

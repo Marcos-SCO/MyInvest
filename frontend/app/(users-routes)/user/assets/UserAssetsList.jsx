@@ -9,8 +9,8 @@ import { fetchUserAssets } from "app/api/assets/userAssets/fetchUserAssets";
 import AssetFavButton from "components/assets/assetButtons/assetFavButton/layout";
 import { getAssetTypeDescription, formatCurrency } from "../../../helpers/assets";
 
-import SymbolsBr from "../../../../components/assets/SymbolsBr";
-import SymbolsUs from "../../../../components/assets/SymbolsUs";
+import SymbolsBr from "../../../../components/assets/symbols/SymbolsBr";
+import SymbolsUs from "../../../../components/assets/symbols/SymbolsUs";
 
 import OpenModalContainer from '../../../../components/modal/OpenModalHandler';
 

@@ -107,13 +107,17 @@ const ZoomableTimeSeriesChart = (props) => {
 
   return (
     <>
-      {objData && chartData && <ApexChart className="zoomableTimeSeriesChart"
-        options={chartData.options}
-        series={chartData.series}
-        height={350}
-        width={"100%"}
-        type="line"
-      />}
+      {objData && chartData &&
+        <div className='chart-container' id="historical-price-data">
+          <ApexChart className="zoomableTimeSeriesChart"
+            options={chartData.options}
+            series={chartData.series}
+            height={350}
+            width={"100%"}
+            type="line"
+          />
+        </div>
+      }
     </>
   );
 };

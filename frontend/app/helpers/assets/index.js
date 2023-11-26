@@ -6,8 +6,11 @@ function formatCurrency(input, currencyDefinition = false) {
 
   const isUsd = input.indexOf('$') !== -1;
 
-  const isUsCurrency = currencyDefinition == 'usd';
-  const isBrCurrency = currencyDefinition == 'brl';
+  const lowerCurrencyDefinition = currencyDefinition
+    ? currencyDefinition?.toLowerCase() : false;
+
+  const isUsCurrency = lowerCurrencyDefinition == 'usd';
+  const isBrCurrency = lowerCurrencyDefinition == 'brl';
 
   if (isUsd || isUsCurrency) {
     // Format as USD
@@ -43,18 +46,24 @@ function getAssetTypeDescription(type) {
       typeSlug: 'acoes',
       category: 'Ações',
       nameDescription: 'Ação Brasileira',
+      currenCySymbol: 'R$',
+      currencyName: 'BRL',
     },
     2: {
       backendCode: 2,
       typeSlug: 'stocks',
       category: 'Stocks',
       nameDescription: 'Ação Norte Americana',
+      currenCySymbol: '$',
+      currencyName: 'USD',
     },
     3: {
       backendCode: 3,
       typeSlug: 'fiis',
       category: 'Fiis',
       nameDescription: 'Fundo Imobiliário',
+      currenCySymbol: 'R$',
+      currencyName: 'BRL',
     },
   }
 

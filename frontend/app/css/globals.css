@@ -19,5 +19,11 @@ body {
 }
 
 .main-container {
-  @apply max-w-6xl mx-auto px-5;
+  @apply max-w-6xl mx-auto;
+}
+
+@media (max-width: 1200px) {
+  .main-container {
+    @apply px-5;
+  }
 }
