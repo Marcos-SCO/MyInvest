@@ -30,11 +30,9 @@ export default async function UserAssets({ page }) {
       </Link>
 
       <>
-        <div className="cards-container user-cards-container">
-          <Suspense fallback={<Loading />}>
-            <UserAssetsList userId={userId} page={page} session={sessionData} />
-          </Suspense>
-        </div>
+        <Suspense fallback={<Loading />}>
+          <UserAssetsList userId={userId} page={page} session={sessionData} />
+        </Suspense>
       </>
 
     </div>

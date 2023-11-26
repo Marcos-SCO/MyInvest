@@ -16,10 +16,8 @@ export default async function UserAlerts({ page }) {
   const { id, name, userId, firstName } = sessionData;
 
   return (
-    <div className="alerts-list">
-
+    <div className="alert-lists">
       <h3 className="mb-5">{firstName} - Lista de alertas</h3>
-
       <>
         <div className="cards-container user-cards-container">
           <Suspense fallback={<Loading />}>
@@ -27,7 +25,6 @@ export default async function UserAlerts({ page }) {
           </Suspense>
         </div>
       </>
-
     </div>
   )
 }

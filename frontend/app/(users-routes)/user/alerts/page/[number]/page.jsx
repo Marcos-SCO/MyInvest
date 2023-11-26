@@ -6,7 +6,9 @@ export default async function Page(context) {
 
   return (
     <>
-      <UserAlerts page={pageNumber} />
+      <main className='main-container'>
+        <UserAlerts page={pageNumber} />
+      </main>
     </>
   )
 }

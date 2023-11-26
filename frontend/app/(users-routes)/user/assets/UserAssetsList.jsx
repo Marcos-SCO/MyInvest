@@ -44,59 +44,61 @@ export default async function UserAssetsList({ ...props }) {
         <p className="my-5 text-xl">Você não possui ativos favoritados</p>
       }
 
-      {fetchResultsData && fetchResultsData.map((result, key) => {
-        const { id: assetId, name, type } = result;
-        const assetDetailList = result?.assetDetails;
+      <div className="cards-container user-cards-container">
+        {fetchResultsData && fetchResultsData.map((result, key) => {
+          const { id: assetId, name, type } = result;
+          const assetDetailList = result?.assetDetails;
 
-        const isStockAsset = type == 2;
-        const ticker = name;
+          const isStockAsset = type == 2;
+          const ticker = name;
 
-        const symbols = assetDetailList
-          ? JSON.parse(assetDetailList?.symbols) : undefined;
+          const symbols = assetDetailList
+            ? JSON.parse(assetDetailList?.symbols) : undefined;
 
-        const updatedAt = assetDetailList?.updatedAt;
+          const updatedAt = assetDetailList?.updatedAt;
 
-        const assetLongName =
-          symbols?.name ?? symbols?.companyName ?? ticker;
+          const assetLongName =
+            symbols?.name ?? symbols?.companyName ?? ticker;
 
-        const updatedAtString = updatedAt ?
-          new Date(updatedAt).toLocaleDateString('pt-BR') : false;
+          const updatedAtString = updatedAt ?
+            new Date(updatedAt).toLocaleDateString('pt-BR') : false;
 
-        const typeObj = getAssetTypeDescription(type);
-        const nameDescription = typeObj?.nameDescription;
-        const assetSlug = typeObj?.typeSlug;
+          const typeObj = getAssetTypeDescription(type);
+          const nameDescription = typeObj?.nameDescription;
+          const assetSlug = typeObj?.typeSlug;
 
-        const assetLogoUrl = assetDetailList?.assetIcon
-          ?? 'https://brapi.dev/favicon.svg';
+          const assetLogoUrl = assetDetailList?.assetIcon
+            ?? 'https://brapi.dev/favicon.svg';
 
-        const currentPrice = formatCurrency(assetDetailList?.currentPrice);
+          const currentPrice = formatCurrency(assetDetailList?.currentPrice);
 
-        const assetUrl = `${baseUrl}/asset/${assetSlug}/${name}`;
+          const assetUrl = `${baseUrl}/asset/${assetSlug}/${name}`;
 
-        countItens += 1;
-        const applyLazyOrEager = countItens <= 2
-          ? 'eager' : 'lazy';
+          countItens += 1;
+          const applyLazyOrEager = countItens <= 2
+            ? 'eager' : 'lazy';
 
-        const props = {
-          assetUrl,
-          assetId,
-          userId,
-          ticker,
-          assetUrl,
-          nameDescription,
-          assetLongName,
-          assetLogoUrl,
-          currentPrice,
-          updatedAtString,
-          symbols,
-          applyLazyOrEager
-        }
+          const props = {
+            assetUrl,
+            assetId,
+            userId,
+            ticker,
+            assetUrl,
+            nameDescription,
+            assetLongName,
+            assetLogoUrl,
+            currentPrice,
+            updatedAtString,
+            symbols,
+            applyLazyOrEager
+          }
 
-        return (
-          <UserAssetCard key={key} props={props} />
-        );
+          return (
+            <UserAssetCard key={key} props={props} />
+          );
 
-      })}
+        })}
+      </div>
 
       {<Pagination props={paginationParams} />}
 
