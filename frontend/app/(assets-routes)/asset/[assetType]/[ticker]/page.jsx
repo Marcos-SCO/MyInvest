@@ -63,6 +63,7 @@ export default async function Page({ params, onLoad }) {
 
   const assetTypeDescription = getAssetTypeDescription(type);
   const currencyName = assetTypeDescription?.currencyName;
+  const nameDescription = assetTypeDescription?.nameDescription;
 
   const currentPrice = formatCurrency(assetDetail?.currentPrice);
 
@@ -130,6 +131,7 @@ export default async function Page({ params, onLoad }) {
                   <Image src={assetLogoUrl} width={50} height={50} alt={assetLongName} title={assetLongName} loading="eager" />
                   <figcaption>
                     <p>{ticker}</p>
+                    <small>{nameDescription}</small>
                     <small>{assetLongName}</small>
                   </figcaption>
                 </figure>

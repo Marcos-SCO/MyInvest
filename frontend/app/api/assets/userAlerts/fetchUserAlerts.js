@@ -2,7 +2,7 @@ const API_BASE_URL = process.env.API_BASE_URL;
 
 async function fetchUserAlerts(fetchObj) {
   const { id, page = 1, numberOfItens = 10, active = true,
-    getDetailedList = true } = fetchObj;
+    getDetailedList = true, includeSymbols = false } = fetchObj;
 
   const backendUrl = `${API_BASE_URL}/assets/price/watch/paginate/`;
 
@@ -11,6 +11,7 @@ async function fetchUserAlerts(fetchObj) {
     numberOfItens,
     page,
     active,
+    includeSymbols,
     getDetailedList
   };
 

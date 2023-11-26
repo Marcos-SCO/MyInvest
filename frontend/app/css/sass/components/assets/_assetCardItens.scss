@@ -4,7 +4,8 @@
   max-width: 390px;
   border: 1px solid #ccc;
 
-  padding: .5rem 1rem;
+  // padding: .5rem 1rem;
+  padding: 1rem;
 
   margin-bottom: 1rem;
 
@@ -39,10 +40,14 @@
 
     img {
       margin: auto;
+
+      @include tablet {
+        margin-top: .5rem;
+      }
     }
 
     figure {
-      margin-top: 1rem;
+      // margin-top: 1rem;
       display: flex;
       align-items: center;
 
@@ -59,7 +64,8 @@
     }
 
     .price-description {
-      margin-top: 1rem;
+      // margin-top: 1rem;
+      margin-top: .5rem;
 
       .description-header {
         display: flex;
@@ -120,6 +126,88 @@
 
       .current-price {
         font-size: 1.7rem !important;
+      }
+    }
+
+  }
+
+}
+
+.alert-asset-card {
+
+  .alert-status {
+    display: flex;
+    margin-top: .7rem;
+    font-size: 1.5rem;
+    align-items: center;
+    font-weight: 600;
+
+    svg {
+      path {
+        stroke: $primary;
+      }
+
+      margin-right: .5rem;
+    }
+
+  }
+
+  .alert-details {
+    color: $primary;
+
+    .currentPrice {
+      span {
+        font-size: 1.1rem;
+      }
+
+      .currentPriceValue {
+        font-weight: 700;
+        font-size: 1.1rem;
+      }
+    }
+
+    .programmed {
+      margin-top: .75rem;
+      font-weight: 500;
+      color: $primary;
+
+      .description {
+        font-size: 1.4rem;
+      }
+
+      .programmed-price {
+        font-size: 2rem;
+        font-weight: 700;
+      }
+    }
+
+    @include max-mobile {
+      .programmed {
+        line-height: 1.5;
+
+        .programmed-price {
+          font-size: 1.5rem;
+        }
+      }
+
+      @media (max-width: 320px) {
+        .programmed {
+          .description {
+            font-size: 1.3rem;
+          }
+        }
+
+        .programmed-price {
+          font-size: 1.35rem !important;
+        }
+      }
+    }
+
+    @include desktop {}
+
+    @media (min-width: 1088px) {
+      .programmed {
+        line-height: 1;
       }
     }
 

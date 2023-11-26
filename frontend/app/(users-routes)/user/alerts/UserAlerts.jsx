@@ -1,6 +1,5 @@
 import { nextAuthOptions } from "app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
-
 import { getUserSessionData } from "app/helpers/session/getUserSessionData";
 
 import { Suspense } from "react";
@@ -12,18 +11,21 @@ export default async function UserAlerts({ page }) {
   const pageNumber = page || '1';
 
   const session = await getServerSession(nextAuthOptions);
+  const sessionData = await getUserSessionData(session);
 
-  const { id, name, userId, firstName } = await getUserSessionData(session);
+  const { id, name, userId, firstName } = sessionData;
 
   return (
-    <div className="w-full flex flex-col items-center justify-center p-10">
+    <div className="alerts-list">
 
       <h3 className="mb-5">{firstName} - Lista de alertas</h3>
 
       <>
-        <Suspense fallback={<Loading />}>
-          <AlertList userId={userId} page={page} />
-        </Suspense>
+        <div className="cards-container user-cards-container">
+          <Suspense fallback={<Loading />}>
+            <AlertList userId={userId} page={page} session={sessionData} />
+          </Suspense>
+        </div>
       </>
 
     </div>

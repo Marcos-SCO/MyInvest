@@ -102,7 +102,7 @@ const PriceAssetsWatchController = () => {
   }
 
   async function index(req: Request, res: Response): Promise<Response> {
-    const { page = 1, numberOfItens = 10, orderBy = 'desc', getDetailedList = false } = req.body;
+    const { page = 1, numberOfItens = 10, orderBy = 'desc', getDetailedList = false, includeSymbols = false } = req.body;
 
     const userId = req.body?.userId;
 
@@ -113,6 +113,7 @@ const PriceAssetsWatchController = () => {
       page,
       numberOfItens,
       getDetailedList,
+      includeSymbols,
       orderBy: { 'updatedAt': orderBy }
     }
 

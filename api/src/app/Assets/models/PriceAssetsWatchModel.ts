@@ -141,7 +141,7 @@ const PriceAssetsWatchModel = () => {
   }
 
   async function getAllByPagination(args: any) {
-    const { page = 1, numberOfItens = 10, getDetailedList = false, orderBy = false } = args;
+    const { page = 1, numberOfItens = 10, getDetailedList = false, includeSymbols = false, orderBy = false } = args;
 
     const userId = args?.userId;
     const searchByStatus = args?.searchByStatus ?? false;
@@ -164,9 +164,14 @@ const PriceAssetsWatchModel = () => {
       skip,
       take: +numberOfItens,
       include: {
-        // assets: true,
         priceAlertTypes: true,
       }
+    }
+    
+    if (includeSymbols) {
+      const symbolsParams: any = { assets: { select: { symbols: true } } };
+
+      queryObj.include = { ...queryObj.include, ...symbolsParams };
     }
 
     if (userId) {

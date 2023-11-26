@@ -83,6 +83,7 @@ export default async function UserAssetsList({ ...props }) {
           userId,
           ticker,
           assetUrl,
+          nameDescription,
           assetLongName,
           assetLogoUrl,
           currentPrice,

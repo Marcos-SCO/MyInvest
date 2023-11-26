@@ -7,7 +7,7 @@ import ItemButton from './ItemButton';
 import OpenModalContainer from '../../../modal/OpenModalHandler';
 import DisplaySvg from '../../../../app/helpers/svg/DisplaySvg';
 
-export default async function AssetFavButton({ userId = false, assetId = false }) {
+export default async function AssetFavButton({ userId = false, assetId = false, removeItem = true }) {
   
   if (!userId) {
     return (<OpenModalContainer modalId={`authContainer`} className={'followAssetButton blue'}>
@@ -22,7 +22,7 @@ export default async function AssetFavButton({ userId = false, assetId = false }
 
   return (
     <>
-      <ItemButton isUserAsset={isUserAsset} fetchObj={fetchObj} />
+      <ItemButton isUserAsset={isUserAsset} fetchObj={fetchObj} removeItem={removeItem} />
     </>
   )
 

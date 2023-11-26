@@ -15,6 +15,7 @@ export default function UserAssetCard({ props }) {
   const assetId = props?.assetId;
   const userId = props?.userId;
   const ticker = props?.ticker;
+  const nameDescription = props?.nameDescription;
   const assetLongName = props?.assetLongName;
   const assetLogoUrl = props?.assetLogoUrl ?? false;
 
@@ -36,6 +37,7 @@ export default function UserAssetCard({ props }) {
             <Image src={assetLogoUrl} width={50} height={50} alt={assetLongName} title={assetLongName} loading={applyLazyOrEager} />
             <figcaption>
               <p className="asset-title">{ticker}</p>
+              <small className='assetLongName'>{nameDescription}</small>
               <small className='assetLongName'>{limitString(assetLongName, 50)}</small>
             </figcaption>
           </figure>

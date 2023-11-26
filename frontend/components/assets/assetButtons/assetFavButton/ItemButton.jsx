@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
 import DisplaySvg from '../../../../app/helpers/svg/DisplaySvg';
 
-export default function ItemButton({ isUserAsset, fetchObj }) {
+export default function ItemButton({ isUserAsset, fetchObj, removeItem }) {
   const router = useRouter();
 
   const userAssetInitialValue = isUserAsset;
@@ -43,7 +43,7 @@ export default function ItemButton({ isUserAsset, fetchObj }) {
       e.target.closest('[data-js="asset-container"]')
       ?? e.target.closest('[data-js="asset-card-item"]');
 
-    if (closestAssetContainer) {
+    if (removeItem && closestAssetContainer) {
       closestAssetContainer.style = 'display:none';
     }
 
