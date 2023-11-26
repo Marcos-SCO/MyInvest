@@ -58,7 +58,8 @@ export default async function Page({ params, onLoad }) {
   if (!assetDetailList) notFound();
 
   const assetDetail = assetDetailList[0];
-  const symbols = assetDetail ? JSON.parse(assetDetail?.symbols) : undefined;
+  const symbols = assetDetail
+    ? JSON.parse(assetDetail?.symbols) : undefined;
 
   const assetTypeDescription = getAssetTypeDescription(type);
   const currencyName = assetTypeDescription?.currencyName;
@@ -159,10 +160,10 @@ export default async function Page({ params, onLoad }) {
 
           </div>
 
-          {historicalDataPrice && 
-          <div className='historical-graph-container'>
-            <ZoomableTimeSeriesChart objData={historicalDataPrice} assetType={type} assetTicker={ticker} />
-          </div>
+          {historicalDataPrice &&
+            <div className='historical-graph-container'>
+              <ZoomableTimeSeriesChart objData={historicalDataPrice} assetType={type} assetTicker={ticker} />
+            </div>
           }
 
           {!historicalDataPrice &&

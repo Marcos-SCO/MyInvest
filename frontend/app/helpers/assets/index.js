@@ -72,7 +72,7 @@ function getAssetTypeDescription(type) {
 
 function variationRemoveSpecialChars(inputString) {
   // Remove special characters including +, -, and %
-  return inputString.replace(/[\+\-%]/g, '');
+  return inputString?.replace(/[\+\-%]/g, '');
 }
 
 export { getAssetTypeDescription, formatCurrency, getFormatToInsertPrice, variationRemoveSpecialChars };

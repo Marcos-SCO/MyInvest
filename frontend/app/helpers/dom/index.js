@@ -4,4 +4,16 @@ function attributesToString(attributes) {
     .join(' ');
 }
 
-export { attributesToString };
+function limitString(inputString, maxLength, stringEnd = '...') {
+
+  const stringHaveMoreCharacterThanMaxLength =
+    inputString?.length > maxLength;
+
+  if (stringHaveMoreCharacterThanMaxLength) {
+    return inputString.substring(0, maxLength) + stringEnd;
+  }
+
+  return inputString;
+}
+
+export { attributesToString, limitString };

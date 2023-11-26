@@ -1,21 +1,13 @@
-'use client';
-
-import React, { useState } from 'react';
 import Link from "next/link";
 import Image from 'next/image';
 
 import { fetchUserAssets } from "app/api/assets/userAssets/fetchUserAssets";
 
-import AssetFavButton from "components/assets/assetButtons/assetFavButton/layout";
 import { getAssetTypeDescription, formatCurrency } from "../../../helpers/assets";
 
-import SymbolsBr from "../../../../components/assets/symbols/SymbolsBr";
-import SymbolsUs from "../../../../components/assets/symbols/SymbolsUs";
-
-import OpenModalContainer from '../../../../components/modal/OpenModalHandler';
-
 import { Pagination } from '../../../../components/page/Pagination';
-import DisplaySvg from '../../../helpers/svg/DisplaySvg';
+import UserAssetCard from "../../../../components/assets/assetCards/UserAssetCard";
+import DisplaySvg from "../../../helpers/svg/DisplaySvg";
 
 const baseUrl = process.env.NEXT_PUBLIC_FRONT_END_URL;
 
@@ -27,7 +19,8 @@ export default async function UserAssetsList({ ...props }) {
 
   const numberOfItens = 10;
 
-  const fetchResults = await fetchUserAssets({ id: userId, page, numberOfItens });
+  const fetchResults = await
+    fetchUserAssets({ id: userId, page, numberOfItens });
 
   const fetchResultsData = fetchResults.assetsList;
 
@@ -46,52 +39,60 @@ export default async function UserAssetsList({ ...props }) {
 
   return (
     <>
-      {!fetchResultsData && <>
+
+      {!fetchResultsData &&
         <p className="my-5 text-xl">Você não possui ativos favoritados</p>
-      </>}
+      }
 
       {fetchResultsData && fetchResultsData.map((result, key) => {
-        const { id, type, name, assetDetails } = result;
+        const { id: assetId, name, type } = result;
+        const assetDetailList = result?.assetDetails;
 
         const isStockAsset = type == 2;
+        const ticker = name;
+
+        const symbols = assetDetailList
+          ? JSON.parse(assetDetailList?.symbols) : undefined;
+
+        const updatedAt = assetDetailList?.updatedAt;
+
+        const assetLongName =
+          symbols?.name ?? symbols?.companyName ?? ticker;
+
+        const updatedAtString = updatedAt ?
+          new Date(updatedAt).toLocaleDateString('pt-BR') : false;
 
         const typeObj = getAssetTypeDescription(type);
         const nameDescription = typeObj?.nameDescription;
         const assetSlug = typeObj?.typeSlug;
 
-        const symbolsData = JSON.parse(assetDetails?.symbols);
-
-        const assetLogoUrl = assetDetails?.assetIcon
+        const assetLogoUrl = assetDetailList?.assetIcon
           ?? 'https://brapi.dev/favicon.svg';
 
-        const currentPrice = formatCurrency(assetDetails?.currentPrice);
+        const currentPrice = formatCurrency(assetDetailList?.currentPrice);
+
+        const assetUrl = `${baseUrl}/asset/${assetSlug}/${name}`;
 
         countItens += 1;
         const applyLazyOrEager = countItens <= 2
           ? 'eager' : 'lazy';
 
+        const props = {
+          assetUrl,
+          assetId,
+          userId,
+          ticker,
+          assetUrl,
+          assetLongName,
+          assetLogoUrl,
+          currentPrice,
+          updatedAtString,
+          symbols,
+          applyLazyOrEager
+        }
+
         return (
-          <div key={key} className="mb-3 w-100 min-w-[300px] border-t-4" data-js="asset-container">
-
-            <AssetFavButton assetId={id} userId={userId} />
-
-            <button rel="prefetch" data-href={`${baseUrl}/asset/${assetSlug}/${name}`} className="priceAlertModalButton myButtonSvg" onClick={(e) => {
-              window.location.href = `${baseUrl}/asset/${assetSlug}/${name}/` + '#price-modal';
-            }}>
-              <DisplaySvg name={'bell'} width="18" height="18" /> Definir Alerta de preço
-            </button>
-
-            <Link rel="prefetch" href={`${baseUrl}/asset/${assetSlug}/${name}`} className="activePageButton myButtonSvg">Ir até a página do ativo</Link>
-
-            <Image src={assetLogoUrl} width={50} height={50} alt={name} title={name} loading={applyLazyOrEager} />
-
-            {!isStockAsset && <SymbolsBr symbols={symbolsData} />}
-
-            {isStockAsset && <SymbolsUs symbols={symbolsData} />}
-
-            <p>Preço atual: {currentPrice}</p>
-
-          </div>
+          <UserAssetCard key={key} props={props} />
         );
 
       })}

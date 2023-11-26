@@ -1,0 +1,39 @@
+.cards-container {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .asset-card-item {}
+
+  @media (max-width:768px) {
+    .asset-card-item {
+      max-width: 100%;
+    }
+  }
+
+  @include max-mobile {
+    width: 100%;
+    justify-content: center;
+
+    .asset-card-item {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  @include tablet {
+    .asset-card-item {
+      width: 49%;
+      max-width: 50%;
+    }
+  }
+
+  @include desktop {
+    .asset-card-item {
+      width: 32%;
+      max-width: 390px;
+    }
+  }
+
+}

@@ -1,0 +1,120 @@
+.asset-card-item {
+  position: relative;
+  width: 100%;
+  max-width: 390px;
+  border: 1px solid #ccc;
+
+  padding: .5rem 1rem;
+
+  margin-bottom: 1rem;
+
+  .header-container {
+    display: flex;
+    justify-content: flex-end;
+
+    @media (min-width: 360px) {
+      .followAssetButton {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+      }
+    }
+  }
+
+  .asset-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+  }
+
+  .asset-info-details {
+    display: flex;
+    flex-direction: column;
+
+    img {
+      margin: auto;
+    }
+
+    figure {
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+
+      figcaption {
+        margin-left: .5rem;
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+        flex-direction: column;
+
+      }
+    }
+
+    .price-description {
+      margin-top: 1rem;
+
+      .description-header {
+        display: flex;
+        align-items: baseline;
+        font-size: 1.5rem;
+        font-weight: 600;
+
+        .current-price {
+          font-size: 2rem;
+          font-weight: 700;
+        }
+
+        .percentage-variation {
+          margin-left: 1rem;
+        }
+      }
+    }
+
+  }
+
+  .priceAlertModalButton {
+    margin-top: 1rem;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  @include max-mobile {
+
+    .asset-title {
+      font-size: 1.5rem;
+    }
+
+    .asset-info-details {
+      figure {
+        align-items: center;
+
+        @media (max-width:300px) {
+          align-items: flex-start;
+          flex-direction: column;
+
+          figcaption {
+            margin-left: 0;
+            margin-top: 1rem;
+          }
+        }
+
+      }
+
+    }
+
+    .followAssetButton {
+      margin-top: .5rem;
+    }
+
+    .description-header {
+      font-size: 1.3rem !important;
+
+      .current-price {
+        font-size: 1.7rem !important;
+      }
+    }
+
+  }
+
+}

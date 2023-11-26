@@ -1,71 +1,53 @@
-.percentage-variation {
-  &.up {
-    color: #037b4b;
-  }
+.asset-page-header {
+  // display: flex;
 
-  &.down {
-    color: #bd1414;
-  }
-}
+  position: relative;
 
-.myAssetsButton {
-  max-width: 200px;
-}
+  .side-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: flex-end;
 
-.activePageButton {
-  max-width: 250px;
-}
+    // margin-top: 1rem;
 
-.priceAlertModalButton {
-  svg {
-    path {
-      stroke: $primary;
+    a:last-child,
+    button:last-child {
+      margin-left: 1rem;
     }
+
   }
 
-}
+  @include max-mobile {
+    .side-buttons {
 
-.followAssetButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+      a,
+      button {
+        width: 100%;
+        max-width: 100%;
 
-  text-align: center;
+        margin-top: 1rem;
 
-  width: 100%;
-  max-width: 120px;
+        &:last-child {
+          margin-left: 0;
+          // margin-bottom: 1rem;
+        }
 
-  border: 1px solid;
-  border-color: #d2e3fc;
-  color: #4d5156;
-
-  padding: .25rem .6875rem .25rem .4375rem;
-
-  // font-size: .75rem;
-  font-size: .95rem;
-  border-radius: .875rem;
-
-  .svg-container {
-    margin-right: .4rem;
-
-    svg {
-      path {
-        stroke: $primary;
       }
     }
   }
 
-  &.blue {
-    background-color: $primary;
+  @include tablet {
+    .side-buttons {
+      a, button {
+        position: relative;
+        top: -3rem;
+        right: 0;
+      }
 
-    &,
-    svg path {
-      stroke: #fff;
-      color: #fff;
     }
   }
 
-  @include desktop {}
 }
 
 .asset-header {
