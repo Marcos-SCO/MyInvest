@@ -119,7 +119,7 @@ export default async function Page({ params, onLoad }) {
 
             <div className='asset-header'>
               <div className='caption-title'>
-                <div>
+                <div className='inner-title-container'>
                   <h1 className='asset-title'>{assetLongName} ({ticker})</h1>
                   <small>Apresentação de valores diários em Moeda - {currencyName}</small>
                 </div>
@@ -176,7 +176,6 @@ export default async function Page({ params, onLoad }) {
           }
 
           {<HashClickAfterLoading />}
-
 
         </div>
       </main>

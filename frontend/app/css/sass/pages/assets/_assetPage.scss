@@ -56,7 +56,10 @@
     align-items: flex-start;
     flex-wrap: wrap;
     justify-content: space-between;
-    // max-width: 700px;
+    
+    .inner-title-container {
+      max-width: 700px;
+    }
 
     .asset-title {
       font-size: 1.5rem;
