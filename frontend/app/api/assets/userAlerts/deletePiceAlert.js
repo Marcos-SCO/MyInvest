@@ -1,19 +1,18 @@
 const API_BASE_URL = process.env.API_BASE_URL;
 
-async function addPriceAlert(fetchObj) {
-  const { userId, assetId, expectedPrice, priceAlertTypeId } = fetchObj;
+async function deletePriceAlert(fetchObj) {
+  const { userId, alertId, token = '' } = fetchObj;
 
   const backendUrl = `${API_BASE_URL}/assets/price/watch/`;
 
   const bodyObj = {
     userId,
-    assetId,
-    expectedPrice,
-    priceAlertTypeId
+    alertId,
+    token
   };
 
   const config = {
-    method: 'POST',
+    method: 'DELETE',
     headers: { 'Content-type': 'application/json' },
     body: JSON.stringify(bodyObj),
   }
@@ -28,17 +27,17 @@ async function addPriceAlert(fetchObj) {
     if (isMissing) throw new Error(data.message);
 
     return {
-      alertCreated: true,
+      assetCreated: true,
       data
     };
 
   } catch (error) {
-    console.error('Add price alert: ', error.message);
+    console.error('Delete price alert: ', error.message);
     return {
-      alertCreated: false,
+      assetDeleted: false,
       message: error.message,
     }
   }
 }
 
-export { addPriceAlert }
+export { deletePriceAlert }

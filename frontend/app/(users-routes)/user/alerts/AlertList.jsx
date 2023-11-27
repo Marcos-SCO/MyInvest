@@ -12,7 +12,9 @@ import UserAlertCard from '../../../../components/assets/assetCards/UserAlertCar
 const baseUrl = process.env.NEXT_PUBLIC_FRONT_END_URL;
 
 export default async function AlertList({ ...props }) {
-  const { userId, page = 1 } = props;
+  const { session, userId, page = 1 } = props;
+
+  const token = session?.token;
 
   const numberOfItens = 10;
 
@@ -43,6 +45,12 @@ export default async function AlertList({ ...props }) {
         {fetchResultsData && fetchResultsData.map((result, key) => {
           const { id, priceAlertTypeId, expectedPrice, active, createdAt, updatedAt, assetDetails } = result;
 
+          const createdAtString = createdAt ?
+            new Date(createdAt).toLocaleDateString('pt-BR') : false;
+
+          const updatedAtString = updatedAt ?
+            new Date(updatedAt).toLocaleDateString('pt-BR') : false;
+
           const { type, name, currentPrice, assetIcon } = assetDetails;
           const assetId = assetDetails?.id;
 
@@ -71,13 +79,13 @@ export default async function AlertList({ ...props }) {
 
           const currentPriceValue = formatCurrency(currentPrice);
 
-          const alertProps = { id, priceAlertTypeId, expectedPriceValue, name, nameDescription, assetSlug, currentPriceValue };
-
           countItens += 1;
           const applyLazyOrEager = countItens <= 2
             ? 'eager' : 'lazy';
 
           const cardProps = {
+            token,
+            alertId: id,
             userId,
             assetId,
             assetUrl,
@@ -90,10 +98,12 @@ export default async function AlertList({ ...props }) {
             currentPriceValue,
             priceAlertTypeId,
             expectedPriceValue,
+            createdAtString,
+            updatedAtString,
           }
 
           return (
-            <UserAlertCard props={cardProps} />
+            <UserAlertCard props={cardProps} key={key} />
           );
 
         })}

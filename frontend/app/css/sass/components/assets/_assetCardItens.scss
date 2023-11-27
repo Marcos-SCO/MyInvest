@@ -135,16 +135,75 @@
 
 .alert-asset-card {
 
+  .asset-card-item {
+    overflow: hidden;
+  }
+
+  .header-container {
+    margin-bottom: .7rem;
+    padding-bottom: 1rem;
+    justify-content: space-between;
+    align-items: baseline;
+
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: block;
+      left: -1rem;
+      right: -1rem;
+      width: calc(100% + 2rem);
+      height: 1px;
+      background-color: #ddd;
+      bottom: 0;
+    }
+
+    .deleteButton {
+      padding: .3rem;
+      background-color: $primary;
+      border-radius: 20px;
+
+      position: absolute;
+      top: .5rem;
+      right: 0;
+
+      svg {
+        path {
+          stroke: #fff;
+        }
+
+        height: 25px;
+        width: 25px;
+      }
+    }
+  }
+
+  .timeStatus {
+    margin-top: .5rem;
+    // display: flex;
+    // align-items: flex-start;
+    // flex-direction: column;
+
+    span {
+      margin: 0 .3rem;
+    }
+  }
+
   .alert-status {
     display: flex;
     margin-top: .7rem;
     font-size: 1.5rem;
     align-items: center;
     font-weight: 600;
+    // color: $primary;
+
+    color: #4CAF50;
 
     svg {
       path {
-        stroke: $primary;
+        stroke: #4CAF50;
+        // stroke: $primary;
       }
 
       margin-right: .5rem;
@@ -152,10 +211,17 @@
 
   }
 
+  .followAssetButton {
+    position: initial;
+    margin: .75rem 0 .65rem 0;
+  }
+
   .alert-details {
     color: $primary;
 
     .currentPrice {
+      color: #787879;
+
       span {
         font-size: 1.1rem;
       }
