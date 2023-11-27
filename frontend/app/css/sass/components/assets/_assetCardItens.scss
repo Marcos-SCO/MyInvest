@@ -13,6 +13,10 @@
     display: flex;
     justify-content: flex-end;
 
+    @include max-mobile {
+      justify-content: center;
+    }
+
     @include max-tablet {
       .followAssetButton {
         margin-bottom: 1rem;
@@ -192,7 +196,7 @@
       border-radius: 20px;
 
       position: absolute;
-      top: .5rem;
+      top: 0;
       right: 0;
 
       svg {
@@ -219,10 +223,10 @@
 
   .alert-status {
     display: flex;
-    margin-top: .7rem;
     font-size: 1.5rem;
     align-items: center;
     font-weight: 600;
+    // margin-top: .7rem;
     // color: $primary;
 
     color: #4CAF50;
@@ -240,14 +244,21 @@
 
   .followAssetButton {
     position: initial;
-    margin: .75rem 0 .65rem 0;
   }
 
   .alert-details {
     color: $primary;
 
+    .current-price-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1rem;
+    }
+
     .currentPrice {
       color: #787879;
+      margin-right: .5rem;
 
       span {
         font-size: 1.1rem;
@@ -278,27 +289,59 @@
       .programmed {
         line-height: 1.5;
 
-        .programmed-price {
-          font-size: 1.5rem;
+        .description {
+          font-size: 1.3rem;
         }
+
+        .programmed-price {
+          font-size: 1.1rem;
+        }
+
+        @media (min-width: 399.9px) {
+          .programmed-price {
+            font-size: 1.5rem;
+          }
+        }
+
       }
 
-      @media (max-width: 320px) {
+      @media (max-width: 345.9px) {
         .programmed {
           .description {
-            font-size: 1.3rem;
+            font-size: 1.15rem !important;
           }
         }
 
         .programmed-price {
-          font-size: 1.35rem !important;
+          // font-size: 1.35rem !important;
         }
+
+        .description {
+          font-size: 1.15rem !important;
+        }
+      }
+
+      @media (min-width: 346px) and (max-width: 400px) {
+        .programmed-price {
+          font-size: 1.4rem !important;
+        }
+      }
+
+      @media (max-width:320.9px) {
+        .programmed-price {
+          font-size: 1.1rem !important;
+        }
+      }
+
+    }
+
+    @media (min-width: 1088px) {
+      .programmed {
+        line-height: 1.5;
       }
     }
 
-    @include desktop {}
-
-    @media (min-width: 1088px) {
+    @media (min-width: 1200px) {
       .programmed {
         line-height: 1;
       }
