@@ -19,11 +19,9 @@ export default async function UserAlerts({ page }) {
     <div className="alert-lists">
       <h3 className="mb-5">{firstName} - Lista de alertas</h3>
       <>
-        <div className="cards-container user-cards-container">
-          <Suspense fallback={<Loading />}>
-            <AlertList userId={userId} page={page} session={sessionData} />
-          </Suspense>
-        </div>
+        <Suspense fallback={<Loading />}>
+          <AlertList userId={userId} page={page} session={sessionData} />
+        </Suspense>
       </>
     </div>
   )

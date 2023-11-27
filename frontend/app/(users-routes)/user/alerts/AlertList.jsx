@@ -16,7 +16,7 @@ export default async function AlertList({ ...props }) {
 
   const token = session?.token;
 
-  const numberOfItens = 10;
+  const numberOfItens = 12;
 
   const fetchResults = await fetchUserAlerts({ id: userId, page, numberOfItens, includeSymbols: true });
 

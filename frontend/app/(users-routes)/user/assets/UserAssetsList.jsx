@@ -17,7 +17,7 @@ export default async function UserAssetsList({ ...props }) {
 
   const { userId, page = 1 } = props;
 
-  const numberOfItens = 10;
+  const numberOfItens = 12;
 
   const fetchResults = await
     fetchUserAssets({ id: userId, page, numberOfItens });

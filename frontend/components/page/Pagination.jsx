@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import DisplaySvg from '../../app/helpers/svg/DisplaySvg';
 
 export function Pagination({ props }) {
 
@@ -14,6 +15,8 @@ export function Pagination({ props }) {
 
   const pageCount = +totalPages;
 
+  const goToPageText = 'Ir até a página';
+
   const renderPaginationItems = () => {
 
     const items = [];
@@ -26,7 +29,7 @@ export function Pagination({ props }) {
 
       items.push(
         <li key={pageNumber - 1} className={selected ? 'selected' : ''}>
-          <Link href={`${baseUrl}[page]`} as={`${baseUrl}${pageNumber}`} title={`Go to page ${pageNumber}`}>
+          <Link href={`${baseUrl}[page]`} as={`${baseUrl}${pageNumber}`} title={`${goToPageText} ${pageNumber}`}>
             {pageNumber}
           </Link>
         </li>
@@ -38,8 +41,10 @@ export function Pagination({ props }) {
       const firstPage = 1;
 
       items.push(
-        <li key="previous">
-          <Link href={`${baseUrl}[page]`} as={`${baseUrl}${firstPage}`} title={`Go to page ${firstPage}`}>{"<<"}</Link>
+        <li key="previous" className="previous">
+          <Link href={`${baseUrl}[page]`} as={`${baseUrl}${firstPage}`} title={`${goToPageText} ${firstPage}`} className="arrow-link doubleArrow">
+            <DisplaySvg name="doubleArrowNext" className="arrow" />
+          </Link>
         </li>
       );
     };
@@ -49,8 +54,10 @@ export function Pagination({ props }) {
       const lastPage = totalPages;
 
       items.push(
-        <li key="previous">
-          <Link href={`${baseUrl}[page]`} as={`${baseUrl}${lastPage}`} title={`Go to page ${lastPage}`}>{">>"}</Link>
+        <li key="next">
+          <Link href={`${baseUrl}[page]`} as={`${baseUrl}${lastPage}`} title={`${goToPageText} ${lastPage}`} className="arrow-link doubleArrow">
+            <DisplaySvg name="doubleArrowNext" className="arrow doubleArrow" />
+          </Link>
         </li>
       );
     };
@@ -60,8 +67,10 @@ export function Pagination({ props }) {
       const previousNumber = pageValue - 1;
 
       items.push(
-        <li key="previous">
-          <Link href={`${baseUrl}[page]`} as={`${baseUrl}${previousNumber}`} title={`Go to page ${previousNumber}`}>{"<"}</Link>
+        <li key="previous" className="previous">
+          <Link href={`${baseUrl}[page]`} as={`${baseUrl}${previousNumber}`} title={`${goToPageText} ${previousNumber}`} className="arrow-link">
+            <DisplaySvg name="arrowNext" className="arrow arrowPrev" />
+          </Link>
         </li>
       );
     };
@@ -72,7 +81,9 @@ export function Pagination({ props }) {
 
       items.push(
         <li key="next">
-          <Link href={`${baseUrl}[page]`} as={`${baseUrl}${nextPageNumber}`} title={`Ir para página ${nextPageNumber}`}>{">"}</Link>
+          <Link href={`${baseUrl}[page]`} as={`${baseUrl}${nextPageNumber}`} title={`${goToPageText} ${nextPageNumber}`} className="arrow-link">
+            <DisplaySvg name="arrowNext" className="arrow arrowNext" />
+          </Link>
         </li>
       );
     };
