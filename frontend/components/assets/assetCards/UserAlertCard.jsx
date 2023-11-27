@@ -62,8 +62,10 @@ export default function UserAlertCard({ props }) {
             <Image src={assetLogoUrl} width={50} height={50} alt={assetLongName} title={assetLongName} loading={applyLazyOrEager} />
             <figcaption>
               <p className="asset-title">{ticker}</p>
-              <small className='assetLongName'>{limitString(assetLongName, 50)}</small>
-              <small>{nameDescription}</small>
+              <div className='asset-description'>
+                <small>{nameDescription}</small><span> - </span>
+                <small className='assetLongName'>{limitString(assetLongName, 50)}</small>
+              </div>
             </figcaption>
           </figure>
         </Link>

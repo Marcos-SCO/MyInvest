@@ -13,6 +13,13 @@
     display: flex;
     justify-content: flex-end;
 
+    @include max-tablet {
+      .followAssetButton {
+        margin-bottom: 1rem;
+      }
+
+    }
+
     @media (min-width: 360px) {
       .followAssetButton {
         position: absolute;
@@ -102,6 +109,10 @@
       figure {
         align-items: center;
 
+        figcaption {
+          margin-top: .5rem;
+        }
+
         @media (max-width:300px) {
           align-items: flex-start;
           flex-direction: column;
@@ -131,12 +142,28 @@
 
   }
 
+  @include tablet {
+    .asset-description {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-height: 20px;
+    }
+  }
+
 }
 
 .alert-asset-card {
 
   .asset-card-item {
     overflow: hidden;
+  }
+
+  .asset-info-details {
+    img {
+      @include max-mobile {
+        margin-top: .5rem;
+      }
+    }
   }
 
   .header-container {
