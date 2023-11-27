@@ -40,6 +40,18 @@ async function PriceAlertEmailsExecuteQueue(page = 1, processedCount = 0) {
 
     if (!assetReachedExpectedPrice) {
       console.log(`Alert ${priceAlertId} didn't reach expected price \n`);
+
+      try {
+        const updateAlert = await PriceAssetsWatchModel()
+          .updatePriceAlert({ alertId: priceAlertId, active: true });
+
+        // console.log('Update alert: ', updateAlert);
+
+      } catch (error) {
+
+        console.log('Update error alert: ', error);
+      }
+
       sleep(1000);
       continue;
     }
@@ -47,6 +59,15 @@ async function PriceAlertEmailsExecuteQueue(page = 1, processedCount = 0) {
     currentProcessedCount++;
 
     console.log(`Alert ${priceAlertId} reach expected price \n`, assetReachedExpectedPrice);
+    try {
+      const updateDelete = await PriceAssetsWatchModel()
+        .updatePriceAlert({ alertId: priceAlertId, active: false });
+
+    } catch (error) {
+
+      console.log('Soft delete error: ', error);
+    }
+
     sleep(1000);
 
     console.log(`${i + 1}: ${currentProcessedCount}\n`);

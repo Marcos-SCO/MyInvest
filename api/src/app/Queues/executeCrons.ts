@@ -26,7 +26,7 @@ export async function assetUpdatesCron(scheduleTime = '*/10 * * * * *') {
     isAssetUpdateCronRunning = true;
 
     // await someAsyncOperation();
-    await AssetUpdatesExecuteQueue();
+    // await AssetUpdatesExecuteQueue();
 
     await PriceAlertEmailsExecuteQueue();
 

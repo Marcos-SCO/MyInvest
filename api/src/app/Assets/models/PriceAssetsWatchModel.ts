@@ -167,7 +167,7 @@ const PriceAssetsWatchModel = () => {
         priceAlertTypes: true,
       }
     }
-    
+
     if (includeSymbols) {
       const symbolsParams: any = { assets: { select: { symbols: true } } };
 
@@ -238,6 +238,33 @@ const PriceAssetsWatchModel = () => {
 
   }
 
+  async function updatePriceAlert(insertOjb: any) {
+    const { alertId, active = true } = insertOjb;
+
+    const foundPriceAlert = await getPriceAlertById(alertId);
+
+    if (!foundPriceAlert) throw new CommonError(`Alert id: ${alertId} was not found`);
+
+    try {
+
+      const updatedAlert = await prisma.priceAssetsWatch.update({
+        where: { id: alertId },
+        data: { active }
+      })
+
+      return updatedAlert;
+
+    } catch (error) {
+
+      console.error(`Error updating price alert: `, error);
+      throw new CommonError(`Error updating price alert`);
+
+    } finally {
+      await prisma.$disconnect();
+    }
+
+  }
+
   async function deletePriceAlert(insertOjb: any) {
     const { alertId, softDelete = false, active = false } = insertOjb;
 
@@ -273,7 +300,7 @@ const PriceAssetsWatchModel = () => {
 
   }
 
-  return { insertPriceAlert, userScheduleSamePriceAlert, deletePriceAlert, getAllByPagination, assetReachedExpectedPrice }
+  return { insertPriceAlert, userScheduleSamePriceAlert, updatePriceAlert, deletePriceAlert, getAllByPagination, assetReachedExpectedPrice }
 }
 
 export default PriceAssetsWatchModel;
