@@ -80,7 +80,7 @@ export default async function AlertList({ ...props }) {
           const currentPriceValue = formatCurrency(currentPrice);
 
           countItens += 1;
-          const applyLazyOrEager = countItens <= 2
+          const applyLazyOrEager = countItens <= 3
             ? 'eager' : 'lazy';
 
           const cardProps = {

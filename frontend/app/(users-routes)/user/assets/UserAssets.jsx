@@ -24,7 +24,7 @@ export default async function UserAssets({ page }) {
     <div className="user-assets py-10">
 
      <div className="list-page-header">
-       <h3 className="title">{firstName} - Lista de ativos</h3>
+       <h3 className="title">Lista de ativos</h3>
        <Link rel="prefetch" href={`${baseUrl}/user/alerts`} className="priceAlertModalButton myButtonSvg" title="Ir para página dos meus alertas">
          <DisplaySvg name={'bell'} width="18" height="18" /> Ver todos meus alertas
        </Link>

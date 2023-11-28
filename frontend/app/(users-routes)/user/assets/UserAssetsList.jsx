@@ -75,7 +75,7 @@ export default async function UserAssetsList({ ...props }) {
           const assetUrl = `${baseUrl}/asset/${assetSlug}/${name}`;
 
           countItens += 1;
-          const applyLazyOrEager = countItens <= 2
+          const applyLazyOrEager = countItens <= 3
             ? 'eager' : 'lazy';
 
           const props = {

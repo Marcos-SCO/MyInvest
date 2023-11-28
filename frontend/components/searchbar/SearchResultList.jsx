@@ -8,7 +8,13 @@ import Link from "next/link";
 
 const baseUrl = process.env.FRONT_END_BASE_URL;
 
+import { useModal } from '../../app/providers/modalProviders';
+import { formatCurrency, getAssetTypeDescription, getFormatToInsertPrice } from '../../app/helpers/assets';
+import PercentageVariation from '../assets/symbols/PercentageVariation';
+
 function SearchResultsList({ results }) {
+
+  const { closeModalHandler } = useModal();
 
   const router = useRouter();
 
@@ -40,21 +46,33 @@ function SearchResultsList({ results }) {
           const resultName = result.name;
           const resultCode = result.code;
 
-          const { backendCode, typeSlug, nameDescription } =
+          console.log(result)
+
+          const { backendCode, typeSlug } =
             getBackendAssetType(resultType);
 
           const assetPageUrl =
             `${baseUrl}/asset/${typeSlug}/${resultCode}`;
 
+          const typeObj = getAssetTypeDescription(backendCode);
+          const typeNameDescription = typeObj?.nameDescription;
+
+          const priceCurrency = backendCode == 2 ? 'usd' : 'brl';
+          const formattedPrice = getFormatToInsertPrice(result?.price);
+
+          const priceItem = formatCurrency(formattedPrice, priceCurrency);
+
           return (
-            <Link href={assetPageUrl} key={id}>
+            <Link href={assetPageUrl} key={id} onClick={() => closeModalHandler('search-bar')}>
               <div className="search-results">
-                <p>{resultName} - {resultCode}</p>
-                <p>Preço: {result.price}</p>
-                <p>Variação: {result.variation}</p>
-                <p>TYPE vindo da api: {resultType}</p>
-                <p>Tipo para cadastro no backend: {backendCode}</p>
-                <p>Descrição do tipo: {nameDescription}</p>
+                <div className='item-description'>
+                  <p>{resultName} - {resultCode}</p>
+                  <small className='type-description'>{resultCode} - {typeNameDescription}</small>
+                  <div className='price-description'>
+                    <p className='current-price'>{priceItem}</p>
+                    {<PercentageVariation symbols={result} />}
+                  </div>
+                </div>
               </div>
             </Link>
           )

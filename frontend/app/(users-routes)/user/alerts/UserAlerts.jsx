@@ -23,7 +23,7 @@ export default async function UserAlerts({ page }) {
     <div className="alert-lists py-10">
 
       <div className="list-page-header">
-        <h3 className="title">{firstName} - Lista de alertas</h3>
+        <h3 className="title">Lista de alertas</h3>
         <Link rel="prefetch" href={`${baseUrl}/user/assets`} className="priceAlertModalButton myButtonSvg" title="Ir para página dos meus ativos">
           <DisplaySvg name={'checkCircle'} class="checkCircle" width="18" height="18" /> Ver todos meus ativos
         </Link>

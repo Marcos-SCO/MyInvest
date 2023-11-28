@@ -52,6 +52,9 @@
     img {
       margin: auto;
 
+      min-height: 50px;
+      min-width: 50px;
+
       @include tablet {
         margin-top: .5rem;
       }

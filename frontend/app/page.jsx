@@ -20,8 +20,8 @@ export default async function Home() {
 
   return (
     <>
+      <ChangePageAttributes pageName="home" />
       <div>
-        <ChangePageAttributes pageName="home" />
         <MainHero userSession={userSession} />
       </div>
     </>

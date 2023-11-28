@@ -1,5 +1,6 @@
 .search-bar-container {
   position: relative;
+  z-index: 999;
 
   .search-inputs-container {
     position: relative;
@@ -34,11 +35,14 @@
   }
 
   .search-results {
-    padding: .5rem 1rem;
+    // padding: .5rem 1rem;
+    padding: 1rem;
 
     &:hover {
       background-color: #efefef;
     }
+
+    border-bottom: 1px solid #ddd;
   }
 
   .results-list {
@@ -60,6 +64,25 @@
       display: block;
     }
   }
+
+  .item-description {
+    .type-description {
+      margin-top: -.2rem;
+    }
+
+    .price-description {
+      display: flex;
+      margin-top: .5rem;
+
+      font-size: 1.3rem;
+      font-weight: 500;
+
+      .current-price {
+        margin-right: .5rem;
+      }
+    }
+  }
+
 }
 
 .search-bar-header-container {
