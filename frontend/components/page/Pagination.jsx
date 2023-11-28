@@ -37,7 +37,7 @@ export function Pagination({ props }) {
     };
 
     const addFirstPage = () => {
-      if (pageValue <= 1) return;
+      if (pageValue <= 1 || totalPages <= 2) return;
       const firstPage = 1;
 
       items.push(
@@ -50,7 +50,7 @@ export function Pagination({ props }) {
     };
 
     const addLastPage = () => {
-      if (totalPages <= 1 || pageValue == totalPages) return;
+      if (totalPages <= 2 || pageValue == totalPages) return;
       const lastPage = totalPages;
 
       items.push(
@@ -63,7 +63,7 @@ export function Pagination({ props }) {
     };
 
     const addPreviousButton = () => {
-      if (pageValue <= 1) return;
+      if (pageValue <= 2) return;
       const previousNumber = pageValue - 1;
 
       items.push(
@@ -76,7 +76,7 @@ export function Pagination({ props }) {
     };
 
     const addNextButton = () => {
-      if (pageValue >= pageCount) return;
+      if (pageValue >= pageCount || pageValue <= 2) return;
       const nextPageNumber = pageValue + 1;
 
       items.push(
