@@ -16,4 +16,13 @@ function limitString(inputString, maxLength, stringEnd = '...') {
   return inputString;
 }
 
-export { attributesToString, limitString };
+function removePreFetchFromLinks() {
+  const preFetchItens = document.querySelectorAll(`[rel="prefetch"]`);
+  if (!preFetchItens) return;
+
+  preFetchItens.forEach((e) => {
+    e.removeAttribute('rel');
+  });
+}
+
+export { attributesToString, limitString, removePreFetchFromLinks };

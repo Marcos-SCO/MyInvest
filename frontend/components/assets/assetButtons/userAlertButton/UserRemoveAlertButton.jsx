@@ -1,11 +1,16 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
+import dynamic from 'next/dynamic';
+
 import DisplaySvg from '../../../../app/helpers/svg/DisplaySvg';
 
 import { deletePriceAlert } from '../../../../app/api/assets/userAlerts/deletePiceAlert';
 
+const removePreFetchFromLinks = dynamic(() => import('../../../../app/helpers/dom/index'),{ssr: false});
+
 export default async function UserRemoveAlertButton({ props }) {
+
   const userId = props?.userId;
   const alertId = props?.alertId;
   const token = props?.token;
@@ -18,6 +23,8 @@ export default async function UserRemoveAlertButton({ props }) {
     'Tem certeza que deseja cancelar alerta?';
 
   async function handleDeleteAlert(e) {
+
+    removePreFetchFromLinks();
 
     const confirmDelete = window.confirm(areYouSure);
     if (!confirmDelete) return;

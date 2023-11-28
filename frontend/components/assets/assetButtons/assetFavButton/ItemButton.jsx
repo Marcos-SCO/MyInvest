@@ -7,6 +7,8 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
 import DisplaySvg from '../../../../app/helpers/svg/DisplaySvg';
 
+import { removePreFetchFromLinks } from '../../../../app/helpers/dom';
+
 export default function ItemButton({ isUserAsset, fetchObj, removeItem }) {
   const router = useRouter();
 
@@ -17,6 +19,8 @@ export default function ItemButton({ isUserAsset, fetchObj, removeItem }) {
     userAsset ? 'Tem certeza que deseja deixar de seguir o ativo?' : '';
 
   async function handleAsset(e) {
+
+    removePreFetchFromLinks();
 
     if (userAsset) {
       const confirmUnfollow = window.confirm(areYouSure);
@@ -29,7 +33,7 @@ export default function ItemButton({ isUserAsset, fetchObj, removeItem }) {
 
       // Use refresh to request the data from the backend without cashing
       // window.location.reload();
-      router.refresh();
+      // router.refresh();
 
       return;
     }
@@ -47,7 +51,7 @@ export default function ItemButton({ isUserAsset, fetchObj, removeItem }) {
       closestAssetContainer.style = 'display:none';
     }
 
-    router.refresh();
+    // router.refresh();
     // window.location.reload();
   }
 
@@ -58,7 +62,7 @@ export default function ItemButton({ isUserAsset, fetchObj, removeItem }) {
   const buttonTitle = !userAsset ? 'Seguir' : 'Deixar de seguir';
 
   return (
-    <button onClick={handleAsset} className={`followAssetButton ${followClass}`} title={buttonTitle}>
+    <button onClick={handleAsset} className={`followAssetButton ${followClass}`} title={buttonTitle} data-js="followAssetButton">
       <DisplaySvg name={svgName} width="18" height="18" /> {followStatus}
     </button>
   );
