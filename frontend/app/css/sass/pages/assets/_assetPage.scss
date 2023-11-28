@@ -1,3 +1,46 @@
+.list-page-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // justify-content: space-between;
+
+  padding: 0 0 1rem;
+
+  .title {
+    font-size: 1.5rem;
+
+    font-weight: 450;
+
+    text-align: center;
+
+    margin-right: 1rem;
+  }
+
+  .checkCircle {
+    margin-right: .35rem;
+  }
+
+  @include max-mobile {
+    flex-direction: column;
+
+    .title {
+      margin-bottom: 1rem;
+    }
+  }
+
+  @include tablet {
+    padding: 1rem 0 1.5rem;
+  }
+
+  @include desktop {
+    .myButtonSvg {
+      position: absolute;
+      right: 0 !important;
+    }
+  }
+}
+
 .asset-page-header {
   // display: flex;
 
@@ -39,7 +82,9 @@
 
   @include tablet {
     .side-buttons {
-      a, button {
+
+      a,
+      button {
         position: relative;
         top: -3rem;
         right: 0;
@@ -56,7 +101,7 @@
     align-items: flex-start;
     flex-wrap: wrap;
     justify-content: space-between;
-    
+
     .inner-title-container {
       max-width: 700px;
     }
@@ -136,10 +181,10 @@
     }
 
     .description-header {
-      font-size: 1.3rem!important;
+      font-size: 1.3rem !important;
 
       .current-price {
-        font-size: 1.7rem!important;
+        font-size: 1.7rem !important;
       }
     }
 
@@ -148,6 +193,6 @@
 
 .asset-page-container {
   figure {
-    align-items: center!important;
+    align-items: center !important;
   }
 }
