@@ -9,9 +9,9 @@ const { port } = config;
 const app = App();
 app.listen(port);
 
-
 import { assetUpdatesCron } from './app/Queues/executeCrons';
 import AssetsEmail from './app/Emails/AssetsEmail';
+import TrendingTickersWebScrappy from './app/Assets/services/TrendingTickersWebScrappy';
 
 // Define your cron job for 12 PM (noon)
 assetUpdatesCron('0 12 * * *');
@@ -20,6 +20,8 @@ assetUpdatesCron('0 12 * * *');
 assetUpdatesCron('0 0 * * *');
 
 // assetUpdatesCron('*/2 * * * * *');
+
+// assetUpdatesCron('*/15 * * * * *');
 
 // assetUpdatesCron('*/30 * * * * *');
 
@@ -39,3 +41,11 @@ const emailTemplateVariables = {
 }
 
 // assetsEmail.send(emailOptionsObj, emailTemplateVariables);
+
+// TrendingTickersWebScrappy({ trendingType: 'acoes' });
+// TrendingTickersWebScrappy({ trendingType: 'fiis', trendingSection: 'BAIXAS' });
+
+
+
+
+

@@ -40,7 +40,7 @@ CREATE TABLE `user_emails` (
 -- CreateTable
 CREATE TABLE `asset_types` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(191) NOT NULL DEFAULT 'Ação',
+    `name` VARCHAR(191) NOT NULL DEFAULT 'ações',
 
     UNIQUE INDEX `asset_types_name_key`(`name`),
     PRIMARY KEY (`id`)
@@ -61,6 +61,7 @@ CREATE TABLE `asset_details_list` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `assetId` INTEGER NOT NULL,
     `symbols` LONGTEXT NOT NULL,
+    `assetIcon` TEXT NOT NULL DEFAULT 'https://brapi.dev/favicon.svg',
     `currentPrice` TEXT NOT NULL,
     `historicalData` LONGTEXT NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
@@ -102,6 +103,28 @@ CREATE TABLE `price_assets_watch` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
+CREATE TABLE `top_asset_list_types` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(191) NOT NULL DEFAULT 'Ações',
+
+    UNIQUE INDEX `top_asset_list_types_name_key`(`name`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `top_asset_list_itens` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `assetListTypeId` INTEGER NOT NULL,
+    `hightItens` VARCHAR(191) NULL,
+    `lowItens` VARCHAR(191) NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL,
+
+    UNIQUE INDEX `top_asset_list_itens_assetListTypeId_key`(`assetListTypeId`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- AddForeignKey
 ALTER TABLE `Users` ADD CONSTRAINT `Users_account_type_fkey` FOREIGN KEY (`account_type`) REFERENCES `account_types`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
@@ -131,3 +154,6 @@ ALTER TABLE `price_assets_watch` ADD CONSTRAINT `price_assets_watch_assetId_fkey
 
 -- AddForeignKey
 ALTER TABLE `price_assets_watch` ADD CONSTRAINT `price_assets_watch_priceAlertTypeId_fkey` FOREIGN KEY (`priceAlertTypeId`) REFERENCES `price_alert_types`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `top_asset_list_itens` ADD CONSTRAINT `top_asset_list_itens_assetListTypeId_fkey` FOREIGN KEY (`assetListTypeId`) REFERENCES `top_asset_list_types`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

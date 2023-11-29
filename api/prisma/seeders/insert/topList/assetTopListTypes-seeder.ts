@@ -2,32 +2,34 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-async function seedPriceAssetsWatchTypes() {
+// const assetTopListInserts = require('./insert/topList/assetTopListInserts-seeder');
+
+async function seedAssetTopListTypes() {
   async function seed() {
 
-    const priceAlertTypesToSeed = ['Menor ou igual', 'Maior ou igual'];
+    const topListTypesToSeed = ['ações', 'stocks', 'fiis'];
 
-    for (const type of priceAlertTypesToSeed) {
+    for (const type of topListTypesToSeed) {
 
-      const existingAlertType = await prisma.priceAlertTypes.findUnique({
+      const existingTopListType = await prisma.topAssetListTypes.findUnique({
         where: {
           name: type,
         },
       });
 
-      if (existingAlertType) {
+      if (existingTopListType) {
         // console.log(`Asset type '${type}' already exists\n`);
       }
 
-      if (!existingAlertType) {
+      if (!existingTopListType) {
         // Insert the account type if it doesn't exist
-        await prisma.priceAlertTypes.create({
+        await prisma.topAssetListTypes.create({
           data: {
             name: type,
           },
         });
 
-        console.log(`Price alert type '${type}' inserted`);
+        console.log(`Top list type '${type}' inserted`);
       }
 
     }
@@ -39,8 +41,9 @@ async function seedPriceAssetsWatchTypes() {
       throw e;
     })
     .finally(async () => {
+
       await prisma.$disconnect();
     });
 }
 
-module.exports = seedPriceAssetsWatchTypes;
+module.exports = seedAssetTopListTypes;

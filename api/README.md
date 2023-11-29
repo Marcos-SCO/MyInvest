@@ -40,6 +40,8 @@
 
 - nodemailer: npm i nodemailer @types/nodemailer
 
+- cheerio @types/cheerio
+
 # Prisma commands
 
 - npx prisma init
