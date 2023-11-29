@@ -41,7 +41,7 @@ const emailTemplateVariables = {
 // assetsEmail.send(emailOptionsObj, emailTemplateVariables);
 
 // TrendingTickersWebScrappy({ trendingType: 'acoes' });
-TrendingTickersWebScrappy({ trendingType: 'fiis', trendingSection: 'BAIXAS' });
+// TrendingTickersWebScrappy({ trendingType: 'fiis', trendingSection: 'BAIXAS' });
 
 
 

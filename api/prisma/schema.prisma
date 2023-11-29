@@ -55,7 +55,7 @@ model UserEmails {
 
 model AssetTypes {
   id   Int    @id @default(autoincrement())
-  name String @unique @default("Ação")
+  name String @unique @default("ações")
 
   Assets Assets[]
 
@@ -128,4 +128,26 @@ model PriceAssetsWatch {
   priceAlertTypes PriceAlertTypes  @relation(fields: [priceAlertTypeId], references: [id], onDelete: Cascade)
 
   @@map(name: "price_assets_watch")
+}
+
+model TopAssetListTypes {
+  id Int @id @default(autoincrement())
+  name String @unique @default("Ações")
+  topAssetListItens TopAssetListItens[]
+
+  @@map(name: "top_asset_list_types")
+}
+
+model TopAssetListItens {
+  id Int @id @default(autoincrement())
+  assetListTypeId Int @unique
+  hightItens String?
+  lowItens String?
+
+  topAssetListTypes TopAssetListTypes @relation(fields: [assetListTypeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map(name: "top_asset_list_itens")
 }
