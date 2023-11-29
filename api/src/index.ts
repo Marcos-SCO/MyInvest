@@ -21,6 +21,8 @@ assetUpdatesCron('0 0 * * *');
 
 // assetUpdatesCron('*/2 * * * * *');
 
+// assetUpdatesCron('*/15 * * * * *');
+
 // assetUpdatesCron('*/30 * * * * *');
 
 const assetsEmail = AssetsEmail.AssetsEmail()
