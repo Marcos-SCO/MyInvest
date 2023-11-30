@@ -13,7 +13,7 @@ export default function UserAssetCard({ props }) {
 
   const assetUrl = props?.assetUrl;
   const assetId = props?.assetId;
-  const userId = props?.userId;
+  const userId = props?.userId ?? false;
   const ticker = props?.ticker;
   const nameDescription = props?.nameDescription;
   const assetLongName = props?.assetLongName;
