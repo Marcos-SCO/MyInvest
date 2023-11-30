@@ -7,30 +7,46 @@ const prisma = new PrismaClient();
 
 const TopAssetListModel = () => {
 
-  async function getAssetByTickerFromDb(ticker: string) {
-    return await AssetModel().getAssetByTickerFromDb(ticker);
-  }
+  async function getTopAssetsData(props: any) {
+    const { assetListTypeId } = props;
 
-  async function insertNotInsertedTickers(tickers: any, tickerAssetType: any) {
+    if (!assetListTypeId) throw new CommonError('assetListTypeId is missing');
 
-    if (!tickers) return;
+    try {
+      const assetsData: any =
+        (await prisma.topAssetListItens.findMany({ where: { assetListTypeId } }))?.[0];
 
-    const tickerItens = JSON.parse(tickers);
-    // console.log(tickerItens);
+      if (!assetsData) throw new CommonError('No assets data found');
 
-    if (!tickerItens) return;
+      const highItens = assetsData?.highItens
+        ? JSON.parse(assetsData?.highItens) : [];
 
-    tickerItens.map(async (ticker: any) => {
-      const tickerCode = ticker.replace(/(^[\\/-]+)|([\\/-]+$)/g, '');
+      const lowItens = assetsData?.lowItens
+        ? JSON.parse(assetsData?.lowItens) : [];
 
-      let assetAlreadyInDb = await getAssetByTickerFromDb(tickerCode);
-      if (assetAlreadyInDb) return;
+      // const tickers = [...highItens, ...lowItens];
 
-      await AssetModel().insertAsset({
-        ticker, type: tickerAssetType
-      });
+      // const notInsertedTickers = await AssetModel().insertNotInsertedTickers(tickers, assetListTypeId);
 
-    });
+      const includeOptions = { includeDetails: true };
+
+      const highItensData = await AssetModel().getAllAssetsByTickerFromDb(highItens, includeOptions);
+
+      const lowItensData = await AssetModel().getAllAssetsByTickerFromDb(lowItens, includeOptions);
+
+      return {
+        topAssetData: assetsData,
+        highItensData,
+        lowItensData
+      }
+
+    } catch (error) {
+      console.log('TopAssetListModel ', error);
+      throw new CommonError('Error getting top assets data');
+    } finally {
+      await prisma.$disconnect();
+    }
+
   }
 
   async function insertTopItens(insertObj: any) {
@@ -40,11 +56,11 @@ const TopAssetListModel = () => {
     const isLowItens = trendingSection == 'low';
 
     const notInsertedTickers =
-      await insertNotInsertedTickers(tickers, tickerAssetType);
+      await AssetModel().insertNotInsertedTickers(tickers, tickerAssetType);
 
     const dataToInsert: any = { assetListTypeId };
 
-    if (isHighItens) dataToInsert.hightItens = tickers;
+    if (isHighItens) dataToInsert.highItens = tickers;
     if (isLowItens) dataToInsert.lowItens = tickers;
 
     const listIsInDb = await prisma.topAssetListItens.findFirst({
@@ -93,7 +109,7 @@ const TopAssetListModel = () => {
 
   }
 
-  return { insertTopItens, getAssetByTickerFromDb, };
+  return { insertTopItens, getTopAssetsData };
 }
 
 export default TopAssetListModel;

@@ -4,6 +4,7 @@ import UserAssetsController from "./controllers/UserAssetsController";
 import UserAssetsService from "./services/UserAssetService";
 
 import PriceAssetsWatchController from './controllers/PriceAssetsWatchController';
+import TopAssetsController from "./controllers/TopAssetsController";
 
 const routes = Router();
 
@@ -29,5 +30,7 @@ routes.post('/assets/price/watch/paginate/', PriceAssetsWatchController().index)
 routes.post('/assets/user/view/', PriceAssetsWatchController().show);
 
 routes.post('/assets/user/paginate/', UserAssetsController().index);
+
+routes.post('/topAssets/', TopAssetsController().index);
 
 export default routes;

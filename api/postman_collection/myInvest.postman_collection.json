@@ -296,6 +296,89 @@
 							]
 						},
 						{
+							"name": "webscrapping",
+							"item": [
+								{
+									"name": "indices-acoes",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://statusinvest.com.br/Home/Today?categoryType=Acoes&indiceCode=ibovespa&yesterday=false&time=-1",
+											"protocol": "https",
+											"host": [
+												"statusinvest",
+												"com",
+												"br"
+											],
+											"path": [
+												"Home",
+												"Today"
+											],
+											"query": [
+												{
+													"key": "categoryType",
+													"value": "Acoes"
+												},
+												{
+													"key": "indiceCode",
+													"value": "ibovespa"
+												},
+												{
+													"key": "yesterday",
+													"value": "false"
+												},
+												{
+													"key": "time",
+													"value": "-1"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "indices-fiis",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://statusinvest.com.br/Home/Today?categoryType=FundosImobiliarios&indiceCode=&yesterday=false&time=-1",
+											"protocol": "https",
+											"host": [
+												"statusinvest",
+												"com",
+												"br"
+											],
+											"path": [
+												"Home",
+												"Today"
+											],
+											"query": [
+												{
+													"key": "categoryType",
+													"value": "FundosImobiliarios"
+												},
+												{
+													"key": "indiceCode",
+													"value": ""
+												},
+												{
+													"key": "yesterday",
+													"value": "false"
+												},
+												{
+													"key": "time",
+													"value": "-1"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
 							"name": "Search Copy",
 							"request": {
 								"method": "GET",
@@ -412,12 +495,44 @@
 								"header": []
 							},
 							"response": []
-						},
+						}
+					]
+				},
+				{
+					"name": "Brapi",
+					"item": [
 						{
-							"name": "New Request",
+							"name": "search quotes",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "https://brapi.dev/api/quote/mac?range=3mo&interval=1d&token=dyhKRbpoJ83bUhVDQK4fj4",
+									"protocol": "https",
+									"host": [
+										"brapi",
+										"dev"
+									],
+									"path": [
+										"api",
+										"quote",
+										"mac"
+									],
+									"query": [
+										{
+											"key": "range",
+											"value": "3mo"
+										},
+										{
+											"key": "interval",
+											"value": "1d"
+										},
+										{
+											"key": "token",
+											"value": "dyhKRbpoJ83bUhVDQK4fj4"
+										}
+									]
+								}
 							},
 							"response": []
 						}
@@ -712,7 +827,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    // \"type\": 3,\r\n    \"ticker\": \"HCTR11\"\r\n}",
+									"raw": "{\r\n    // \"type\": 3,\r\n    // \"ticker\": \"HCTR11\",\r\n    // \"ticker\": \"KO\"\r\n    \"ticker\": \"mxrf11\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -744,7 +859,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    //\"ticker\": \"SAPR11\",\r\n    // \"type\": 1\r\n    //\"ticker\": \"KO\",\r\n    \"ticker\": \"MAC\",\r\n    \"type\": 2\r\n}",
+									"raw": "{\r\n    // \"ticker\": \"OIBR4\",\r\n    // \"type\": 1\r\n    // \"ticker\": \"SAPR11\",\r\n    // \"type\": 1\r\n    // \"ticker\": \"KO\",\r\n    // \"type\": 2\r\n    \"ticker\": \"MAC\",\r\n    \"type\": 2\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -771,7 +886,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    // \"type\": 1\r\n    // \"ticker\": \"SAPR11\"\r\n    // \"ticker\": \"OIBR4\"\r\n    // \"ticker\": \"MAC\"\r\n    \"ticker\": \"KO\"\r\n}",
+									"raw": "{\r\n    // \"type\": 1\r\n    // \"ticker\": \"OIBR4\"\r\n    // \"ticker\": \"MAC\"\r\n    //\"ticker\": \"MODL11\"\r\n    //\"ticker\": \"KO\"\r\n    // \"ticker\": \"MAC\"\r\n    // \"type\": 2\r\n\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -800,7 +915,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    // \"ticker\": \"visc11\"\r\n    // \"ticker\": \"MXRF11\"\r\n    // \"ticker\": \"SAPR11\"\r\n    // \"ticker\": \"OIBR4\"\r\n    // \"ticker\": \"MAC\"\r\n    // \"ticker\": \"KO\"\r\n    // \"ticker\": \"IRDM11\"\r\n    // \"ticker\": \"amx\",\r\n    \"ticker\": \"SOJA3\"\r\n}",
+							"raw": "{\r\n    // \"ticker\": \"visc11\"\r\n    // \"ticker\": \"MXRF11\"\r\n    // \"ticker\": \"SAPR11\"\r\n    // \"ticker\": \"OIBR4\"\r\n    \"ticker\": \"MAC\"\r\n    //\"ticker\": \"KO\"\r\n    // \"ticker\": \"IRDM11\"\r\n    // \"ticker\": \"amx\",\r\n    // \"ticker\": \"SOJA3\"\r\n    // \"ticker\": \"NYMX\"\r\n    // \"ticker\": \"HJLIW\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1189,7 +1304,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": 1000,\r\n    // \"page\": 1,\r\n    \"orderBy\": \"asc\",\r\n    \"numberOfItens\": 10,\r\n    \"searchByStatus\": true,\r\n    \"active\": true\r\n}",
+							"raw": "{\r\n    \"userId\": 1,\r\n    // \"page\": 1,\r\n    \"orderBy\": \"asc\",\r\n    \"numberOfItens\": 10,\r\n    \"searchByStatus\": true,\r\n    \"active\": true,\r\n    \"getDetailedList\": true,\r\n    \"includeSymbols\": false\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1235,6 +1350,38 @@
 								"assets",
 								"user",
 								"view",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TopAssets",
+			"item": [
+				{
+					"name": "Get top assets data",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"assetListTypeId\": 1 // ações\r\n    // \"assetListTypeId\": 3 // fiis\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/topAssets/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"topAssets",
 								""
 							]
 						}
