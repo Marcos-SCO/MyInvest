@@ -22,6 +22,7 @@
       .currentValue {
         font-weight: 500;
         font-size: 1.2rem;
+
         span {
           font-size: 1.5rem;
           font-weight: 400;
@@ -32,13 +33,14 @@
 
     @include max-mobile {
       .link-container {
-        margin: 1.5rem 0 0!important;
+        margin: 1.5rem 0 0 !important;
       }
     }
 
   }
 
   .alert-container {
+    z-index: 100;
 
     .form-main-content {
       display: flex;
@@ -71,7 +73,7 @@
         &:focus {
           border-color: $primary;
         }
-        
+
         &[focused=true] {
           border-color: $primary;
         }
