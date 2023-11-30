@@ -28,6 +28,27 @@ const AssetModel = () => {
     return assetInDb;
   }
 
+  async function getAllAssetsByTickerFromDb(tickers: any, options: any) {
+    const includeDetails = options?.includeDetails ?? false;
+    const historicalData = options?.historicalData ?? false;
+
+    const queryObj: any = { where: { name: { in: tickers }, }, include: {} }
+
+    if (includeDetails) {
+      queryObj.include = {
+        AssetDetailList: {
+          select: { assetId: true, symbols: true, assetIcon: true, currentPrice: true, historicalData: historicalData }
+        }
+      }
+    }
+
+    const assetInDb = await prisma.assets.findMany(queryObj);
+
+    if (!assetInDb) return false;
+
+    return assetInDb;
+  }
+
   async function getAssetWithDetailInfo(ticker: string) {
     const assetQuery = await prisma.assets.findFirst({
       where: { name: ticker },
@@ -129,6 +150,31 @@ const AssetModel = () => {
     }
 
     return apiObjData;
+  }
+
+  async function insertNotInsertedTickers(tickers: any, tickerAssetType: any) {
+
+    if (!tickers) return;
+
+    const tickerItens = Array.isArray(tickers)
+      ? tickers : JSON.parse(tickers);
+
+    if (!tickerItens) return;
+
+    tickerItens.map(async (ticker: any) => {
+      const tickerCode =
+        ticker.replace(/(^[\\/-]+)|([\\/-]+$)/g, '');
+
+      let assetAlreadyInDb =
+        await getAssetByTickerFromDb(tickerCode);
+
+      if (assetAlreadyInDb) return;
+
+      await insertAsset({
+        ticker, type: tickerAssetType
+      });
+
+    });
   }
 
   async function insertAsset(insertObj: any) {
@@ -245,7 +291,7 @@ const AssetModel = () => {
 
   }
 
-  return { insertAsset, updateAsset, deleteAsset, getAssetByTickerFromDb, getAssetWithDetailInfo, getAllAssetsWithDetailInfo, getAllAssetsByPagination, getAssetById, getAssetApiData, getHistoryData };
+  return { insertAsset, updateAsset, deleteAsset, insertNotInsertedTickers, getAssetByTickerFromDb, getAllAssetsByTickerFromDb, getAssetWithDetailInfo, getAllAssetsWithDetailInfo, getAllAssetsByPagination, getAssetById, getAssetApiData, getHistoryData };
 }
 
 export default AssetModel;

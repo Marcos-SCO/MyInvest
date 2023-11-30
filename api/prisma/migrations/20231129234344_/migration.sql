@@ -106,7 +106,7 @@ CREATE TABLE `price_assets_watch` (
 -- CreateTable
 CREATE TABLE `top_asset_list_types` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(191) NOT NULL DEFAULT 'Ações',
+    `name` VARCHAR(191) NOT NULL DEFAULT 'ações',
 
     UNIQUE INDEX `top_asset_list_types_name_key`(`name`),
     PRIMARY KEY (`id`)
@@ -116,7 +116,7 @@ CREATE TABLE `top_asset_list_types` (
 CREATE TABLE `top_asset_list_itens` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `assetListTypeId` INTEGER NOT NULL,
-    `hightItens` VARCHAR(191) NULL,
+    `highItens` VARCHAR(191) NULL,
     `lowItens` VARCHAR(191) NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL,

@@ -132,7 +132,7 @@ model PriceAssetsWatch {
 
 model TopAssetListTypes {
   id Int @id @default(autoincrement())
-  name String @unique @default("Ações")
+  name String @unique @default("ações")
   topAssetListItens TopAssetListItens[]
 
   @@map(name: "top_asset_list_types")
@@ -141,7 +141,7 @@ model TopAssetListTypes {
 model TopAssetListItens {
   id Int @id @default(autoincrement())
   assetListTypeId Int @unique
-  hightItens String?
+  highItens String?
   lowItens String?
 
   topAssetListTypes TopAssetListTypes @relation(fields: [assetListTypeId], references: [id], onDelete: Cascade)
