@@ -37,7 +37,7 @@ const AssetModel = () => {
     if (includeDetails) {
       queryObj.include = {
         AssetDetailList: {
-          select: { assetId: true, symbols: true, assetIcon: true, currentPrice: true, historicalData: historicalData }
+          select: { assetId: true, symbols: true, assetIcon: true, currentPrice: true, createdAt: true, updatedAt: true, historicalData: historicalData }
         }
       }
     }
