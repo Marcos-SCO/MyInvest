@@ -150,25 +150,25 @@ export default async function TopAssets({ ...props }) {
     <section className="user-assets py-10" data-js="top-list-section">
       <Suspense fallback={<Loading />}></Suspense>
 
-      {highBrazilianSectionElements &&
+      {highBrazilianSectionElements?.length > 0 &&
         <div>
           Ações Top alta
           {displaySectionElements(highBrazilianSectionElements, userId)}
         </div>}
 
-      {lowBrazilianSectionElements &&
+      {lowBrazilianSectionElements?.length > 0 &&
         <div>
           Ações Top queda
           {displaySectionElements(lowBrazilianSectionElements, userId)}
         </div>}
 
-      {highFiisSectionElements &&
+      {highFiisSectionElements?.length > 0 &&
         <div>
           Fiis Top alta
           {displaySectionElements(highFiisSectionElements, userId)}
         </div>}
 
-      {lowFiisSectionElements &&
+      {lowFiisSectionElements?.length > 0 &&
         <div>
           Fiis Top queda
           {displaySectionElements(lowFiisSectionElements, userId)}
