@@ -61,7 +61,7 @@ CREATE TABLE `asset_details_list` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `assetId` INTEGER NOT NULL,
     `symbols` LONGTEXT NOT NULL,
-    `assetIcon` TEXT NOT NULL DEFAULT 'https://brapi.dev/favicon.svg',
+    `assetIcon` VARCHAR(191) NOT NULL DEFAULT 'https://brapi.dev/favicon.svg',
     `currentPrice` TEXT NOT NULL,
     `historicalData` LONGTEXT NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
