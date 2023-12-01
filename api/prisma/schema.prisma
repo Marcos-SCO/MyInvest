@@ -77,7 +77,7 @@ model AssetDetailsList {
   assetId Int @unique
 
   symbols        String @db.LongText
-  assetIcon      String @default("https://brapi.dev/favicon.svg") @db.Text
+  assetIcon      String @default("https://brapi.dev/favicon.svg")
   currentPrice   String @db.Text
   historicalData String @db.LongText
 
