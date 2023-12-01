@@ -51,3 +51,5 @@
 - npx prisma migrate dev
 
 - npx prisma migrate up 
+
+- send to remote server: npx prisma db push
