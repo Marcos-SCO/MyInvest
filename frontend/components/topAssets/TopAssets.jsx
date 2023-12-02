@@ -117,7 +117,7 @@ function displaySectionElements(elementsSectionData, userId = undefined) {
     const applyLazyOrEager =
       countItens <= 3 ? 'eager' : 'lazy';
 
-    item = { ...item, userId, applyLazyOrEager };
+    item = { ...item, userId, applyLazyOrEager, removeItem: false };
 
     return <UserAssetCard key={key} props={item} />
   });
