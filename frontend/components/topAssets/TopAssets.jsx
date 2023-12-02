@@ -69,7 +69,7 @@ function getAssetProperties(assetsData) {
     ? JSON.parse(assetsData?.symbols) : undefined;
 
   const assetLongName =
-    symbols?.name ?? symbols?.companyName ?? ticker;
+    symbols?.name ?? symbols?.companyName;
 
   const assetLogoUrl = assetsData?.assetIcon
     ?? 'https://brapi.dev/favicon.svg';
