@@ -43,6 +43,10 @@
   }
 }
 
+.hide {
+  opacity: 0;
+}
+
 .fadeIn {
   animation: fadeIn .3s ease-out forwards;
 }

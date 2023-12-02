@@ -3,6 +3,7 @@ import Header from 'components/base/Header';
 // Styles
 import './css/sass/main.scss';
 import './css/globals.css';
+
 import { Inter } from 'next/font/google';
 
 import { NextAuthSessionProvider } from './providers/sessionProvider';
