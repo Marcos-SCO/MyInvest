@@ -157,6 +157,7 @@ img {
 .myButton.myAlerts {
   span {
     width: auto;
+
     svg {
       margin-right: .25rem;
     }
@@ -186,4 +187,11 @@ img {
     width: 100%;
   }
 
+}
+
+.you-dont-posses-text {
+  color: #030303;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 2rem;
 }
