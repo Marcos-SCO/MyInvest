@@ -1,5 +1,7 @@
 import Header from 'components/base/Header';
 
+import dynamic from 'next/dynamic';
+
 // Styles
 import './css/sass/main.scss';
 import './css/globals.css';

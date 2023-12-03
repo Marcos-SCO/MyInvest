@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { getUserSessionData } from "app/helpers/session/getUserSessionData";
 
 import { Suspense } from "react";
-import Loading from "app/loading";
+import Loading from "../../../../components/loading/loading";
 
 import AlertList from './AlertList';
 import DisplaySvg from "../../../helpers/svg/DisplaySvg";

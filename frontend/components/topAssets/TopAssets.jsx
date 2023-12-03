@@ -2,8 +2,6 @@ import { nextAuthOptions } from "app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 
 import Link from "next/link";
-import { Suspense } from "react";
-import Loading from "app/loading";
 
 // import TopAssetsList from './TopAssetsList';
 import { getUserSessionData } from "app/helpers/session/getUserSessionData";
@@ -137,7 +135,6 @@ export default async function TopAssets({ ...props }) {
 
   return (
     <article className="topAssetsSection user-assets py-10" data-js="top-list-section">
-      <Suspense fallback={<Loading />}></Suspense>
 
       {highBrazilianSectionElements?.length > 0 &&
         <section className="sliderContainer">
