@@ -202,8 +202,9 @@ img {
 
 .loadingContainer {
   padding: 2rem;
-
   opacity: .85;
+
+  min-height: 700px;
 
   .loadingText {
     font-size: 3rem;

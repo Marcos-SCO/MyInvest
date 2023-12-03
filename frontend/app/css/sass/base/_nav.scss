@@ -59,6 +59,7 @@
   .button-text {
     font-size: 1.1rem;
     line-height: initial;
+    min-width: 103.5px;
   }
 
   @include desktop {
@@ -67,6 +68,10 @@
     line-height: 24px;
 
     margin-top: .15rem;
+
+    .button-text {
+      margin-top: -0.075rem;
+    }
   }
 }
 

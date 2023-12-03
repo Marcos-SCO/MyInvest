@@ -1,4 +1,5 @@
 import Header from 'components/base/Header';
+import Footer from 'components/base/Footer';
 
 import dynamic from 'next/dynamic';
 
@@ -47,8 +48,8 @@ function renderChildrenWithHeader(children) {
       <SearchModalContainer modalId="search-bar">
         <SearchBar />
       </SearchModalContainer>
-
       {children}
+      <Footer childrenSegment={childrenSegment} />
     </>
   )
 }

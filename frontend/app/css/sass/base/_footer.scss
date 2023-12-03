@@ -1,0 +1,39 @@
+.mainFooter {
+  background-color: #f3f5f9;
+
+  address {
+    font-family: 'inter', sans-serif;
+    font-style: initial;
+
+    &.main-container {
+      max-width: 73.1rem;
+    }
+  }
+
+  font-size: 1.1rem;
+
+  a {
+    margin: .5rem;
+    font-size: 1.1rem;
+  }
+
+  .logoFooterContainer {}
+
+  @include max-mobile {
+    .myInvestLogo {
+      margin: 1rem;
+      margin-top: 0;
+    }
+
+    .logoFooterContainer,
+    .ulLinks {
+      justify-content: center;
+    }
+  }
+
+  @include desktop {
+    address {
+      padding-right: .25rem;
+    }
+  }
+}
