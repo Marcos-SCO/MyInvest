@@ -6,6 +6,10 @@ import dynamic from 'next/dynamic';
 import './css/sass/main.scss';
 import './css/globals.css';
 
+// Toastify
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { Inter } from 'next/font/google';
 
 import { NextAuthSessionProvider } from './providers/sessionProvider';
@@ -83,6 +87,7 @@ export default async function RootLayout({ children }) {
           <ChangePageAttributes pageName={childrenSegment} />
           <ModalProvider>
             <UrlChangeListener />
+            <ToastContainer />
             {activateContainerModals(userId)}
             {
               !dontShowNavbarIn(childrenSegment)

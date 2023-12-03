@@ -273,14 +273,34 @@
       }
     }
 
-    .programmed {
-      margin-top: .75rem;
+    .alertDescription {
+      margin-top: .35rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      flex-direction: column;
+      min-height: 80px;
+
       font-weight: 500;
       color: $primary;
 
-      .description {
-        font-size: 1.4rem;
+      .programmedInitial {
+        line-height: 1.3;
+
+        .description {
+          font-size: 1.4rem;
+        }
       }
+
+      .programmed-price {
+        margin-top: 0.25rem;
+        display: inline-block;
+      }
+    }
+
+    .programmed {
+      margin-top: .3rem;
 
       .programmed-price {
         font-size: 2rem;
@@ -289,15 +309,17 @@
     }
 
     @include max-mobile {
-      .programmed {
-        line-height: 1.5;
-
+      .programmedInitial {
         .description {
           font-size: 1.3rem;
         }
+      }
+
+      .programmed {
+        line-height: 1.5;
 
         .programmed-price {
-          font-size: 1.1rem;
+          font-size: 1.25rem;
         }
 
         @media (min-width: 399.9px) {

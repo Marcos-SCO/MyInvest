@@ -9,6 +9,8 @@ import DisplaySvg from '../../../../app/helpers/svg/DisplaySvg';
 
 import { removePreFetchFromLinks } from '../../../../app/helpers/dom';
 
+import swal from 'sweetalert';
+
 export default function ItemButton({ isUserAsset, fetchObj, removeItem }) {
   const router = useRouter();
 
@@ -23,7 +25,20 @@ export default function ItemButton({ isUserAsset, fetchObj, removeItem }) {
     removePreFetchFromLinks();
 
     if (userAsset) {
-      const confirmUnfollow = window.confirm(areYouSure);
+      // const confirmUnfollow = window.confirm(areYouSure);
+      const confirmUnfollow = await swal({
+        title: "Deixar de seguir?",
+        text: areYouSure,
+        icon: "warning",
+        dangerMode: true,
+        buttons: ["Cancelar", "OK"],
+      })
+        .then((willDelete) => {
+          // if (willDelete) { swal("Você não está seguindo mais esse ativo", {              icon: "success",}); }
+          if (willDelete) { return true; }
+          return false;
+        });
+
       if (!confirmUnfollow) return;
     }
 

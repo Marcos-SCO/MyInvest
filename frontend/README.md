@@ -17,7 +17,9 @@
 
 - nextUI: npm i @nextui-org/react framer-motion
 
-- nextjs-toploader: npm install nextjs-toploader
+- react-toastify: npm install --save react-toastify
+
+- sweetalert: npm install sweetalert
 
 ## Tailwind
 installation: npm i -D tailwindcss postcss autoprefixer

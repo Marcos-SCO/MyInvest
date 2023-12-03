@@ -9,6 +9,8 @@ import { deletePriceAlert } from '../../../../app/api/assets/userAlerts/deletePi
 
 const removePreFetchFromLinks = dynamic(() => import('../../../../app/helpers/dom/index'),{ssr: false});
 
+import { toast } from 'react-toastify';
+
 export default async function UserRemoveAlertButton({ props }) {
 
   const userId = props?.userId;
@@ -20,13 +22,25 @@ export default async function UserRemoveAlertButton({ props }) {
   const deleteObj = { userId, alertId, token };
 
   const areYouSure =
-    'Tem certeza que deseja cancelar alerta?';
+    'Tem certeza que deseja remover alerta?';
 
   async function handleDeleteAlert(e) {
 
     removePreFetchFromLinks();
 
-    const confirmDelete = window.confirm(areYouSure);
+    const confirmDelete = await swal({
+      title: "Remover alerta?",
+      text: areYouSure,
+      icon: "warning",
+      dangerMode: true,
+      buttons: ["Cancelar", "Remover!"],
+    })
+      .then((willDelete) => {
+        // if (willDelete) { swal("Alerta removido ativo", { icon: "success",}); }
+        if (willDelete) { return true; }
+        return false;
+      });
+
     if (!confirmDelete) return;
 
     const alertDeleted = await deletePriceAlert(deleteObj);
@@ -34,7 +48,7 @@ export default async function UserRemoveAlertButton({ props }) {
 
     if (!alertWasDeleted) {
       console.error(`${alertDeleted?.message}`);
-      window.alert(`Não foi possível remover o alerta!`);
+      toast.error('Não foi possível remover o alerta!');
       return;
     }
 
@@ -46,7 +60,7 @@ export default async function UserRemoveAlertButton({ props }) {
       closestAssetContainer.style = 'display:none';
     }
 
-    window.alert('Alerta foi removido com sucesso!');
+    toast.success('Alerta foi removido com sucesso!');
   }
 
   return (
