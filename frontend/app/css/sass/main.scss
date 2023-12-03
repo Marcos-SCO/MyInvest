@@ -231,5 +231,13 @@ img {
 }
 
 .notFound {
-  
+  .imageContainer {
+    max-width: 500px;
+  }
+
+  @include desktop {
+    .imageContainer {
+      padding-left: 2rem;
+    }
+  }
 }
