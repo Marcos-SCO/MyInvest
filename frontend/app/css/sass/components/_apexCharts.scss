@@ -7,10 +7,12 @@
 .historical-graph-container {
   margin-top: 1rem;
   min-height: 365px;
+  z-index: 10;
 }
 
 .no-data-graph {
   position: relative;
+  z-index: 10;
 
   &::before {
     content: '';
@@ -38,7 +40,7 @@
   }
 
   &:hover {
-    
+
     .not-found-text {
       top: 45%;
     }

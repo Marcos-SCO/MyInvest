@@ -38,7 +38,7 @@ export default async function AlertList({ ...props }) {
   return (
     <>
       {!fetchResultsData && <>
-        <p className="my-5 text-xl">Você não possui alertas cadastrados</p>
+        <p className="my-5 text-xl you-dont-posses-text">Você ainda não possui alertas cadastrados...</p>
       </>}
 
       <div className='cards-container user-cards-container'>

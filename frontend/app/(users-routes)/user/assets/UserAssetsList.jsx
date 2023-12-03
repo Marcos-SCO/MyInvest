@@ -41,7 +41,7 @@ export default async function UserAssetsList({ ...props }) {
     <>
 
       {!fetchResultsData &&
-        <p className="my-5 text-xl">Você não possui ativos favoritados</p>
+        <p className="my-5 text-xl you-dont-posses-text">Você ainda não possui ativos favoritados...</p>
       }
 
       <div className="cards-container user-cards-container">

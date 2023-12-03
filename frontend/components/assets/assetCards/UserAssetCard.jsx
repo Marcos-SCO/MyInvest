@@ -13,7 +13,7 @@ export default function UserAssetCard({ props }) {
 
   const assetUrl = props?.assetUrl;
   const assetId = props?.assetId;
-  const userId = props?.userId;
+  const userId = props?.userId ?? false;
   const ticker = props?.ticker;
   const nameDescription = props?.nameDescription;
   const assetLongName = props?.assetLongName;
@@ -23,6 +23,8 @@ export default function UserAssetCard({ props }) {
   const updatedAtString = props?.updatedAtString ?? false;
   const symbols = props?.symbols ?? false;
 
+  const removeCardItem = props?.removeItem ?? true;
+
   const applyLazyOrEager = props?.applyLazyOrEager ?? 'lazy';
 
   return (
@@ -30,7 +32,7 @@ export default function UserAssetCard({ props }) {
 
       <div className='asset-info-details'>
         <div className="header-container">
-          {<AssetFavButton assetId={assetId} userId={userId} />}
+          {<AssetFavButton assetId={assetId} userId={userId} removeItem={removeCardItem} />}
         </div>
         <Link href={assetUrl} title={`Ir para página do ${ticker}`}>
           <figure>

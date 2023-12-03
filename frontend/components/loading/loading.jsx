@@ -2,8 +2,8 @@
 
 export default function Loading() {
   return (
-    <div className="text-center">
-      <h2 className="text-primary">Carregando...</h2>
+    <div className="loadingContainer text-center">
+      <h2 className="loadingText text-primary">Carregando...</h2>
       <p>Esperamos que não por muito tempo :)</p>
     </div>
   )

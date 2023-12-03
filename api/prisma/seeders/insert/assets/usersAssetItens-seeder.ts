@@ -52,9 +52,10 @@ async function insertUserAssets() {
     } catch (error) {
       console.error('Error inserting user assets:', error);
     } finally {
-      await prisma.$disconnect();
-
+      
       await insertPriceAssetsWatch();
+      
+      await prisma.$disconnect();
     }
   }
 

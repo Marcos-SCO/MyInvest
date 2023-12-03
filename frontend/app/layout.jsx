@@ -1,8 +1,11 @@
 import Header from 'components/base/Header';
 
+import dynamic from 'next/dynamic';
+
 // Styles
 import './css/sass/main.scss';
 import './css/globals.css';
+
 import { Inter } from 'next/font/google';
 
 import { NextAuthSessionProvider } from './providers/sessionProvider';
