@@ -17,7 +17,7 @@ const UserAssetsService = () => {
       const userAssetQuery = await UserAssetsModel().getUserAsset(userId, assetId);
 
       if (!userAssetQuery) {
-        return res.status(404).json({
+        return res.status(200).json({
           userHasAsset: false,
           message: `User don't have asset ${assetId}`,
         });

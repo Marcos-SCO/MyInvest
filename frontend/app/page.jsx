@@ -24,7 +24,7 @@ export default async function Home() {
     <>
       <ChangePageAttributes pageName="home" />
       <MainHero userSession={userSession} />
-      <main>
+      <main className="main-container">
         <TopAssets />
       </main>
     </>

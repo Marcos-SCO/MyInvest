@@ -2,7 +2,7 @@ import { nextAuthOptions } from "app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 
 import { Suspense } from "react";
-import Loading from "app/loading";
+import Loading from "../../../../components/loading/loading";
 
 import UserAssetsList from './UserAssetsList';
 import { getUserSessionData } from "app/helpers/session/getUserSessionData";

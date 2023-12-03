@@ -2,8 +2,6 @@ import { nextAuthOptions } from "app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 
 import Link from "next/link";
-import { Suspense } from "react";
-import Loading from "app/loading";
 
 // import TopAssetsList from './TopAssetsList';
 import { getUserSessionData } from "app/helpers/session/getUserSessionData";
@@ -12,7 +10,11 @@ import DisplaySvg from "../../app/helpers/svg/DisplaySvg";
 
 import fetchTopListAssets from '../../app/api/assets/fetchTopListAssets';
 import { formatCurrency, getAssetTypeDescription } from "../../app/helpers/assets";
-import UserAssetCard from "../assets/assetCards/UserAssetCard";
+
+import DisplaySectionElements from './DisplaySectionElements';
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function getDetailListElements(dataElements = false) {
   if (!dataElements) return false;
@@ -69,7 +71,7 @@ function getAssetProperties(assetsData) {
     ? JSON.parse(assetsData?.symbols) : undefined;
 
   const assetLongName =
-    symbols?.name ?? symbols?.companyName ?? ticker;
+    symbols?.name ?? symbols?.companyName;
 
   const assetLogoUrl = assetsData?.assetIcon
     ?? 'https://brapi.dev/favicon.svg';
@@ -108,21 +110,6 @@ function getSectionElements(sectionData) {
   return { highElements, lowElements }
 }
 
-function displaySectionElements(elementsSectionData, userId = undefined) {
-  if (!elementsSectionData) return;
-  let countItens = 1;
-
-  return elementsSectionData.map((item, key) => {
-    countItens += 1;
-    const applyLazyOrEager =
-      countItens <= 3 ? 'eager' : 'lazy';
-
-    item = { ...item, userId, applyLazyOrEager };
-
-    return <UserAssetCard key={key} props={item} />
-  });
-}
-
 export default async function TopAssets({ ...props }) {
   const session = await getServerSession(nextAuthOptions);
   const sessionData = await getUserSessionData(session);
@@ -147,33 +134,32 @@ export default async function TopAssets({ ...props }) {
   const lowFiisSectionElements = fiisSectionElements?.lowElements;
 
   return (
-    <section className="user-assets py-10" data-js="top-list-section">
-      <Suspense fallback={<Loading />}></Suspense>
+    <article className="topAssetsSection user-assets py-10" data-js="top-list-section">
 
       {highBrazilianSectionElements?.length > 0 &&
-        <div>
-          Ações Top alta
-          {displaySectionElements(highBrazilianSectionElements, userId)}
-        </div>}
+        <section className="sliderContainer">
+          <h2 className="sectionTitle">Ações Top Alta</h2>
+          <DisplaySectionElements elementsSectionData={highBrazilianSectionElements} userId={userId} key="brazilianStocks-top-high" />
+        </section>}
 
       {lowBrazilianSectionElements?.length > 0 &&
-        <div>
-          Ações Top queda
-          {displaySectionElements(lowBrazilianSectionElements, userId)}
-        </div>}
+        <section className="sliderContainer animationContainer hide">
+          <h2 className="sectionTitle">Ações Top Queda</h2>
+          <DisplaySectionElements elementsSectionData={lowBrazilianSectionElements} userId={userId} key="brazilianStocks-top-low" />
+        </section>}
 
       {highFiisSectionElements?.length > 0 &&
-        <div>
-          Fiis Top alta
-          {displaySectionElements(highFiisSectionElements, userId)}
-        </div>}
+        <section className="sliderContainer animationContainer hide">
+          <h2 className="sectionTitle">Fiis Top Alta</h2>
+          <DisplaySectionElements elementsSectionData={highFiisSectionElements} userId={userId} key="fiis-top-high" />
+        </section>}
 
       {lowFiisSectionElements?.length > 0 &&
-        <div>
-          Fiis Top queda
-          {displaySectionElements(lowFiisSectionElements, userId)}
-        </div>}
+        <section className="sliderContainer animationContainer hide">
+          <h2 className="sectionTitle">Fiis Top Queda</h2>
+          <DisplaySectionElements elementsSectionData={lowFiisSectionElements} userId={userId} key="fiis-top-low" />
+        </section>}
 
-    </section>
+    </article>
   )
 }

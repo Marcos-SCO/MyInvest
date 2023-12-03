@@ -42,6 +42,8 @@ body {
   overflow-x: hidden;
   width: 100%;
   height: 100%;
+
+  scroll-behavior: smooth;
 }
 
 body.modal-open {
@@ -63,6 +65,7 @@ button {
 
 a,
 button,
+.buttonTransition,
 .myButton,
 .followAssetButton {
   transition: transform .1s ease-in-out;
@@ -157,6 +160,7 @@ img {
 .myButton.myAlerts {
   span {
     width: auto;
+
     svg {
       margin-right: .25rem;
     }
@@ -186,4 +190,46 @@ img {
     width: 100%;
   }
 
+}
+
+.you-dont-posses-text {
+  color: #030303;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+
+.loadingContainer {
+  padding: 2rem;
+
+  opacity: .85;
+
+  .loadingText {
+    font-size: 3rem;
+    color: $primary;
+  }
+
+  p {
+    font-size: 1.1rem;
+  }
+
+  @include max-mobile {
+    .loadingText {
+      font-size: 2rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+
+}
+
+.gradient {
+  background-image: linear-gradient(135deg, $primary 35%, #1c4ca0 100%);
+}
+
+.notFound {
+  
 }
