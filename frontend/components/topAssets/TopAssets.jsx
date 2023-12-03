@@ -137,7 +137,7 @@ export default async function TopAssets({ ...props }) {
     <article className="topAssetsSection user-assets py-10" data-js="top-list-section">
 
       {highBrazilianSectionElements?.length > 0 &&
-        <section className="sliderContainer">
+        <section className="sliderContainer" id="top-acoes">
           <h2 className="sectionTitle">Ações Top Alta</h2>
           <DisplaySectionElements elementsSectionData={highBrazilianSectionElements} userId={userId} key="brazilianStocks-top-high" />
         </section>}
@@ -149,7 +149,7 @@ export default async function TopAssets({ ...props }) {
         </section>}
 
       {highFiisSectionElements?.length > 0 &&
-        <section className="sliderContainer animationContainer hide">
+        <section className="sliderContainer animationContainer hide" id="top-fiis">
           <h2 className="sectionTitle">Fiis Top Alta</h2>
           <DisplaySectionElements elementsSectionData={highFiisSectionElements} userId={userId} key="fiis-top-high" />
         </section>}

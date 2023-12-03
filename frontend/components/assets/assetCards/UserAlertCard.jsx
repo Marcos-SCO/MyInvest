@@ -79,8 +79,11 @@ export default function UserAlertCard({ props }) {
             {<AssetFavButton assetId={assetId} userId={userId} removeItem={false} />}
           </div>
 
-          <p className='programmed'>Programado para <br /> <span className='description'>{priceTypeDescription[priceAlertTypeId]}</span> <span className='programmed-price'>{expectedPriceValue}</span>
-          </p>
+          <div className='alertDescription'>
+            <p className='programmedInitial'>Programado para <br/><span className='description'>{priceTypeDescription[priceAlertTypeId]}</span></p>
+            <p className='programmed'><span className='programmed-price'>{expectedPriceValue}</span>
+            </p>
+          </div>
         </div>
       </div>
 

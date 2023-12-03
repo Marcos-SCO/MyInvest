@@ -1,10 +1,15 @@
 import Header from 'components/base/Header';
+import Footer from 'components/base/Footer';
 
 import dynamic from 'next/dynamic';
 
 // Styles
 import './css/sass/main.scss';
 import './css/globals.css';
+
+// Toastify
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { Inter } from 'next/font/google';
 
@@ -43,8 +48,8 @@ function renderChildrenWithHeader(children) {
       <SearchModalContainer modalId="search-bar">
         <SearchBar />
       </SearchModalContainer>
-
       {children}
+      <Footer childrenSegment={childrenSegment} />
     </>
   )
 }
@@ -83,6 +88,7 @@ export default async function RootLayout({ children }) {
           <ChangePageAttributes pageName={childrenSegment} />
           <ModalProvider>
             <UrlChangeListener />
+            <ToastContainer />
             {activateContainerModals(userId)}
             {
               !dontShowNavbarIn(childrenSegment)

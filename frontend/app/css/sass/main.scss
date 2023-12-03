@@ -202,8 +202,9 @@ img {
 
 .loadingContainer {
   padding: 2rem;
-
   opacity: .85;
+
+  min-height: 700px;
 
   .loadingText {
     font-size: 3rem;
@@ -231,5 +232,13 @@ img {
 }
 
 .notFound {
-  
+  .imageContainer {
+    max-width: 500px;
+  }
+
+  @include desktop {
+    .imageContainer {
+      padding-left: 2rem;
+    }
+  }
 }

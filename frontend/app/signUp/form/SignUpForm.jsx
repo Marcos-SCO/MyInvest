@@ -12,6 +12,8 @@ import { MessageContainer } from "./MessageContainer";
 
 import DisplaySvg from 'app/helpers/svg/DisplaySvg';
 
+import { toast } from 'react-toastify';
+
 const baseUrl = process.env.FRONT_END_BASE_URL;
 
 export default function SignUpForm() {
@@ -100,12 +102,16 @@ export default function SignUpForm() {
     // if (userError) return;
 
     if (alreadyUser) {
-      // const answer = window.alert('Usuário já está cadastrado');
+      const alreadyUserMessage = 'Usuário já está cadastrado!';
 
-      setInputState({ ...inputState, formFeedBackError: 'Usuário já está cadastrado' });
+      toast.error(alreadyUserMessage);
+
+      setInputState({ ...inputState, formFeedBackError: alreadyUserMessage });
 
       return;
     }
+
+    toast.success('Usuário cadastrado com sucesso!');
 
     router.push('/signIn');
     return;

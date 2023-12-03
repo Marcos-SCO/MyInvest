@@ -7,6 +7,8 @@ import Link from 'next/link';
 
 import { formatCurrency } from '../../../app/helpers/assets';
 
+import { toast } from 'react-toastify';
+
 export default function AlertPriceForm(props) {
 
   const baseUrl = process.env.NEXT_PUBLIC_FRONT_END_URL;
@@ -74,6 +76,8 @@ export default function AlertPriceForm(props) {
 
       console.log(lessThanZeroMessage);
 
+      toast.error(lessThanZeroMessage);
+
       setInputState({ ...inputState, formFeedBackError: lessThanZeroMessage });
 
       handleFocus(true);
@@ -85,6 +89,8 @@ export default function AlertPriceForm(props) {
       const samePriceMessage = `Selecione um valor diferente do preço atual de ${expectedPriceTextDisplay}`;
 
       console.log(samePriceMessage);
+
+      toast.error(samePriceMessage);
 
       setInputState({ ...inputState, formFeedBackError: samePriceMessage });
 
@@ -116,7 +122,7 @@ export default function AlertPriceForm(props) {
     if (!userAlreadyHasSchedule) {
       const alertCreatedMessage = `Alerta para o ativo ${assetTicker} foi criado no preço ${typeDescription} ${expectedPriceTextDisplay}`;
 
-      window.alert(alertCreatedMessage);
+      toast.success(alertCreatedMessage);
     }
 
     if (userAlreadyHasSchedule) {
@@ -125,6 +131,8 @@ export default function AlertPriceForm(props) {
       const alreadyCreatedMessage = `Você já possui um alerta <br/> "${typeDescription}" ${expectedPriceTextDisplay} para ${assetTicker}`;
 
       console.log(alreadyCreatedMessage);
+      
+      toast.error(`Você já possui um alerta "${typeDescription}" ${expectedPriceTextDisplay} para ${assetTicker}`);
 
       setInputState({ ...inputState, formFeedBackError: alreadyCreatedMessage });
 

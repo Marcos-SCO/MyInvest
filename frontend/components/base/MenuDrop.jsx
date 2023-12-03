@@ -61,18 +61,13 @@ export default function MenuDrop({ ...props }) {
         <NavbarContent justify="start" as="div">
           <NavbarContent className="navLinksContent gap-3" as="div">
             <NavbarItem>
-              <Link href="#">
-                Features
+              <Link href={`${baseUrl}/#top-acoes`}>
+                Top ações
               </Link>
             </NavbarItem>
             <NavbarItem>
-              <Link href="#">
-                Customers
-              </Link>
-            </NavbarItem>
-            <NavbarItem>
-              <Link href="#">
-                Integrations
+              <Link href={`${baseUrl}/#top-fiis`}>
+                Top fiis
               </Link>
             </NavbarItem>
 
