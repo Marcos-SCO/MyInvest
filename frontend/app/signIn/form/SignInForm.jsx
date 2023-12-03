@@ -14,6 +14,8 @@ import { MessageContainer } from "./MessageContainer";
 
 import DisplaySvg from 'app/helpers/svg/DisplaySvg';
 
+import { toast } from 'react-toastify';
+
 const baseUrl = process.env.FRONT_END_BASE_URL;
 
 export default function SignInForm() {
@@ -67,9 +69,12 @@ export default function SignInForm() {
 
     if (result?.error) {
       console.error(result);
-      // window.alert('Credenciais inválidas');
 
-      setInputState({ ...inputState, formFeedBackError: 'E-mail ou senha inválidos!' });
+      const invalidEmailPasswordMessage = 'E-mail ou senha inválidos!';
+
+      toast.error(invalidEmailPasswordMessage);
+
+      setInputState({ ...inputState, formFeedBackError: invalidEmailPasswordMessage });
 
       return;
     }
@@ -78,7 +83,12 @@ export default function SignInForm() {
     // shallow perform a full reload
     // router.push('/admin', undefined, { shallow: false });
 
-    window.location.href = "/admin";
+    toast.success('Login feito com sucesso!');
+
+    setTimeout(() => {
+      window.location.href = "/admin";
+    }, 1500);
+
   }
 
   return (

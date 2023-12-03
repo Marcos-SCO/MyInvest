@@ -1,0 +1,20 @@
+.swal-modal {
+  .swal-title {
+    font-size: 1.5rem;
+    color: #6b6b6b;
+  }
+
+  .swal-button--cancel {
+
+    &,
+    &:hover {
+      background-color: rgb(56 101 163 / 90%);
+      color: #fff;
+    }
+  }
+
+  .swal-text {
+    padding-bottom: 1rem;
+  }
+
+}
