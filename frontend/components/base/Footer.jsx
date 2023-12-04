@@ -15,12 +15,12 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="mainFooter shadow mt-4 dark:bg-gray-800">
+      <footer className="mainFooter shadow dark:bg-gray-800">
 
         <address className="main-container w-full mx-auto max-w-screen-xl py-4 md:flex md:items-center md:justify-between max-md:justify-center">
           <Link href={'https://github.com/KauaCazeS/MyInvest'} title="MyInvest" target="_blank">
             <div className='logoFooterContainer flex flex-wrap items-center'>
-              <DisplaySvg name="myInvestLogo" class="myInvestLogo md:mr-4" width="80" height="80" />
+              {/* <DisplaySvg name="myInvestLogo" class="myInvestLogo md:mr-4" width="80" height="80" /> */}
               <span className="sm:text-center dark:text-gray-400">© {yearPresentation} MyInvest™. Tudo nosso!</span>
             </div>
           </Link>
