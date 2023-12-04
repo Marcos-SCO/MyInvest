@@ -70,6 +70,11 @@ export default function MenuDrop({ ...props }) {
                 Top fiis
               </Link>
             </NavbarItem>
+            <NavbarItem>
+              <Link href={`https://github.com/KauaCazeS/MyInvest`} target='_blank' className="hover:underline">
+                Contato
+              </Link>
+            </NavbarItem>
 
             {(!sessionHasToken) && (
               <>

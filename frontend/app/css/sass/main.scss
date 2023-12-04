@@ -232,6 +232,8 @@ img {
 }
 
 .notFound {
+  position: relative;
+
   .imageContainer {
     max-width: 500px;
   }
@@ -240,5 +242,7 @@ img {
     .imageContainer {
       padding-left: 2rem;
     }
+
+    left: -4rem;
   }
 }
