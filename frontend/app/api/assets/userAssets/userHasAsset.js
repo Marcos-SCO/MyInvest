@@ -14,6 +14,9 @@ async function userHasAsset(fetchObj) {
     method: 'POST',
     headers: { 'Content-type': 'application/json' },
     body: JSON.stringify(bodyObj),
+    next: {
+      revalidate: 0
+    }
   }
 
   try {
@@ -26,7 +29,7 @@ async function userHasAsset(fetchObj) {
     if (isMissing) throw new Error(data.message);
 
     return {
-      haveAsset: true,
+      haveAsset: data?.userHasAsset,
       data
     };
 
@@ -35,6 +38,7 @@ async function userHasAsset(fetchObj) {
 
     return {
       haveAsset: false,
+      userHasAsset: false,
       message: error.message,
     }
   }
