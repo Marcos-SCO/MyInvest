@@ -22,6 +22,10 @@ body {
   @apply max-w-6xl mx-auto;
 }
 
+main.main-container {
+  min-height: 600px;
+}
+
 @media (max-width: 1200px) {
   .main-container {
     @apply px-5;

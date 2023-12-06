@@ -133,6 +133,12 @@ export default async function TopAssets({ ...props }) {
   const highFiisSectionElements = fiisSectionElements?.highElements;
   const lowFiisSectionElements = fiisSectionElements?.lowElements;
 
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  // await sleep(100000)
+
   return (
     <article className="topAssetsSection user-assets py-10" data-js="top-list-section">
 
