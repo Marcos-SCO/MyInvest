@@ -32,7 +32,7 @@ function AssetsEmail() {
 
       const emailSend = await transporter.sendMail(emailSendOptions);
 
-      // console.log('Email send: ', emailSend);
+      console.log('Email send: ', emailSend, '\n');
 
       return true;
 
