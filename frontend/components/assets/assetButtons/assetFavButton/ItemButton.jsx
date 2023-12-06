@@ -12,7 +12,7 @@ import { removePreFetchFromLinks } from '../../../../app/helpers/dom';
 import swal from 'sweetalert';
 
 export default function ItemButton({ isUserAsset, fetchObj, removeItem }) {
-  const router = useRouter();
+  // const router = useRouter();
 
   const userAssetInitialValue = isUserAsset;
   const [userAsset, setUserAsset] = useState(userAssetInitialValue);

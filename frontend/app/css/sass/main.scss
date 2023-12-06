@@ -201,10 +201,15 @@ img {
 
 
 .loadingContainer {
+  cursor: progress;
   padding: 2rem;
   opacity: .85;
 
-  min-height: 700px;
+  height: 100%;
+  min-height: 500px;
+  max-height: 500px;
+
+  animation: upAndDown 2s infinite ease-in-out;
 
   .loadingText {
     font-size: 3rem;
@@ -232,6 +237,8 @@ img {
 }
 
 .notFound {
+  position: relative;
+
   .imageContainer {
     max-width: 500px;
   }
@@ -240,5 +247,7 @@ img {
     .imageContainer {
       padding-left: 2rem;
     }
+
+    left: -4rem;
   }
 }

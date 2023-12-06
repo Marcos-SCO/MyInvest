@@ -5,7 +5,7 @@ export default function NotFound() {
 
   return (
     <main className="gradient">
-      <div className="notFound text-center">
+      <div className="main-container notFound text-center">
         <div class="text-white min-h-screen flex items-center">
           <div class="container mx-auto py-5 flex flex-wrap items-center">
             <div class="imageContainer w-full md:w-5/12 text-center p-4">

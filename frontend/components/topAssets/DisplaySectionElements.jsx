@@ -100,11 +100,20 @@ export default function DisplaySectionElements({ ...props }) {
     };
   }, [sliderRef]);
 
+  const assetIdAlreadyInArray = [];
+
   return (
     <>
       <div className="sliderItemContainer" ref={sliderRef}>
         <Slider {...settings}>
           {elementsSectionData.map((item, index) => {
+
+            const assetIsInArray =
+              assetIdAlreadyInArray.includes(item?.assetId);
+
+            if (assetIsInArray) return;
+            assetIdAlreadyInArray.push(item?.assetId);
+
             countItens += 1;
             const applyLazyOrEager =
               countItens <= 3 ? 'eager' : 'lazy';
