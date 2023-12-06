@@ -1,0 +1,164 @@
+.topAssetsSection {
+  position: relative;
+
+  @keyframes moveBottom {
+    0% {
+      transform: translateY(20%);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  .moveFromBottom {
+    animation: fadeIn .6s ease-out forwards, moveBottom .75s ease-out forwards;
+  }
+
+
+  .sectionTitle {
+    position: relative;
+    color: #4b4b4b;
+    // font-size: 1.5rem;
+    font-size: 2rem;
+
+    line-height: 28px;
+    font-weight: 700;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: -1rem;
+      display: block;
+      width: 100%;
+      max-width: 75px;
+      height: 4px;
+      background-color: #346ca6;
+    }
+  }
+
+  .custom-arrow {
+    position: absolute;
+    cursor: pointer;
+    top: -2rem;
+    right: 1rem;
+
+    padding: .3rem .35rem;
+
+    // background-color: $primary;
+    background-color: #f3f5f9;
+    border: 1px solid #e5e8ed;
+
+    svg {
+      path {
+        fill: #9295b8;
+      }
+    }
+
+    &:hover {
+      opacity: .9;
+      background-color: #e8e8ea;
+    }
+  }
+
+  .custom-prev-arrow {
+    right: 4rem;
+
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+
+  .sliderContainer {
+    padding-top: 1.5rem;
+  }
+
+  .slick-slider {
+    padding: 1.5rem 0 3rem;
+
+    .slick-slide {}
+
+    .slick-dots {
+      bottom: 0;
+
+      li {
+        margin: 0 2px;
+
+        button {
+          &:before {
+            font-size: .85rem;
+            color: $primary;
+          }
+        }
+      }
+
+      li.slick-active button {
+        &:before {
+          font-size: 1.25rem;
+        }
+      }
+
+    }
+  }
+
+  .asset-card-item {
+    margin: auto;
+    width: auto;
+    margin-left: 1rem;
+  }
+
+  @include max-mobile {
+    .animationContainer {
+      animation: none;
+    }
+
+    .sliderContainer {
+      padding-bottom: 2rem;
+    }
+
+    @media (max-width: 320px) {
+      .custom-arrow {
+        top: -5.5rem;
+        display: none;
+      }
+    }
+
+    .custom-arrow {
+      top: -2.5rem;
+      right: 0;
+    }
+
+    .custom-prev-arrow {
+      right: 3rem;
+    }
+
+    .sectionTitle {
+      font-size: 1.5rem;
+    }
+
+    .slick-slider {
+      .slick-dots {
+        bottom: -0.5rem;
+      }
+
+      padding-bottom: 1rem;
+
+    }
+
+    .asset-card-item {
+      margin: auto;
+      width: 100%;
+      max-width: 100%;
+    }
+
+  }
+
+  @include desktop {
+    .slick-list {
+      left: -1rem;
+    }
+  }
+
+}

@@ -1,8 +1,16 @@
 import SignInForm from "./form/SignInForm";
 
+import ChangePageAttributes from "../../app/hooks/ChangePageAttributes";
+
+export const metadata = {}
+
 export default function signIn() {
+  metadata.title = `MyInvest - Login`;
+
+  <ChangePageAttributes pageName={'signIn'} />
+
   return (
-    <div className='grid place-items-center h-screen -mt-24'>
+    <div className='signIn'>
       <SignInForm />
     </div>
   )

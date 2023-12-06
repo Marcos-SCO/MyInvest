@@ -1,0 +1,27 @@
+.modal-container {
+  &.bg-gray-900 {
+    background-color: #000;
+    background-color: rgba(0, 0, 0, .4);
+  }
+
+  &>div {
+    height: auto;
+    position: absolute;
+    top: 15%;
+    width: 60%;
+    max-width: 980px;
+    padding: 0;
+
+    @include max-tablet {
+      width: 90%;
+    }
+
+  }
+}
+
+.search-modal-container {
+
+  .input-wrapper {
+    padding: 0;
+  }
+}

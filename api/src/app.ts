@@ -5,9 +5,10 @@ import bodyParser from 'body-parser';
 
 import allRoutes from '@/routes';
 
+const path = require('path');
 
 const middleware = (app: Express) => {
-   
+
   app.use(cors());
 
   app.use(bodyParser.json()); // Parse JSON bodies
@@ -29,6 +30,9 @@ const exceptionHandler = () => {
 
 const App = () => {
   const app = express();
+
+  // public path
+  app.use(express.static(path.join(__dirname, 'public')));
 
   middleware(app);
   routes(app);

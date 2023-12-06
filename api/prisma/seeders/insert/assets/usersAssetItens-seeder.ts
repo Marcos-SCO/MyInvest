@@ -2,6 +2,8 @@ const { PrismaClient } = require('@prisma/client');
 
 import userAssetModel from "../../../../src/app/Assets/models/UserAssetsModel";
 
+const insertPriceAssetsWatch = require("../alerts/priceAssetsWatch-seeder");
+
 const prisma = new PrismaClient();
 
 async function insertUserAssets() {
@@ -50,6 +52,9 @@ async function insertUserAssets() {
     } catch (error) {
       console.error('Error inserting user assets:', error);
     } finally {
+      
+      await insertPriceAssetsWatch();
+      
       await prisma.$disconnect();
     }
   }

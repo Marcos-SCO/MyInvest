@@ -1,0 +1,152 @@
+  .main-hero {
+    background: linear-gradient(rgb($primary, 77%), rgb($primary, 82%)), url("../../../../public/img/backtext.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: cover;
+    background-position: center;
+
+    min-height: 410px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 1rem;
+
+    .inner-content {
+      color: #fff;
+    }
+
+    .top-container,
+    .middle-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .button-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .top-container {
+      h1 {
+        font-size: 4.375rem;
+        line-height: 84.72px;
+        font-weight: 650;
+      }
+
+      p {
+        margin-top: 6%;
+        font-size: 1.3rem;
+        line-height: 24.2px;
+        font-weight: 650;
+      }
+    }
+
+    .middle-container {
+      margin-top: 8%;
+
+      h3 {
+        font-size: 1.875rem;
+        line-height: 36.31px;
+        font-weight: 650;
+      }
+
+      .button-container {
+        margin-top: 5%;
+
+        .google-button,
+        .myButton {
+          padding: .7rem .9rem;
+          min-height: 54px;
+        }
+
+        .google-button {
+          background-color: #fff;
+          color: #000;
+        }
+
+        .myButton {
+          font-weight: 500;
+
+          background-color: #f3f5f9;
+          color: #000;
+
+          span {
+            width: initial;
+          }
+
+          .svg-container {
+            margin-right: .3rem;
+
+            svg {
+              stroke: #005480;
+
+              & path {
+
+                stroke: #005480;
+              }
+            }
+          }
+
+          &>span {
+            width: 100%;
+            display: flex;
+            align-items: center;
+          }
+
+
+          &:last-child {
+            margin-left: 1rem;
+          }
+
+        }
+
+        justify-content: center;
+
+        &.user-logged {
+          .myButton {
+            min-width: 225px;
+          }
+        }
+      }
+
+      @include max-mobile {
+        .button-container {
+          margin-top: 8%;
+
+          .myButton,
+          .google-button {
+            margin: .5rem !important;
+          }
+        }
+      }
+
+    }
+
+    @include max-mobile {
+      .top-container {
+        h1 {
+          font-size: 3.5rem;
+          line-height: 74.72px;
+        }
+
+        p {
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    @include wide {
+
+      .myButton,
+      .google-button {
+        // padding: .5rem;
+        font-size: 1.2rem;
+        line-height: inherit;
+        min-height: inherit;
+      }
+    }
+
+  }

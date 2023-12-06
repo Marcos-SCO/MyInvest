@@ -11,8 +11,8 @@ const UserModel = () => {
     });
 
     if (!hashedPassword) {
-      console.error(`User password credentials not founded`);
-      throw new AuthError(`User password credentials not founded`);
+      console.error(`User password credentials not found`);
+      throw new AuthError(`User password credentials not found`);
     }
 
     return hashedPassword;
@@ -24,14 +24,16 @@ const UserModel = () => {
     });
 
     if (!userEmailData) {
-      console.error(`Email: ${email} was not founded`);
-      throw new AuthError(`Email: ${email} was not founded`);
+      console.error(`Email: ${email} was not found`);
+      throw new AuthError(`Email: ${email} was not found`);
     }
 
     return userEmailData;
   }
 
   async function getUserById(id: number) {
+    if (!id) throw new AuthError(`No user id was passed`);
+
     const user = await prisma.users.findUnique({
       where: { id }
     });

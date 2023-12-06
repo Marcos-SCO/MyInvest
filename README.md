@@ -27,7 +27,8 @@ Projeto realizado para TCC com intuito de ser realizado um WebApp com função d
 - npm run dev
 
 ### Execute o schema para a criação das tabelas no db
-- npx prisma migrate dev
+  Vá até a pasta /prisma e execute: 
+  - npx prisma migrate dev
 
 
 ### Execute seeders para teste

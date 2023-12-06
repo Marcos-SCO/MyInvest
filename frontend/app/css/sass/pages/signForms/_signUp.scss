@@ -1,0 +1,39 @@
+.signUp {
+
+  background: linear-gradient($primary, $primary), url("../../../../../public/img/economical-research.jpg");
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top right;
+
+  /* Hide the scrollbar */
+  overflow-x: hidden;
+  // overflow-y: hidden;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    /* Adjust the width as needed */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    /* Make the thumb transparent */
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+    /* Make the track transparent */
+  }
+
+  /* For Firefox */
+  & {
+    scrollbar-width: thin;
+    /* Adjust the width as needed */
+    scrollbar-color: transparent transparent;
+    /* Make the thumb and track transparent */
+  }
+
+  .form-container {
+    // max-width: 850px;
+  }
+}

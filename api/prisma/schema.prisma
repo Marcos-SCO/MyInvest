@@ -29,9 +29,10 @@ model Users {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  UserPassword UsersPassword[]
-  UserEmail    UserEmails[]
-  UserAssets   UserAssets[]
+  UserPassword     UsersPassword[]
+  UserEmail        UserEmails[]
+  UserAssets       UserAssets[]
+  PriceAssetsWatch PriceAssetsWatch[]
 }
 
 model UsersPassword {
@@ -54,7 +55,7 @@ model UserEmails {
 
 model AssetTypes {
   id   Int    @id @default(autoincrement())
-  name String @unique @default("Ação")
+  name String @unique @default("ações")
 
   Assets Assets[]
 
@@ -62,8 +63,8 @@ model AssetTypes {
 }
 
 model Assets {
-  id         Int        @id @default(autoincrement())
-  name       String     @unique
+  id         Int         @id @default(autoincrement())
+  name       String      @unique
   type       Int?        @default(1)
   AssetTypes AssetTypes? @relation(fields: [type], references: [id], onDelete: SetNull)
 
@@ -75,14 +76,17 @@ model AssetDetailsList {
   id      Int @id @default(autoincrement())
   assetId Int @unique
 
-  symbols             String @db.Text
-  currentDividend     String @db.Text
-  historicalDividends String @db.Text
+  symbols        String @db.LongText
+  assetIcon      String @default("https://brapi.dev/favicon.svg")
+  currentPrice   String @db.Text
+  historicalData String @db.LongText
 
   assets Assets @relation(fields: [assetId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+
+  PriceAssetsWatch PriceAssetsWatch[]
 
   @@map("asset_details_list")
 }
@@ -97,4 +101,53 @@ model UserAssets {
   assets Assets @relation(fields: [assetId], references: [id], onDelete: Cascade)
 
   @@map(name: "user_assets")
+}
+
+model PriceAlertTypes {
+  id   Int    @id @default(autoincrement())
+  name String @unique @default("Menor ou igual")
+
+  PriceAssetsWatch PriceAssetsWatch[]
+
+  @@map(name: "price_alert_types")
+}
+
+model PriceAssetsWatch {
+  id               Int     @id @default(autoincrement())
+  userId           Int
+  assetId          Int
+  priceAlertTypeId Int     @default(1)
+  expectedPrice    String  @db.Text
+  active           Boolean @default(true)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  users           Users            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  assets          AssetDetailsList @relation(fields: [assetId], references: [assetId], onDelete: Cascade)
+  priceAlertTypes PriceAlertTypes  @relation(fields: [priceAlertTypeId], references: [id], onDelete: Cascade)
+
+  @@map(name: "price_assets_watch")
+}
+
+model TopAssetListTypes {
+  id Int @id @default(autoincrement())
+  name String @unique @default("ações")
+  topAssetListItens TopAssetListItens[]
+
+  @@map(name: "top_asset_list_types")
+}
+
+model TopAssetListItens {
+  id Int @id @default(autoincrement())
+  assetListTypeId Int @unique
+  highItens String?
+  lowItens String?
+
+  topAssetListTypes TopAssetListTypes @relation(fields: [assetListTypeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map(name: "top_asset_list_itens")
 }

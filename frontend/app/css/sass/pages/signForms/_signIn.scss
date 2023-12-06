@@ -1,0 +1,164 @@
+.signUp, .signIn {
+  width: 100%;
+  overflow-x: hidden;
+
+  background: linear-gradient($primary, $primary), url("../../../../../public/img/backtext.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: cover;
+}
+
+.form-section-container {
+  height: 100%;
+  // overflow-y: auto;
+
+  @include max-mobile {
+    flex-direction: column-reverse;
+  }
+}
+
+.form-container {
+  background-color: #FFF;
+
+  .form-container-header {
+    padding-bottom: 2rem;
+  }
+
+  .form-header-title {
+    font-family: "inter", sans-serif;
+    // font-size: 2.5rem;
+    font-size: 2.1rem;
+    font-weight: 700;
+
+    @include wide {
+      font-size: 2.35rem;
+    }
+  }
+
+  .form-container-inner {
+    // background-color: #D1D1D159;
+    background-color: #d1d1d12b;
+    padding: 3rem 1rem;
+    margin: auto;
+    width: 100%;
+    max-width: 550px;
+  }
+
+  .account-question {
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    font-weight: 500;
+    line-height: 24.2px;
+    font-size: 1.1rem;
+
+    margin-top: 1.8rem;
+
+    @include wide {
+      line-height: 30.2px;
+      // font-size: 1.25rem;
+      font-size: 1.15rem;
+    }
+
+    a {
+      color: $primary;
+    }
+  }
+}
+
+.form-message-container,
+.form-container {
+  width: 50%;
+  
+  @include max-mobile {
+    width: 100%;
+  }
+}
+
+.form-message-container {
+  display: flex;
+  height: 100%;
+  text-align: center;
+  padding: 1rem 1.5rem;
+  color: white;
+
+  .form-message-inner {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+
+    max-width: 685px;
+    margin: auto;
+
+    max-height: 800px;
+  }
+
+  .text-inner {
+    // padding-top: 10%;
+  }
+
+  .form-title {
+    font-weight: 400;
+    font-size: 1.65rem;
+    line-height: 36.31px;
+
+    span {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 3.55rem;
+      line-height: 72.61px;
+    }
+  }
+
+  p {
+    font-weight: 500;
+    font-size: 1.35rem;
+    line-height: 30.26px;
+  }
+
+  @include max-desktop {
+
+    .form-title {
+      font-size: 1.575rem;
+
+      span {
+        font-size: 2.75rem;
+      }
+    }
+
+    p {
+      font-size: 1.1625rem;
+    }
+  }
+
+  @include wide {
+
+    .form-title {
+      font-size: 1.75rem;
+      line-height: 36.31px;
+
+      span {
+        font-size: 3.75rem;
+        line-height: 72.61px;
+      }
+    }
+
+    p {
+      font-weight: 500;
+      font-size: 1.45rem;
+      line-height: 30.26px;
+    }
+  }
+
+  @include tablet {
+    height: 100vh;
+
+    .text-inner {
+      // padding-top: 20%;
+    }
+  }
+
+}

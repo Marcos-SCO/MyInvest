@@ -1,31 +1,65 @@
 'use client';
 
-import SignInGoogle from "@/components/SignInBtnGoogle";
+import SignInGoogle from "components/auth/SignInBtnGoogle";
 import { signIn } from "next-auth/react";
 
 import Link from "next/link";
+import Image from "next/image";
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+
+import { FormInput } from "components/form/FormInput";
+import { MessageContainer } from "./MessageContainer";
+
+import DisplaySvg from 'app/helpers/svg/DisplaySvg';
+
+import { toast } from 'react-toastify';
+
+const baseUrl = process.env.FRONT_END_BASE_URL;
 
 export default function SignInForm() {
 
   const [inputState, setInputState] = useState({
     email: '',
-    password: ''
+    password: '',
+    formFeedBackError: false,
   });
+
+  const formFeedBackError = inputState?.formFeedBackError;
+
+  const inputs = [
+    {
+      name: "email",
+      type: "email",
+      placeholder: "E-mail",
+      errorMessage: "Precisa ser um e-mail válido!",
+      label: "E-mail",
+      required: true,
+    },
+    {
+      name: "password",
+      type: "password",
+      placeholder: "Senha",
+      errorMessage:
+        "Preencha este campo",
+      label: "Senha",
+      required: true,
+    },
+  ];
 
   const handleInput = (e) => setInputState({ ...inputState, [e.target.name]: e.target.value });
 
-
-  const router = useRouter();
+  // const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // console.log(inputState);
+    console.log(inputState);
 
     const { email, password } = inputState;
+
+    setInputState({ ...inputState, formFeedBackError: false });
 
     const result = await signIn('credentials', {
       email,
@@ -35,90 +69,90 @@ export default function SignInForm() {
 
     if (result?.error) {
       console.error(result);
+
+      const invalidEmailPasswordMessage = 'E-mail ou senha inválidos!';
+
+      toast.error(invalidEmailPasswordMessage);
+
+      setInputState({ ...inputState, formFeedBackError: invalidEmailPasswordMessage });
+
       return;
     }
 
-    router.replace('/admin');
+    // router.replace('/admin');
+    // shallow perform a full reload
+    // router.push('/admin', undefined, { shallow: false });
+
+    toast.success('Login feito com sucesso!');
+
+    setTimeout(() => {
+      window.location.href = "/admin";
+    }, 1500);
+
   }
 
   return (
     <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          {/* <img
-            className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Your Company"
-          /> */}
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Acesse sua conta
-          </h2>
-        </div>
+      <section className="form-section-container flex flex-wrap md:flex-no-wrap">
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                Endereço de E-mail
-              </label>
-              <div className="mt-2">
-                <input
-                  id="email"
-                  name="email"
-                  // type="email"
-                  autoComplete="E-mail"
-                  // required
-                  onChange={(e) => handleInput(e)}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
+        <MessageContainer />
 
-            <div>
-              <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                  Senha
-                </label>
-                <div className="text-sm">
-                  {/* <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                    Forgot password?
-                  </a> */}
+        <div className="form-container flex flex-1 flex-col justify-center py-12">
+
+          <div className="form-container-header sm:mx-auto sm:w-full sm:max-w-sm moveFromLeft-mobile">
+
+            <a href={`${baseUrl}`} title="MyInvest">
+              <DisplaySvg name="myInvestLogo" class="myInvestLogo m-auto" width="120" height="120" />
+            </a>
+
+          </div>
+
+          <div className="form-container-inner">
+
+            <h2 className="form-header-title text-center">
+              Acesse sua conta
+            </h2>
+
+            <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+              <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
+
+                {inputs.map((input, key) => (
+                  <FormInput
+                    key={key}
+                    {...input}
+                    value={inputState[input.name]}
+                    handleInput={handleInput}
+                  />
+                ))}
+
+                <div>
+                  <button
+                    type="submit"
+                    className="form-button sendButton"
+                  >Fazer Login</button>
                 </div>
+
+                {formFeedBackError && <div className="form-feed-back" data-js="form-feed-back">
+                  <p>{formFeedBackError}</p>
+                </div>}
+
+              </form>
+
+              <div className="google-button-container text-center">
+                <p>Ou utilize o Google para login:</p>
+                <SignInGoogle />
               </div>
-              <div className="mt-2">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="Senha atual"
-                  // required
-                  onChange={(e) => handleInput(e)}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
+
+              <p className="account-question">
+                Não possui uma conta?{' '}
+                <Link rel="prefetch" href={'/signUp'} className="font-semibold leading-6">Cadastre agora!</Link>
+              </p>
+
             </div>
-
-            <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Sign in
-              </button>
-            </div>
-          </form>
-
-          <p className="mt-10 text-center text-sm text-gray-500">
-            <SignInGoogle />
-          </p>
-
-          <p className="mt-10 text-center text-sm text-gray-500">
-            Não possui uma conta?{' '}
-            <Link href={'/signUp'} className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Cadastre agora!</Link>
-          </p>
+          </div>
 
         </div>
-      </div>
+      </section>
     </>
   )
 }

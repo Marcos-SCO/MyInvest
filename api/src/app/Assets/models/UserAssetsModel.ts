@@ -19,6 +19,7 @@ const UserAssetsModel = () => {
 
   async function userAssetsValidation(validationObj: any) {
     const { userId, assetId } = validationObj;
+    if (!userId) throw new CommonError(`No user id was passed`);
 
     const userExist = await getUserById(userId);
 
@@ -34,6 +35,8 @@ const UserAssetsModel = () => {
 
     if (!userAsset) return false;
 
+    await prisma.$disconnect();
+
     return userAsset;
   }
 
@@ -48,7 +51,7 @@ const UserAssetsModel = () => {
         .getAssetDetailsFromDb(paginatedAssetItem.assetId);
 
       // Exclude itens and return rest
-      const { id, assetId, historicalDividends, ...restAssetDetails } = assetDetails;
+      const { id, assetId, historicalData, ...restAssetDetails } = assetDetails;
 
       assetsWithDetails.push({ ...paginatedAssetItem.assets, assetDetails: restAssetDetails });
     }
@@ -58,8 +61,15 @@ const UserAssetsModel = () => {
 
   async function getAllByPagination(userId: number, args: any) {
     const userExist = await getUserById(userId);
+    if (!userExist) return;
 
-    const { page = 1, numberOfItens = 10, orderBy = false } = args;
+    const { page = 1, numberOfItens = 10, getDetailedList = true, orderBy = false } = args;
+
+    const totalAssetsCount = await prisma.userAssets.count({
+      where: { userId }
+    });
+
+    const totalPages = Math.ceil(totalAssetsCount / numberOfItens);
 
     const skip = (page - 1) * numberOfItens;
     // Calculate the number of records to skip
@@ -78,12 +88,17 @@ const UserAssetsModel = () => {
     const userAssetsResults =
       await prisma.userAssets.findMany(queryObj);
 
-    const assetsWithDetails =
-      await getPaginatedAssetWithDetails(userAssetsResults);
+    const assetsQueryResults = getDetailedList
+      ? await getPaginatedAssetWithDetails(userAssetsResults)
+      : userAssetsResults;
 
     await prisma.$disconnect();
 
-    return assetsWithDetails;
+    return {
+      totalPages,
+      totalAssetsCount,
+      assetsQueryResults
+    };
   }
 
 

@@ -7,7 +7,7 @@
     "strict": true,
     "esModuleInterop": true,
     "typeRoots":["./src/@types"],
-    "types": ["node", "express"],
+    // "types": ["node", "express"],
     "baseUrl": "./src",
     "paths": {
       "@/*": ["*"],

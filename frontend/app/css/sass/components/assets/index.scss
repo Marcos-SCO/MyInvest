@@ -1,0 +1,74 @@
+.percentage-variation {
+  &.up {
+    color: #037b4b;
+  }
+
+  &.down {
+    color: #bd1414;
+  }
+}
+
+.myAssetsButton {
+  max-width: 200px;
+}
+
+.activePageButton {
+  max-width: 250px;
+}
+
+.priceAlertModalButton {
+  svg {
+    path {
+      stroke: $primary;
+    }
+  }
+
+}
+
+.followAssetButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  transition: opacity .25s!important;
+
+  width: 100%;
+  max-width: 120px;
+
+  border: 1px solid;
+  border-color: #d2e3fc;
+  color: #4d5156;
+
+  padding: .25rem .6875rem .25rem .4375rem;
+
+  // font-size: .75rem;
+  font-size: .95rem;
+  border-radius: .875rem;
+
+  .svg-container {
+    margin-right: .4rem;
+
+    svg {
+      path {
+        stroke: $primary;
+      }
+    }
+  }
+
+  &.blue {
+    background-color: $primary;
+
+    &,
+    svg path {
+      stroke: #fff;
+      color: #fff;
+    }
+  }
+
+  @include desktop {}
+}
+
+@import './cardscontainer';
+@import './assetCardItens';

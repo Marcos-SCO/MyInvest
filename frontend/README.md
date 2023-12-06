@@ -11,6 +11,16 @@
 
 - axios
 
+- apexcharts: npm install --save react-apexcharts apexcharts
+
+- flowbite: npm i flowbite-react
+
+- nextUI: npm i @nextui-org/react framer-motion
+
+- react-toastify: npm install --save react-toastify
+
+- sweetalert: npm install sweetalert
+
 ## Tailwind
 installation: npm i -D tailwindcss postcss autoprefixer
 

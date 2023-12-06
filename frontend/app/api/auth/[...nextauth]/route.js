@@ -1,5 +1,6 @@
-import { loginUser } from '@/components/user/databaseFunctions';
 import dotenv from 'dotenv';
+
+import { insertUserProvider, loginUser } from 'app/helpers/user/databaseFunctions';
 
 import NextAuth from "next-auth/next";
 import Credentials from "next-auth/providers/credentials";
@@ -54,25 +55,50 @@ const nextAuthOptions = {
 
   callbacks: {
     async signIn({ user, account }) {
-      // console.log('User: ', user);
-      // console.log('Account: ', account);
+      const { name, email } = user;
+
+      if (account.provider === "google") {
+        let userIdValue;
+
+        const emailInProvider =
+          await insertUserProvider({ name, email }, 2);
+
+        const emailAlreadyExists = emailInProvider?.emailExists;
+
+        if (emailAlreadyExists) {
+          userIdValue = emailInProvider?.user.email?.userId;
+          if (userIdValue) user.userId = userIdValue;
+
+          return user;
+        }
+
+        const userInsertResult = emailInProvider;
+
+        userIdValue = userInsertResult?.user?.userId;
+
+        if (userIdValue) user.userId = userIdValue;
+      }
+
+
       return user;
     },
     async jwt({ token, user }) {
       user && (token.user = user);
-      
+
       const sessionHasToken = token?.user?.token;
       if (!user && !sessionHasToken) {
         const userEmail = token?.email;
         const user = await loginUser(userEmail, 2);
 
-        user && (token.user.token = user)
+        // user && (token.user.token = user?.token)
+        user && (token.user.token = user?.token)
       }
 
       return token;
     },
     async session({ session, token, user }) {
       session = token.user;
+
       return session;
     }
   },

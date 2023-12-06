@@ -39,6 +39,10 @@ const UserService = () => {
     const isEmailAccountType = accountType == 1;
     // console.log('Account type:', accountType);
 
+    if (isEmailAccountType && !password) {
+      throw new AuthError(`No password was passed`);
+    }
+
     const existingUserEmail = await prisma.userEmails.findFirst({
       where: { email },
     });
@@ -67,6 +71,7 @@ const UserService = () => {
       const lastInsertedId = newUser.id;
 
       let dataOjb = {
+        userId: lastInsertedId,
         newUser
       }
 

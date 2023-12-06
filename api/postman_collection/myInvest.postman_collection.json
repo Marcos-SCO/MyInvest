@@ -109,7 +109,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "https://statusinvest.com.br/fii/getearnings?Filter=hctr11&Start=2023-10-01&End=2023-10-31",
+											"raw": "https://statusinvest.com.br/fii/getearnings?Start=2022-02-01&End=2024-02-28&Filter=SNAG11",
 											"protocol": "https",
 											"host": [
 												"statusinvest",
@@ -127,16 +127,16 @@
 													"disabled": true
 												},
 												{
-													"key": "Filter",
-													"value": "hctr11"
-												},
-												{
 													"key": "Start",
-													"value": "2023-10-01"
+													"value": "2022-02-01"
 												},
 												{
 													"key": "End",
-													"value": "2023-10-31"
+													"value": "2024-02-28"
+												},
+												{
+													"key": "Filter",
+													"value": "SNAG11"
 												}
 											]
 										}
@@ -149,7 +149,7 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "https://statusinvest.com.br/fii/getearnings?Filter=hctr11&Start=2022-01-01&End=2024-01-01",
+											"raw": "https://statusinvest.com.br/fiagros/getearnings?Start=2022-01-01&End=2024-01-01&Filter=SNAG11",
 											"protocol": "https",
 											"host": [
 												"statusinvest",
@@ -157,7 +157,7 @@
 												"br"
 											],
 											"path": [
-												"fii",
+												"fiagros",
 												"getearnings"
 											],
 											"query": [
@@ -167,16 +167,43 @@
 													"disabled": true
 												},
 												{
-													"key": "Filter",
-													"value": "hctr11"
-												},
-												{
 													"key": "Start",
 													"value": "2022-01-01"
 												},
 												{
 													"key": "End",
 													"value": "2024-01-01"
+												},
+												{
+													"key": "Filter",
+													"value": "SNAG11"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Search",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://statusinvest.com.br/home/mainsearchquery?q=coca",
+											"protocol": "https",
+											"host": [
+												"statusinvest",
+												"com",
+												"br"
+											],
+											"path": [
+												"home",
+												"mainsearchquery"
+											],
+											"query": [
+												{
+													"key": "q",
+													"value": "coca"
 												}
 											]
 										}
@@ -269,12 +296,95 @@
 							]
 						},
 						{
-							"name": "Search",
+							"name": "webscrapping",
+							"item": [
+								{
+									"name": "indices-acoes",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://statusinvest.com.br/Home/Today?categoryType=Acoes&indiceCode=ibovespa&yesterday=false&time=-1",
+											"protocol": "https",
+											"host": [
+												"statusinvest",
+												"com",
+												"br"
+											],
+											"path": [
+												"Home",
+												"Today"
+											],
+											"query": [
+												{
+													"key": "categoryType",
+													"value": "Acoes"
+												},
+												{
+													"key": "indiceCode",
+													"value": "ibovespa"
+												},
+												{
+													"key": "yesterday",
+													"value": "false"
+												},
+												{
+													"key": "time",
+													"value": "-1"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "indices-fiis",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://statusinvest.com.br/Home/Today?categoryType=FundosImobiliarios&indiceCode=&yesterday=false&time=-1",
+											"protocol": "https",
+											"host": [
+												"statusinvest",
+												"com",
+												"br"
+											],
+											"path": [
+												"Home",
+												"Today"
+											],
+											"query": [
+												{
+													"key": "categoryType",
+													"value": "FundosImobiliarios"
+												},
+												{
+													"key": "indiceCode",
+													"value": ""
+												},
+												{
+													"key": "yesterday",
+													"value": "false"
+												},
+												{
+													"key": "time",
+													"value": "-1"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Search Copy",
 							"request": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://statusinvest.com.br/home/mainsearchquery?q=coca",
+									"raw": "https://statusinvest.com.br/acao/getearnings?IndiceCode=&Filter=sapr11&Start=2023-10&End=2023-10",
 									"protocol": "https",
 									"host": [
 										"statusinvest",
@@ -282,13 +392,25 @@
 										"br"
 									],
 									"path": [
-										"home",
-										"mainsearchquery"
+										"acao",
+										"getearnings"
 									],
 									"query": [
 										{
-											"key": "q",
-											"value": "coca"
+											"key": "IndiceCode",
+											"value": ""
+										},
+										{
+											"key": "Filter",
+											"value": "sapr11"
+										},
+										{
+											"key": "Start",
+											"value": "2023-10"
+										},
+										{
+											"key": "End",
+											"value": "2023-10"
 										}
 									]
 								}
@@ -360,6 +482,54 @@
 										{
 											"key": "assetclass",
 											"value": "stocks"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "tranding symbols",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Brapi",
+					"item": [
+						{
+							"name": "search quotes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://brapi.dev/api/quote/mac?range=3mo&interval=1d&token=dyhKRbpoJ83bUhVDQK4fj4",
+									"protocol": "https",
+									"host": [
+										"brapi",
+										"dev"
+									],
+									"path": [
+										"api",
+										"quote",
+										"mac"
+									],
+									"query": [
+										{
+											"key": "range",
+											"value": "3mo"
+										},
+										{
+											"key": "interval",
+											"value": "1d"
+										},
+										{
+											"key": "token",
+											"value": "dyhKRbpoJ83bUhVDQK4fj4"
 										}
 									]
 								}
@@ -474,7 +644,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"first_name\": \"Alexandre\",\r\n    \"last_name\": \"Gallaxy\",\r\n    \"email\": \"cabeca@jj.com\"\r\n}",
+							"raw": "{\r\n    \"id\": 10000,\r\n    \"first_name\": \"Alexandre\",\r\n    \"last_name\": \"Gallaxy\",\r\n    \"email\": \"cabeca@jj.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -595,7 +765,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Marcos\",\r\n    \"lastName\": \"dos Santos Carvalho\",\r\n    \"email\": \"aaaaamarcos@test.com\",\r\n    //\"password\": \"pass\",\r\n    \"accountType\": 2\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Marcos\",\r\n    \"lastName\": \"dos Santos Carvalho\",\r\n    \"email\": \"aaaaaaaaamarcos@test.com\",\r\n    \"password\": \"pass\",\r\n    \"accountType\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -657,7 +827,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"ticker\": \"HCTR11\",\r\n    \"type\": 3\r\n}",
+									"raw": "{\r\n    // \"type\": 3,\r\n    // \"ticker\": \"HCTR11\",\r\n    // \"ticker\": \"KO\"\r\n    \"ticker\": \"mxrf11\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -689,7 +859,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    // \"ticker\": \"SAPR11\",\r\n    //\"ticker\": \"KO\",\r\n    \"ticker\": \"MAC\",\r\n    \"type\": 2\r\n}",
+									"raw": "{\r\n    // \"ticker\": \"OIBR4\",\r\n    // \"type\": 1\r\n    // \"ticker\": \"SAPR11\",\r\n    // \"type\": 1\r\n    // \"ticker\": \"KO\",\r\n    // \"type\": 2\r\n    \"ticker\": \"MAC\",\r\n    \"type\": 2\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -716,7 +886,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    //\"ticker\": \"SAPR11\"\r\n    // \"ticker\": \"OIBR4\"\r\n    \"ticker\": \"KO\",\r\n    // \"ticker\": \"MAC\",\r\n    \"type\": 2\r\n}",
+									"raw": "{\r\n    // \"type\": 1\r\n    // \"ticker\": \"OIBR4\"\r\n    // \"ticker\": \"MAC\"\r\n    //\"ticker\": \"MODL11\"\r\n    //\"ticker\": \"KO\"\r\n    // \"ticker\": \"MAC\"\r\n    // \"type\": 2\r\n\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -745,7 +915,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    // \"ticker\": \"SAPR11\"\r\n    // \"ticker\": \"OIBR4\"\r\n    // \"ticker\": \"MAC\"\r\n    \"ticker\": \"KO\"\r\n}",
+							"raw": "{\r\n    // \"ticker\": \"visc11\"\r\n    // \"ticker\": \"MXRF11\"\r\n    // \"ticker\": \"SAPR11\"\r\n    // \"ticker\": \"OIBR4\"\r\n    \"ticker\": \"MAC\"\r\n    //\"ticker\": \"KO\"\r\n    // \"ticker\": \"IRDM11\"\r\n    // \"ticker\": \"amx\",\r\n    // \"ticker\": \"SOJA3\"\r\n    // \"ticker\": \"NYMX\"\r\n    // \"ticker\": \"HJLIW\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -764,6 +934,188 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Show stocks",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ticker\": \"MAC\"\r\n    // \"ticker\": \"KO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/assets/stocks/ko",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"assets",
+								"stocks",
+								"ko"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show ações",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"ticker\": \"SAPR11\"\r\n    // \"ticker\": \"OIBR4\"\r\n    // \"ticker\": \"KO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/assets/acoes/SAPR11",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"assets",
+								"acoes",
+								"SAPR11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show fiis",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"ticker\": \"SAPR11\"\r\n    // \"ticker\": \"OIBR4\"\r\n    // \"ticker\": \"MAC\"\r\n    // \"ticker\": \"MAC\",\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/assets/fiis/SNCI11",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"assets",
+								"fiis",
+								"SNCI11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show fiis Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"ticker\": \"SAPR11\"\r\n    // \"ticker\": \"OIBR4\"\r\n    // \"ticker\": \"MAC\"\r\n    // \"ticker\": \"MAC\",\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/assets/fiis/IRDM11",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"assets",
+								"fiis",
+								"IRDM11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show fiis Copy 2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"ticker\": \"SAPR11\"\r\n    // \"ticker\": \"OIBR4\"\r\n    // \"ticker\": \"MAC\"\r\n    // \"ticker\": \"MAC\",\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/assets/fiis/IRDM11",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"assets",
+								"fiis",
+								"IRDM11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Paginate Assets",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 1,\r\n    \"numberOfItens\": 5,\r\n    // \"getDetailedList\": true,\r\n    \"orderBy\": \"asc\" // \"orderBy\": \"desc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/assets/paginate",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"assets",
+								"paginate"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -777,7 +1129,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": 1,\r\n    \"assetId\": 2\r\n}",
+							"raw": "{\r\n    \"userId\": 19\r\n    \"assetId\": 3\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -799,13 +1151,41 @@
 					"response": []
 				},
 				{
+					"name": "Create User asset Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 40,\r\n    \"assetId\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/assets/user/verify",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"assets",
+								"user",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Delete User asset",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": 1,\r\n    \"assetId\": 2\r\n}",
+							"raw": "{\r\n    \"userId\": 1,\r\n    \"assetId\": 200\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -833,7 +1213,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": 1,\r\n    \"numberOfItens\": 10,\r\n    \"page\": 1\r\n}",
+							"raw": "{\r\n    \"userId\": 100,\r\n    \"numberOfItens\": 10,\r\n    \"page\": 1,\r\n    \"getDetailedList\": true // \"getDetailedList\": false\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -849,6 +1229,160 @@
 								"assets",
 								"user",
 								"paginate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Price alerts",
+			"item": [
+				{
+					"name": "Create price alert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 1,\r\n    \"assetId\": 10,\r\n    \"expectedPrice\": \"10.270\",\r\n    \"priceAlertTypeId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/assets/price/watch/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"assets",
+								"price",
+								"watch",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete price alert",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"softDelete\": true,\r\n    // \"alertId\": 6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/assets/price/watch/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"assets",
+								"price",
+								"watch",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Price alert paginate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 1,\r\n    // \"page\": 1,\r\n    \"orderBy\": \"asc\",\r\n    \"numberOfItens\": 10,\r\n    \"searchByStatus\": true,\r\n    \"active\": true,\r\n    \"getDetailedList\": true,\r\n    \"includeSymbols\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/assets/price/watch/paginate/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"assets",
+								"price",
+								"watch",
+								"paginate",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify if price alert was reach",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 5,\r\n    \"assetId\": 2,\r\n    \"priceAlertId\": 1,\r\n    \"priceAlertTypeId\": 1, // Menor ou igual - //\"priceAlertTypeId\": 2, // Maior ou igual\r\n    \"expectedPrice\": 13.60\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/assets/user/view/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"assets",
+								"user",
+								"view",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TopAssets",
+			"item": [
+				{
+					"name": "Get top assets data",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"assetListTypeId\": 1 // ações\r\n    // \"assetListTypeId\": 3 // fiis\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/topAssets/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"topAssets",
+								""
 							]
 						}
 					},
@@ -984,7 +1518,7 @@
 		},
 		{
 			"key": "jwt_token",
-			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImlhdCI6MTY5NTU4Mzg4NiwiZXhwIjoxNjk2MTg4Njg2fQ.jXZWXxhFugABr--Kgpszp82HoE3_hNTMrYWCIkUW7h4",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsImlhdCI6MTY5ODgxMjQxNCwiZXhwIjoxNjk5NDE3MjE0fQ.oe0C8X9AuD5epQ8IJjvg4vyXQgUgqrX4ZjCJTPxMDSU",
 			"type": "string"
 		}
 	]

@@ -6,6 +6,9 @@ import AuthError from "@/app/Auth/exceptions/AuthError";
 import { PrismaClient } from '@prisma/client';
 import UserModel from "../models/UserModel";
 
+import commonErrorMessageHelper from '@app/helpers/ErrorHelper';
+import errorMessageHelper from "@app/helpers/ErrorHelper";
+
 const prisma = new PrismaClient();
 
 const UsersController = () => {
@@ -39,9 +42,7 @@ const UsersController = () => {
       });
 
     } catch (error) {
-      return res.status(404).json({
-        message: 'Error when updating user',
-      });
+      return commonErrorMessageHelper(res, error, { customMessage: 'Error when updating user' });
     }
   }
 
@@ -51,7 +52,7 @@ const UsersController = () => {
       const deletedUser = await UserModel().deleteUser(req.body);
 
       const { id } = deletedUser;
-      
+
       const userEmail =
         deletedUser?.UserEmail?.map(({ email }) => email);
 
@@ -63,9 +64,8 @@ const UsersController = () => {
 
     } catch (error) {
 
-      return res.status(404).json({
-        message: 'Error when deleting user',
-      });
+      return errorMessageHelper(res, error, { errorMessageHelper: 'Error deleting user' })
+
     }
   }
 

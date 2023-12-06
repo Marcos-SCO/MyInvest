@@ -1,0 +1,101 @@
+.pagination {
+  padding: 5rem 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-wrap: wrap;
+  height: 100%;
+
+  li {
+    margin-right: .65rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    a {
+      width: 100%;
+      display: block;
+      // max-width: 50px;
+
+      font-weight: 450;
+
+      position: relative;
+      border-radius: 20px;
+
+      transition: .17s ease-in-out;
+
+      background-color: #f3f5f9;
+      // padding: .55rem 1.1rem;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      min-height: 39px;
+      min-width: 39px;
+      max-height: 39px;
+      max-width: 39px;
+
+      &.arrow-link {
+        padding: .65rem;
+      }
+
+      svg {
+        max-height: 20px;
+        max-width: 20px;
+
+        path {}
+      }
+
+      &:hover {
+        // top: -.15rem;
+
+        color: #fff;
+        background-color: $primary;
+
+        svg {
+          path {
+            fill: #fff;
+          }
+        }
+
+        &.doubleArrow {
+          svg {
+            path {
+              fill: none !important;
+              stroke: #fff;
+            }
+          }
+        }
+
+      }
+    }
+
+    &.selected {
+      a {
+        background-color: $primary;
+        color: #fff;
+      }
+    }
+
+    &.previous {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  @include max-mobile {
+
+    @media (max-width: 320px) {
+      justify-content: flex-start;
+    }
+
+    a {
+      margin-bottom: .75rem;
+    }
+  }
+
+}

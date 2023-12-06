@@ -1,0 +1,54 @@
+.zoomableTimeSeriesChart {
+  width: 100%;
+  // max-width: 800px;
+  margin: 0;
+}
+
+.historical-graph-container {
+  margin-top: 1rem;
+  min-height: 365px;
+  z-index: 10;
+}
+
+.no-data-graph {
+  position: relative;
+  z-index: 10;
+
+  &::before {
+    content: '';
+    cursor: not-allowed;
+    display: block;
+    position: absolute;
+    inset: 0;
+    background-color: #dddddd66;
+    z-index: 99;
+    opacity: .5;
+  }
+
+  .not-found-text {
+    cursor: not-allowed;
+    position: absolute;
+    transition: .1s ease-in-out;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    color: #fff;
+    color: $primary;
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  &:hover {
+
+    .not-found-text {
+      top: 45%;
+    }
+  }
+
+  @include max-mobile {
+    .not-found-text {
+      font-size: 1.3rem;
+    }
+  }
+}
