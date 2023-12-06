@@ -33,7 +33,7 @@ import PercentageVariation from '../../../../../components/assets/symbols/Percen
 
 export const metadata = {}
 
-export default async function Page({ params, onLoad }) {
+export default async function Page({ params }) {
   const { assetType, ticker } = params;
 
   metadata.title = `MyInvest - ${ticker}`;
