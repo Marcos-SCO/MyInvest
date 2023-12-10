@@ -42,6 +42,8 @@
 
 - cheerio @types/cheerio
 
+- pre-commit: npm i -D pre-commit
+
 # Prisma commands
 
 - npx prisma init
