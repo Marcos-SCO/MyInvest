@@ -19,7 +19,7 @@ import { UrlChangeListener } from './hooks/UrlChangeListener';
 import ChangePageAttributes from "app/hooks/ChangePageAttributes";
 import ProgressBar from 'components/page/ProgressBar';
 
-import SearchBar from "components/searchBar/SearchBar";
+import SearchBarContainer from "components/searchBar/SearchBarContainer";
 
 import { nextAuthOptions } from './api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
@@ -46,7 +46,7 @@ function renderChildrenWithHeader(children) {
       <ProgressBar />
       <Header childrenSegment={childrenSegment} />
       <SearchModalContainer modalId="search-bar">
-        <SearchBar />
+        <SearchBarContainer />
       </SearchModalContainer>
       {children}
       <Footer childrenSegment={childrenSegment} />

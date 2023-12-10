@@ -6,7 +6,7 @@ import SearchBarItem from "./SearchBarItem";
 import SearchResultsList from "./SearchResultList";
 
 
-function SearchBar() {
+function SearchBarContainer() {
   const [results, setResults] = useState([]);
 
   return (
@@ -21,4 +21,4 @@ function SearchBar() {
   );
 }
 
-export default SearchBar;
+export default SearchBarContainer;
