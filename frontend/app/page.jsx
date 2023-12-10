@@ -6,9 +6,6 @@ import { getUserSessionData } from "./helpers/session/getUserSessionData";
 
 import ChangePageAttributes from "app/hooks/ChangePageAttributes";
 
-import SearchModalButton from "../components/modal/SearchModalButton";
-import SearchBar from "../components/searchBar/layout";
-
 import MainHero from '../components/sections/MainHero';
 
 import TopAssets from '../components/topAssets/TopAssets';
