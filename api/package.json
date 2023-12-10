@@ -9,15 +9,8 @@
     "build": "rimraf ./build && tsc && tsc-alias",
     "start": "nodemon ./build/index.js",
     "prisma-seed": "npx tsx prisma/seeders/_executeSeeders.ts",
-    "prisma-drop-seed": "npx tsx prisma/seeders/_executeDrops.ts",
-    "add-build": "git add dist",
-    "ts.check": "tsc --project tsconfig.json"
+    "prisma-drop-seed": "npx tsx prisma/seeders/_executeDrops.ts"
   },
-  "pre-commit": [
-    "ts.check",
-    "build",
-    "add-build"
-  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -33,7 +26,6 @@
     "@types/nodemailer": "^6.4.13",
     "faker": "^5.5.3",
     "nodemon": "^3.0.1",
-    "pre-commit": "^1.2.2",
     "ts-node": "^10.9.1",
     "tsc-alias": "^1.8.8",
     "tsconfig-paths": "^4.2.0",
