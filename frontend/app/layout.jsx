@@ -24,7 +24,7 @@ import { getUserSessionData } from './helpers/session/getUserSessionData';
 import { ModalProvider } from 'app/providers/modalProviders';
 
 import SearchModalContainer from "components/modal/SearchModalContainer";
-import SearchBar from "../components/searchBar/SearchBar";
+import SearchBar from "../components/searchBar/SearchBar.jsx";
 
 import ModalContainer from '../components/modal/ModalContainer';
 
