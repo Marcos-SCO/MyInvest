@@ -127,7 +127,7 @@ export default function SignUpForm() {
 
           <div className="form-container-header sm:mx-auto sm:w-full sm:max-w-sm">
 
-            <a href={`${baseUrl}`} title="MyInvest">
+            <a href={`${baseUrl}/`} title="MyInvest">
               <DisplaySvg name="myInvestLogo" class="myInvestLogo m-auto" width="120" height="120" />
             </a>
 
