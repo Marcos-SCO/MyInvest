@@ -19,7 +19,7 @@ import { UrlChangeListener } from './hooks/UrlChangeListener';
 import ChangePageAttributes from "app/hooks/ChangePageAttributes";
 import ProgressBar from 'components/page/ProgressBar';
 
-import SearchBarContainer from "components/searchBar/SearchBarContainer";
+import SearchBarContainer from "../components/searchBar/SearchBarContainer";
 
 import { nextAuthOptions } from './api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
