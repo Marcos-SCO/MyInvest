@@ -5,8 +5,7 @@ import { useState } from "react";
 import SearchBarItem from "./SearchBarItem";
 import SearchResultsList from "./SearchResultList";
 
-
-function SearchBarContainer() {
+function SearchBar() {
   const [results, setResults] = useState([]);
 
   return (
@@ -21,4 +20,4 @@ function SearchBarContainer() {
   );
 }
 
-export default SearchBarContainer;
+export default SearchBar;

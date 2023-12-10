@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import { nextAuthOptions } from "./api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { getUserSessionData } from "./helpers/session/getUserSessionData";
