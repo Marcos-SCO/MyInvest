@@ -12,6 +12,7 @@ import DisplaySectionElements from './DisplaySectionElements';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { fetchUserAssets } from "../../app/api/assets/userAssets/fetchUserAssets";
 
 function getDetailListElements(dataElements = false) {
   if (!dataElements) return false;
