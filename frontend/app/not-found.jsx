@@ -19,7 +19,7 @@ export default function NotFound() {
               <div class="text-lg mb-8">
                 Você deve ter digitado o endereço errado ou simplesmente a página foi movida para outro caminho.
               </div>
-              <Link href={`${FRONT_END_BASE_URL}`}><p className="buttonTransition text-5xl font-medium">Voltar para Home</p></Link>
+              <Link href={`${FRONT_END_BASE_URL}/`}><p className="buttonTransition text-5xl font-medium">Voltar para Home</p></Link>
             </div>
           </div>
         </div>
