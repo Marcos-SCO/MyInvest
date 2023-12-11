@@ -38,8 +38,6 @@ export default function DisplaySectionElements({ ...props }) {
     speed: 500,
     slidesToShow: isDesktop ? 3 : 1,
     slidesToScroll: isDesktop ? 3 : 1,
-    fade: false,
-    swipeToSlide: true,
     responsive: [
       {
         breakpoint: 1124,
@@ -58,6 +56,8 @@ export default function DisplaySectionElements({ ...props }) {
       {
         breakpoint: 630,
         settings: {
+          fade: true,
+          swipeToSlide: true,
           slidesToShow: 1,
           slidesToScroll: 1
         }
