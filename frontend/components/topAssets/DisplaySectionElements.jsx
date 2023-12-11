@@ -10,6 +10,7 @@ export default function DisplaySectionElements({ ...props }) {
 
   const { elementsSectionData } = props;
   const userId = props?.userId ?? undefined;
+  const userAssetIds = props?.userAssetIds ?? [];
 
   if (!elementsSectionData) return;
 
@@ -118,7 +119,7 @@ export default function DisplaySectionElements({ ...props }) {
             const applyLazyOrEager =
               countItens <= 3 ? 'eager' : 'lazy';
 
-            item = { ...item, userId, applyLazyOrEager, removeItem: false };
+            item = { ...item, userId, userAssetIds, applyLazyOrEager, removeItem: false };
 
             return (
               <div key={index} className="card-container">

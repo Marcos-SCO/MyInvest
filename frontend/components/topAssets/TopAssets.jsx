@@ -1,14 +1,11 @@
 import { nextAuthOptions } from "app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 
-import Link from "next/link";
-
 // import TopAssetsList from './TopAssetsList';
 import { getUserSessionData } from "app/helpers/session/getUserSessionData";
 
-import DisplaySvg from "../../app/helpers/svg/DisplaySvg";
-
 import fetchTopListAssets from '../../app/api/assets/fetchTopListAssets';
+
 import { formatCurrency, getAssetTypeDescription } from "../../app/helpers/assets";
 
 import DisplaySectionElements from './DisplaySectionElements';
@@ -112,8 +109,10 @@ function getSectionElements(sectionData) {
 
 export default async function TopAssets({ ...props }) {
   const session = await getServerSession(nextAuthOptions);
-  const sessionData = await getUserSessionData(session);
+  const sessionData = await getUserSessionData(session, true);
   const { id, userId, name, firstName, token } = sessionData;
+
+  const userAssetIds = sessionData?.userAssetIds ?? [];
 
   const baseUrl = process.env.NEXT_PUBLIC_FRONT_END_URL;
 
@@ -139,25 +138,25 @@ export default async function TopAssets({ ...props }) {
       {highBrazilianSectionElements?.length > 0 &&
         <section className="sliderContainer" id="top-acoes">
           <h2 className="sectionTitle">Ações Top Alta</h2>
-          <DisplaySectionElements elementsSectionData={highBrazilianSectionElements} userId={userId} key="brazilianStocks-top-high" />
+          <DisplaySectionElements elementsSectionData={highBrazilianSectionElements} userId={userId} userAssetIds={userAssetIds} key="brazilianStocks-top-high" />
         </section>}
 
       {lowBrazilianSectionElements?.length > 0 &&
         <section className="sliderContainer animationContainer hide">
           <h2 className="sectionTitle">Ações Top Queda</h2>
-          <DisplaySectionElements elementsSectionData={lowBrazilianSectionElements} userId={userId} key="brazilianStocks-top-low" />
+          <DisplaySectionElements elementsSectionData={lowBrazilianSectionElements} userId={userId}  userAssetIds={userAssetIds} key="brazilianStocks-top-low" />
         </section>}
 
       {highFiisSectionElements?.length > 0 &&
         <section className="sliderContainer animationContainer hide" id="top-fiis">
           <h2 className="sectionTitle">Fiis Top Alta</h2>
-          <DisplaySectionElements elementsSectionData={highFiisSectionElements} userId={userId} key="fiis-top-high" />
+          <DisplaySectionElements elementsSectionData={highFiisSectionElements} userId={userId} userAssetIds={userAssetIds} key="fiis-top-high" />
         </section>}
 
       {lowFiisSectionElements?.length > 0 &&
         <section className="sliderContainer animationContainer hide">
           <h2 className="sectionTitle">Fiis Top Queda</h2>
-          <DisplaySectionElements elementsSectionData={lowFiisSectionElements} userId={userId} key="fiis-top-low" />
+          <DisplaySectionElements elementsSectionData={lowFiisSectionElements} userId={userId} userAssetIds={userAssetIds} key="fiis-top-low" />
         </section>}
 
     </article>
