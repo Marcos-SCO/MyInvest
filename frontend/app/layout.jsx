@@ -87,8 +87,8 @@ export default async function RootLayout({ children }) {
           <ChangePageAttributes pageName={childrenSegment} />
           <ModalProvider>
             <UrlChangeListener />
-            <ToastContainer />
             {activateContainerModals(userId)}
+            <ToastContainer />
             {
               !dontShowNavbarIn(childrenSegment)
                 ? renderChildrenWithHeader(children)

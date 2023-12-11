@@ -2,11 +2,11 @@ import React from 'react';
 
 import Link from "next/link";
 
-import DisplaySvg from 'app/helpers/svg/DisplaySvg';
-
-const baseUrl = process.env.FRONT_END_BASE_URL;
+// import DisplaySvg from 'app/helpers/svg/DisplaySvg';
 
 export default function Footer() {
+  const baseUrl = process.env.FRONT_END_BASE_URL;
+  
   const date = new Date();
   const currentYear = date.getFullYear();
 

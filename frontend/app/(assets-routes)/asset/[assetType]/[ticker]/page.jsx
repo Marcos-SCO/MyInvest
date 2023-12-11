@@ -16,7 +16,10 @@ import { ZoomableTimeSeriesChart } from '../../charts/ZoomableTimeSeriesChart';
 
 import AddPriceAlert from "../../../../../components/alerts/AddPriceAlert";
 
-import AssetFavButton from "../../../../../components/assets/assetButtons/assetFavButton/layout";
+// import AssetFavButton from "../../../../../components/assets/assetButtons/assetFavButton/layout";
+
+const AssetFavButton =
+  dynamic(() => import('../../../../../components/assets/assetButtons/assetFavButton/layout'), { ssr: false });
 
 import ChangePageAttributes from "app/hooks/ChangePageAttributes";
 
