@@ -15,7 +15,7 @@ async function userHasAsset(fetchObj) {
     headers: { 'Content-type': 'application/json' },
     body: JSON.stringify(bodyObj),
     next: {
-      revalidate: 60
+      revalidate: 0
     }
   }
 
