@@ -83,7 +83,7 @@ const ZoomableTimeSeriesChart = (props) => {
             formatter: function (val, { series, seriesIndex, dataPointIndex, w }) {
               const dataItem = objData[dataPointIndex];
               const closePrice = dataItem.close;
-              const toFixedValue = closePrice.toFixed(2);
+              const toFixedValue = closePrice?.toFixed(2);
               const isBrazilianAsset = assetType == 1 || assetType == 3;
 
               const priceValue = isBrazilianAsset ? `R$ ${toFixedValue}` : `$${toFixedValue}`;
