@@ -38,6 +38,7 @@ export default function DisplaySectionElements({ ...props }) {
     speed: 500,
     slidesToShow: isDesktop ? 3 : 1,
     slidesToScroll: isDesktop ? 3 : 1,
+    fade: true,
     responsive: [
       {
         breakpoint: 1124,
