@@ -23,7 +23,7 @@ body {
 }
 
 main.main-container {
-  min-height: 600px;
+  min-height: 80vh;
 }
 
 @media (max-width: 1200px) {

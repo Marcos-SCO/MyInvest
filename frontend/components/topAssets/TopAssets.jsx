@@ -1,20 +1,18 @@
 import { nextAuthOptions } from "app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 
-import Link from "next/link";
-
 // import TopAssetsList from './TopAssetsList';
 import { getUserSessionData } from "app/helpers/session/getUserSessionData";
 
-import DisplaySvg from "../../app/helpers/svg/DisplaySvg";
-
 import fetchTopListAssets from '../../app/api/assets/fetchTopListAssets';
+
 import { formatCurrency, getAssetTypeDescription } from "../../app/helpers/assets";
 
 import DisplaySectionElements from './DisplaySectionElements';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { fetchUserAssets } from "../../app/api/assets/userAssets/fetchUserAssets";
 
 function getDetailListElements(dataElements = false) {
   if (!dataElements) return false;
@@ -112,10 +110,14 @@ function getSectionElements(sectionData) {
 
 export default async function TopAssets({ ...props }) {
   const session = await getServerSession(nextAuthOptions);
-  const sessionData = await getUserSessionData(session);
+  const sessionData = await getUserSessionData(session, true);
   const { id, userId, name, firstName, token } = sessionData;
 
-  const baseUrl = process.env.NEXT_PUBLIC_FRONT_END_URL;
+  const userAssetsList =
+    (await fetchUserAssets({ id: userId, numberOfItens: 60 }))?.assetsList;
+
+  const userAssetIds = userAssetsList ?
+    userAssetsList.map(asset => asset?.id) : [];
 
   const brazilianStocksData = await getTopListObjData(1);
   const fiisData = await getTopListObjData(3);
@@ -133,31 +135,33 @@ export default async function TopAssets({ ...props }) {
   const highFiisSectionElements = fiisSectionElements?.highElements;
   const lowFiisSectionElements = fiisSectionElements?.lowElements;
 
+  const baseUrl = process.env.NEXT_PUBLIC_FRONT_END_URL;
+
   return (
     <article className="topAssetsSection user-assets py-10" data-js="top-list-section">
 
       {highBrazilianSectionElements?.length > 0 &&
         <section className="sliderContainer" id="top-acoes">
           <h2 className="sectionTitle">Ações Top Alta</h2>
-          <DisplaySectionElements elementsSectionData={highBrazilianSectionElements} userId={userId} key="brazilianStocks-top-high" />
+          <DisplaySectionElements elementsSectionData={highBrazilianSectionElements} userId={userId} userAssetIds={userAssetIds} key="brazilianStocks-top-high" />
         </section>}
 
       {lowBrazilianSectionElements?.length > 0 &&
         <section className="sliderContainer animationContainer hide">
           <h2 className="sectionTitle">Ações Top Queda</h2>
-          <DisplaySectionElements elementsSectionData={lowBrazilianSectionElements} userId={userId} key="brazilianStocks-top-low" />
+          <DisplaySectionElements elementsSectionData={lowBrazilianSectionElements} userId={userId} userAssetIds={userAssetIds} key="brazilianStocks-top-low" />
         </section>}
 
       {highFiisSectionElements?.length > 0 &&
         <section className="sliderContainer animationContainer hide" id="top-fiis">
           <h2 className="sectionTitle">Fiis Top Alta</h2>
-          <DisplaySectionElements elementsSectionData={highFiisSectionElements} userId={userId} key="fiis-top-high" />
+          <DisplaySectionElements elementsSectionData={highFiisSectionElements} userId={userId} userAssetIds={userAssetIds} key="fiis-top-high" />
         </section>}
 
       {lowFiisSectionElements?.length > 0 &&
         <section className="sliderContainer animationContainer hide">
           <h2 className="sectionTitle">Fiis Top Queda</h2>
-          <DisplaySectionElements elementsSectionData={lowFiisSectionElements} userId={userId} key="fiis-top-low" />
+          <DisplaySectionElements elementsSectionData={lowFiisSectionElements} userId={userId} userAssetIds={userAssetIds} key="fiis-top-low" />
         </section>}
 
     </article>

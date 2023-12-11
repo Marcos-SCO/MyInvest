@@ -10,9 +10,12 @@ import DisplaySvg from '../../../../app/helpers/svg/DisplaySvg';
 import { removePreFetchFromLinks } from '../../../../app/helpers/dom';
 
 import swal from 'sweetalert';
+import { setLocalStorageUserAsset } from '../../../../app/helpers/localstorage/assetsLocalStorage';
 
 export default function ItemButton({ isUserAsset, fetchObj, removeItem }) {
   // const router = useRouter();
+
+  const assetId = fetchObj?.assetId;
 
   const userAssetInitialValue = isUserAsset;
   const [userAsset, setUserAsset] = useState(userAssetInitialValue);
@@ -75,6 +78,8 @@ export default function ItemButton({ isUserAsset, fetchObj, removeItem }) {
 
   const followClass = !userAsset ? 'blue' : 'white';
   const buttonTitle = !userAsset ? 'Seguir' : 'Deixar de seguir';
+
+  if (assetId) setLocalStorageUserAsset(assetId, userAsset);
 
   return (
     <button onClick={handleAsset} className={`followAssetButton ${followClass}`} title={buttonTitle} data-js="followAssetButton">

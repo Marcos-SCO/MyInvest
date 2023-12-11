@@ -1,8 +1,6 @@
 import Header from 'components/base/Header';
 import Footer from 'components/base/Footer';
 
-import dynamic from 'next/dynamic';
-
 // Styles
 import './css/sass/main.scss';
 import './css/globals.css';
@@ -19,14 +17,15 @@ import { UrlChangeListener } from './hooks/UrlChangeListener';
 import ChangePageAttributes from "app/hooks/ChangePageAttributes";
 import ProgressBar from 'components/page/ProgressBar';
 
-import SearchBar from "components/searchBar/layout";
-
 import { nextAuthOptions } from './api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
 import { getUserSessionData } from './helpers/session/getUserSessionData';
 
 import { ModalProvider } from 'app/providers/modalProviders';
+
 import SearchModalContainer from "components/modal/SearchModalContainer";
+import SearchBar from "../components/searchBar/SearchBar.jsx";
+
 import ModalContainer from '../components/modal/ModalContainer';
 
 import AuthButtonsTemplate from '../components/page/AuthButtonsTemplate';

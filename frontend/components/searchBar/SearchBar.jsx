@@ -5,7 +5,6 @@ import { useState } from "react";
 import SearchBarItem from "./SearchBarItem";
 import SearchResultsList from "./SearchResultList";
 
-
 function SearchBar() {
   const [results, setResults] = useState([]);
 

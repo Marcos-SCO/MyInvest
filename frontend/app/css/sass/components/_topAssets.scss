@@ -109,9 +109,13 @@
     margin-left: 1rem;
   }
 
-  @include max-mobile {
+  @include max-tablet {
     .animationContainer {
       animation: none;
+
+      &.hide {
+        opacity: 1!important;
+      }
     }
 
     .sliderContainer {

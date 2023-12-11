@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 
 import { userHasAsset } from 'app/api/assets/userAssets/userHasAsset';
@@ -7,18 +9,45 @@ import ItemButton from './ItemButton';
 import OpenModalContainer from '../../../modal/OpenModalHandler';
 import DisplaySvg from '../../../../app/helpers/svg/DisplaySvg';
 
-export default async function AssetFavButton({ userId = false, assetId = false, removeItem = true }) {
-  
+import { setLocalStorageUserAsset, userHasAssetInLocalStorage } from '../../../../app/helpers/localstorage/assetsLocalStorage';
+
+export default async function AssetFavButton({ userId = false, assetId = false, removeItem = true, userAssetIds = false }) {
+
+  const fetchObj = { assetId, userId };
+
+  let isUserAsset = false;
+
+  if (userId) {
+
+    const userHasAssetInList =
+      userAssetIds ? userAssetIds.includes(assetId) : false;
+
+    let assetInLocalStorage =
+      userHasAssetInLocalStorage(assetId);
+
+    isUserAsset = assetInLocalStorage?.isUserAsset;
+
+    if (userAssetIds) {
+      setLocalStorageUserAsset(assetId, userHasAssetInList);
+
+      assetInLocalStorage = true;
+    }
+
+    if (!assetInLocalStorage) {
+
+      const userAsset = await userHasAsset(fetchObj);
+      isUserAsset = userAsset?.haveAsset;
+
+      setLocalStorageUserAsset(assetId, isUserAsset);
+    }
+
+  }
+
   if (!userId) {
     return (<OpenModalContainer modalId={`authContainer`} className={'followAssetButton blue'}>
       <DisplaySvg name="plusSign" width="18" height="18" /> Seguir
     </OpenModalContainer>)
   }
-
-  const fetchObj = { assetId, userId };
-
-  const userAsset = await userHasAsset(fetchObj);
-  const isUserAsset = userAsset?.haveAsset;
 
   return (
     <>

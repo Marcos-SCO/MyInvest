@@ -38,7 +38,7 @@ const App = () => {
   routes(app);
   exceptionHandler();
 
-  const listen = (port: number) => {
+  const listen = (port: number = 3000) => {
     app.listen(port, () => {
       console.log(`Server is running on ${port}`)
     });

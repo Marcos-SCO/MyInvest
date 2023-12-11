@@ -11,6 +11,7 @@ import OpenModalContainer from '../../modal/OpenModalHandler';
 
 export default function UserAssetCard({ props }) {
 
+  const userAssetIds = props?.userAssetIds;
   const assetUrl = props?.assetUrl;
   const assetId = props?.assetId;
   const userId = props?.userId ?? false;
@@ -32,7 +33,7 @@ export default function UserAssetCard({ props }) {
 
       <div className='asset-info-details'>
         <div className="header-container">
-          {<AssetFavButton assetId={assetId} userId={userId} removeItem={removeCardItem} />}
+          {<AssetFavButton assetId={assetId} userId={userId} userAssetIds={userAssetIds} removeItem={removeCardItem} />}
         </div>
         <Link href={assetUrl} title={`Ir para página do ${ticker}`}>
           <figure>

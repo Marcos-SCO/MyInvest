@@ -1,3 +1,5 @@
+import { fetchUserAssets } from "../../api/assets/userAssets/fetchUserAssets";
+
 export async function getUserSessionData(session) {
 
   const credentialSession = session?.user;
@@ -21,7 +23,7 @@ export async function getUserSessionData(session) {
 
   const image = sessionData?.image ?? false;
 
-  return {
+  const sessionDataObj = {
     id,
     userId,
     email,
@@ -30,4 +32,6 @@ export async function getUserSessionData(session) {
     image,
     token
   }
+
+  return sessionDataObj;
 }
