@@ -112,9 +112,11 @@ export default async function TopAssets({ ...props }) {
   const sessionData = await getUserSessionData(session, true);
   const { id, userId, name, firstName, token } = sessionData;
 
-  const userAssetIds = sessionData?.userAssetIds ?? [];
+  const userAssetsList =
+    (await fetchUserAssets({ id: userId, numberOfItens: 60 }))?.assetsList;
 
-  const baseUrl = process.env.NEXT_PUBLIC_FRONT_END_URL;
+  const userAssetIds = userAssetsList ?
+    userAssetsList.map(asset => asset?.id) : [];
 
   const brazilianStocksData = await getTopListObjData(1);
   const fiisData = await getTopListObjData(3);
@@ -132,6 +134,8 @@ export default async function TopAssets({ ...props }) {
   const highFiisSectionElements = fiisSectionElements?.highElements;
   const lowFiisSectionElements = fiisSectionElements?.lowElements;
 
+  const baseUrl = process.env.NEXT_PUBLIC_FRONT_END_URL;
+
   return (
     <article className="topAssetsSection user-assets py-10" data-js="top-list-section">
 
@@ -144,7 +148,7 @@ export default async function TopAssets({ ...props }) {
       {lowBrazilianSectionElements?.length > 0 &&
         <section className="sliderContainer animationContainer hide">
           <h2 className="sectionTitle">Ações Top Queda</h2>
-          <DisplaySectionElements elementsSectionData={lowBrazilianSectionElements} userId={userId}  userAssetIds={userAssetIds} key="brazilianStocks-top-low" />
+          <DisplaySectionElements elementsSectionData={lowBrazilianSectionElements} userId={userId} userAssetIds={userAssetIds} key="brazilianStocks-top-low" />
         </section>}
 
       {highFiisSectionElements?.length > 0 &&

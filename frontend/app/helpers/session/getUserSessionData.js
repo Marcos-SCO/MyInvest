@@ -1,6 +1,6 @@
 import { fetchUserAssets } from "../../api/assets/userAssets/fetchUserAssets";
 
-export async function getUserSessionData(session, getUserAssetsIds = false) {
+export async function getUserSessionData(session) {
 
   const credentialSession = session?.user;
 
@@ -31,17 +31,6 @@ export async function getUserSessionData(session, getUserAssetsIds = false) {
     firstName,
     image,
     token
-  }
-
-  if (getUserAssetsIds) {
-
-    const userAssetsList =
-      (await fetchUserAssets({ id: userId, numberOfItens: 60 }))?.assetsList;
-
-    const userAssetIds = userAssetsList ?
-      userAssetsList.map(asset => asset?.id) : [];
-
-    sessionDataObj.userAssetIds = userAssetIds;
   }
 
   return sessionDataObj;
