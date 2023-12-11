@@ -61,10 +61,12 @@ export default function DisplaySectionElements({ ...props }) {
     nextArrow: <CustomNextArrow />,
   };
 
-
   const sliderRef = useRef(null);
-
+  
   useEffect(() => {
+   const isDesktop = window.innerWidth >= 1023.9;
+   if (!isDesktop) return;
+
     const options = {
       root: null,
       rootMargin: '0px',
