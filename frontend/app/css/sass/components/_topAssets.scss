@@ -109,12 +109,12 @@
     margin-left: 1rem;
   }
 
-  @include max-tablet {
+  @include max-desktop {
     .animationContainer {
       animation: none;
 
       &.hide {
-        opacity: 1!important;
+        opacity: 1 !important;
       }
     }
 
@@ -156,8 +156,17 @@
       width: 100%;
       max-width: 100%;
     }
+    
+    @include tablet {
+      .slick-slider {
+        .slick-dots {
+          bottom: -1.5rem;
+        }
+      }
+    }
 
   }
+
 
   @include desktop {
     .slick-list {
