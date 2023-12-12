@@ -16,8 +16,6 @@ export default function DisplaySectionElements({ ...props }) {
   const userId = props?.userId ?? false;
   const userAssetIds = props?.userAssetIds ?? [];
 
-  console.log(userId);
-
   if (!elementsSectionData) return;
 
   let countItens = 1;
