@@ -1,14 +1,12 @@
 const API_BASE_URL = process.env.API_BASE_URL;
 
 async function fetchTopListAssets(assetsType = 1) {
-  const backendUrl = `${API_BASE_URL}/topAssets/`;
-
-  const bodyObj = { assetListTypeId: assetsType };
+  const backendUrl =
+    `${API_BASE_URL}/topAssets/${assetsType}`;
 
   const config = {
-    method: 'POST',
+    method: 'GET',
     headers: { 'Content-type': 'application/json' },
-    body: JSON.stringify(bodyObj),
     next: {
       revalidate: 60
     }
@@ -19,7 +17,6 @@ async function fetchTopListAssets(assetsType = 1) {
     const res = await fetchResults.json();
     const data = res;
 
-       // console.log('filtered: ', fetchResults);
     return data;
 
   } catch (error) {

@@ -8,6 +8,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { Navbar, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, NavbarBrand, NavbarContent, NavbarItem, Link, Input, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar, Button } from "@nextui-org/react";
 
 import DisplaySvg from '../../app/helpers/svg/DisplaySvg';
+import { removeLocalStorageItem } from '../../app/helpers/localstorage/assetsLocalStorage';
 
 const baseUrl = process.env.FRONT_END_BASE_URL;
 
@@ -21,7 +22,9 @@ export default function MenuDrop({ ...props }) {
   async function logout() {
     await signOut({
       redirect: false
-    })
+    });
+
+    removeLocalStorageItem('userAssets');
 
     window.location.href = baseUrl;
   }

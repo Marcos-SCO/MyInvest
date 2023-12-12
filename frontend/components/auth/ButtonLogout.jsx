@@ -2,6 +2,7 @@
 
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { removeLocalStorageItem } from "../../app/helpers/localstorage/assetsLocalStorage";
 
 export default function ButtonLogout() {
   const router = useRouter();
@@ -9,7 +10,9 @@ export default function ButtonLogout() {
   async function logout() {
     await signOut({
       redirect: false
-    })
+    });
+
+    removeLocalStorageItem('userAssets');
 
     router.replace('/');
     window.location.reload();

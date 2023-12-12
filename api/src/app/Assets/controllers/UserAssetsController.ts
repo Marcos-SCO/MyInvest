@@ -42,13 +42,13 @@ const UserAssetsController = () => {
   async function destroy(req: Request, res: Response): Promise<Response> {
     const userId = req.body?.userId;
     const assetId = req.body?.assetId;
-    
+
     const insertObj = { userId, assetId };
-    
+
     try {
 
       await verifyUserAssetParams(res, userId, assetId);
-      
+
       const deleteUserAsset = await
         UserAssetsModel().deleteUserAsset(insertObj);
 
@@ -100,7 +100,36 @@ const UserAssetsController = () => {
 
   }
 
-  return { index, create, destroy }
+  async function searchUserAssetIds(req: Request, res: Response): Promise<Response> {
+    const { userId, numberOfItens = 60 } = req.body;
+
+    if (!userId) return res.status(404).json({ message: `userId param is missing`, });
+
+    try {
+      const assetsQuery: any = await UserAssetsModel().getUserAssetIds(userId, numberOfItens);
+
+      const haveUserResults = assetsQuery?.length > 0;
+
+      if (!haveUserResults) {
+        return res.status(404).json({
+          message: `No assets found for userId: ${userId}`,
+        });
+      }
+
+      const message = `user assetIds found:`;
+
+      return res.status(200).json({
+        message,
+        assetIds: assetsQuery,
+      });
+
+    } catch (error) {
+      return errorMessageHelper(res, error);
+    }
+
+  }
+
+  return { index, searchUserAssetIds, create, destroy }
 
 }
 

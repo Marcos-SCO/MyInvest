@@ -12,7 +12,9 @@ import DisplaySectionElements from './DisplaySectionElements';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { fetchUserAssets } from "../../app/api/assets/userAssets/fetchUserAssets";
+import { fetchUserAssetIds } from "../../app/api/assets/userAssets/fetchUserAssets";
+
+// const baseUrl = process.env.NEXT_PUBLIC_FRONT_END_URL;
 
 function getDetailListElements(dataElements = false) {
   if (!dataElements) return false;
@@ -114,10 +116,10 @@ export default async function TopAssets({ ...props }) {
   const { id, userId, name, firstName, token } = sessionData;
 
   const userAssetsList =
-    (await fetchUserAssets({ id: userId, numberOfItens: 60 }))?.assetsList;
+    (await fetchUserAssetIds({ id: userId, numberOfItens: 60 }))?.assetIds;
 
   const userAssetIds = userAssetsList ?
-    userAssetsList.map(asset => asset?.id) : [];
+    userAssetsList.map(asset => asset?.assetId) : [];
 
   const brazilianStocksData = await getTopListObjData(1);
   const fiisData = await getTopListObjData(3);
@@ -134,8 +136,6 @@ export default async function TopAssets({ ...props }) {
 
   const highFiisSectionElements = fiisSectionElements?.highElements;
   const lowFiisSectionElements = fiisSectionElements?.lowElements;
-
-  const baseUrl = process.env.NEXT_PUBLIC_FRONT_END_URL;
 
   return (
     <article className="topAssetsSection user-assets py-10" data-js="top-list-section">

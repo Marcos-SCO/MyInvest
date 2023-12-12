@@ -59,6 +59,30 @@ const UserAssetsModel = () => {
     return assetsWithDetails;
   }
 
+  async function getUserAssetIds(userId: number, numberOfItens: number = 60) {
+    const userExist = await getUserById(userId);
+    if (!userExist) return;
+
+    const queryObj: any = {
+      where: { userId },
+      take: +numberOfItens,
+      select: { assetId: true, },
+    }
+
+    try {
+      const userAssetIds = await prisma.userAssets.findMany(queryObj);
+
+      return userAssetIds;
+    } catch (error) {
+      console.log(`Error getting user asset ids: `, error);
+      throw new CommonError(`Error getting user asset ids`);
+
+    } finally {
+      await prisma.$disconnect();
+    }
+
+  }
+
   async function getAllByPagination(userId: number, args: any) {
     const userExist = await getUserById(userId);
     if (!userExist) return;
@@ -149,7 +173,7 @@ const UserAssetsModel = () => {
 
   }
 
-  return { insertUserAsset, deleteUserAsset, getUserAsset, getAllByPagination }
+  return { insertUserAsset, deleteUserAsset, getUserAsset, getUserAssetIds, getAllByPagination }
 }
 
 export default UserAssetsModel;

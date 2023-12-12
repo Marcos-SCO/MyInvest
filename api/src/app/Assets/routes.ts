@@ -31,6 +31,8 @@ routes.post('/assets/user/view/', PriceAssetsWatchController().show);
 
 routes.post('/assets/user/paginate/', UserAssetsController().index);
 
-routes.post('/topAssets/', TopAssetsController().index);
+routes.post('/assets/user/ids/', UserAssetsController().searchUserAssetIds);
+
+routes.get('/topAssets/:assetListTypeId([\\s\\S]+)', TopAssetsController().index);
 
 export default routes;
