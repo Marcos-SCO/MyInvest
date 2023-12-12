@@ -14,7 +14,7 @@ export default function UserAssetCard({ props }) {
   const userAssetIds = props?.userAssetIds;
   const assetUrl = props?.assetUrl;
   const assetId = props?.assetId;
-  const userId = props?.userId ?? false;
+  const userId = props?.userId ? props?.userId : false;
   const ticker = props?.ticker;
   const nameDescription = props?.nameDescription;
   const assetLongName = props?.assetLongName;
@@ -33,7 +33,7 @@ export default function UserAssetCard({ props }) {
 
       <div className='asset-info-details'>
         <div className="header-container">
-          {<AssetFavButton assetId={assetId} userId={userId} userAssetIds={userAssetIds} removeItem={removeCardItem} />}
+          {<AssetFavButton assetId={assetId} userId={userId} removeItem={removeCardItem} />}
         </div>
         <Link href={assetUrl} title={`Ir para página do ${ticker}`}>
           <figure>

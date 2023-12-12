@@ -13,7 +13,7 @@ export default function DisplaySectionElements({ ...props }) {
     && window.innerWidth >= 1023.9;
 
   const { elementsSectionData } = props;
-  const userId = props?.userId ?? undefined;
+  const userId = props?.userId ?? false;
   const userAssetIds = props?.userAssetIds ?? [];
 
   if (!elementsSectionData) return;
@@ -35,7 +35,7 @@ export default function DisplaySectionElements({ ...props }) {
   const settings = {
     dots: true,
     autoplay: false,
-    infinite: false,
+    infinite: isDesktop ? false : true,
     speed: 500,
     slidesToShow: isDesktop ? 3 : 1,
     slidesToScroll: isDesktop ? 3 : 1,

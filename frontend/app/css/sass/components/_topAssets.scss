@@ -157,7 +157,7 @@
       max-width: 100%;
     }
     
-    @include tablet {
+    @include max-tablet {
       .slick-slider {
         .slick-dots {
           bottom: -1.5rem;

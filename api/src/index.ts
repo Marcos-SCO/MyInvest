@@ -17,13 +17,16 @@ import TrendingTickersWebScrappy from './app/Assets/services/TrendingTickersWebS
 // assetUpdatesCron('0 0 * * *');
 
 // Define your cron job for 12 PM (noon)
-assetUpdatesCron('0 12 * * *');
-
-// Define your cron job for 3 PM (noon)
+// assetUpdatesCron('0 12 * * *');
 assetUpdatesCron('0 15 * * *');
 
-// Define your cron job for 6 PM (night)
+// Define your cron job for 3 PM (noon)
+// assetUpdatesCron('0 15 * * *');
 assetUpdatesCron('0 18 * * *');
+
+// Define your cron job for 6 PM (night)
+// assetUpdatesCron('0 18 * * *');
+assetUpdatesCron('0 21 * * *');
 
 // assetUpdatesCron('*/2 * * * * *');
 
