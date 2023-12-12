@@ -157,6 +157,15 @@
     }
   }
 
+  @include max-mobile {
+    .asset-description {
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-height: 20px;
+    }
+  }
+
 }
 
 .alert-asset-card {
