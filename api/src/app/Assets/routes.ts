@@ -33,6 +33,6 @@ routes.post('/assets/user/paginate/', UserAssetsController().index);
 
 routes.post('/assets/user/ids/', UserAssetsController().searchUserAssetIds);
 
-routes.post('/topAssets/', TopAssetsController().index);
+routes.get('/topAssets/:assetListTypeId([\\s\\S]+)', TopAssetsController().index);
 
 export default routes;

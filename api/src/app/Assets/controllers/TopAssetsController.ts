@@ -10,7 +10,7 @@ import TopAssetListModel from "../models/TopAssetListModel";
 const TopAssetsController = () => {
 
   async function index(req: Request, res: Response): Promise<Response> {
-    const { assetListTypeId } = req.body;
+    const assetListTypeId = +(req.params?.assetListTypeId);
 
     try {
 

@@ -905,6 +905,14 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
 						}
 					]
 				},
@@ -1015,14 +1023,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/assets/fiis/SNCI11",
+							"raw": "{{baseUrl}}/assets/fiis/IRDM11",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"assets",
 								"fiis",
-								"SNCI11"
+								"IRDM11"
 							]
 						}
 					},
@@ -1362,7 +1370,7 @@
 			"name": "TopAssets",
 			"item": [
 				{
-					"name": "Get top assets data",
+					"name": "Get top assets data - not using",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -1383,6 +1391,36 @@
 							"path": [
 								"topAssets",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get top assets data",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"assetListTypeId\": 1 // ações\r\n    // \"assetListTypeId\": 3 // fiis\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/topAssets/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"topAssets",
+								"1"
 							]
 						}
 					},
@@ -1520,6 +1558,12 @@
 			"key": "jwt_token",
 			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsImlhdCI6MTY5ODgxMjQxNCwiZXhwIjoxNjk5NDE3MjE0fQ.oe0C8X9AuD5epQ8IJjvg4vyXQgUgqrX4ZjCJTPxMDSU",
 			"type": "string"
+		},
+		{
+			"key": "baseUrl",
+			"value": "https://myinvest-backend.onrender.com",
+			"type": "string",
+			"disabled": true
 		}
 	]
 }
