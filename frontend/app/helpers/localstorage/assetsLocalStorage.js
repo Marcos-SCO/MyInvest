@@ -24,4 +24,9 @@ function setLocalStorageUserAsset(assetId, isUserAsset = false) {
   localStorage.setItem('userAssets', JSON.stringify(userAssets));
 }
 
-export { getUserAssetsLocalStorage, userHasAssetInLocalStorage, setLocalStorageUserAsset }
+function removeLocalStorageItem(itemName) {
+  if (!isLocalStorageAvailable) return;
+  localStorage.removeItem(itemName);
+}
+
+export { getUserAssetsLocalStorage, userHasAssetInLocalStorage, setLocalStorageUserAsset, removeLocalStorageItem }
