@@ -34,6 +34,7 @@ export default function DisplaySectionElements({ ...props }) {
 
   const settings = {
     dots: true,
+    autoplay: false,
     infinite: false,
     speed: 500,
     slidesToShow: isDesktop ? 3 : 1,
@@ -56,8 +57,6 @@ export default function DisplaySectionElements({ ...props }) {
       {
         breakpoint: 630,
         settings: {
-          fade: true,
-          swipeToSlide: true,
           slidesToShow: 1,
           slidesToScroll: 1
         }

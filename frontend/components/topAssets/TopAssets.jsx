@@ -14,6 +14,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { fetchUserAssetIds } from "../../app/api/assets/userAssets/fetchUserAssets";
 
+// const baseUrl = process.env.NEXT_PUBLIC_FRONT_END_URL;
+
 function getDetailListElements(dataElements = false) {
   if (!dataElements) return false;
 
@@ -134,8 +136,6 @@ export default async function TopAssets({ ...props }) {
 
   const highFiisSectionElements = fiisSectionElements?.highElements;
   const lowFiisSectionElements = fiisSectionElements?.lowElements;
-
-  const baseUrl = process.env.NEXT_PUBLIC_FRONT_END_URL;
 
   return (
     <article className="topAssetsSection user-assets py-10" data-js="top-list-section">
