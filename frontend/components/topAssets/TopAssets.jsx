@@ -13,6 +13,7 @@ import DisplaySectionElements from './DisplaySectionElements';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { fetchUserAssetIds } from "../../app/api/assets/userAssets/fetchUserAssets";
+import { setLocalStorageUserAsset } from "../../app/helpers/localstorage/assetsLocalStorage";
 
 // const baseUrl = process.env.NEXT_PUBLIC_FRONT_END_URL;
 
@@ -121,6 +122,12 @@ export default async function TopAssets({ ...props }) {
   const userAssetIds = userAssetsList ?
     userAssetsList.map(asset => asset?.assetId) : [];
 
+  if (userAssetIds) {
+    userAssetIds.forEach(assetId => {
+      setLocalStorageUserAsset(assetId, true);
+    });
+  }
+
   const brazilianStocksData = await getTopListObjData(1);
   const fiisData = await getTopListObjData(3);
 
@@ -143,25 +150,25 @@ export default async function TopAssets({ ...props }) {
       {highBrazilianSectionElements?.length > 0 &&
         <section className="sliderContainer" id="top-acoes">
           <h2 className="sectionTitle">Ações Top Alta</h2>
-          <DisplaySectionElements elementsSectionData={highBrazilianSectionElements} userId={userId} userAssetIds={userAssetIds} key="brazilianStocks-top-high" />
+          <DisplaySectionElements elementsSectionData={highBrazilianSectionElements} userId={userId} key="brazilianStocks-top-high" />
         </section>}
 
       {lowBrazilianSectionElements?.length > 0 &&
         <section className="sliderContainer animationContainer hide">
           <h2 className="sectionTitle">Ações Top Queda</h2>
-          <DisplaySectionElements elementsSectionData={lowBrazilianSectionElements} userId={userId} userAssetIds={userAssetIds} key="brazilianStocks-top-low" />
+          <DisplaySectionElements elementsSectionData={lowBrazilianSectionElements} userId={userId} key="brazilianStocks-top-low" />
         </section>}
 
       {highFiisSectionElements?.length > 0 &&
         <section className="sliderContainer animationContainer hide" id="top-fiis">
           <h2 className="sectionTitle">Fiis Top Alta</h2>
-          <DisplaySectionElements elementsSectionData={highFiisSectionElements} userId={userId} userAssetIds={userAssetIds} key="fiis-top-high" />
+          <DisplaySectionElements elementsSectionData={highFiisSectionElements} userId={userId} key="fiis-top-high" />
         </section>}
 
       {lowFiisSectionElements?.length > 0 &&
         <section className="sliderContainer animationContainer hide">
           <h2 className="sectionTitle">Fiis Top Queda</h2>
-          <DisplaySectionElements elementsSectionData={lowFiisSectionElements} userId={userId} userAssetIds={userAssetIds} key="fiis-top-low" />
+          <DisplaySectionElements elementsSectionData={lowFiisSectionElements} userId={userId} key="fiis-top-low" />
         </section>}
 
     </article>

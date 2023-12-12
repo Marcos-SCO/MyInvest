@@ -11,7 +11,7 @@ import DisplaySvg from '../../../../app/helpers/svg/DisplaySvg';
 
 import { setLocalStorageUserAsset, userHasAssetInLocalStorage } from '../../../../app/helpers/localstorage/assetsLocalStorage';
 
-export default async function AssetFavButton({ userId = false, assetId = false, removeItem = true, userAssetIds = false }) {
+export default async function AssetFavButton({ userId = false, assetId = false, removeItem = true }) {
 
   const fetchObj = { assetId, userId };
 
@@ -19,19 +19,10 @@ export default async function AssetFavButton({ userId = false, assetId = false, 
 
   if (userId) {
 
-    const userHasAssetInList =
-      userAssetIds ? userAssetIds.includes(assetId) : false;
-
     let assetInLocalStorage =
       userHasAssetInLocalStorage(assetId);
 
     isUserAsset = assetInLocalStorage?.isUserAsset;
-
-    if (userAssetIds) {
-      setLocalStorageUserAsset(assetId, userHasAssetInList);
-
-      assetInLocalStorage = true;
-    }
 
     if (!assetInLocalStorage) {
 
