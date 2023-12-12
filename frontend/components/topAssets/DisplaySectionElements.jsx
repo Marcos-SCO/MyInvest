@@ -13,8 +13,10 @@ export default function DisplaySectionElements({ ...props }) {
     && window.innerWidth >= 1023.9;
 
   const { elementsSectionData } = props;
-  const userId = props?.userId ?? undefined;
+  const userId = props?.userId ?? false;
   const userAssetIds = props?.userAssetIds ?? [];
+
+  console.log(userId);
 
   if (!elementsSectionData) return;
 
