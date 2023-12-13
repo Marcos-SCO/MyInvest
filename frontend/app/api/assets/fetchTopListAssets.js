@@ -8,7 +8,7 @@ async function fetchTopListAssets(assetsType = 1) {
     method: 'GET',
     headers: { 'Content-type': 'application/json' },
     next: {
-      revalidate: 60
+      revalidate: 0
     }
   }
 
