@@ -1,6 +1,13 @@
 import { nextAuthOptions } from "app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 
+// const baseUrl = process.env.NEXT_PUBLIC_FRONT_END_URL;
+
+import dynamic from 'next/dynamic';
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 // import TopAssetsList from './TopAssetsList';
 import { getUserSessionData } from "app/helpers/session/getUserSessionData";
 
@@ -8,14 +15,11 @@ import fetchTopListAssets from '../../app/api/assets/fetchTopListAssets';
 
 import { formatCurrency, getAssetTypeDescription } from "../../app/helpers/assets";
 
-import DisplaySectionElements from './DisplaySectionElements';
-
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { fetchUserAssetIds } from "../../app/api/assets/userAssets/fetchUserAssets";
 import { setLocalStorageUserAsset } from "../../app/helpers/localstorage/assetsLocalStorage";
 
-// const baseUrl = process.env.NEXT_PUBLIC_FRONT_END_URL;
+// import DisplaySectionElements from './DisplaySectionElements';
+const DisplaySectionElements = dynamic(() => import('./DisplaySectionElements'), { ssr: false })
 
 function getDetailListElements(dataElements = false) {
   if (!dataElements) return false;

@@ -1,8 +1,7 @@
-import dynamic from 'next/dynamic';
-
 import { nextAuthOptions } from "app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 
+import dynamic from 'next/dynamic';
 import Image from "next/image";
 import Link from 'next/link';
 
@@ -18,12 +17,12 @@ import AddPriceAlert from "../../../../../components/alerts/AddPriceAlert";
 
 // import AssetFavButton from "../../../../../components/assets/assetButtons/assetFavButton/layout";
 
+// import DisplaySvg from '../../../../helpers/svg/DisplaySvg';
+
 const AssetFavButton =
   dynamic(() => import('../../../../../components/assets/assetButtons/assetFavButton/layout'), { ssr: false });
 
 import ChangePageAttributes from "app/hooks/ChangePageAttributes";
-
-import DisplaySvg from '../../../../helpers/svg/DisplaySvg';
 
 import ModalContainer from '../../../../../components/modal/ModalContainer';
 
