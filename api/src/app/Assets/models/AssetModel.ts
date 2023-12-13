@@ -227,7 +227,7 @@ const AssetModel = () => {
 
   }
 
-  async function updateAsset(updateObj: any, disconnect = true) {
+  async function updateAsset(updateObj: any, disconnect = false) {
     const { ticker, type = 1, passedAssetFromDb = false } = updateObj;
 
     let assetAlreadyInDb = !passedAssetFromDb

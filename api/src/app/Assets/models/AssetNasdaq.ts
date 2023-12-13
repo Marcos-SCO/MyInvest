@@ -98,7 +98,7 @@ const AssetNasdaq = () => {
 
   }
 
-  async function updateAsset(updateObj: any, disconnect = true) {
+  async function updateAsset(updateObj: any, disconnect = false) {
     const { ticker, type = 2, passedAssetFromDb = false } = updateObj;
 
     let assetAlreadyInDb = !passedAssetFromDb
