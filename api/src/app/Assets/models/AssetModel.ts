@@ -222,7 +222,7 @@ const AssetModel = () => {
       console.log('AssetModel: ', error);
       throw new CommonError(`Error creating Asset Item`);
     } finally {
-      await prisma.$disconnect();
+      // await prisma.$disconnect();
     }
 
   }

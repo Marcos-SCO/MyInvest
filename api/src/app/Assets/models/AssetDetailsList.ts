@@ -28,7 +28,7 @@ const AssetDetailsList = () => {
       console.log(`Error creating Asset details: `, error);
       throw new CommonError(`Error creating Asset details`);
     } finally {
-      await prisma.$disconnect();
+      // await prisma.$disconnect();
     }
   }
 
@@ -46,7 +46,7 @@ const AssetDetailsList = () => {
       console.log(`Error updating Asset details: `, error);
       throw new CommonError(`Error updating Asset details`);
     } finally {
-      await prisma.$disconnect();
+      // await prisma.$disconnect();
     }
   }
 

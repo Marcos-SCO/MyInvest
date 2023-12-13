@@ -6,7 +6,10 @@ export async function getAssetData(params) {
   const backendUrl = `${API_BASE_URL}/assets/${assetType}/${ticker}/`;
   const config = {
     method: 'GET',
-    Headers: { 'Content-type': 'application/json' },
+    Headers: {
+      'Content-type': 'application/json',
+      'Connection': 'keep-alive'
+    },
     next: {
       revalidate: 0
     }
