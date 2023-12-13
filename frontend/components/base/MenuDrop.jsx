@@ -64,17 +64,17 @@ export default function MenuDrop({ ...props }) {
         <NavbarContent justify="start" as="div">
           <NavbarContent className="navLinksContent gap-3" as="div">
             <NavbarItem>
-              <Link href={`${baseUrl}/#top-acoes`}>
+              <Link href={`${baseUrl}/#top-acoes`} onClick={() => setIsMenuOpen(false)}>
                 Top ações
               </Link>
             </NavbarItem>
             <NavbarItem>
-              <Link href={`${baseUrl}/#top-fiis`}>
+              <Link href={`${baseUrl}/#top-fiis`} onClick={() => setIsMenuOpen(false)}>
                 Top fiis
               </Link>
             </NavbarItem>
             <NavbarItem>
-              <Link href={`https://github.com/KauaCazeS/MyInvest`} target='_blank' className="hover:underline">
+              <Link href={`https://github.com/KauaCazeS/MyInvest`} target='_blank' className="hover:underline" onClick={() => setIsMenuOpen(false)}>
                 Contato
               </Link>
             </NavbarItem>
