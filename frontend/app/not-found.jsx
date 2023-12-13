@@ -1,4 +1,4 @@
-import Link from "next/link";
+// import Link from "next/link";
 
 export default function NotFound() {
   const FRONT_END_BASE_URL = process.env.FRONT_END_BASE_URL;

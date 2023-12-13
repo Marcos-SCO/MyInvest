@@ -10,6 +10,7 @@ import SearchModalButton from "../modal/SearchModalButton";
 import MenuDrop from "components/base/MenuDrop";
 
 export default async function Navbar() {
+  const FRONT_END_BASE_URL = process.env.FRONT_END_BASE_URL;
 
   const session = await getServerSession(nextAuthOptions);
   const userSessionData = await getUserSessionData(session);
@@ -17,7 +18,7 @@ export default async function Navbar() {
   return (
     <nav className="nav-bar-container">
       <div className="flex justify-between item-center max-w-6xl mx-auto">
-        <Link rel="prefetch" href={'/'} title="MyInvest">
+        <Link rel="prefetch" href={`${FRONT_END_BASE_URL}/`} title="MyInvest">
           <DisplaySvg name="myInvestLogo" class="myInvestLogo m-auto" width="80" height="80" />
         </Link>
 
