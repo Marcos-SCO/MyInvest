@@ -8,7 +8,7 @@ export async function getAssetData(params) {
     method: 'GET',
     Headers: { 'Content-type': 'application/json' },
     next: {
-      revalidate: 60
+      revalidate: 0
     }
   }
 
