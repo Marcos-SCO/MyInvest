@@ -29,7 +29,7 @@ export async function assetUpdatesCron(scheduleTime = '*/10 * * * * *') {
     // await someAsyncOperation();
     await AssetUpdatesExecuteQueue();
 
-    // await PriceAlertEmailsExecuteQueue();
+    await PriceAlertEmailsExecuteQueue();
 
     // This function will run every minute
     console.log('\nCron job executed at:', new Date().toLocaleString());

@@ -11,7 +11,7 @@ app.listen(port);
 
 import { assetUpdatesCron } from './app/Queues/executeCrons';
 import AssetsEmail from './app/Emails/AssetsEmail';
-import TrendingTickersWebScrappy from './app/Assets/services/TrendingTickersWebScrappy';
+// import TrendingTickersWebScrappy from './app/Assets/services/TrendingTickersWebScrappy';
 
 // Define your cron job for 12 AM (midnight)
 // assetUpdatesCron('0 0 * * *');

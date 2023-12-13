@@ -238,7 +238,7 @@ const PriceAssetsWatchModel = () => {
 
   }
 
-  async function updatePriceAlert(insertOjb: any) {
+  async function updatePriceAlert(insertOjb: any, disconnect = true) {
     const { alertId, active = true } = insertOjb;
 
     const foundPriceAlert = await getPriceAlertById(alertId);
@@ -260,7 +260,7 @@ const PriceAssetsWatchModel = () => {
       throw new CommonError(`Error updating price alert`);
 
     } finally {
-      await prisma.$disconnect();
+      if (disconnect) await prisma.$disconnect();
     }
 
   }
