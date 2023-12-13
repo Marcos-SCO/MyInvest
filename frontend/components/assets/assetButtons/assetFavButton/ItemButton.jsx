@@ -57,10 +57,9 @@ export default function ItemButton({ isUserAsset, fetchObj, removeItem }) {
       return;
     }
 
+    setUserAsset(false);
     const removeUserAsset = await userRemoveAsset(fetchObj);
     // console.log(removeUserAsset);
-
-    setUserAsset(false);
 
     const closestAssetContainer =
       e.target.closest('[data-js="asset-container"]')
