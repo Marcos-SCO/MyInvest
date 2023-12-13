@@ -25,6 +25,8 @@ async function PriceAlertEmailsExecuteQueue(page = 1, processedCount = 0) {
   const isFirstPage = page == 1;
   if (isFirstPage) console.log(`\n Price alerts Queue process start: Page ${page}\n`);
 
+  const disconnect = page == (totalPages - 1) ? true : false;
+
   for (let i = 0; i < resultsLength; i++) {
     let priceAlertId = priceAlertResults[i]?.id;
 
@@ -61,7 +63,7 @@ async function PriceAlertEmailsExecuteQueue(page = 1, processedCount = 0) {
     console.log(`Alert ${priceAlertId} reach expected price \n`, assetReachedExpectedPrice);
     try {
       const updateDelete = await PriceAssetsWatchModel()
-        .updatePriceAlert({ alertId: priceAlertId, active: false });
+        .updatePriceAlert({ alertId: priceAlertId, active: false }, disconnect);
 
     } catch (error) {
 

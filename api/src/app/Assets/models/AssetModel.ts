@@ -227,7 +227,7 @@ const AssetModel = () => {
 
   }
 
-  async function updateAsset(updateObj: any) {
+  async function updateAsset(updateObj: any, disconnect = true) {
     const { ticker, type = 1, passedAssetFromDb = false } = updateObj;
 
     let assetAlreadyInDb = !passedAssetFromDb
@@ -265,7 +265,7 @@ const AssetModel = () => {
       // console.log(error);
       throw new CommonError(`Error updating Asset Item`);
     } finally {
-      await prisma.$disconnect();
+      if (disconnect) await prisma.$disconnect();
     }
 
   }

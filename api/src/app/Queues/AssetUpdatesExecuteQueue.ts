@@ -30,9 +30,11 @@ async function AssetUpdatesExecuteQueue(page = 1, processedCount = 0) {
 
     const isNasdaq = assetType == 2;
 
+    const disconnect = page == (totalPages - 1) ? true : false;
+
     const assetDetails = isNasdaq ?
-      await AssetNasdaq().updateAsset(updateObj) :
-      await AssetModel().updateAsset(updateObj);
+      await AssetNasdaq().updateAsset(updateObj, disconnect) :
+      await AssetModel().updateAsset(updateObj, disconnect);
 
     if (!assetDetails) continue;
 
