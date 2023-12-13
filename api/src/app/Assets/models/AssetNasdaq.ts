@@ -93,7 +93,7 @@ const AssetNasdaq = () => {
       // console.log(error);
       throw new CommonError(`Error creating Asset Item: ${error}`);
     } finally {
-      await prisma.$disconnect();
+      // await prisma.$disconnect();
     }
 
   }
