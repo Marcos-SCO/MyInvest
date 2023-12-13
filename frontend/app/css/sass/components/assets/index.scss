@@ -68,6 +68,10 @@
   }
 
   @include desktop {}
+
+  @media (max-width: 370px) {
+    max-width: 110px;
+  }
 }
 
 @import './cardscontainer';
