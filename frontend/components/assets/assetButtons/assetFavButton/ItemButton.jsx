@@ -46,8 +46,9 @@ export default function ItemButton({ isUserAsset, fetchObj, removeItem }) {
     }
 
     if (!userAsset) {
-      await userCreateAsset(fetchObj);
       setUserAsset(true);
+      
+      await userCreateAsset(fetchObj);
 
       // Use refresh to request the data from the backend without cashing
       // window.location.reload();
