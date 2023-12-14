@@ -37,8 +37,8 @@ assetUpdatesCron('0 21 * * *');
 const assetsEmail = AssetsEmail.AssetsEmail()
 
 const emailOptionsObj = {
-  emailTo: 'malvitima0@gmail.com',
-  subject: 'Hello warudo!!! Assunto pendente'
+  emailTo: 'marcosxsco@gmail.com',
+  subject: 'Hello world!'
 };
 
 const emailTemplateVariables = {
