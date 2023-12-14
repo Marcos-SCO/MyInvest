@@ -238,7 +238,7 @@ const PriceAssetsWatchModel = () => {
 
   }
 
-  async function updatePriceAlert(insertOjb: any, disconnect = true) {
+  async function updatePriceAlert(insertOjb: any, disconnect = false) {
     const { alertId, active = true } = insertOjb;
 
     const foundPriceAlert = await getPriceAlertById(alertId);

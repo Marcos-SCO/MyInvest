@@ -93,12 +93,12 @@ const AssetNasdaq = () => {
       // console.log(error);
       throw new CommonError(`Error creating Asset Item: ${error}`);
     } finally {
-      await prisma.$disconnect();
+      // await prisma.$disconnect();
     }
 
   }
 
-  async function updateAsset(updateObj: any, disconnect = true) {
+  async function updateAsset(updateObj: any, disconnect = false) {
     const { ticker, type = 2, passedAssetFromDb = false } = updateObj;
 
     let assetAlreadyInDb = !passedAssetFromDb
