@@ -67,7 +67,10 @@ export default async function Page({ params }) {
   const currencyName = assetTypeDescription?.currencyName;
   const nameDescription = assetTypeDescription?.nameDescription;
 
-  const currentPrice = formatCurrency(assetDetail?.currentPrice);
+  const assetCurrentPriceValue = type == 2
+    ? `$` + assetDetail?.currentPrice : assetDetail?.currentPrice;
+
+  const currentPrice = formatCurrency(assetCurrentPriceValue);
 
   const historicalData = assetDetail?.historicalData;
 
