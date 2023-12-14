@@ -38,9 +38,10 @@ const AssetsService = () => {
     const symbolEndpoint: any = {
       // 1: `https://mfinance.com.br/api/v1/stocks?symbols=${ticker}`,
       // 3: `https://mfinance.com.br/api/v1/fiis?symbols=${ticker}`,
+      // 2: `https://api.nasdaq.com/api/quote/${ticker}/info?assetclass=stocks`,
       1: `https://statusinvest.com.br/home/mainsearchquery?q=${ticker}`,
       3: `https://statusinvest.com.br/home/mainsearchquery?q=${ticker}`,
-      2: `https://api.nasdaq.com/api/quote/${ticker}/info?assetclass=stocks`,
+      2: `https://statusinvest.com.br/home/mainsearchquery?q=${ticker}`,
     }
 
     if (!ticker) throw new CommonError(`No ticker was passed`);

@@ -13,9 +13,10 @@ const AssetsController = () => {
 
     const isNasdaq = type == 2;
 
-    const symbols = isNasdaq ?
+    /* const symbols = isNasdaq ?
       await AssetNasdaq().insertAsset(insertObj) :
-      await AssetModel().insertAsset(insertObj);
+      await AssetModel().insertAsset(insertObj); */
+    const symbols = await AssetModel().insertAsset(insertObj);
 
     return symbols;
   }
@@ -148,9 +149,11 @@ const AssetsController = () => {
 
       const isNasdaq = typeValue == 2;
 
-      const assetDetails = isNasdaq ?
+      /*const assetDetails = isNasdaq ?
         await AssetNasdaq().updateAsset(updateObj) :
-        await AssetModel().updateAsset(updateObj);
+        await AssetModel().updateAsset(updateObj); */
+        
+      const assetDetails = await AssetModel().updateAsset(updateObj);
 
       return res.status(200).json({
         ticker,
