@@ -77,7 +77,10 @@ export default async function AlertList({ ...props }) {
           const expectedPriceValue =
             formatCurrency(expectedPriceForCurrentFormat);
 
-          const currentPriceValue = formatCurrency(currentPrice);
+          const assetCurrentPriceValue = type == 2
+            ? `$` + currentPrice : currentPrice;
+
+          const currentPriceValue = formatCurrency(assetCurrentPriceValue);
 
           countItens += 1;
           const applyLazyOrEager = countItens <= 3

@@ -70,7 +70,10 @@ export default async function UserAssetsList({ ...props }) {
           const assetLogoUrl = assetDetailList?.assetIcon
             ?? 'https://brapi.dev/favicon.svg';
 
-          const currentPrice = formatCurrency(assetDetailList?.currentPrice);
+          const assetCurrentPriceValue = type == 2
+            ? `$` + assetDetailList?.currentPrice : assetDetailList?.currentPrice;
+
+          const currentPrice = formatCurrency(assetCurrentPriceValue);
 
           const assetUrl = `${baseUrl}/asset/${assetSlug}/${name}`;
 
