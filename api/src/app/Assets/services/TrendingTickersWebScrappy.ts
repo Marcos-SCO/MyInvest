@@ -83,11 +83,11 @@ const TrendingTickersWebScrappy = () => {
 
         const jsonTickerObj = JSON.stringify(tickersObj);
 
+        console.log(trendingType, trendingSection, jsonTickerObj);
         return jsonTickerObj;
 
       })
       .catch((error: any) => {
-
         console.error(`Failed to retrieve the webpage: \n${error?.message}`);
 
         throw new CommonError(error);
