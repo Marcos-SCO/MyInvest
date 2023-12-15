@@ -61,7 +61,6 @@ function pingServer() {
     const { statusCode } = res;
 
     const requestOk = statusCode === 200;
-    console.log(statusCode);
 
     if (requestOk) {
       console.log(`Server pinged successfully at ${new Date()}`);
