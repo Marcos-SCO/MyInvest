@@ -4,7 +4,7 @@ import App from './app';
 
 import config from './config';
 
-const { port } = config;
+const { port, API_BASE_URL } = config;
 
 const app = App();
 app.listen(port);
@@ -52,6 +52,30 @@ const emailTemplateVariables = {
 // TrendingTickersWebScrappy({ trendingType: 'fiis', trendingSection: 'BAIXAS' });
 
 
+const https = require('https');
 
+function pingServer() {
+  const url = 'https://my-invest-backend.onrender.com/';
 
+  https.get(url, (res: any) => {
+    const { statusCode } = res;
 
+    const requestOk = statusCode === 200;
+    console.log(statusCode);
+
+    if (requestOk) {
+      console.log(`Server pinged successfully at ${new Date()}`);
+    }
+
+    if (!requestOk) {
+      console.error(`Failed to ping server. Status code: ${statusCode}`);
+    }
+
+  }).on('error', (err: any) => {
+    console.error(`Error while pinging server: ${err.message}`);
+  });
+}
+
+// Set up the interval to ping the server every 5 minutes (300,000 milliseconds)
+const pingInterval = 5 * 60 * 1000; // 5 minutes in milliseconds
+setInterval(pingServer, pingInterval);

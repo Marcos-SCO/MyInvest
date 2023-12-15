@@ -1,4 +1,6 @@
 import { Router } from "express";
+import { Request, Response } from "express";
+
 import AssetsController from "./controllers/AssetsController";
 import UserAssetsController from "./controllers/UserAssetsController";
 import UserAssetsService from "./services/UserAssetService";
@@ -7,6 +9,12 @@ import PriceAssetsWatchController from './controllers/PriceAssetsWatchController
 import TopAssetsController from "./controllers/TopAssetsController";
 
 const routes = Router();
+
+routes.get('/', (req: Request, res: Response) => {
+  return res.status(200).json({
+    message: `Pong`,
+  });
+});
 
 routes.get('/assetsApiQuery/:ticker([\\s\\S]+)', AssetsController().searchAssetsApiQuery);
 
