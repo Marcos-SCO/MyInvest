@@ -55,7 +55,7 @@ const emailTemplateVariables = {
 const https = require('https');
 
 function pingServer() {
-  const url = 'https://my-invest-frontend-marcos-sco.vercel.app/';
+  const url = 'https://my-invest-backend.onrender.com';
 
   https.get(url, (res: any) => {
     const { statusCode } = res;
