@@ -48,8 +48,9 @@ const emailTemplateVariables = {
 
 // assetsEmail.send(emailOptionsObj, emailTemplateVariables);
 
-// TrendingTickersWebScrappy({ trendingType: 'acoes' });
-// TrendingTickersWebScrappy({ trendingType: 'fiis', trendingSection: 'BAIXAS' });
+
+// TrendingTickersWebScrappy().getTrendingTickers({ trendingType: 'fiis', trendingSection: 'BAIXAS' });
+// TrendingTickersWebScrappy().getTrendingTickers({ trendingType: 'fiis', trendingSection: 'Altas' });
 
 
 const https = require('https');

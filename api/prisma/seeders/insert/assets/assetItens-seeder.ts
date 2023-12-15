@@ -33,11 +33,13 @@ async function assetSeeds() {
 
     const insertObj = { ticker, type };
 
-    const isNasdaq = type == 2;
+    // const isNasdaq = type == 2;
 
-    isNasdaq ?
-      await AssetNasdaq().insertAsset(insertObj) :
-      await AssetModel().insertAsset(insertObj);
+    // isNasdaq ?
+    //   await AssetNasdaq().insertAsset(insertObj) :
+    //   await AssetModel().insertAsset(insertObj);
+
+    await AssetModel().insertAsset(insertObj);
   }
 
   async function seedAssets() {
@@ -56,7 +58,7 @@ async function assetSeeds() {
       console.error('Error seeding Asset Itens:', error);
     })
     .finally(async () => {
-      await prisma.$disconnect();
+      // await prisma.$disconnect();
 
       console.log(`\nFinish inserting assets\n`);
 

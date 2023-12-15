@@ -60,6 +60,7 @@ const AssetsService = () => {
         return response?.data;
       })
       .catch((error: any) => {
+        console.error(`Ticker with error: `, ticker);
         console.error(`Error: ${error?.message}`);
 
         throw new CommonError(error);
