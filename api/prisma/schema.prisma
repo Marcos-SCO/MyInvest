@@ -46,7 +46,7 @@ model UsersPassword {
 
 model UserEmails {
   id     Int    @id @default(autoincrement())
-  email  String
+  email  String @unique
   userId Int
   users  Users  @relation(fields: [userId], references: [id], onDelete: Cascade)
 

@@ -129,7 +129,12 @@ const UserModel = () => {
 
     const queryObj: any = {
       skip,
-      take: +numberOfItens
+      take: +numberOfItens,
+      include: {
+        UserEmail: {
+          select: { email: true, },
+        },
+      },
     }
 
     if (orderBy) {
