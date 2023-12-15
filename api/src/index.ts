@@ -52,6 +52,29 @@ const emailTemplateVariables = {
 // TrendingTickersWebScrappy({ trendingType: 'fiis', trendingSection: 'BAIXAS' });
 
 
+const https = require('https');
 
+function pingServer() {
+  const url = 'https://my-invest-frontend-marcos-sco.vercel.app/';
 
+  https.get(url, (res: any) => {
+    const { statusCode } = res;
 
+    const requestOk = statusCode === 200;
+
+    if (requestOk) {
+      console.log(`Server pinged successfully at ${new Date()}`);
+    }
+
+    if (!requestOk) {
+      console.error(`Failed to ping server. Status code: ${statusCode}`);
+    }
+
+  }).on('error', (err: any) => {
+    console.error(`Error while pinging server: ${err.message}`);
+  });
+}
+
+// Set up the interval to ping the server every 5 minutes (300,000 milliseconds)
+const pingInterval = 5 * 60 * 1000; // 5 minutes in milliseconds
+setInterval(pingServer, pingInterval);
