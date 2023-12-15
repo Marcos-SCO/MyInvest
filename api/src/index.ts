@@ -4,7 +4,7 @@ import App from './app';
 
 import config from './config';
 
-const { port } = config;
+const { port, API_BASE_URL } = config;
 
 const app = App();
 app.listen(port);
@@ -55,12 +55,13 @@ const emailTemplateVariables = {
 const https = require('https');
 
 function pingServer() {
-  const url = 'https://my-invest-backend.onrender.com';
+  const url = 'https://my-invest-backend.onrender.com/';
 
   https.get(url, (res: any) => {
     const { statusCode } = res;
 
     const requestOk = statusCode === 200;
+    console.log(statusCode);
 
     if (requestOk) {
       console.log(`Server pinged successfully at ${new Date()}`);
