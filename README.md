@@ -1,35 +1,39 @@
 # MyInvest
-
 <p>
-  Projeto demonstrativo sobre o mercado financeiro, desenvolvido como trabalho para conclusão de curso na instituição ETEC Barueri. 
+  Projeto demonstrativo sobre o mercado financeiro.<br/>
+  Desenvolvido como trabalho para conclusão de curso na instituição ETEC Barueri. 
 </p>
 
-<p>
-  As principais tecnologias utilizadas para codificação foram:<br/> 
-  JS com Node, banco de dados MySQL e no front-end, framework de react NEXT.js.
+
+<p align="left">
+  <a href='https://github.com/Marcos-SCO/MyInvest/'>
+    <img src="./frontend/public/img/mockups/myInvestMockup.jpg?raw=true" width="500" title="Main screen mockup">
+  </a>
 </p>
+
+
+## Principais tecnologias Utilizadas 🚀
+
+- Js
+- Node
+- MySQL
+- Next.js
+
+## Objetivo 🎯
 
 <p>
   Tem o intuito de monitorar o preço dos ativos e definir alertas para cada item.
   Sendo ações, stocks (ações-norte-americanas) e Fiis (Fundos imobiliários).
 </p>
 
-<p align="left">
-  <a href='https://github.com/Marcos-SCO/MyInvest/'>
-    <img src="./frontend/public/img/mockups/myInvestMockup.jpg?raw=true" width="600" title="Main screen mockup">
-  </a>
-</p>
-
-<br/>
 <p>
   No topo do site, clickando na barra de busca é apresentado resultados sobre os elementos, tendo nas descrições o nome da empresa, valor atual e variação percentual sendo positiva ou negativa.
 </p>
 <br/>
-<br/>
 
 <p align="left">
   <a href='https://github.com/Marcos-SCO/MyInvest/'>
-    <img src="./frontend/public/img/gif/searchBar.gif?raw=true" width="600" title="Top search bar">
+    <img src="./frontend/public/img/gif/searchBar.gif?raw=true" width="500" title="Top search bar">
   </a>
 </p>
 
@@ -41,7 +45,7 @@
 
 <p align="left">
   <a href='https://github.com/Marcos-SCO/MyInvest/'>
-    <img src="./frontend/public/img/gif/graph.gif?raw=true" width="600" title="Asset Graph">
+    <img src="./frontend/public/img/gif/graph.gif?raw=true" width="500" title="Asset Graph">
   </a>
 </p>
 
@@ -49,11 +53,10 @@
 <p>
   Outra funcionalidade é a definição de alertas para valor das cotações, no qual, quando definido e atingido, <br/>o usuário receberá um e-mail informando sobre.
 </p>
-<br/>
 
 <p align="left">
   <a href='https://github.com/Marcos-SCO/MyInvest/'>
-    <img src="./frontend/public/img/gif/alerts.gif?raw=true" width="600" title="Alerts definition">
+    <img src="./frontend/public/img/gif/alerts.gif?raw=true" width="500" title="Alerts definition">
   </a>
 </p>
 
@@ -68,7 +71,7 @@
 
 <p align="left">
   <a href='https://github.com/Marcos-SCO/MyInvest/'>
-    <img src="./frontend/public/img/gif/assetList.gif?raw=true" width="600" title="Asset list">
+    <img src="./frontend/public/img/gif/assetList.gif?raw=true" width="500" title="Asset list">
   </a>
 </p>
 
@@ -88,7 +91,7 @@
 
 <p align="left">
   <a href='https://github.com/Marcos-SCO/MyInvest/'>
-    <img src="./frontend/public/img/gif/login.gif?raw=true" width="600" title="Login">
+    <img src="./frontend/public/img/gif/login.gif?raw=true" width="500" title="Login">
   </a>
 </p>
 
@@ -101,13 +104,12 @@
 
 <p align="left">
   <a href='https://github.com/Marcos-SCO/MyInvest/'>
-    <img src="./frontend/public/img/gif/initialPage.gif?raw=true" width="600" title="Initial page">
+    <img src="./frontend/public/img/gif/initialPage.gif?raw=true" width="500" title="Initial page">
   </a>
 </p>
-
 <br/>
 
-## Cronjob
+## Cronjob ⏲
 No projeto foram utilizadas ferramentas gratuitas e api de terceiros contendo limitações.  Sendo um projeto experimental e para que não houvesse uma sobrecarga de recursos, houve a necessidade em atualizar e cachear itens de forma inteligente.
 
 Ao pesquisar por um elemento, ele é salvo no banco de dados caso ainda não tenha sido registrado no sistema. 
@@ -120,6 +122,6 @@ Essa operação de rotina atualiza todos os itens do banco e também dispara os 
 
 <p align="left">
   <a href='https://github.com/Marcos-SCO/MyInvest/'>
-    <img src="./frontend/public/img/gif/cronjob.gif?raw=true" width="600" title="cronjob">
+    <img src="./frontend/public/img/gif/cronjob.gif?raw=true" width="500" title="cronjob">
   </a>
 </p>
