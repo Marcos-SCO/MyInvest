@@ -1,7 +1,7 @@
 # MyInvest
-Projeto demonstrativo sobre o mercado financeiro, desenvolvido como trabalho para conclusão de curso na instituição ETEC Barueri.
+Projeto demonstrativo sobre o mercado financeiro, desenvolvido como trabalho para conclusão de curso na instituição ETEC Barueri. 
 
-As principais tecnologias utilizadas para codificação foram: 
+As principais tecnologias utilizadas para codificação foram:<br/> 
 JS com Node, banco de dados MySQL e no front-end, framework de react NEXT.js.
 
 Tem o intuito de monitorar o preço dos ativos e definir alertas para cada item.
@@ -15,6 +15,7 @@ Sendo ações, stocks (ações-norte-americanas) e Fiis (Fundos imobiliários).
 
 <br/>
 No topo do site, clickando na barra de busca é apresentado resultados sobre os elementos, tendo nas descrições o nome da empresa, valor atual e variação percentual sendo positiva ou negativa.
+<br/>
 
 <p align="left">
   <a href='https://github.com/Marcos-SCO/MyInvest/'>
@@ -24,6 +25,7 @@ No topo do site, clickando na barra de busca é apresentado resultados sobre os 
 
 <br/>
 Entrando na página do ativo é possível visualizar gráficos com as cotações de valor dos últimos 3 meses.
+<br/>
 
 <p align="left">
   <a href='https://github.com/Marcos-SCO/MyInvest/'>
@@ -33,6 +35,7 @@ Entrando na página do ativo é possível visualizar gráficos com as cotações
 
 <br/>
 Outra funcionalidade é a definição de alertas para valor das cotações, no qual, quando definido e atingido, o usuário receberá um e-mail informando sobre.
+<br/>
 
 <p align="left">
   <a href='https://github.com/Marcos-SCO/MyInvest/'>
@@ -52,11 +55,14 @@ Para deixar de seguir basta clickar no botão “seguindo” que irá abrir um m
   </a>
 </p>
 
-
-Nos alertas o card é similar, mas um pouco diferente, contendo informações e valor definido pelo usuário em destaque, podendo ser das opções “menor que” ou “maior que”.
+<br/>
+Nos alertas o card é similar, mas um pouco diferente, contendo informações e valor 
+definido pelo usuário em destaque, podendo ser das opções “menor que” ou “maior que”.
 
 <br/>
-Para facilidade de acesso, foram construídas duas opções de login, usando a conta google ou então da maneira tradicional com e-mail e senha.
+Para facilidade de acesso, foram construídas duas opções de login, usando a conta google
+ou então da maneira tradicional com e-mail e senha.
+<br/>
 
 <p align="left">
   <a href='https://github.com/Marcos-SCO/MyInvest/'>
@@ -65,18 +71,19 @@ Para facilidade de acesso, foram construídas duas opções de login, usando a c
 </p>
 
 <br/>
-A página inicial possui sliders com o top de ações e fiis que mais subiram ou caíram durante o expediente da bolsa de valores.
+A página inicial possui sliders com o top de ações e fiis que mais subiram ou caíram 
+durante o expediente da bolsa de valores.
+<br/>
 
 <p align="left">
   <a href='https://github.com/Marcos-SCO/MyInvest/'>
-    <img src="./frontend/public/img/gif/login.gif?raw=true" width="600" title="Login">
+    <img src="./frontend/public/img/gif/initialPage.gif?raw=true" width="600" title="Initial page">
   </a>
 </p>
 
 <br/>
-<br/>
 
-## cronjob
+## Cronjob
 No projeto foram utilizadas ferramentas gratuitas e api de terceiros contendo limitações.  Sendo um projeto experimental e para que não houvesse uma sobrecarga de recursos, houve a necessidade em atualizar e cachear itens de forma inteligente.
 
 Ao pesquisar por um elemento, ele é salvo no banco de dados caso ainda não tenha sido registrado no sistema. 
