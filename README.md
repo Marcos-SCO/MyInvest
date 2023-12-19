@@ -81,7 +81,7 @@
 <p>
   <br/>
   Nos alertas o card é similar, mas um pouco diferente, contendo informações e valor 
-  definido pelo usuário em destaque, podendo ser das opções “menor que” ou “maior que”.
+  definido em destaque pelo usuário, podendo ser das opções “menor que” ou “maior que”.
   <br/>
 </p>
 
