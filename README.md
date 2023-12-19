@@ -7,11 +7,18 @@ JS com Node, banco de dados MySQL e no front-end, framework de react NEXT.js.
 Tem o intuito de monitorar o preço dos ativos e definir alertas para cada item.
 Sendo ações, stocks (ações-norte-americanas) e Fiis (Fundos imobiliários).
 
+<p align="left">
+  <a href='https://github.com/Marcos-SCO/MyInvest/'>
+    <img src="https://github.com/Marcos-SCO/MyInvest/frontend/public/img/mockups/myInvestMockup.jpg?raw=true" width="700" title="Main screen mockup">
+  </a>
+</p>
+
+
 No topo do site, clickando na barra de busca é apresentado resultados sobre os elementos, tendo nas descrições o nome da empresa, valor atual e variação percentual sendo positiva ou negativa.
 
 <p align="left">
-  <a href='https://marcos-sco.github.io/MyFigure/'>
-    <img src="https://github.com/Marcos-SCO/MyInvest/tree/develop/frontend/public/img/gif/searchBar.gif?raw=true" width="700" title="Top search bar">
+  <a href='https://github.com/Marcos-SCO/MyInvest/'>
+    <img src="https://github.com/Marcos-SCO/MyInvest/frontend/public/img/gif/searchBar.gif?raw=true" width="700" title="Top search bar">
   </a>
 </p>
 
@@ -19,8 +26,8 @@ No topo do site, clickando na barra de busca é apresentado resultados sobre os 
 Entrando na página do ativo é possível visualizar gráficos com as cotações de valor dos últimos 3 meses.
 
 <p align="left">
-  <a href='https://marcos-sco.github.io/MyFigure/'>
-    <img src="https://github.com/Marcos-SCO/MyInvest/tree/develop/frontend/public/img/gif/graph.gif?raw=true" width="700" title="Asset Graph">
+  <a href='https://github.com/Marcos-SCO/MyInvest/'>
+    <img src="https://github.com/Marcos-SCO/MyInvest/frontend/public/img/gif/graph.gif?raw=true" width="700" title="Asset Graph">
   </a>
 </p>
 
@@ -28,8 +35,8 @@ Entrando na página do ativo é possível visualizar gráficos com as cotações
 Outra funcionalidade é a definição de alertas para valor das cotações, no qual, quando definido e atingido, o usuário receberá um e-mail informando sobre.
 
 <p align="left">
-  <a href='https://marcos-sco.github.io/MyFigure/'>
-    <img src="https://github.com/Marcos-SCO/MyInvest/tree/develop/frontend/public/img/gif/alerts.gif?raw=true" width="700" title="Alerts definition">
+  <a href='https://github.com/Marcos-SCO/MyInvest/'>
+    <img src="https://github.com/Marcos-SCO/MyInvest/frontend/public/img/gif/alerts.gif?raw=true" width="700" title="Alerts definition">
   </a>
 </p>
 
@@ -40,8 +47,8 @@ Os elementos marcados pelo usuário estarão disponíveis na página “meus ati
 Para deixar de seguir basta clickar no botão “seguindo” que irá abrir um modal confirmando a ação.
 
 <p align="left">
-  <a href='https://marcos-sco.github.io/MyFigure/'>
-    <img src="https://github.com/Marcos-SCO/MyInvest/tree/develop/frontend/public/img/gif/alerts.gif?raw=true" width="700" title="Alerts definition">
+  <a href='https://github.com/Marcos-SCO/MyInvest/'>
+    <img src="https://github.com/Marcos-SCO/MyInvest/frontend/public/img/gif/alerts.gif?raw=true" width="700" title="Alerts definition">
   </a>
 </p>
 
@@ -52,8 +59,8 @@ Nos alertas o card é similar, mas um pouco diferente, contendo informações e 
 Para facilidade de acesso, foram construídas duas opções de login, usando a conta google ou então da maneira tradicional com e-mail e senha.
 
 <p align="left">
-  <a href='https://marcos-sco.github.io/MyFigure/'>
-    <img src="https://github.com/Marcos-SCO/MyInvest/tree/develop/frontend/public/img/gif/login.gif?raw=true" width="700" title="Login">
+  <a href='https://github.com/Marcos-SCO/MyInvest/'>
+    <img src="https://github.com/Marcos-SCO/MyInvest/frontend/public/img/gif/login.gif?raw=true" width="700" title="Login">
   </a>
 </p>
 
@@ -61,8 +68,8 @@ Para facilidade de acesso, foram construídas duas opções de login, usando a c
 A página inicial possui sliders com o top de ações e fiis que mais subiram ou caíram durante o expediente da bolsa de valores.
 
 <p align="left">
-  <a href='https://marcos-sco.github.io/MyFigure/'>
-    <img src="https://github.com/Marcos-SCO/MyInvest/tree/develop/frontend/public/img/gif/login.gif?raw=true" width="700" title="Login">
+  <a href='https://github.com/Marcos-SCO/MyInvest/'>
+    <img src="https://github.com/Marcos-SCO/MyInvest/frontend/public/img/gif/login.gif?raw=true" width="700" title="Login">
   </a>
 </p>
 
@@ -78,7 +85,7 @@ De tempos em tempos, durante o período de abertura até o fechamento da bolsa v
 Essa operação de rotina atualiza todos os itens do banco e também dispara os alertas de e-mails que atingiram o valor esperado.
 
 <p align="left">
-  <a href='https://marcos-sco.github.io/MyFigure/'>
-    <img src="https://github.com/Marcos-SCO/MyInvest/tree/develop/frontend/public/img/gif/cronjob.gif?raw=true" width="700" title="cronjob">
+  <a href='https://github.com/Marcos-SCO/MyInvest/'>
+    <img src="https://github.com/Marcos-SCO/MyInvest/frontend/public/img/gif/cronjob.gif?raw=true" width="700" title="cronjob">
   </a>
 </p>
