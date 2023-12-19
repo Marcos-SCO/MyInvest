@@ -11,9 +11,9 @@
   </a>
 </p>
 
+<p>Link para acesso: <a href="my-invest-frontend-marcos-sco.vercel.app">my-invest-frontend-marcos-sco.vercel.app</a></p>
 
 ## Principais tecnologias Utilizadas 🚀
-
 - Js
 - Node
 - MySQL
@@ -22,9 +22,12 @@
 ## Objetivo 🎯
 
 <p>
-  Tem o intuito de monitorar o preço dos ativos e definir alertas para cada item.
+  Tem o intuito de monitorar o preço dos ativos e definir alertas para cada item.<br/>
   Sendo ações, stocks (ações-norte-americanas) e Fiis (Fundos imobiliários).
 </p>
+</br>
+
+## Funcionalidades 💻
 
 <p>
   No topo do site, clickando na barra de busca é apresentado resultados sobre os elementos, tendo nas descrições o nome da empresa, valor atual e variação percentual sendo positiva ou negativa.
@@ -110,7 +113,9 @@
 <br/>
 
 ## Cronjob ⏲
-No projeto foram utilizadas ferramentas gratuitas e api de terceiros contendo limitações.  Sendo um projeto experimental e para que não houvesse uma sobrecarga de recursos, houve a necessidade em atualizar e cachear itens de forma inteligente.
+No projeto foram utilizadas ferramentas gratuitas e api de terceiros contendo limitações. 
+
+Sendo algo experimental e para que não houvesse uma sobrecarga de recursos, houve a necessidade em atualizar e cachear itens de forma inteligente.
 
 Ao pesquisar por um elemento, ele é salvo no banco de dados caso ainda não tenha sido registrado no sistema. 
 
