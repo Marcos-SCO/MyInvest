@@ -9,7 +9,7 @@ Sendo ações, stocks (ações-norte-americanas) e Fiis (Fundos imobiliários).
 
 <p align="left">
   <a href='https://github.com/Marcos-SCO/MyInvest/'>
-    <img src="https://github.com/Marcos-SCO/MyInvest/frontend/public/img/mockups/myInvestMockup.jpg?raw=true" width="700" title="Main screen mockup">
+    <img src="./frontend/public/img/mockups/myInvestMockup.jpg?raw=true" width="700" title="Main screen mockup">
   </a>
 </p>
 
@@ -18,7 +18,7 @@ No topo do site, clickando na barra de busca é apresentado resultados sobre os 
 
 <p align="left">
   <a href='https://github.com/Marcos-SCO/MyInvest/'>
-    <img src="https://github.com/Marcos-SCO/MyInvest/frontend/public/img/gif/searchBar.gif?raw=true" width="700" title="Top search bar">
+    <img src="./frontend/public/img/gif/searchBar.gif?raw=true" width="700" title="Top search bar">
   </a>
 </p>
 
@@ -27,7 +27,7 @@ Entrando na página do ativo é possível visualizar gráficos com as cotações
 
 <p align="left">
   <a href='https://github.com/Marcos-SCO/MyInvest/'>
-    <img src="https://github.com/Marcos-SCO/MyInvest/frontend/public/img/gif/graph.gif?raw=true" width="700" title="Asset Graph">
+    <img src="./frontend/public/img/gif/graph.gif?raw=true" width="700" title="Asset Graph">
   </a>
 </p>
 
@@ -36,7 +36,7 @@ Outra funcionalidade é a definição de alertas para valor das cotações, no q
 
 <p align="left">
   <a href='https://github.com/Marcos-SCO/MyInvest/'>
-    <img src="https://github.com/Marcos-SCO/MyInvest/frontend/public/img/gif/alerts.gif?raw=true" width="700" title="Alerts definition">
+    <img src="./frontend/public/img/gif/alerts.gif?raw=true" width="700" title="Alerts definition">
   </a>
 </p>
 
@@ -48,7 +48,7 @@ Para deixar de seguir basta clickar no botão “seguindo” que irá abrir um m
 
 <p align="left">
   <a href='https://github.com/Marcos-SCO/MyInvest/'>
-    <img src="https://github.com/Marcos-SCO/MyInvest/frontend/public/img/gif/alerts.gif?raw=true" width="700" title="Alerts definition">
+    <img src="./frontend/public/img/gif/alerts.gif?raw=true" width="700" title="Alerts definition">
   </a>
 </p>
 
@@ -60,7 +60,7 @@ Para facilidade de acesso, foram construídas duas opções de login, usando a c
 
 <p align="left">
   <a href='https://github.com/Marcos-SCO/MyInvest/'>
-    <img src="https://github.com/Marcos-SCO/MyInvest/frontend/public/img/gif/login.gif?raw=true" width="700" title="Login">
+    <img src="./frontend/public/img/gif/login.gif?raw=true" width="700" title="Login">
   </a>
 </p>
 
@@ -69,7 +69,7 @@ A página inicial possui sliders com o top de ações e fiis que mais subiram ou
 
 <p align="left">
   <a href='https://github.com/Marcos-SCO/MyInvest/'>
-    <img src="https://github.com/Marcos-SCO/MyInvest/frontend/public/img/gif/login.gif?raw=true" width="700" title="Login">
+    <img src="./frontend/public/img/gif/login.gif?raw=true" width="700" title="Login">
   </a>
 </p>
 
@@ -86,6 +86,6 @@ Essa operação de rotina atualiza todos os itens do banco e também dispara os 
 
 <p align="left">
   <a href='https://github.com/Marcos-SCO/MyInvest/'>
-    <img src="https://github.com/Marcos-SCO/MyInvest/frontend/public/img/gif/cronjob.gif?raw=true" width="700" title="cronjob">
+    <img src="./frontend/public/img/gif/cronjob.gif?raw=true" width="700" title="cronjob">
   </a>
 </p>
