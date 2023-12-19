@@ -7,7 +7,7 @@
 
 <p align="left">
   <a href='https://my-invest-frontend-marcos-sco.vercel.app/' target="_blank">
-    <img src="./frontend/public/img/mockups/myInvestMockup.jpg?raw=true" width="500" title="Main screen mockup">
+    <img src="./frontend/public/img/mockups/myInvestMockup.jpg?raw=true" width="580" title="Main screen mockup">
   </a>
 </p>
 
@@ -36,7 +36,7 @@
 
 <p align="left">
   <a href='https://my-invest-frontend-marcos-sco.vercel.app/' target="_blank">
-    <img src="./frontend/public/img/gif/searchBar.gif?raw=true" width="500" title="Top search bar">
+    <img src="./frontend/public/img/gif/searchBar.gif?raw=true" width="580" title="Top search bar">
   </a>
 </p>
 
@@ -48,7 +48,7 @@
 
 <p align="left">
   <a href='https://my-invest-frontend-marcos-sco.vercel.app/' target="_blank">
-    <img src="./frontend/public/img/gif/graph.gif?raw=true" width="500" title="Asset Graph">
+    <img src="./frontend/public/img/gif/graph.gif?raw=true" width="580" title="Asset Graph">
   </a>
 </p>
 
@@ -59,7 +59,7 @@
 
 <p align="left">
   <a href='https://my-invest-frontend-marcos-sco.vercel.app/' target="_blank">
-    <img src="./frontend/public/img/gif/alerts.gif?raw=true" width="500" title="Alerts definition">
+    <img src="./frontend/public/img/gif/alerts.gif?raw=true" width="580" title="Alerts definition">
   </a>
 </p>
 
@@ -74,7 +74,7 @@
 
 <p align="left">
   <a href='https://my-invest-frontend-marcos-sco.vercel.app/' target="_blank">
-    <img src="./frontend/public/img/gif/assetList.gif?raw=true" width="500" title="Asset list">
+    <img src="./frontend/public/img/gif/assetList.gif?raw=true" width="580" title="Asset list">
   </a>
 </p>
 
@@ -94,7 +94,7 @@
 
 <p align="left">
   <a href='https://my-invest-frontend-marcos-sco.vercel.app/' target="_blank">
-    <img src="./frontend/public/img/gif/login.gif?raw=true" width="500" title="Login">
+    <img src="./frontend/public/img/gif/login.gif?raw=true" width="580" title="Login">
   </a>
 </p>
 
@@ -107,7 +107,7 @@
 
 <p align="left">
   <a href='https://my-invest-frontend-marcos-sco.vercel.app/' target="_blank">
-    <img src="./frontend/public/img/gif/initialPage.gif?raw=true" width="500" title="Initial page">
+    <img src="./frontend/public/img/gif/initialPage.gif?raw=true" width="580" title="Initial page">
   </a>
 </p>
 <br/>
@@ -127,6 +127,6 @@ Essa operação de rotina atualiza todos os itens do banco e também dispara os 
 
 <p align="left">
   <a href='https://my-invest-frontend-marcos-sco.vercel.app/' target="_blank">
-    <img src="./frontend/public/img/gif/cronjob.gif?raw=true" width="500" title="cronjob">
+    <img src="./frontend/public/img/gif/cronjob.gif?raw=true" width="580" title="cronjob">
   </a>
 </p>
