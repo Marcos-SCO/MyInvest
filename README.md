@@ -65,7 +65,7 @@
 
 <p>
   <br/>
-  Todos os ativos estarão em um card contendo suas informações e no canto superior direito há o botão para “seguir”.
+  Todos os ativos estão em um card contendo suas informações e no canto superior direito há o botão para “seguir”.
 
   Os elementos marcados pelo usuário estarão disponíveis na página “meus ativos”. 
   Para deixar de seguir basta clickar no botão “seguindo” que irá abrir um modal confirmando a ação.
