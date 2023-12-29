@@ -22,7 +22,6 @@ function AssetTopListQueue() {
     const insertedObjs: any = [];
 
     try {
-
       for (const trendingObjItem of trendingSections) {
 
         const trendingType = trendingObjItem?.trendingType;
@@ -41,13 +40,14 @@ function AssetTopListQueue() {
         const trendingScrapItem: any =
           await TrendingTickersWebScrappy().getTrendingTickers(trendingObjItem);
 
-        console.log(trendingObjItem);
-
-        if (!trendingScrapItem) {
+        if (!trendingScrapItem || trendingScrapItem == '[]') {
+          console.log('Not inserted: ', trendingObjItem, '\n');
           continue;
         }
 
-        const insertTopBrazilianStocks =
+        console.log(trendingObjItem);
+
+        const insertTopItens =
           await TopAssetListModel().insertTopItens({
             tickers: trendingScrapItem,
             tickerAssetType,
@@ -55,11 +55,11 @@ function AssetTopListQueue() {
             trendingSection,
           });
 
-        insertedObjs.push(insertTopBrazilianStocks);
+        // console.log('Insert top item: ', insertTopItens);
+        insertedObjs.push(insertTopItens);
       }
 
       console.log('AssetTopListQueue get itens successfully.');
-
       return insertedObjs;
 
     } catch (error) {
