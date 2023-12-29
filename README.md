@@ -81,7 +81,7 @@
 <p>
   <br/>
   Nos alertas o card é similar, mas um pouco diferente, contendo informações e valor 
-  definido pelo usuário em destaque, podendo ser das opções “menor que” ou “maior que”.
+  definido em destaque pelo usuário, podendo ser das opções “menor que” ou “maior que”.
   <br/>
 </p>
 
@@ -113,15 +113,15 @@
 <br/>
 
 ## Cronjob ⏲
-No projeto foram utilizadas ferramentas gratuitas e api de terceiros contendo limitações. 
+Foram utilizadas ferramentas gratuitas e api de terceiros contendo limitações. 
 
-Sendo algo experimental e para que não houvesse uma sobrecarga de recursos, houve a necessidade em atualizar e cachear itens de forma inteligente.
+Sendo algo experimental e para que não houvesse falta de recursos, houve a necessidade em atualizar e cachear itens de forma inteligente.
 
-Ao pesquisar por um elemento, ele é salvo no banco de dados caso ainda não tenha sido registrado no sistema. 
+Como por exemplo, ao pesquisar por um elemento, ele é salvo no banco de dados caso ainda não tenha sido registrado no sistema. 
 
-Após isso, esse elemento é disponibilizado para todos os outros usuários.
+Após isso, esse elemento é disponibilizado para todos os outros usuários, sem precisar chamar recursos de api externas.
 
-De tempos em tempos, durante o período de abertura até o fechamento da bolsa valores, um cron cron job é executado. 
+De tempos em tempos, durante o período de abertura até o fechamento da bolsa de valores, um cron job é executado. 
 
 Essa operação de rotina atualiza todos os itens do banco e também dispara os alertas de e-mails que atingiram o valor esperado.
 
