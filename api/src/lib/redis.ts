@@ -8,7 +8,9 @@ const { redisCredentials } = config;
 const redis = new Redis({
   port: Number(redisCredentials.REDIS_PORT),
   host: redisCredentials.REDIS_HOSTNAME,
-  password: redisCredentials.REDIS_PASSWORD
+  password: redisCredentials.REDIS_PASSWORD,
+  lazyConnect: true,
+  connectTimeout: 10000,
 });
 
 export async function getValue(key: string): Promise<object | undefined> {

@@ -25,6 +25,7 @@ assetUpdatesCron('0 15 * * *');
 // Define your cron job for 6 PM (night)
 assetUpdatesCron('0 18 * * *');
 
+
 // assetUpdatesCron('*/2 * * * * *');
 
 // assetUpdatesCron('*/15 * * * * *');
