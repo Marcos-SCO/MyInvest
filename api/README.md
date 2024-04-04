@@ -26,6 +26,10 @@
   Vá até a pasta /prisma e execute: 
   - npx prisma migrate dev
 
+### Para mysql remoto
+ Caso for rodar o projeto em um banco de dados remoto : 
+ - npx prisma db push   
+
 
 ### Execute seeders para teste
 - Vá até /prisma/seeders 
