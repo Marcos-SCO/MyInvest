@@ -1,5 +1,10 @@
 {
   "compilerOptions": {
+    "paths": {
+      "@/*": ["./*"],
+      "app/*": ["./app/*"],
+      "components/*": ["./components/*"]
+    },
     "lib": [
       "dom",
       "dom.iterable",
