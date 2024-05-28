@@ -127,8 +127,8 @@ export default async function TopAssets({ ...props }) {
     userAssetsList.map(asset => asset?.assetId) : [];
 
   if (userAssetIds) {
-    userAssetIds.forEach(assetId => {
-      setLocalStorageUserAsset(assetId, true);
+    userAssetIds.forEach(async (assetId) => {
+      await setLocalStorageUserAsset(assetId, true);
     });
   }
 

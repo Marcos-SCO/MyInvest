@@ -12,7 +12,7 @@ export default function ButtonLogout() {
       redirect: false
     });
 
-    removeLocalStorageItem('userAssets');
+    await removeLocalStorageItem('userAssets');
 
     router.replace('/');
     window.location.reload();

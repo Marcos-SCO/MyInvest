@@ -20,7 +20,7 @@ export default async function AssetFavButton({ userId = false, assetId = false, 
   if (userId) {
 
     let assetInLocalStorage =
-      userHasAssetInLocalStorage(assetId);
+      await userHasAssetInLocalStorage(assetId);
 
     isUserAsset = assetInLocalStorage?.isUserAsset;
 
@@ -29,7 +29,7 @@ export default async function AssetFavButton({ userId = false, assetId = false, 
       const userAsset = await userHasAsset(fetchObj);
       isUserAsset = userAsset?.haveAsset;
 
-      setLocalStorageUserAsset(assetId, isUserAsset);
+      await setLocalStorageUserAsset(assetId, isUserAsset);
     }
 
   }
