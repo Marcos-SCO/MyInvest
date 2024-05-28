@@ -78,5 +78,5 @@ function pingServer() {
 }
 
 // Set up the interval to ping the server every 5 minutes (300,000 milliseconds)
-const pingInterval = 5 * 60 * 1000; // 5 minutes in milliseconds
+const pingInterval = 7 * 60 * 1000; // 7 minutes in milliseconds
 setInterval(pingServer, pingInterval);
