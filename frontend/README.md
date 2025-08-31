@@ -1,5 +1,7 @@
 # Front end notes
 
+- Front-end Node version: v22.19.0
+
 - Create a react app : npx create-next-app@latest .
 
 

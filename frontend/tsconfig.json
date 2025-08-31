@@ -1,9 +1,15 @@
 {
   "compilerOptions": {
     "paths": {
-      "@/*": ["./*"],
-      "app/*": ["./app/*"],
-      "components/*": ["./components/*"]
+      "@/*": [
+        "./*"
+      ],
+      "app/*": [
+        "./app/*"
+      ],
+      "components/*": [
+        "./components/*"
+      ]
     },
     "lib": [
       "dom",
@@ -25,14 +31,15 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "target": "ES2017"
   },
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
-    "**/*.js",
+    "**/*.js"
   ],
   "exclude": [
     "node_modules"
