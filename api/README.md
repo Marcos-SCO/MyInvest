@@ -1,6 +1,6 @@
 # Como iniciar o Back-end
 
-### node na versão : 18.17.0 ou superior
+### node na versão : v22.19.0 ou superior
 
 - Se preferir Instale o nvm para executar, o projeto, na versão exata em desenvolvimento. Com nvm é possível ter várias versões de node, sem precisar de uma instalação global.
 
